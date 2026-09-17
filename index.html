@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Noah & Daughter of Abdul Sattar — Nikah Ceremony</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: #FAF7F2; color: #14110F; overflow-x: hidden; margin: 0; font-family: 'Jost', sans-serif; }
+  .font-display { font-family: 'Cormorant Garamond', serif; }
+  .font-script { font-family: 'Great Vibes', cursive; }
+  .text-gold-gradient { background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA8529 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hairline { height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,.6), transparent); }
+  .grain::after { content: ''; position: fixed; inset: 0; z-index: 95; pointer-events: none; opacity: .03; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+  .tile-inner { transition: transform 1.1s cubic-bezier(.2,.8,.2,1); }
+  .tile:hover .tile-inner { transform: scale(1.06); }
+  .field { background: transparent; border: 0; border-bottom: 1px solid rgba(20,17,15,.18); padding: .8rem 0; width: 100%; outline: none; font-size: .95rem; transition: border-color .35s ease; font-family: 'Jost', sans-serif; }
+  .field:focus { border-color: #D4AF37; }
+  .field::placeholder { color: rgba(20,17,15,.32); }
+  ::-webkit-scrollbar { width: 7px; }
+  ::-webkit-scrollbar-track { background: #F1E9DF; }
+  ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 9px; }
+  .photo-fallback { background: linear-gradient(135deg, #7a2a1f 0%, #D4AF37 50%, #1B4332 100%); }
+</style>
+</head>
+<body class="grain">
+
+<div id="progress" style="position:fixed;top:0;left:0;right:0;height:2px;z-index:100;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,#1B4332,#D4AF37,#1B4332);"></div>
+
+<header id="navbar" style="position:fixed;top:0;left:0;right:0;z-index:80;transition:all .5s;padding:1.5rem 0;">
+  <nav style="max-width:80rem;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;">
+    <a href="#top" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:.18em;color:#1B4332;text-decoration:none;font-weight:600;">N<span style="color:#D4AF37;margin:0 .4rem;font-style:italic;">&amp;</span>U</a>
+    <ul class="hidden md:flex" style="display:none;list-style:none;gap:2.25rem;margin:0;padding:0;align-items:center;">
+      <li><a href="#story" style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.8);text-decoration:none;">Verses</a></li>
+      <li><a href="#details" style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.8);text-decoration:none;">Events</a></li>
+      <li><a href="#gallery" style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.8);text-decoration:none;">Gallery</a></li>
+      <li><a href="#rsvp" style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.8);text-decoration:none;">RSVP</a></li>
+    </ul>
+    <a href="#rsvp" class="hidden md:inline-flex" style="display:none;border:1px solid rgba(27,67,50,.4);border-radius:9999px;padding:.6rem 1.5rem;font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:#1B4332;text-decoration:none;background:rgba(212,175,55,0.1);">RSVP</a>
+    <button id="menuBtn" class="md:hidden" style="display:flex;flex-direction:column;gap:6px;background:none;border:0;cursor:pointer;padding:6px;" aria-label="Menu">
+      <span style="display:block;height:2px;width:26px;background:#1B4332;transition:all .4s;"></span>
+      <span style="display:block;height:2px;width:26px;background:#1B4332;transition:all .4s;"></span>
+    </button>
+  </nav>
+</header>
+
+<div id="mobileMenu" style="display:none;position:fixed;inset:0;z-index:90;background:#FAF7F2;flex-direction:column;align-items:center;justify-content:center;gap:1.75rem;opacity:0;">
+  <a href="#story" class="mobile-link" style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:#1B4332;text-decoration:none;">Verses</a>
+  <a href="#details" class="mobile-link" style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:#1B4332;text-decoration:none;">Events</a>
+  <a href="#gallery" class="mobile-link" style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:#1B4332;text-decoration:none;">Gallery</a>
+  <a href="#rsvp" class="mobile-link" style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:#1B4332;text-decoration:none;">RSVP</a>
+  <div class="hairline" style="width:6rem;margin-top:1rem;"></div>
+  <p style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.45);margin:0;">13 · 11 · 2026</p>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section id="top" style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6rem 1rem 4rem;">
+  <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1600&q=80&auto=format&fit=crop" alt="Nikah" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;" />
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(250,247,242,0.6) 0%, rgba(250,247,242,0.8) 60%, rgba(250,247,242,1) 100%);z-index:1;"></div>
+  <div style="position:relative;z-index:10;width:100%;text-align:center;max-width:800px;">
+    <p style="font-size:12px;text-transform:uppercase;letter-spacing:.3em;color:#D4AF37;margin:0 0 1.5rem;font-weight:600;">Welcome to the</p>
+    <h1 class="font-script" style="font-size:clamp(3rem, 12vw, 5rem);color:#1B4332;margin:0 0 .5rem;line-height:1.2;">Nikah Ceremony</h1>
+    <p style="font-size:14px;text-transform:uppercase;letter-spacing:.2em;color:#1B4332;margin:0 0 1.5rem;font-weight:500;">of</p>
+    <div class="hairline" style="width:100px;margin:0 auto 1.5rem;"></div>
+    <h2 class="font-display" style="font-size:clamp(2rem, 8vw, 3.5rem);color:#14110F;margin:0 0 .5rem;font-weight:400;line-height:1.3;">Noah Bin Ahmed</h2>
+    <p class="font-script" style="font-size:2.5rem;color:#D4AF37;margin:0 0 .5rem;">&amp;</p>
+    <h2 class="font-display" style="font-size:clamp(1.8rem, 7vw, 3rem);color:#14110F;margin:0 0 2rem;font-weight:400;line-height:1.3;">Daughter Of<br/>Abdul Sattar</h2>
+    <div style="background:rgba(27,67,50,0.9);border:1px solid rgba(212,175,55,0.6);border-radius:50px;padding:.9rem 2.5rem;display:inline-block;">
+      <p style="font-size:14px;text-transform:uppercase;letter-spacing:.25em;color:#FAF7F2;margin:0;font-weight:500;">13 · 11 · 2026</p>
+    </div>
+    <p style="font-size:11px;text-transform:uppercase;letter-spacing:.3em;color:rgba(27,67,50,.7);margin:1.5rem 0 0;font-weight:500;">Karachi, Pakistan</p>
+  </div>
+</section>
+
+<!-- VERSES -->
+<section id="story" style="position:relative;padding:6rem 1.5rem;background:#FAF7F2;">
+  <div style="max-width:56rem;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:4rem;">
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 1rem;">Blessings</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#1B4332;margin:0;line-height:1.1;">Words of <span style="font-style:italic;" class="text-gold-gradient">Love</span></h2>
+      <p style="margin-top:1rem;font-size:14px;color:rgba(27,67,50,.6);">From the Holy Quran &amp; Islamic Teachings</p>
+    </div>
+    <div style="position:relative;padding-left:2rem;">
+      <div style="position:absolute;left:0;top:.5rem;bottom:.5rem;width:2px;background:linear-gradient(180deg, #D4AF37, #1B4332, transparent);"></div>
+      <div style="display:flex;flex-direction:column;gap:4rem;">
+        <div class="reveal" style="position:relative;">
+          <span style="position:absolute;left:-2.1rem;top:.5rem;width:12px;height:12px;border-radius:9999px;background:#D4AF37;box-shadow:0 0 0 4px #FAF7F2, 0 0 0 6px rgba(212,175,55,0.3);"></span>
+          <p class="font-display" style="font-size:1.4rem;font-weight:600;color:#D4AF37;margin:0 0 .5rem;">Surah Ar-Rum 30:21</p>
+          <h3 class="font-display" style="font-size:1.4rem;color:#1B4332;margin:0 0 1rem;font-style:italic;">"And among His signs is this..."</h3>
+          <p style="font-size:15px;line-height:1.8;color:rgba(20,17,15,.7);margin:0;background:rgba(27,67,50,0.04);padding:1rem;border-left:3px solid #D4AF37;border-radius:0 8px 8px 0;">"And among His signs is this, that He created for you mates from among yourselves, that you may dwell in tranquillity with them, and He has put love and mercy between your hearts. Verily in that are signs for those who reflect."</p>
+        </div>
+        <div class="reveal" style="position:relative;">
+          <span style="position:absolute;left:-2.1rem;top:.5rem;width:12px;height:12px;border-radius:9999px;background:#D4AF37;box-shadow:0 0 0 4px #FAF7F2, 0 0 0 6px rgba(212,175,55,0.3);"></span>
+          <p class="font-display" style="font-size:1.4rem;font-weight:600;color:#D4AF37;margin:0 0 .5rem;">Surah Al-Baqarah 2:187</p>
+          <h3 class="font-display" style="font-size:1.4rem;color:#1B4332;margin:0 0 1rem;font-style:italic;">"They are your garments..."</h3>
+          <p style="font-size:15px;line-height:1.8;color:rgba(20,17,15,.7);margin:0;background:rgba(27,67,50,0.04);padding:1rem;border-left:3px solid #D4AF37;border-radius:0 8px 8px 0;">"They are your garments and you are their garments." — A beautiful metaphor of how spouses protect, comfort, and cover each other.</p>
+        </div>
+        <div class="reveal" style="position:relative;">
+          <span style="position:absolute;left:-2.1rem;top:.5rem;width:12px;height:12px;border-radius:9999px;background:#D4AF37;box-shadow:0 0 0 4px #FAF7F2, 0 0 0 6px rgba(212,175,55,0.3);"></span>
+          <p class="font-display" style="font-size:1.4rem;font-weight:600;color:#D4AF37;margin:0 0 .5rem;">Surah Al-Furqan 25:74</p>
+          <h3 class="font-display" style="font-size:1.4rem;color:#1B4332;margin:0 0 1rem;font-style:italic;">"Our Lord, grant us..."</h3>
+          <p style="font-size:15px;line-height:1.8;color:rgba(20,17,15,.7);margin:0;background:rgba(27,67,50,0.04);padding:1rem;border-left:3px solid #D4AF37;border-radius:0 8px 8px 0;">"Our Lord, grant us from among our spouses and offspring comfort to our eyes and make us an example for the righteous."</p>
+        </div>
+        <div class="reveal" style="position:relative;">
+          <span style="position:absolute;left:-2.1rem;top:.5rem;width:12px;height:12px;border-radius:9999px;background:#D4AF37;box-shadow:0 0 0 4px #FAF7F2, 0 0 0 6px rgba(212,175,55,0.3);"></span>
+          <p class="font-display" style="font-size:1.4rem;font-weight:600;color:#D4AF37;margin:0 0 .5rem;">Prophet Muhammad (PBUH)</p>
+          <h3 class="font-display" style="font-size:1.4rem;color:#1B4332;margin:0 0 1rem;font-style:italic;">"The best of you..."</h3>
+          <p style="font-size:15px;line-height:1.8;color:rgba(20,17,15,.7);margin:0;background:rgba(27,67,50,0.04);padding:1rem;border-left:3px solid #D4AF37;border-radius:0 8px 8px 0;">"The best of you are those who are best to their wives." — A reminder to carry love, respect, and kindness into this new chapter.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="details" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg, #FAF7F2 0%, #F1E9DF 100%);">
+  <div style="max-width:72rem;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:4rem;">
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 1rem;">The Celebrations</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#1B4332;margin:0;line-height:1.1;">Days of <span style="font-style:italic;" class="text-gold-gradient">Joy</span></h2>
+      <p style="margin-top:1rem;font-size:14px;color:rgba(27,67,50,.6);">13 – 16 November 2026 · Karachi, Pakistan</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;">
+
+      <!-- NIKAH -->
+      <article class="reveal" style="overflow:hidden;border-radius:1.5rem;border:1px solid rgba(212,175,55,.3);background:#fff;box-shadow:0 10px 30px rgba(27,67,50,0.05);">
+        <div style="position:relative;height:15rem;overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=80&auto=format&fit=crop" alt="Nikah" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(250,247,242,.9));"></div>
+        </div>
+        <div style="padding:2rem;">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .75rem;">Day One · Afternoon</p>
+          <h3 class="font-display" style="font-size:1.75rem;color:#1B4332;margin:0 0 .75rem;">Nikkah Ceremony</h3>
+          <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
+          <p class="font-display" style="font-size:1.1rem;color:rgba(20,17,15,.8);margin:0 0 .3rem;">Friday, 13 November 2026</p>
+          <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(27,67,50,.6);margin:0 0 1rem;">After Jumma Prayer · Jamia Masjid Al Falahiya</p>
+          <p style="font-size:14px;line-height:1.7;color:rgba(20,17,15,.6);margin:0 0 1.25rem;">The sacred Nikkah ceremony, uniting two families in the presence of Allah and our loved ones.</p>
+          <a href="https://maps.google.com/?q=Jamia+Masjid+Al+Falahiya+Karachi" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#1B4332;text-decoration:none;font-weight:500;">📍 Open in Maps</a>
+        </div>
+      </article>
+
+      <!-- MEHNDI -->
+      <article class="reveal" style="overflow:hidden;border-radius:1.5rem;border:1px solid rgba(212,175,55,.3);background:#fff;box-shadow:0 10px 30px rgba(27,67,50,0.05);">
+        <div style="position:relative;height:15rem;overflow:hidden;">
+          <img src="https://i.ibb.co/1tFND64t/IMG-8660.jpg" alt="Mehndi Celebration" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(250,247,242,.9));"></div>
+        </div>
+        <div style="padding:2rem;">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .75rem;">Day One · Night</p>
+          <h3 class="font-display" style="font-size:1.75rem;color:#1B4332;margin:0 0 .75rem;">Mehndi</h3>
+          <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
+          <p class="font-display" style="font-size:1.1rem;color:rgba(20,17,15,.8);margin:0 0 .3rem;">Friday, 13 November 2026</p>
+          <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(27,67,50,.6);margin:0 0 1rem;">9:00 PM onwards · Al Bilal Ballroom</p>
+          <p style="font-size:14px;line-height:1.7;color:rgba(20,17,15,.6);margin:0 0 1.25rem;">An evening of dholki, dance and henna. Come ready to sing, laugh and get your hands decorated.</p>
+          <div style="border:1px solid rgba(212,175,55,.3);background:rgba(212,175,55,.08);border-radius:.75rem;padding:1rem;margin-bottom:1.25rem;">
+            <p style="font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .4rem;">Dress Code</p>
+            <p class="font-display" style="font-size:1rem;color:rgba(20,17,15,.85);margin:0 0 .3rem;">Yellow &amp; Green Traditional</p>
+            <p style="font-size:12px;color:rgba(20,17,15,.5);margin:0;">Bright yellows, greens and florals. Comfortable juttis recommended.</p>
+          </div>
+          <a href="https://maps.app.goo.gl/KS4t3Zn1KKbgsZxP9?g_st=ic" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#1B4332;text-decoration:none;font-weight:500;">📍 Open in Maps</a>
+        </div>
+      </article>
+
+      <!-- BARAAT -->
+      <article class="reveal" style="overflow:hidden;border-radius:1.5rem;border:1px solid rgba(212,175,55,.3);background:#fff;box-shadow:0 10px 30px rgba(27,67,50,0.05);">
+        <div style="position:relative;height:15rem;overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1200&q=80&auto=format&fit=crop" alt="Baraat" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(250,247,242,.9));"></div>
+        </div>
+        <div style="padding:2rem;">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .75rem;">Day Two</p>
+          <h3 class="font-display" style="font-size:1.75rem;color:#1B4332;margin:0 0 .75rem;">Baraat</h3>
+          <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
+          <p class="font-display" style="font-size:1.1rem;color:rgba(20,17,15,.8);margin:0 0 .3rem;">Saturday, 14 November 2026</p>
+          <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(27,67,50,.6);margin:0 0 1rem;">9:00 PM · Nudrat Banquet</p>
+          <p style="font-size:14px;line-height:1.7;color:rgba(20,17,15,.6);margin:0 0 1.25rem;">The groom's grand procession — a night of music, joy, and celebration as the Baraat arrives.</p>
+          <div style="border:1px solid rgba(212,175,55,.3);background:rgba(212,175,55,.08);border-radius:.75rem;padding:1rem;margin-bottom:1.25rem;">
+            <p style="font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .4rem;">Dress Code</p>
+            <p class="font-display" style="font-size:1rem;color:rgba(20,17,15,.85);margin:0 0 .3rem;">Royal Formal — Sherwani &amp; Lehenga</p>
+            <p style="font-size:12px;color:rgba(20,17,15,.5);margin:0;">Deep jewel tones, gold embroidery, silks.</p>
+          </div>
+          <a href="https://maps.app.goo.gl/ke9NR6pEhi9NnhTY7?g_st=ic" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#1B4332;text-decoration:none;font-weight:500;">📍 Open in Maps</a>
+        </div>
+      </article>
+
+      <!-- WALIMA -->
+      <article class="reveal" style="overflow:hidden;border-radius:1.5rem;border:1px solid rgba(212,175,55,.3);background:#fff;box-shadow:0 10px 30px rgba(27,67,50,0.05);">
+        <div style="position:relative;height:15rem;overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80&auto=format&fit=crop" alt="Walima" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(250,247,242,.9));"></div>
+        </div>
+        <div style="padding:2rem;">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .75rem;">Day Three</p>
+          <h3 class="font-display" style="font-size:1.75rem;color:#1B4332;margin:0 0 .75rem;">Walima</h3>
+          <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
+          <p class="font-display" style="font-size:1.1rem;color:rgba(20,17,15,.8);margin:0 0 .3rem;">Monday, 16 November 2026</p>
+          <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(27,67,50,.6);margin:0 0 1rem;">9:00 PM · Universal Zewar Banquet</p>
+          <p style="font-size:14px;line-height:1.7;color:rgba(20,17,15,.6);margin:0 0 1.25rem;">The grand reception. A formal evening of dinner, blessings and celebration as husband and wife.</p>
+          <div style="border:1px solid rgba(212,175,55,.3);background:rgba(212,175,55,.08);border-radius:.75rem;padding:1rem;margin-bottom:1.25rem;">
+            <p style="font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .4rem;">Dress Code</p>
+            <p class="font-display" style="font-size:1rem;color:rgba(20,17,15,.85);margin:0 0 .3rem;">Formal Black Tie / Elegant</p>
+            <p style="font-size:12px;color:rgba(20,17,15,.5);margin:0;">Suits, sherwanis, elegant sarees or formal gowns.</p>
+          </div>
+          <a href="https://maps.app.goo.gl/eZ2hiWf45WQ6AGMi8?g_st=ic" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#1B4332;text-decoration:none;font-weight:500;">📍 Open in Maps</a>
+        </div>
+      </article>
+    </div>
+
+    <!-- COUNTDOWN -->
+    <div class="reveal" style="margin-top:5rem;">
+      <div style="border-radius:2rem;border:1px solid rgba(212,175,55,.3);background:linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);padding:2.5rem 1.5rem;box-shadow:0 20px 40px rgba(27,67,50,0.2);">
+        <p style="text-align:center;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 2.25rem;">Counting down to the Nikkah</p>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;max-width:36rem;margin:0 auto;">
+          <div style="text-align:center;"><div class="font-display" data-cd="d" style="font-size:clamp(2rem,8vw,3.5rem);font-weight:300;color:#FAF7F2;">00</div><div style="margin-top:.5rem;font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(243,229,171,.7);">Days</div></div>
+          <div style="text-align:center;"><div class="font-display" data-cd="h" style="font-size:clamp(2rem,8vw,3.5rem);font-weight:300;color:#FAF7F2;">00</div><div style="margin-top:.5rem;font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(243,229,171,.7);">Hours</div></div>
+          <div style="text-align:center;"><div class="font-display" data-cd="m" style="font-size:clamp(2rem,8vw,3.5rem);font-weight:300;color:#FAF7F2;">00</div><div style="margin-top:.5rem;font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(243,229,171,.7);">Min</div></div>
+          <div style="text-align:center;"><div class="font-display" data-cd="s" style="font-size:clamp(2rem,8vw,3.5rem);font-weight:300;color:#FAF7F2;">00</div><div style="margin-top:.5rem;font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(243,229,171,.7);">Sec</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="position:relative;padding:6rem 1.5rem;background:#FAF7F2;overflow:hidden;">
+  <div style="max-width:72rem;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:4rem;">
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 1rem;">Moments</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#1B4332;margin:0;line-height:1.1;">A few of our <span style="font-style:italic;" class="text-gold-gradient">favourites</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;">
+      <div class="tile reveal" style="grid-column:span 2;aspect-ratio:16/10;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=80&auto=format&fit=crop');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));"></div>
+        <span class="font-display" style="position:absolute;bottom:1rem;left:1.25rem;font-size:1.2rem;color:#FAF7F2;">The Promise</span>
+      </div>
+      <div class="tile reveal" style="aspect-ratio:1;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80&auto=format&fit=crop');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));"></div>
+        <span class="font-display" style="position:absolute;bottom:.75rem;left:1rem;font-size:1rem;color:#FAF7F2;">Blessings</span>
+      </div>
+      <div class="tile reveal" style="aspect-ratio:1;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://i.ibb.co/1tFND64t/IMG-8660.jpg');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));"></div>
+        <span class="font-display" style="position:absolute;bottom:.75rem;left:1rem;font-size:1rem;color:#FAF7F2;">Henna Nights</span>
+      </div>
+      <div class="tile reveal" style="aspect-ratio:1;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));"></div>
+        <span class="font-display" style="position:absolute;bottom:.75rem;left:1rem;font-size:1rem;color:#FAF7F2;">Family</span>
+      </div>
+      <div class="tile reveal" style="aspect-ratio:1;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80&auto=format&fit=crop');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));"></div>
+        <span class="font-display" style="position:absolute;bottom:.75rem;left:1rem;font-size:1rem;color:#FAF7F2;">Tranquillity</span>
+      </div>
+      <div class="tile reveal" style="grid-column:span 2;aspect-ratio:16/10;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&q=80&auto=format&fit=crop');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));"></div>
+        <span class="font-display" style="position:absolute;bottom:1rem;left:1.25rem;font-size:1.2rem;color:#FAF7F2;">Forever Begins</span>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:3rem;text-align:center;">
+      <p style="font-size:13px;color:rgba(27,67,50,.6);margin:0;">Share your photos with <span style="color:#D4AF37;font-weight:600;">#NoahWedDaughterOfAbdulSattar</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg, #F1E9DF 0%, #FAF7F2 100%);">
+  <div style="max-width:48rem;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 1rem;">RSVP</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#1B4332;margin:0;line-height:1.1;">Will you <span style="font-style:italic;" class="text-gold-gradient">join us?</span></h2>
+      <p style="margin-top:1.25rem;font-size:15px;color:rgba(27,67,50,.6);line-height:1.7;">Kindly respond by <span style="color:#1B4332;font-weight:500;">30 October 2026</span> so we can save you a seat.</p>
+    </div>
+    <div class="reveal">
+      <form id="rsvpForm" action="https://formspree.io/f/xgaveozq" method="POST" style="border-radius:2rem;border:1px solid rgba(212,175,55,.4);background:#fff;padding:2rem;box-shadow:0 15px 40px rgba(27,67,50,0.08);">
+        <div style="display:grid;grid-template-columns:1fr;gap:2rem;">
+          <div>
+            <label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:.75rem;">Full name</label>
+            <input class="field" id="fName" name="name" placeholder="Your name" required />
+            <p class="err" id="errName" style="display:none;margin-top:.5rem;font-size:11px;color:rgba(220,38,38,.8);">Please tell us your name</p>
+          </div>
+          <div>
+            <label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:.75rem;">Email</label>
+            <input class="field" id="fEmail" name="email" type="email" placeholder="you@email.com" required />
+            <p class="err" id="errEmail" style="display:none;margin-top:.5rem;font-size:11px;color:rgba(220,38,38,.8);">A valid email helps us reach you</p>
+          </div>
+          <div>
+            <label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:.75rem;">Number of guests</label>
+            <select class="field" id="fGuests" name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select>
+          </div>
+          <div>
+            <label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:.75rem;">Attending?</label>
+            <div style="display:flex;gap:.75rem;padding-top:.4rem;">
+              <button type="button" class="att-btn active" data-att="yes" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.16em;border:1px solid #1B4332;background:#1B4332;color:#fff;cursor:pointer;font-family:inherit;transition:all .4s;">Joyfully yes</button>
+              <button type="button" class="att-btn" data-att="no" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.16em;border:1px solid rgba(27,67,50,.2);background:transparent;color:rgba(27,67,50,.6);cursor:pointer;font-family:inherit;transition:all .4s;">Sadly no</button>
+            </div>
+            <input type="hidden" id="fAttending" name="attending" value="Yes" />
+          </div>
+          <div id="eventPicker">
+            <label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:1rem;">Which events will you attend?</label>
+            <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
+              <button type="button" class="evt-btn active" data-evt="Nikkah (13 Nov)" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.14em;border:1px solid #D4AF37;background:rgba(212,175,55,.15);color:#1B4332;cursor:pointer;font-family:inherit;font-weight:500;">✓ Nikkah · 13 Nov</button>
+              <button type="button" class="evt-btn active" data-evt="Mehndi (13 Nov)" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.14em;border:1px solid #D4AF37;background:rgba(212,175,55,.15);color:#1B4332;cursor:pointer;font-family:inherit;font-weight:500;">✓ Mehndi · 13 Nov</button>
+              <button type="button" class="evt-btn active" data-evt="Baraat (14 Nov)" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.14em;border:1px solid #D4AF37;background:rgba(212,175,55,.15);color:#1B4332;cursor:pointer;font-family:inherit;font-weight:500;">✓ Baraat · 14 Nov</button>
+              <button type="button" class="evt-btn active" data-evt="Walima (16 Nov)" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.14em;border:1px solid #D4AF37;background:rgba(212,175,55,.15);color:#1B4332;cursor:pointer;font-family:inherit;font-weight:500;">✓ Walima · 16 Nov</button>
+            </div>
+            <input type="hidden" id="fEvents" name="events" value="Nikkah (13 Nov), Mehndi (13 Nov), Baraat (14 Nov), Walima (16 Nov)" />
+          </div>
+          <div>
+            <label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:.75rem;">A note for the couple <span style="text-transform:none;letter-spacing:normal;color:rgba(27,67,50,.3);">(optional)</span></label>
+            <input class="field" id="fNote" name="note" placeholder="Dietary needs, song requests, wishes…" />
+          </div>
+        </div>
+        <div style="margin-top:3rem;display:flex;flex-direction:column;align-items:center;gap:1.25rem;">
+          <button type="submit" id="submitBtn" style="width:100%;max-width:20rem;background:#1B4332;color:#FAF7F2;border-radius:9999px;padding:1rem 2.5rem;font-size:11px;text-transform:uppercase;letter-spacing:.28em;border:0;cursor:pointer;font-family:inherit;transition:background .4s;">Send RSVP</button>
+          <p style="font-size:11px;color:rgba(27,67,50,.4);margin:0;text-align:center;">We'll email you the full itinerary.</p>
+        </div>
+      </form>
+      <div id="rsvpSuccess" style="display:none;border-radius:2rem;border:1px solid rgba(212,175,55,.4);background:#fff;padding:3rem 2rem;text-align:center;opacity:0;box-shadow:0 15px 40px rgba(27,67,50,0.08);">
+        <div style="margin:0 auto 1.75rem;width:4rem;height:4rem;border-radius:9999px;border:1px solid rgba(212,175,55,.5);background:rgba(212,175,55,.1);display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 24 24" style="width:1.75rem;height:1.75rem;stroke:#D4AF37;fill:none;stroke-width:1.2;"><path d="M4 12.5 9.5 18 20 6.5"/></svg>
+        </div>
+        <h3 class="font-display" id="succTitle" style="font-size:2rem;color:#1B4332;margin:0 0 1rem;">Thank you.</h3>
+        <p id="succMsg" style="font-size:15px;color:rgba(27,67,50,.6);line-height:1.7;max-width:24rem;margin:0 auto;"></p>
+        <div class="hairline" style="width:6rem;margin:2rem auto;"></div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0;">#NoahWedDaughterOfAbdulSattar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="position:relative;padding:5rem 1.5rem 3rem;background:#1B4332;">
+  <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, transparent, #D4AF37, transparent);"></div>
+  <div style="max-width:48rem;margin:0 auto;text-align:center;">
+    <div class="reveal">
+      <p class="font-script" style="font-size:clamp(2rem,6vw,3.5rem);color:#D4AF37;margin:0;line-height:1.2;">Noah &amp; Daughter of Abdul Sattar</p>
+      <p style="margin-top:1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(250,247,242,.6);">13 – 16 November 2026 · Karachi</p>
+      <div class="hairline" style="width:8rem;margin:2.5rem auto;"></div>
+      <p style="font-size:13px;color:rgba(250,247,242,.7);line-height:1.7;max-width:24rem;margin:0 auto;">With love, laughter and a little bit of chaos — we can't wait to see you there.</p>
+      <p style="margin-top:2.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(212,175,55,.8);">#NoahWedDaughterOfAbdulSattar</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var progress = document.getElementById("progress");
+  window.addEventListener("scroll", function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = "scaleX(" + (h > 0 ? window.scrollY / h : 0) + ")";
+  }, { passive: true });
+  var navbar = document.getElementById("navbar");
+  function updateNav(){
+    if (window.scrollY > 90){ navbar.style.background = "rgba(250,247,242,.95)"; navbar.style.backdropFilter = "blur(10px)"; navbar.style.padding = ".9rem 0"; navbar.style.boxShadow = "0 1px 0 rgba(212,175,55,.2)"; }
+    else { navbar.style.background = "transparent"; navbar.style.backdropFilter = "none"; navbar.style.padding = "1.5rem 0"; navbar.style.boxShadow = "none"; }
+  }
+  window.addEventListener("scroll", updateNav, { passive: true });
+  updateNav();
+  var menuBtn = document.getElementById("menuBtn");
+  var mobileMenu = document.getElementById("mobileMenu");
+  var menuOpen = false;
+  var bars = menuBtn.querySelectorAll("span");
+  menuBtn.addEventListener("click", function(){
+    menuOpen = !menuOpen;
+    if (menuOpen){ mobileMenu.style.display = "flex"; requestAnimationFrame(function(){ mobileMenu.style.transition = "opacity .4s"; mobileMenu.style.opacity = "1"; }); bars[0].style.transform = "rotate(45deg) translateY(4px)"; bars[1].style.transform = "rotate(-45deg) translateY(-4px)"; }
+    else { mobileMenu.style.opacity = "0"; setTimeout(function(){ mobileMenu.style.display = "none"; }, 350); bars[0].style.transform = "none"; bars[1].style.transform = "none"; }
+  });
+  document.querySelectorAll(".mobile-link").forEach(function(a){
+    a.addEventListener("click", function(e){ e.preventDefault(); menuBtn.click(); var t = document.querySelector(a.getAttribute("href")); if (t) setTimeout(function(){ t.scrollIntoView({ behavior: "smooth" }); }, 100); });
+  });
+  var observer = new IntersectionObserver(function(entries){ entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add("active"); observer.unobserve(en.target); } }); }, { threshold: 0.1 });
+  document.querySelectorAll(".reveal").forEach(function(el){ observer.observe(el); });
+  var target = new Date("2026-11-13T14:00:00").getTime();
+  function pad(n){ return n < 10 ? "0" + n : "" + n; }
+  function updateCD(){
+    var diff = Math.max(0, target - Date.now());
+    document.querySelector('[data-cd="d"]').textContent = pad(Math.floor(diff / 86400000));
+    document.querySelector('[data-cd="h"]').textContent = pad(Math.floor((diff / 3600000) % 24));
+    document.querySelector('[data-cd="m"]').textContent = pad(Math.floor((diff / 60000) % 60));
+    document.querySelector('[data-cd="s"]').textContent = pad(Math.floor((diff / 1000) % 60));
+  }
+  updateCD(); setInterval(updateCD, 1000);
+
+  /* RSVP - Attending toggle */
+  var attendingValue = "Yes";
+  document.querySelectorAll(".att-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var val = btn.dataset.att;
+      attendingValue = val === "yes" ? "Yes" : "No";
+      document.getElementById("fAttending").value = attendingValue;
+      document.querySelectorAll(".att-btn").forEach(function(b){ b.classList.remove("active"); b.style.background = "transparent"; b.style.color = "rgba(27,67,50,.6)"; b.style.borderColor = "rgba(27,67,50,.2)"; });
+      btn.classList.add("active"); btn.style.background = "#1B4332"; btn.style.color = "#fff"; btn.style.borderColor = "#1B4332";
+      document.getElementById("eventPicker").style.display = attendingValue === "Yes" ? "block" : "none";
+    });
+  });
+
+  /* RSVP - Events toggle */
+  var selectedEvents = ["Nikkah (13 Nov)", "Mehndi (13 Nov)", "Baraat (14 Nov)", "Walima (16 Nov)"];
+  function updateEventsInput(){ document.getElementById("fEvents").value = selectedEvents.join(", ") || "None selected"; }
+  document.querySelectorAll(".evt-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var id = btn.dataset.evt;
+      var idx = selectedEvents.indexOf(id);
+      if (idx > -1){ selectedEvents.splice(idx, 1); btn.textContent = btn.textContent.replace("✓ ", ""); btn.style.background = "transparent"; btn.style.color = "rgba(27,67,50,.5)"; btn.style.borderColor = "rgba(27,67,50,.2)"; }
+      else { selectedEvents.push(id); btn.textContent = "✓ " + btn.textContent; btn.style.background = "rgba(212,175,55,.15)"; btn.style.color = "#1B4332"; btn.style.borderColor = "#D4AF37"; }
+      updateEventsInput();
+    });
+  });
+
+  /* RSVP - Submit via AJAX to Formspree */
+  var form = document.getElementById("rsvpForm");
+  var submitBtn = document.getElementById("submitBtn");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("fName").value.trim();
+    var email = document.getElementById("fEmail").value.trim();
+    var ok = true;
+    if (!name){ document.getElementById("errName").style.display = "block"; ok = false; } else { document.getElementById("errName").style.display = "none"; }
+    if (!/^\S+@\S+\.\S+$/.test(email)){ document.getElementById("errEmail").style.display = "block"; ok = false; } else { document.getElementById("errEmail").style.display = "none"; }
+    if (!ok) return;
+
+    submitBtn.textContent = "Sending...";
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = "0.7";
+
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { "Accept": "application/json" }
+    }).then(function(response){
+      if (response.ok){
+        form.style.display = "none";
+        var succ = document.getElementById("rsvpSuccess");
+        succ.style.display = "block";
+        document.getElementById("succTitle").textContent = "Thank you, " + name.split(" ")[0] + ".";
+        document.getElementById("succMsg").textContent = attendingValue === "Yes"
+          ? "Your RSVP is in. We can't wait to celebrate with you in Karachi."
+          : "We'll miss you dearly — thank you for letting us know.";
+        setTimeout(function(){
+          succ.style.transition = "opacity .8s";
+          succ.style.opacity = "1";
+          succ.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 100);
+      } else {
+        return response.json().then(function(data){
+          throw new Error(data.error || "Something went wrong");
+        });
+      }
+    }).catch(function(err){
+      submitBtn.textContent = "Send RSVP";
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = "1";
+      alert("Sorry, there was a problem sending your RSVP: " + err.message + "\n\nPlease try again.");
+    });
+  });
+})();
+</script>
+</body>
+</html>
