@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Noah & Daughter of Abdul Sattar — Nikah Ceremony</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: #FAF7F2; color: #14110F; overflow-x: hidden; margin: 0; font-family: 'Jost', sans-serif; }
+  body.intro-locked { overflow: hidden !important; position: fixed !important; width: 100% !important; height: 100% !important; top: 0 !important; left: 0 !important; }
+
+  .font-display { font-family: 'Cormorant Garamond', serif; }
+  .font-script { font-family: 'Great Vibes', cursive; }
+  .text-gold-gradient { background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA8529 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hairline { height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,.6), transparent); }
+  .grain::after { content: ''; position: fixed; inset: 0; z-index: 95; pointer-events: none; opacity: .03; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .field { background: transparent; border: 0; border-bottom: 1px solid rgba(20,17,15,.18); padding: .8rem 0; width: 100%; outline: none; font-size: .95rem; transition: border-color .35s ease, box-shadow .35s ease; font-family: 'Jost', sans-serif; }
+  .field:focus { border-color: #D4AF37; box-shadow: 0 8px 14px -10px rgba(212,175,55,.7); }
+  .field::placeholder { color: rgba(20,17,15,.32); }
+  ::-webkit-scrollbar { width: 7px; }
+  ::-webkit-scrollbar-track { background: #F1E9DF; }
+  ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 9px; }
+  .photo-fallback { background: linear-gradient(135deg, #7a2a1f 0%, #D4AF37 50%, #1B4332 100%); }
+
+  /* ============================================
+     INTRO SCENE - CLEAN (no overlays, no filters)
+     Images overflow slightly to hide bottom gap
+     ============================================ */
+  #introScene { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: #FAF7F2; overflow: hidden; transition: opacity 2s cubic-bezier(.4,0,.2,1), visibility 2s cubic-bezier(.4,0,.2,1); will-change: opacity; transform: translateZ(0); }
+  #introScene.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+  /* Composite couple image - fills container with slight overflow */
+  .composite-layer {
+    position: absolute;
+    top: -4%;
+    left: 0;
+    width: 100%;
+    height: 108%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 2s cubic-bezier(.4,0,.2,1);
+    will-change: opacity, transform;
+  }
+  .composite-layer.show { opacity: 1; }
+  .composite-layer.show.kenburns {
+    animation: kenBurns 18s ease-in-out infinite alternate;
+  }
+  @keyframes kenBurns {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.28) translate(-3%, -4%); }
+  }
+
+  /* Envelope on top - same overflow */
+  .envelope-image {
+    position: absolute;
+    top: -4%;
+    left: 0;
+    width: 100%;
+    height: 108%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 1.5s cubic-bezier(.4,0,.2,1), transform 2.8s cubic-bezier(.25,.1,.25,1);
+    pointer-events: none;
+    transform-origin: 50% 50%;
+    will-change: opacity, transform;
+  }
+  .envelope-image.show { opacity: 1; }
+  .envelope-image.opening { transform: scale(2.6); opacity: 0; transition: transform 2.8s cubic-bezier(.4,0,.2,1), opacity 2s ease .8s; }
+
+  .gold-glow { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(255,245,220,.55) 0%, rgba(245,216,154,.35) 30%, rgba(224,184,120,.15) 60%, rgba(212,165,116,0) 85%); pointer-events: none; z-index: 8; opacity: 0; filter: blur(18px); mix-blend-mode: screen; }
+  #introScene.glowing .gold-glow { animation: goldPulse 3.2s ease-in-out infinite; }
+  @keyframes goldPulse { 0%, 100% { opacity: .15; transform: translate(-50%,-50%) scale(0.85); } 50% { opacity: .55; transform: translate(-50%,-50%) scale(1.1); } }
+
+  /* ===== LOADER ===== */
+  #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10001; background: #FAF7F2; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 2s cubic-bezier(.4,0,.2,1); will-change: opacity; transform: translateZ(0); }
+  #loader.visible { opacity: 1; pointer-events: auto; }
+  .loader-logo { font-family: 'Cormorant Garamond', serif; font-size: 4rem; letter-spacing: .25em; color: #1B4332; animation: logoPulse 2s ease-in-out infinite; }
+  .loader-logo span { color: #D4AF37; font-style: italic; }
+  @keyframes logoPulse { 0%, 100% { opacity: .5; transform: scale(.95); } 50% { opacity: 1; transform: scale(1.02); } }
+  .loader-line { width: 120px; height: 1px; margin-top: 2rem; background: linear-gradient(90deg, transparent, #D4AF37, transparent); position: relative; overflow: hidden; }
+  .loader-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, #1B4332, transparent); animation: loaderSlide 1.5s ease-in-out infinite; }
+  @keyframes loaderSlide { 0% { left: -100%; } 100% { left: 100%; } }
+  .loader-tagline { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: .4em; text-transform: uppercase; color: rgba(27,67,50,.5); margin-top: 1.5rem; animation: fadeInOut 2s ease-in-out infinite; }
+  @keyframes fadeInOut { 0%, 100% { opacity: .4; } 50% { opacity: 1; } }
+
+  .marquee { position: relative; overflow: hidden; background: linear-gradient(90deg, #1B4332 0%, #2D6A4F 50%, #1B4332 100%); padding: 1.2rem 0; border-top: 1px solid rgba(212,175,55,.3); border-bottom: 1px solid rgba(212,175,55,.3); }
+  .marquee-track { display: flex; gap: 3rem; white-space: nowrap; animation: marqueeScroll 30s linear infinite; }
+  .marquee-item { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #D4AF37; letter-spacing: .2em; display: flex; align-items: center; gap: 3rem; }
+  .marquee-item .dot { color: #FAF7F2; font-size: 1rem; }
+  @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  .hero-letter { display: inline-block; opacity: 0; transform: translateY(60px) rotateX(-90deg) scale(0.5); animation: letterReveal 1s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes letterReveal { to { opacity: 1; transform: translateY(0) rotateX(0) scale(1); } }
+
+  .shimmer-text { background: linear-gradient(90deg, #1B4332 0%, #1B4332 40%, #D4AF37 50%, #1B4332 60%, #1B4332 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmerMove 4s ease-in-out infinite; }
+  @keyframes shimmerMove { 0%, 100% { background-position: 200% 0; } 50% { background-position: -200% 0; } }
+
+  .gold-divider { width: 0; height: 2px; background: linear-gradient(90deg, transparent, #D4AF37, transparent); margin: 1.25rem auto 0; transition: width 1.6s cubic-bezier(.2,.8,.2,1) .4s; box-shadow: 0 0 12px rgba(212,175,55,.5); }
+  .reveal.active .gold-divider { width: 180px; }
+
+  .shimmer-btn { position: relative; overflow: hidden; }
+  .shimmer-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); transition: left .6s ease; }
+  .shimmer-btn:hover::before { left: 100%; }
+
+  .card-reveal { opacity: 0; transform: translateY(60px) scale(0.92); transition: opacity 1.2s cubic-bezier(.2,.8,.2,1), transform 1.2s cubic-bezier(.2,.8,.2,1); }
+  .card-reveal.card-from-left { transform: translateX(-80px) translateY(40px) scale(0.94); }
+  .card-reveal.card-from-right { transform: translateX(80px) translateY(40px) scale(0.94); }
+  .card-reveal.active { opacity: 1; transform: translateX(0) translateY(0) scale(1); animation: cardGlow 3s ease-in-out infinite 1s; }
+  @keyframes cardGlow {
+    0%, 100% { box-shadow: 0 10px 30px rgba(27,67,50,0.05), 0 0 0 1px rgba(212,175,55,.4), 0 0 30px rgba(212,175,55,.08); }
+    50% { box-shadow: 0 10px 30px rgba(27,67,50,0.08), 0 0 0 1px rgba(212,175,55,.9), 0 0 55px rgba(212,175,55,.3); }
+  }
+
+  .reveal { opacity: 0; transform: translateY(50px) scale(.97); transition: opacity 1.2s cubic-bezier(.2,.8,.2,1), transform 1.2s cubic-bezier(.2,.8,.2,1); }
+  .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
+
+  .cd-flip { animation: cdFlip .8s ease-out; }
+  @keyframes cdFlip { 0% { transform: rotateX(0deg); opacity: 1; } 50% { transform: rotateX(-90deg) scale(1.1); opacity: .3; } 100% { transform: rotateX(0deg) scale(1); opacity: 1; } }
+
+  .tile-inner { transition: transform 1.2s cubic-bezier(.2,.8,.2,1), filter .8s ease; }
+  .tile:hover .tile-inner { transform: scale(1.08); filter: saturate(1.15) brightness(1.05); }
+  .tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(212,175,55,0) 0%, rgba(212,175,55,.4) 50%, rgba(212,175,55,0) 100%); opacity: 0; transition: opacity .6s ease; pointer-events: none; z-index: 2; }
+  .tile:hover::after { opacity: 1; }
+
+  .gallery-tile { opacity: 0; transition: opacity 1.2s cubic-bezier(.2,.8,.2,1), transform 1.2s cubic-bezier(.2,.8,.2,1); }
+  .gallery-tile.from-left { transform: translateX(-100px) rotate(-6deg); }
+  .gallery-tile.from-right { transform: translateX(100px) rotate(6deg); }
+  .gallery-tile.active { opacity: 1; transform: translateX(0) translateY(0) rotate(0) scale(1); }
+
+  .sparkle-border { position: relative; }
+  .sparkle-border::before { content: ''; position: absolute; inset: -2px; border-radius: inherit; padding: 2px; background: linear-gradient(45deg, transparent 30%, #D4AF37 50%, transparent 70%); background-size: 300% 300%; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: sparkleShift 4s linear infinite; pointer-events: none; opacity: 0; transition: opacity .5s ease; }
+  .sparkle-border:hover::before { opacity: 1; }
+  @keyframes sparkleShift { 0% { background-position: 0% 0%; } 100% { background-position: 300% 300%; } }
+
+  .cursor-sparkle { position: fixed; pointer-events: none; z-index: 9998; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle, #FFF8E0 0%, #F3E5AB 40%, #D4AF37 80%, transparent 100%); box-shadow: 0 0 14px rgba(212,175,55,.9); animation: sparkleFade 1s ease-out forwards; }
+  @keyframes sparkleFade { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0) translateY(-14px); opacity: 0; } }
+
+  @keyframes pulseDot { 0%, 100% { box-shadow: 0 0 0 4px #FAF7F2, 0 0 0 6px rgba(212,175,55,0.3); } 50% { box-shadow: 0 0 0 4px #FAF7F2, 0 0 0 10px rgba(212,175,55,0.1); } }
+  .verse-dot { animation: pulseDot 3s ease-in-out infinite; }
+
+  .verse-item { opacity: 0; transform: translateY(60px); transition: opacity 1.1s cubic-bezier(.2,.8,.2,1), transform 1.1s cubic-bezier(.2,.8,.2,1); }
+  .verse-item.active { opacity: 1; transform: translateY(0); }
+  .verse-item.active .verse-dot { animation: pulseDot 3s ease-in-out infinite, dotGlow 2s ease-in-out infinite; }
+  @keyframes dotGlow { 0%, 100% { box-shadow: 0 0 0 4px #FAF7F2, 0 0 0 6px rgba(212,175,55,.3); } 50% { box-shadow: 0 0 0 4px #FAF7F2, 0 0 0 12px rgba(212,175,55,.55); } }
+
+  @keyframes scrollBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+  .scroll-indicator { animation: scrollBounce 2s ease-in-out infinite; }
+
+  .nav-link { position: relative; }
+  .nav-link::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 0; height: 1px; background: #D4AF37; transition: width .4s ease; }
+  .nav-link:hover::after { width: 100%; }
+
+  .map-link .pin { display: inline-block; animation: pinPulse 2s ease-in-out infinite; }
+  @keyframes pinPulse { 0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 0 rgba(212,175,55,0)); } 50% { transform: translateY(-3px) scale(1.15); filter: drop-shadow(0 0 8px rgba(212,175,55,.9)); } }
+
+  .btn-spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.35); border-top-color: #FAF7F2; border-radius: 50%; animation: spin .8s linear infinite; margin-right: .5rem; vertical-align: middle; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .confetti-piece { position: fixed; pointer-events: none; z-index: 99999; will-change: transform, opacity; }
+
+  .event-timeline { position: relative; margin-top: 2rem; padding: 1.5rem 0 1rem; }
+  .event-timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, transparent, rgba(212,175,55,.6) 15%, rgba(212,175,55,.6) 85%, transparent); transform: translateX(-50%); }
+  .tl-ornament { position: absolute; left: 50%; transform: translateX(-50%); width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
+  .tl-ornament-top { top: -9px; }
+  .tl-ornament-bottom { bottom: -9px; }
+  .tl-ornament svg { width: 100%; height: 100%; }
+
+  .tl-flower { position: absolute; left: 50%; top: 0; width: 34px; height: 34px; transform: translate(-50%, -50%); z-index: 5; pointer-events: none; filter: drop-shadow(0 3px 8px rgba(212,175,55,.45)); will-change: top; }
+  .tl-flower svg { width: 100%; height: 100%; display: block; }
+  .tl-flower::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; background: radial-gradient(circle, rgba(212,175,55,.5) 0%, rgba(212,175,55,0) 70%); animation: flowerTrail 3s ease-in-out infinite; pointer-events: none; }
+  @keyframes flowerTrail { 0%, 100% { opacity: .3; transform: scale(1); } 50% { opacity: .7; transform: scale(1.25); } }
+
+  .tl-item { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0; margin: 2.5rem 0; position: relative; }
+  .tl-item.left .tl-content { grid-column: 1; text-align: right; padding-right: 1.5rem; }
+  .tl-item.left .tl-dot-wrap { grid-column: 2; }
+  .tl-item.left .tl-icon { grid-column: 3; padding-left: 1.5rem; }
+  .tl-item.right .tl-content { grid-column: 3; text-align: left; padding-left: 1.5rem; }
+  .tl-item.right .tl-dot-wrap { grid-column: 2; }
+  .tl-item.right .tl-icon { grid-column: 1; padding-right: 1.5rem; text-align: right; }
+
+  .tl-dot-wrap { display: flex; align-items: center; justify-content: center; width: 26px; z-index: 2; }
+  .tl-dot { display: none; }
+
+  .tl-icon { display: flex; align-items: center; justify-content: center; }
+  .tl-icon svg { width: 150px; height: 150px; }
+  .tl-icon img { width: 150px; height: 150px; object-fit: contain; border-radius: 0; mix-blend-mode: multiply; -webkit-mask-image: radial-gradient(ellipse at center, #000 42%, rgba(0,0,0,.85) 62%, transparent 90%); mask-image: radial-gradient(ellipse at center, #000 42%, rgba(0,0,0,.85) 62%, transparent 90%); filter: sepia(.1) saturate(.9) brightness(1.02) contrast(.98); transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .5s ease; }
+  .tl-icon img:hover { transform: scale(1.05); filter: sepia(0) saturate(1) brightness(1.05) contrast(1); }
+
+  .tl-time { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.5rem; color: #8a6a20; line-height: 1; margin: 0 0 .35rem; font-weight: 500; }
+  .tl-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: .12em; color: #4a3a20; text-transform: uppercase; line-height: 1.4; margin: 0; }
+
+  @media (max-width: 640px) {
+    .tl-icon svg { width: 110px; height: 110px; }
+    .tl-icon img { width: 110px; height: 110px; }
+    .tl-time { font-size: 1.25rem; }
+    .tl-title { font-size: .85rem; }
+    .tl-item.left .tl-content { padding-right: 1rem; }
+    .tl-item.right .tl-content { padding-left: 1rem; }
+    .tl-item { margin: 2rem 0; }
+    .tl-flower { width: 26px; height: 26px; }
+    .card-reveal.card-from-left { transform: translateY(40px) scale(0.94); }
+    .card-reveal.card-from-right { transform: translateY(40px) scale(0.94); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .composite-layer.show.kenburns, .marquee-track, .loader-logo, .tl-flower::before, .gold-glow { animation: none !important; }
+  }
+</style>
+</head>
+<body class="grain intro-locked">
+
+<div id="introScene">
+  <img class="composite-layer" id="compositeLayer" src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/refs/heads/main/IMG_8749.jpeg" alt="Noah & Daughter of Abdul Sattar" />
+
+  <div class="gold-glow" style="width:60px;height:60px;left:50%;top:22%;animation-delay:0s;transform:translate(-50%,-50%);"></div>
+  <div class="gold-glow" style="width:50px;height:50px;left:50%;top:78%;animation-delay:1.2s;transform:translate(-50%,-50%);"></div>
+  <div class="gold-glow" style="width:40px;height:40px;left:22%;top:45%;animation-delay:2.4s;transform:translate(-50%,-50%);"></div>
+  <div class="gold-glow" style="width:40px;height:40px;left:78%;top:45%;animation-delay:3.6s;transform:translate(-50%,-50%);"></div>
+  <img class="envelope-image" id="envelopeImage" src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/refs/heads/main/IMG_8750.jpeg" alt="Wedding Envelope" />
+</div>
+
+<div id="loader">
+  <div class="loader-logo">N<span>&amp;</span>U</div>
+  <div class="loader-line"></div>
+  <div class="loader-tagline">13 · November · 2026</div>
+</div>
+
+<div id="progress" style="position:fixed;top:0;left:0;right:0;height:2px;z-index:100;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,#1B4332,#D4AF37,#1B4332);"></div>
+
+<header id="navbar" style="position:fixed;top:0;left:0;right:0;z-index:80;transition:all .5s;padding:1.5rem 0;">
+  <nav style="max-width:80rem;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;">
+    <a href="#top" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:.18em;color:#1B4332;text-decoration:none;font-weight:600;">N<span style="color:#D4AF37;margin:0 .4rem;font-style:italic;">&amp;</span>U</a>
+    <ul class="hidden md:flex" style="display:none;list-style:none;gap:2.25rem;margin:0;padding:0;align-items:center;">
+      <li><a href="#story" class="nav-link" style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.8);text-decoration:none;">Verses</a></li>
+      <li><a href="#details" class="nav-link" style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.8);text-decoration:none;">Events</a></li>
+      <li><a href="#gallery" class="nav-link" style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.8);text-decoration:none;">Gallery</a></li>
+      <li><a href="#rsvp" class="nav-link" style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.8);text-decoration:none;">RSVP</a></li>
+    </ul>
+    <a href="#rsvp" class="hidden md:inline-flex nav-link" style="display:none;border:1px solid rgba(27,67,50,.4);border-radius:9999px;padding:.6rem 1.5rem;font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:#1B4332;text-decoration:none;background:rgba(212,175,55,0.1);">RSVP</a>
+    <button id="menuBtn" class="md:hidden" style="display:flex;flex-direction:column;gap:6px;background:none;border:0;cursor:pointer;padding:6px;" aria-label="Menu">
+      <span style="display:block;height:2px;width:26px;background:#1B4332;transition:all .4s;"></span>
+      <span style="display:block;height:2px;width:26px;background:#1B4332;transition:all .4s;"></span>
+    </button>
+  </nav>
+</header>
+
+<div id="mobileMenu" style="display:none;position:fixed;inset:0;z-index:90;background:#FAF7F2;flex-direction:column;align-items:center;justify-content:center;gap:1.75rem;opacity:0;">
+  <a href="#story" class="mobile-link" style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:#1B4332;text-decoration:none;">Verses</a>
+  <a href="#details" class="mobile-link" style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:#1B4332;text-decoration:none;">Events</a>
+  <a href="#gallery" class="mobile-link" style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:#1B4332;text-decoration:none;">Gallery</a>
+  <a href="#rsvp" class="mobile-link" style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:#1B4332;text-decoration:none;">RSVP</a>
+  <div class="hairline" style="width:6rem;margin-top:1rem;"></div>
+  <p style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.45);margin:0;">13 · 11 · 2026</p>
+</div>
+
+<main>
+
+<section id="top" style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6rem 1rem 4rem;">
+  <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1600&q=80&auto=format&fit=crop" alt="Nikah" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;animation: heroZoom 20s ease-in-out infinite alternate;" />
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(250,247,242,0.6) 0%, rgba(250,247,242,0.8) 60%, rgba(250,247,242,1) 100%);z-index:1;"></div>
+
+  <div style="position:relative;z-index:10;width:100%;text-align:center;max-width:800px;">
+    <p style="font-size:12px;text-transform:uppercase;letter-spacing:.3em;color:#D4AF37;margin:0 0 1.5rem;font-weight:600;" id="heroKicker">Welcome to the</p>
+    <h1 class="font-script" style="font-size:clamp(3rem, 12vw, 5rem);color:#1B4332;margin:0 0 .5rem;line-height:1.2;" id="heroTitle">Nikah Ceremony</h1>
+    <p style="font-size:14px;text-transform:uppercase;letter-spacing:.2em;color:#1B4332;margin:0 0 1.5rem;font-weight:500;" id="heroOf">of</p>
+    <div class="hairline" style="width:100px;margin:0 auto 1.5rem;" id="heroLine"></div>
+    <h2 class="font-display shimmer-text" style="font-size:clamp(2rem, 8vw, 3.5rem);color:#14110F;margin:0 0 .5rem;font-weight:400;line-height:1.3;" id="heroGroom">Noah Bin Ahmed</h2>
+    <p class="font-script" id="heroAmp" style="font-size:2.5rem;color:#D4AF37;margin:0 0 .5rem;">&amp;</p>
+    <h2 class="font-display shimmer-text" style="font-size:clamp(1.8rem, 7vw, 3rem);color:#14110F;margin:0 0 2rem;font-weight:400;line-height:1.3;" id="heroBride">Daughter Of<br/>Abdul Sattar</h2>
+    <div style="background:rgba(27,67,50,0.9);border:1px solid rgba(212,175,55,0.6);border-radius:50px;padding:.9rem 2.5rem;display:inline-block;box-shadow: 0 0 40px rgba(212,175,55,.2), inset 0 0 20px rgba(212,175,55,.1);" id="heroDate">
+      <p style="font-size:14px;text-transform:uppercase;letter-spacing:.25em;color:#FAF7F2;margin:0;font-weight:500;">13 · 11 · 2026</p>
+    </div>
+    <p style="font-size:11px;text-transform:uppercase;letter-spacing:.3em;color:rgba(27,67,50,.7);margin:1.5rem 0 0;font-weight:500;" id="heroCity">Karachi, Pakistan</p>
+  </div>
+
+  <div class="scroll-indicator" style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:.5rem;">
+    <span style="font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.6);font-weight:500;">Scroll</span>
+    <span style="display:block;width:1px;height:2.5rem;background:linear-gradient(180deg,#D4AF37,transparent);"></span>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-item">Noah Bin Ahmed <span class="dot">✦</span> Daughter Of Abdul Sattar <span class="dot">✦</span> 13 · 11 · 2026 <span class="dot">✦</span> Karachi <span class="dot">✦</span></div>
+    <div class="marquee-item">Noah Bin Ahmed <span class="dot">✦</span> Daughter Of Abdul Sattar <span class="dot">✦</span> 13 · 11 · 2026 <span class="dot">✦</span> Karachi <span class="dot">✦</span></div>
+  </div>
+</div>
+
+<section id="story" style="position:relative;padding:6rem 1.5rem;background:#FAF7F2;">
+  <div style="max-width:56rem;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:4rem;">
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 1rem;">Blessings</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#1B4332;margin:0;line-height:1.1;">Words of <span style="font-style:italic;" class="text-gold-gradient">Love</span></h2>
+      <div class="gold-divider"></div>
+      <p style="margin-top:1.5rem;font-size:14px;color:rgba(27,67,50,.6);">From the Holy Quran &amp; Islamic Teachings</p>
+    </div>
+    <div style="position:relative;padding-left:2rem;">
+      <div style="position:absolute;left:0;top:.5rem;bottom:0;width:2px;background:linear-gradient(180deg, #D4AF37, #1B4332, transparent);"></div>
+      <div style="display:flex;flex-direction:column;gap:4rem;">
+        <div class="verse-item" style="position:relative;">
+          <span class="verse-dot" style="position:absolute;left:-2.1rem;top:.5rem;width:12px;height:12px;border-radius:9999px;background:#D4AF37;"></span>
+          <p class="font-display" style="font-size:1.4rem;font-weight:600;color:#D4AF37;margin:0 0 .5rem;">Surah Ar-Rum 30:21</p>
+          <h3 class="font-display" style="font-size:1.4rem;color:#1B4332;margin:0 0 1rem;font-style:italic;">"And among His signs is this..."</h3>
+          <p style="font-size:15px;line-height:1.8;color:rgba(20,17,15,.7);margin:0;background:rgba(27,67,50,0.04);padding:1rem;border-left:3px solid #D4AF37;border-radius:0 8px 8px 0;">"And among His signs is this, that He created for you mates from among yourselves, that you may dwell in tranquillity with them, and He has put love and mercy between your hearts. Verily in that are signs for those who reflect."</p>
+        </div>
+        <div class="verse-item" style="position:relative;">
+          <span class="verse-dot" style="position:absolute;left:-2.1rem;top:.5rem;width:12px;height:12px;border-radius:9999px;background:#D4AF37;"></span>
+          <p class="font-display" style="font-size:1.4rem;font-weight:600;color:#D4AF37;margin:0 0 .5rem;">Surah Al-Baqarah 2:187</p>
+          <h3 class="font-display" style="font-size:1.4rem;color:#1B4332;margin:0 0 1rem;font-style:italic;">"They are your garments..."</h3>
+          <p style="font-size:15px;line-height:1.8;color:rgba(20,17,15,.7);margin:0;background:rgba(27,67,50,0.04);padding:1rem;border-left:3px solid #D4AF37;border-radius:0 8px 8px 0;">"They are your garments and you are their garments." — A beautiful metaphor of how spouses protect, comfort, and cover each other.</p>
+        </div>
+        <div class="verse-item" style="position:relative;">
+          <span class="verse-dot" style="position:absolute;left:-2.1rem;top:.5rem;width:12px;height:12px;border-radius:9999px;background:#D4AF37;"></span>
+          <p class="font-display" style="font-size:1.4rem;font-weight:600;color:#D4AF37;margin:0 0 .5rem;">Surah Al-Furqan 25:74</p>
+          <h3 class="font-display" style="font-size:1.4rem;color:#1B4332;margin:0 0 1rem;font-style:italic;">"Our Lord, grant us..."</h3>
+          <p style="font-size:15px;line-height:1.8;color:rgba(20,17,15,.7);margin:0;background:rgba(27,67,50,0.04);padding:1rem;border-left:3px solid #D4AF37;border-radius:0 8px 8px 0;">"Our Lord, grant us from among our spouses and offspring comfort to our eyes and make us an example for the righteous."</p>
+        </div>
+        <div class="verse-item" style="position:relative;">
+          <span class="verse-dot" style="position:absolute;left:-2.1rem;top:.5rem;width:12px;height:12px;border-radius:9999px;background:#D4AF37;"></span>
+          <p class="font-display" style="font-size:1.4rem;font-weight:600;color:#D4AF37;margin:0 0 .5rem;">Prophet Muhammad (PBUH)</p>
+          <h3 class="font-display" style="font-size:1.4rem;color:#1B4332;margin:0 0 1rem;font-style:italic;">"The best of you..."</h3>
+          <p style="font-size:15px;line-height:1.8;color:rgba(20,17,15,.7);margin:0;background:rgba(27,67,50,0.04);padding:1rem;border-left:3px solid #D4AF37;border-radius:0 8px 8px 0;">"The best of you are those who are best to their wives." — A reminder to carry love, respect, and kindness into this new chapter.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="details" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg, #FAF7F2 0%, #F1E9DF 100%);">
+  <div style="max-width:72rem;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:4rem;">
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 1rem;">The Celebrations</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#1B4332;margin:0;line-height:1.1;">Days of <span style="font-style:italic;" class="text-gold-gradient">Joy</span></h2>
+      <div class="gold-divider"></div>
+      <p style="margin-top:1.5rem;font-size:14px;color:rgba(27,67,50,.6);">13 – 16 November 2026 · Karachi, Pakistan</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;">
+
+      <article class="card-reveal card-from-left sparkle-border" style="overflow:hidden;border-radius:1.5rem;border:1px solid rgba(212,175,55,.3);background:#fff;">
+        <div style="position:relative;height:15rem;overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=80&auto=format&fit=crop" alt="Nikah" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(250,247,242,.9));"></div>
+        </div>
+        <div style="padding:2rem;">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .75rem;">Day One · Afternoon</p>
+          <h3 class="font-display" style="font-size:1.75rem;color:#1B4332;margin:0 0 .75rem;">Nikkah Ceremony</h3>
+          <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
+          <p class="font-display" style="font-size:1.1rem;color:rgba(20,17,15,.8);margin:0 0 .3rem;">Friday, 13 November 2026</p>
+          <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(27,67,50,.6);margin:0 0 1rem;">After Jumma Prayer · Jamia Masjid Al Falahiya</p>
+          <p style="font-size:14px;line-height:1.7;color:rgba(20,17,15,.6);margin:0 0 1.25rem;">The sacred Nikkah ceremony, uniting two families in the presence of Allah and our loved ones.</p>
+
+          <div class="event-timeline">
+            <div class="tl-ornament tl-ornament-top"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2 L14 10 L10 18 L6 10 Z" stroke="#D4AF37" stroke-width="1" fill="none"/><circle cx="10" cy="10" r="2" fill="#D4AF37"/></svg></div>
+            <div class="tl-flower"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g transform="translate(20,20)"><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(51.4)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(102.8)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(154.2)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(205.6)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(257)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(308.4)"/><circle cx="0" cy="0" r="3.5" fill="#D4AF37"/><circle cx="0" cy="0" r="1.6" fill="#8a6a20"/></g></svg></div>
+            <div class="tl-item left">
+              <div class="tl-content"><p class="tl-time">1:00 pm</p><p class="tl-title">Jumma Prayer</p></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-icon"><img src="https://i.ibb.co/RGyTtFC8/IMG-8708.jpg" alt="Jumma Prayer" /></div>
+            </div>
+            <div class="tl-item right">
+              <div class="tl-icon"><img src="https://i.ibb.co/HDjxxWPJ/IMG-8709.jpg" alt="Khutbah" /></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-content"><p class="tl-time">1:45 pm</p><p class="tl-title">Khutbah</p></div>
+            </div>
+            <div class="tl-item left">
+              <div class="tl-content"><p class="tl-time">2:30 pm</p><p class="tl-title">Nikkah Ceremony</p></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-icon"><img src="https://i.ibb.co/chmB4PfN/IMG-8713.jpg" alt="Nikkah Ceremony" /></div>
+            </div>
+            <div class="tl-item right">
+              <div class="tl-icon"><img src="https://i.ibb.co/QvkJCqhk/IMG-8717.jpg" alt="Dua" /></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-content"><p class="tl-time">3:30 pm</p><p class="tl-title">Dua &amp; Mubarak</p></div>
+            </div>
+            <div class="tl-ornament tl-ornament-bottom"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2 L14 10 L10 18 L6 10 Z" stroke="#D4AF37" stroke-width="1" fill="none"/><circle cx="10" cy="10" r="2" fill="#D4AF37"/></svg></div>
+          </div>
+
+          <a href="https://maps.google.com/?q=Jamia+Masjid+Al+Falahiya+Karachi" target="_blank" rel="noopener" class="map-link" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#1B4332;text-decoration:none;font-weight:500;margin-top:1.5rem;"><span class="pin">📍</span> Open in Maps</a>
+        </div>
+      </article>
+
+      <article class="card-reveal card-from-right sparkle-border" style="overflow:hidden;border-radius:1.5rem;border:1px solid rgba(212,175,55,.3);background:#fff;">
+        <div style="position:relative;height:15rem;overflow:hidden;">
+          <img src="https://i.ibb.co/1tFND64t/IMG-8660.jpg" alt="Mehndi" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(250,247,242,.9));"></div>
+        </div>
+        <div style="padding:2rem;">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .75rem;">Day One · Night</p>
+          <h3 class="font-display" style="font-size:1.75rem;color:#1B4332;margin:0 0 .75rem;">Mehndi</h3>
+          <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
+          <p class="font-display" style="font-size:1.1rem;color:rgba(20,17,15,.8);margin:0 0 .3rem;">Friday, 13 November 2026</p>
+          <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(27,67,50,.6);margin:0 0 1rem;">9:00 PM onwards · Al Bilal Ballroom</p>
+          <p style="font-size:14px;line-height:1.7;color:rgba(20,17,15,.6);margin:0 0 1.25rem;">An evening of dholki, dance and henna. Come ready to sing, laugh and get your hands decorated.</p>
+
+          <div style="border:1px solid rgba(212,175,55,.3);background:rgba(212,175,55,.08);border-radius:.75rem;padding:1rem;margin-bottom:1.25rem;">
+            <p style="font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .4rem;">Dress Code</p>
+            <p class="font-display" style="font-size:1rem;color:rgba(20,17,15,.85);margin:0 0 .3rem;">Yellow &amp; Green Traditional</p>
+            <p style="font-size:12px;color:rgba(20,17,15,.5);margin:0;">Bright yellows, greens and florals. Comfortable juttis recommended.</p>
+          </div>
+
+          <div class="event-timeline">
+            <div class="tl-ornament tl-ornament-top"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2 L14 10 L10 18 L6 10 Z" stroke="#D4AF37" stroke-width="1" fill="none"/><circle cx="10" cy="10" r="2" fill="#D4AF37"/></svg></div>
+            <div class="tl-flower"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g transform="translate(20,20)"><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(51.4)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(102.8)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(154.2)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(205.6)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(257)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(308.4)"/><circle cx="0" cy="0" r="3.5" fill="#D4AF37"/><circle cx="0" cy="0" r="1.6" fill="#8a6a20"/></g></svg></div>
+            <div class="tl-item left">
+              <div class="tl-content"><p class="tl-time">9:00 pm</p><p class="tl-title">Guest Arrival</p></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-icon"><img src="https://i.ibb.co/nsrndHyZ/IMG-8714.jpg" alt="Guest Arrival" /></div>
+            </div>
+            <div class="tl-item right">
+              <div class="tl-icon"><img src="https://i.ibb.co/bR1PnNw4/IMG-8715.jpg" alt="Henna for Bride" /></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-content"><p class="tl-time">9:30 pm</p><p class="tl-title">Henna for Bride</p></div>
+            </div>
+            <div class="tl-item left">
+              <div class="tl-content"><p class="tl-time">10:30 pm</p><p class="tl-title">Dholki &amp; Dance</p></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-icon"><img src="https://i.ibb.co/xt0F8xxp/IMG-8716.jpg" alt="Dholki &amp; Dance" /></div>
+            </div>
+            <div class="tl-item right">
+              <div class="tl-icon"><img src="https://i.ibb.co/23s5qzmv/IMG-8707.jpg" alt="Dinner" /></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-content"><p class="tl-time">12:00 am</p><p class="tl-title">Dinner</p></div>
+            </div>
+            <div class="tl-ornament tl-ornament-bottom"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2 L14 10 L10 18 L6 10 Z" stroke="#D4AF37" stroke-width="1" fill="none"/><circle cx="10" cy="10" r="2" fill="#D4AF37"/></svg></div>
+          </div>
+
+          <a href="https://maps.app.goo.gl/KS4t3Zn1KKbgsZxP9?g_st=ic" target="_blank" rel="noopener" class="map-link" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#1B4332;text-decoration:none;font-weight:500;margin-top:1.5rem;"><span class="pin">📍</span> Open in Maps</a>
+        </div>
+      </article>
+
+      <article class="card-reveal card-from-left sparkle-border" style="overflow:hidden;border-radius:1.5rem;border:1px solid rgba(212,175,55,.3);background:#fff;">
+        <div style="position:relative;height:15rem;overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1200&q=80&auto=format&fit=crop" alt="Baraat" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(250,247,242,.9));"></div>
+        </div>
+        <div style="padding:2rem;">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .75rem;">Day Two</p>
+          <h3 class="font-display" style="font-size:1.75rem;color:#1B4332;margin:0 0 .75rem;">Baraat</h3>
+          <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
+          <p class="font-display" style="font-size:1.1rem;color:rgba(20,17,15,.8);margin:0 0 .3rem;">Saturday, 14 November 2026</p>
+          <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(27,67,50,.6);margin:0 0 1rem;">9:00 PM · Nudrat Banquet</p>
+          <p style="font-size:14px;line-height:1.7;color:rgba(20,17,15,.6);margin:0 0 1.25rem;">The groom's grand procession — a night of music, joy, and celebration as the Baraat arrives.</p>
+
+          <div style="border:1px solid rgba(212,175,55,.3);background:rgba(212,175,55,.08);border-radius:.75rem;padding:1rem;margin-bottom:1.25rem;">
+            <p style="font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .4rem;">Dress Code</p>
+            <p class="font-display" style="font-size:1rem;color:rgba(20,17,15,.85);margin:0 0 .3rem;">Royal Formal — Sherwani &amp; Lehenga</p>
+            <p style="font-size:12px;color:rgba(20,17,15,.5);margin:0;">Deep jewel tones, gold embroidery, silks.</p>
+          </div>
+
+          <div class="event-timeline">
+            <div class="tl-ornament tl-ornament-top"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2 L14 10 L10 18 L6 10 Z" stroke="#D4AF37" stroke-width="1" fill="none"/><circle cx="10" cy="10" r="2" fill="#D4AF37"/></svg></div>
+            <div class="tl-flower"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g transform="translate(20,20)"><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(51.4)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(102.8)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(154.2)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(205.6)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(257)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(308.4)"/><circle cx="0" cy="0" r="3.5" fill="#D4AF37"/><circle cx="0" cy="0" r="1.6" fill="#8a6a20"/></g></svg></div>
+            <div class="tl-item left">
+              <div class="tl-content"><p class="tl-time">9:00 pm</p><p class="tl-title">Baraat Arrival</p></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-icon"><img src="https://i.ibb.co/wr6DDvJ7/IMG-8721.jpg" alt="Baraat Arrival" /></div>
+            </div>
+            <div class="tl-item right">
+              <div class="tl-icon"><img src="https://i.ibb.co/wF7L55F7/IMG-8722.jpg" alt="Milni Ceremony" /></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-content"><p class="tl-time">9:45 pm</p><p class="tl-title">Milni Ceremony</p></div>
+            </div>
+            <div class="tl-item left">
+              <div class="tl-content"><p class="tl-time">10:15 pm</p><p class="tl-title">Joota Chupai &amp; Doodh Pilai</p></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-icon"><img src="https://i.ibb.co/rRVR6rjy/IMG-8723.jpg" alt="Joota Chupai & Doodh Pilai" /></div>
+            </div>
+            <div class="tl-item right">
+              <div class="tl-icon"><img src="https://i.ibb.co/ksbd79vQ/IMG-8724.jpg" alt="Dinner" /></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-content"><p class="tl-time">11:00 pm</p><p class="tl-title">Dinner</p></div>
+            </div>
+            <div class="tl-item left">
+              <div class="tl-content"><p class="tl-time">12:30 am</p><p class="tl-title">Rukhsati</p></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-icon"><img src="https://i.ibb.co/Z6VnfGyP/IMG-8725.jpg" alt="Rukhsati" /></div>
+            </div>
+            <div class="tl-ornament tl-ornament-bottom"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2 L14 10 L10 18 L6 10 Z" stroke="#D4AF37" stroke-width="1" fill="none"/><circle cx="10" cy="10" r="2" fill="#D4AF37"/></svg></div>
+          </div>
+
+          <a href="https://maps.app.goo.gl/ke9NR6pEhi9NnhTY7?g_st=ic" target="_blank" rel="noopener" class="map-link" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#1B4332;text-decoration:none;font-weight:500;margin-top:1.5rem;"><span class="pin">📍</span> Open in Maps</a>
+        </div>
+      </article>
+
+      <article class="card-reveal card-from-right sparkle-border" style="overflow:hidden;border-radius:1.5rem;border:1px solid rgba(212,175,55,.3);background:#fff;">
+        <div style="position:relative;height:15rem;overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80&auto=format&fit=crop" alt="Walima" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(250,247,242,.9));"></div>
+        </div>
+        <div style="padding:2rem;">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .75rem;">Day Three</p>
+          <h3 class="font-display" style="font-size:1.75rem;color:#1B4332;margin:0 0 .75rem;">Walima</h3>
+          <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
+          <p class="font-display" style="font-size:1.1rem;color:rgba(20,17,15,.8);margin:0 0 .3rem;">Monday, 16 November 2026</p>
+          <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(27,67,50,.6);margin:0 0 1rem;">9:00 PM · Universal Zewar Banquet</p>
+          <p style="font-size:14px;line-height:1.7;color:rgba(20,17,15,.6);margin:0 0 1.25rem;">The grand reception. A formal evening of dinner, blessings and celebration as husband and wife.</p>
+
+          <div style="border:1px solid rgba(212,175,55,.3);background:rgba(212,175,55,.08);border-radius:.75rem;padding:1rem;margin-bottom:1.25rem;">
+            <p style="font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 .4rem;">Dress Code</p>
+            <p class="font-display" style="font-size:1rem;color:rgba(20,17,15,.85);margin:0 0 .3rem;">Formal Black Tie / Elegant</p>
+            <p style="font-size:12px;color:rgba(20,17,15,.5);margin:0;">Suits, sherwanis, elegant sarees or formal gowns.</p>
+          </div>
+
+          <div class="event-timeline">
+            <div class="tl-ornament tl-ornament-top"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2 L14 10 L10 18 L6 10 Z" stroke="#D4AF37" stroke-width="1" fill="none"/><circle cx="10" cy="10" r="2" fill="#D4AF37"/></svg></div>
+            <div class="tl-flower"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g transform="translate(20,20)"><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(51.4)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(102.8)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(154.2)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(205.6)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(257)"/><ellipse cx="0" cy="-9" rx="3.2" ry="8" fill="#FBF3D5" stroke="#D4AF37" stroke-width="0.9" transform="rotate(308.4)"/><circle cx="0" cy="0" r="3.5" fill="#D4AF37"/><circle cx="0" cy="0" r="1.6" fill="#8a6a20"/></g></svg></div>
+            <div class="tl-item left">
+              <div class="tl-content"><p class="tl-time">9:00 pm</p><p class="tl-title">Guest Arrival</p></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-icon"><img src="https://i.ibb.co/xq9WzLN7/IMG-8726.jpg" alt="Guest Arrival" /></div>
+            </div>
+            <div class="tl-item right">
+              <div class="tl-icon"><img src="https://i.ibb.co/Wv2Kv72Y/IMG-8730.jpg" alt="Couple Entry" /></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-content"><p class="tl-time">9:45 pm</p><p class="tl-title">Couple Entry</p></div>
+            </div>
+            <div class="tl-item left">
+              <div class="tl-content"><p class="tl-time">10:15 pm</p><p class="tl-title">Dance and Celebration</p></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-icon"><img src="https://i.ibb.co/pBLCLFfq/IMG-8728.jpg" alt="Dance and Celebration" /></div>
+            </div>
+            <div class="tl-item right">
+              <div class="tl-icon"><img src="https://i.ibb.co/m5d7sw8m/IMG-8731.jpg" alt="Dinner" /></div>
+              <div class="tl-dot-wrap"></div>
+              <div class="tl-content"><p class="tl-time">11:00 pm</p><p class="tl-title">Dinner</p></div>
+            </div>
+            <div class="tl-ornament tl-ornament-bottom"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2 L14 10 L10 18 L6 10 Z" stroke="#D4AF37" stroke-width="1" fill="none"/><circle cx="10" cy="10" r="2" fill="#D4AF37"/></svg></div>
+          </div>
+
+          <a href="https://maps.app.goo.gl/eZ2hiWf45WQ6AGMi8?g_st=ic" target="_blank" rel="noopener" class="map-link" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#1B4332;text-decoration:none;font-weight:500;margin-top:1.5rem;"><span class="pin">📍</span> Open in Maps</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="reveal" style="margin-top:5rem;">
+      <div style="border-radius:2rem;border:1px solid rgba(212,175,55,.3);background:linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);padding:2.5rem 1.5rem;box-shadow:0 20px 40px rgba(27,67,50,0.2);">
+        <p style="text-align:center;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 2.25rem;">Counting down to the Nikkah</p>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;max-width:36rem;margin:0 auto;">
+          <div style="text-align:center;"><div class="font-display" data-cd="d" style="font-size:clamp(2rem,8vw,3.5rem);font-weight:300;color:#FAF7F2;">00</div><div style="margin-top:.5rem;font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(243,229,171,.7);">Days</div></div>
+          <div style="text-align:center;"><div class="font-display" data-cd="h" style="font-size:clamp(2rem,8vw,3.5rem);font-weight:300;color:#FAF7F2;">00</div><div style="margin-top:.5rem;font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(243,229,171,.7);">Hours</div></div>
+          <div style="text-align:center;"><div class="font-display" data-cd="m" style="font-size:clamp(2rem,8vw,3.5rem);font-weight:300;color:#FAF7F2;">00</div><div style="margin-top:.5rem;font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(243,229,171,.7);">Min</div></div>
+          <div style="text-align:center;"><div class="font-display" data-cd="s" style="font-size:clamp(2rem,8vw,3.5rem);font-weight:300;color:#FAF7F2;">00</div><div style="margin-top:.5rem;font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(243,229,171,.7);">Sec</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="position:relative;padding:6rem 1.5rem;background:#FAF7F2;overflow:hidden;">
+  <div style="max-width:72rem;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:4rem;">
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 1rem;">Moments</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#1B4332;margin:0;line-height:1.1;">A few of our <span style="font-style:italic;" class="text-gold-gradient">favourites</span></h2>
+      <div class="gold-divider"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;">
+      <div class="tile gallery-tile from-left" style="grid-column:span 2;aspect-ratio:16/10;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=80&auto=format&fit=crop');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));z-index:1;"></div>
+        <span class="font-display" style="position:absolute;bottom:1rem;left:1.25rem;font-size:1.2rem;color:#FAF7F2;z-index:3;">The Promise</span>
+      </div>
+      <div class="tile gallery-tile from-left" style="aspect-ratio:1;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80&auto=format&fit=crop');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));z-index:1;"></div>
+        <span class="font-display" style="position:absolute;bottom:.75rem;left:1rem;font-size:1rem;color:#FAF7F2;z-index:3;">Blessings</span>
+      </div>
+      <div class="tile gallery-tile from-right" style="aspect-ratio:1;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://i.ibb.co/1tFND64t/IMG-8660.jpg');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));z-index:1;"></div>
+        <span class="font-display" style="position:absolute;bottom:.75rem;left:1rem;font-size:1rem;color:#FAF7F2;z-index:3;">Henna Nights</span>
+      </div>
+      <div class="tile gallery-tile from-left" style="aspect-ratio:1;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));z-index:1;"></div>
+        <span class="font-display" style="position:absolute;bottom:.75rem;left:1rem;font-size:1rem;color:#FAF7F2;z-index:3;">Family</span>
+      </div>
+      <div class="tile gallery-tile from-right" style="aspect-ratio:1;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80&auto=format&fit=crop');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));z-index:1;"></div>
+        <span class="font-display" style="position:absolute;bottom:.75rem;left:1rem;font-size:1rem;color:#FAF7F2;z-index:3;">Tranquillity</span>
+      </div>
+      <div class="tile gallery-tile from-left" style="grid-column:span 2;aspect-ratio:16/10;border-radius:1rem;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);">
+        <div class="tile-inner" style="position:absolute;inset:0;background-image:url('https://i.ibb.co/V0T6V6Fw/IMG-8634.jpg');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,67,50,.6));z-index:1;"></div>
+        <span class="font-display" style="position:absolute;bottom:1rem;left:1.25rem;font-size:1.2rem;color:#FAF7F2;z-index:3;">Forever Begins</span>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:3rem;text-align:center;">
+      <p style="font-size:13px;color:rgba(27,67,50,.6);margin:0;">Share your photos with <span style="color:#D4AF37;font-weight:600;">#NoahWedDaughterOfAbdulSattar</span></p>
+    </div>
+  </div>
+</section>
+
+<section id="rsvp" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg, #F1E9DF 0%, #FAF7F2 100%);">
+  <div style="max-width:48rem;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0 0 1rem;">RSVP</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#1B4332;margin:0;line-height:1.1;">Will you <span style="font-style:italic;" class="text-gold-gradient">join us?</span></h2>
+      <div class="gold-divider"></div>
+      <p style="margin-top:1.5rem;font-size:15px;color:rgba(27,67,50,.6);line-height:1.7;">Kindly respond by <span style="color:#1B4332;font-weight:500;">30 October 2026</span> so we can save you a seat.</p>
+    </div>
+    <div class="reveal">
+      <form id="rsvpForm" action="https://formspree.io/f/xgaveozq" method="POST" style="border-radius:2rem;border:1px solid rgba(212,175,55,.4);background:#fff;padding:2rem;box-shadow:0 15px 40px rgba(27,67,50,0.08);">
+        <div style="display:grid;grid-template-columns:1fr;gap:2rem;">
+          <div><label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:.75rem;">Full name</label><input class="field" id="fName" name="name" placeholder="Your name" required /><p class="err" id="errName" style="display:none;margin-top:.5rem;font-size:11px;color:rgba(220,38,38,.8);">Please tell us your name</p></div>
+          <div><label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:.75rem;">Email</label><input class="field" id="fEmail" name="email" type="email" placeholder="you@email.com" required /><p class="err" id="errEmail" style="display:none;margin-top:.5rem;font-size:11px;color:rgba(220,38,38,.8);">A valid email helps us reach you</p></div>
+          <div><label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:.75rem;">Number of guests</label><select class="field" id="fGuests" name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select></div>
+          <div><label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:.75rem;">Attending?</label><div style="display:flex;gap:.75rem;padding-top:.4rem;"><button type="button" class="att-btn active" data-att="yes" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.16em;border:1px solid #1B4332;background:#1B4332;color:#fff;cursor:pointer;font-family:inherit;transition:all .4s;">Joyfully yes</button><button type="button" class="att-btn" data-att="no" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.16em;border:1px solid rgba(27,67,50,.2);background:transparent;color:rgba(27,67,50,.6);cursor:pointer;font-family:inherit;transition:all .4s;">Sadly no</button></div><input type="hidden" id="fAttending" name="attending" value="Yes" /></div>
+          <div id="eventPicker">
+            <label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:1rem;">Which events will you attend?</label>
+            <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
+              <button type="button" class="evt-btn active" data-evt="Nikkah (13 Nov)" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.14em;border:1px solid #D4AF37;background:rgba(212,175,55,.15);color:#1B4332;cursor:pointer;font-family:inherit;font-weight:500;">✓ Nikkah · 13 Nov</button>
+              <button type="button" class="evt-btn active" data-evt="Mehndi (13 Nov)" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.14em;border:1px solid #D4AF37;background:rgba(212,175,55,.15);color:#1B4332;cursor:pointer;font-family:inherit;font-weight:500;">✓ Mehndi · 13 Nov</button>
+              <button type="button" class="evt-btn active" data-evt="Baraat (14 Nov)" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.14em;border:1px solid #D4AF37;background:rgba(212,175,55,.15);color:#1B4332;cursor:pointer;font-family:inherit;font-weight:500;">✓ Baraat · 14 Nov</button>
+              <button type="button" class="evt-btn active" data-evt="Walima (16 Nov)" style="border-radius:9999px;padding:.65rem 1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.14em;border:1px solid #D4AF37;background:rgba(212,175,55,.15);color:#1B4332;cursor:pointer;font-family:inherit;font-weight:500;">✓ Walima · 16 Nov</button>
+            </div>
+            <input type="hidden" id="fEvents" name="events" value="Nikkah (13 Nov), Mehndi (13 Nov), Baraat (14 Nov), Walima (16 Nov)" />
+          </div>
+          <div><label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(27,67,50,.5);margin-bottom:.75rem;">A note for the couple <span style="text-transform:none;letter-spacing:normal;color:rgba(27,67,50,.3);">(optional)</span></label><input class="field" id="fNote" name="note" placeholder="Dietary needs, song requests, wishes…" /></div>
+        </div>
+        <div style="margin-top:3rem;display:flex;flex-direction:column;align-items:center;gap:1.25rem;">
+          <button type="submit" id="submitBtn" class="shimmer-btn" style="width:100%;max-width:20rem;background:#1B4332;color:#FAF7F2;border-radius:9999px;padding:1rem 2.5rem;font-size:11px;text-transform:uppercase;letter-spacing:.28em;border:0;cursor:pointer;font-family:inherit;transition:background .4s;"><span id="submitText">Send RSVP</span></button>
+          <p style="font-size:11px;color:rgba(27,67,50,.4);margin:0;text-align:center;">We'll email you the full itinerary.</p>
+        </div>
+      </form>
+      <div id="rsvpSuccess" style="display:none;border-radius:2rem;border:1px solid rgba(212,175,55,.4);background:#fff;padding:3rem 2rem;text-align:center;opacity:0;box-shadow:0 15px 40px rgba(27,67,50,0.08);">
+        <div style="margin:0 auto 1.75rem;width:4rem;height:4rem;border-radius:9999px;border:1px solid rgba(212,175,55,.5);background:rgba(212,175,55,.1);display:flex;align-items:center;justify-content:center;animation: logoPulse 2s ease-in-out infinite;"><svg viewBox="0 0 24 24" style="width:1.75rem;height:1.75rem;stroke:#D4AF37;fill:none;stroke-width:1.2;"><path d="M4 12.5 9.5 18 20 6.5"/></svg></div>
+        <h3 class="font-display" id="succTitle" style="font-size:2rem;color:#1B4332;margin:0 0 1rem;">Thank you.</h3>
+        <p id="succMsg" style="font-size:15px;color:rgba(27,67,50,.6);line-height:1.7;max-width:24rem;margin:0 auto;"></p>
+        <div class="hairline" style="width:6rem;margin:2rem auto;"></div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:#D4AF37;margin:0;">#NoahWedDaughterOfAbdulSattar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="position:relative;padding:5rem 1.5rem 3rem;background:#1B4332;">
+  <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, transparent, #D4AF37, transparent);"></div>
+  <div style="max-width:48rem;margin:0 auto;text-align:center;">
+    <div class="reveal">
+      <p class="font-script" style="font-size:clamp(2rem,6vw,3.5rem);color:#D4AF37;margin:0;line-height:1.2;">Noah &amp; Daughter of Abdul Sattar</p>
+      <p style="margin-top:1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(250,247,242,.6);">13 – 16 November 2026 · Karachi</p>
+      <div class="hairline" style="width:8rem;margin:2.5rem auto;"></div>
+      <p style="font-size:13px;color:rgba(250,247,242,.7);line-height:1.7;max-width:24rem;margin:0 auto;">With love, laughter and a little bit of chaos — we can't wait to see you there.</p>
+      <p style="margin-top:2.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(212,175,55,.8);">#NoahWedDaughterOfAbdulSattar</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @keyframes heroZoom { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
+</style>
+
+<script>
+(function(){
+  "use strict";
+  var introScene = document.getElementById("introScene");
+  var envelopeImage = document.getElementById("envelopeImage");
+  var compositeLayer = document.getElementById("compositeLayer");
+  var loader = document.getElementById("loader");
+  var body = document.body;
+
+  setTimeout(function(){ envelopeImage.classList.add("show"); }, 400);
+  setTimeout(function(){ introScene.classList.add("glowing"); }, 1400);
+  setTimeout(function(){ compositeLayer.classList.add("show"); }, 3500);
+  setTimeout(function(){ envelopeImage.classList.add("opening"); }, 3800);
+  setTimeout(function(){ compositeLayer.classList.add("kenburns"); }, 6600);
+  setTimeout(function(){ loader.classList.add("visible"); }, 11500);
+  setTimeout(function(){ introScene.classList.add("hidden"); }, 13000);
+  setTimeout(function(){
+    loader.classList.remove("visible");
+    body.classList.remove("intro-locked");
+    window.scrollTo(0, 0);
+    startHeroAnimations();
+  }, 15500);
+
+  function startHeroAnimations(){
+    var letterIds = ["heroKicker", "heroTitle", "heroOf", "heroGroom", "heroBride", "heroCity"];
+    letterIds.forEach(function(id, idx){
+      var el = document.getElementById(id);
+      if (!el) return;
+      var text = el.textContent || "";
+      if (el.innerHTML.indexOf("<br") > -1){
+        el.style.opacity = "0"; el.style.transform = "translateY(40px)";
+        el.style.transition = "all 1s cubic-bezier(.2,.8,.2,1) " + (0.4 + idx * 0.15) + "s";
+        setTimeout(function(){ el.style.opacity = "1"; el.style.transform = "translateY(0)"; }, 50);
+        return;
+      }
+      var letters = text.split("");
+      el.innerHTML = letters.map(function(ch, i){
+        if (ch === " ") return '<span class="hero-letter" style="animation-delay:' + (0.4 + idx * 0.15 + i * 0.03) + 's">&nbsp;</span>';
+        return '<span class="hero-letter" style="animation-delay:' + (0.4 + idx * 0.15 + i * 0.03) + 's">' + ch + '</span>';
+      }).join("");
+    });
+    var amp = document.getElementById("heroAmp");
+    if (amp){ amp.style.opacity = "0"; amp.style.transform = "scale(0.5) rotate(-20deg)"; amp.style.transition = "all 1s cubic-bezier(.2,.8,.2,1) 1.1s"; setTimeout(function(){ amp.style.opacity = "1"; amp.style.transform = "scale(1) rotate(0deg)"; }, 50); }
+    var line = document.getElementById("heroLine");
+    if (line){ line.style.opacity = "0"; line.style.transform = "scaleX(0)"; line.style.transition = "all 1s ease 1s"; setTimeout(function(){ line.style.opacity = "1"; line.style.transform = "scaleX(1)"; }, 50); }
+    var date = document.getElementById("heroDate");
+    if (date){ date.style.opacity = "0"; date.style.transform = "translateY(30px) scale(.9)"; date.style.transition = "all 1s cubic-bezier(.2,.8,.2,1) 1.3s"; setTimeout(function(){ date.style.opacity = "1"; date.style.transform = "translateY(0) scale(1)"; }, 50); }
+  }
+
+  var verseObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add("active"); verseObserver.unobserve(en.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll(".verse-item").forEach(function(el){ verseObserver.observe(el); });
+
+  var galleryObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add("active"); galleryObserver.unobserve(en.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll(".gallery-tile").forEach(function(el){ galleryObserver.observe(el); });
+
+  var cardObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add("active"); cardObserver.unobserve(en.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".card-reveal").forEach(function(el){ cardObserver.observe(el); });
+
+  if (window.matchMedia("(hover: hover)").matches){
+    var lastSparkle = 0;
+    document.addEventListener("mousemove", function(e){
+      var now = Date.now(); if (now - lastSparkle < 55) return; lastSparkle = now;
+      var spark = document.createElement("div"); spark.className = "cursor-sparkle";
+      spark.style.left = (e.clientX - 5) + "px"; spark.style.top = (e.clientY - 5) + "px";
+      document.body.appendChild(spark); setTimeout(function(){ spark.remove(); }, 1000);
+    });
+    document.querySelectorAll(".sparkle-border").forEach(function(card){
+      card.addEventListener("mousemove", function(e){
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left, y = e.clientY - rect.top;
+        var cx = rect.width / 2, cy = rect.height / 2;
+        card.style.transform = "perspective(1000px) rotateX(" + ((cy - y) / cy * 4) + "deg) rotateY(" + ((x - cx) / cx * 4) + "deg) translateY(-6px) scale(1.01)";
+      });
+      card.addEventListener("mouseleave", function(){ card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)"; });
+    });
+  }
+
+  var progress = document.getElementById("progress");
+  window.addEventListener("scroll", function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = "scaleX(" + (h > 0 ? window.scrollY / h : 0) + ")";
+  }, { passive: true });
+
+  var navbar = document.getElementById("navbar");
+  function updateNav(){
+    if (window.scrollY > 90){ navbar.style.background = "rgba(250,247,242,.95)"; navbar.style.backdropFilter = "blur(10px)"; navbar.style.padding = ".9rem 0"; navbar.style.boxShadow = "0 1px 0 rgba(212,175,55,.2)"; }
+    else { navbar.style.background = "transparent"; navbar.style.backdropFilter = "none"; navbar.style.padding = "1.5rem 0"; navbar.style.boxShadow = "none"; }
+  }
+  window.addEventListener("scroll", updateNav, { passive: true }); updateNav();
+
+  var menuBtn = document.getElementById("menuBtn");
+  var mobileMenu = document.getElementById("mobileMenu");
+  var menuOpen = false;
+  var bars = menuBtn.querySelectorAll("span");
+  menuBtn.addEventListener("click", function(){
+    menuOpen = !menuOpen;
+    if (menuOpen){ mobileMenu.style.display = "flex"; requestAnimationFrame(function(){ mobileMenu.style.transition = "opacity .4s"; mobileMenu.style.opacity = "1"; }); bars[0].style.transform = "rotate(45deg) translateY(4px)"; bars[1].style.transform = "rotate(-45deg) translateY(-4px)"; }
+    else { mobileMenu.style.opacity = "0"; setTimeout(function(){ mobileMenu.style.display = "none"; }, 350); bars[0].style.transform = "none"; bars[1].style.transform = "none"; }
+  });
+  document.querySelectorAll(".mobile-link").forEach(function(a){
+    a.addEventListener("click", function(e){ e.preventDefault(); menuBtn.click(); var t = document.querySelector(a.getAttribute("href")); if (t) setTimeout(function(){ t.scrollIntoView({ behavior: "smooth" }); }, 100); });
+  });
+
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add("active"); observer.unobserve(en.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(".reveal").forEach(function(el){ observer.observe(el); });
+
+  function updateFlowers(){
+    document.querySelectorAll(".event-timeline").forEach(function(tl){
+      var flower = tl.querySelector(".tl-flower");
+      if (!flower) return;
+      var rect = tl.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var progress = (vh - rect.top) / (vh + rect.height);
+      if (progress < 0) progress = 0;
+      if (progress > 1) progress = 1;
+      flower.style.top = (progress * rect.height) + "px";
+    });
+  }
+  window.addEventListener("scroll", updateFlowers, { passive: true });
+  window.addEventListener("resize", updateFlowers);
+  window.addEventListener("load", updateFlowers);
+  updateFlowers();
+
+  var target = new Date("2026-11-13T14:00:00").getTime();
+  var prev = { d: "", h: "", m: "", s: "" };
+  function pad(n){ return n < 10 ? "0" + n : "" + n; }
+  function setNum(key, val){
+    var el = document.querySelector('[data-cd="' + key + '"]');
+    if (!el) return;
+    if (prev[key] !== val){ el.textContent = val; el.classList.remove("cd-flip"); void el.offsetWidth; el.classList.add("cd-flip"); prev[key] = val; }
+  }
+  function updateCD(){
+    var diff = Math.max(0, target - Date.now());
+    setNum("d", pad(Math.floor(diff / 86400000)));
+    setNum("h", pad(Math.floor((diff / 3600000) % 24)));
+    setNum("m", pad(Math.floor((diff / 60000) % 60)));
+    setNum("s", pad(Math.floor((diff / 1000) % 60)));
+  }
+  updateCD(); setInterval(updateCD, 1000);
+
+  var attendingValue = "Yes";
+  document.querySelectorAll(".att-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var val = btn.dataset.att;
+      attendingValue = val === "yes" ? "Yes" : "No";
+      document.getElementById("fAttending").value = attendingValue;
+      document.querySelectorAll(".att-btn").forEach(function(b){ b.classList.remove("active"); b.style.background = "transparent"; b.style.color = "rgba(27,67,50,.6)"; b.style.borderColor = "rgba(27,67,50,.2)"; });
+      btn.classList.add("active"); btn.style.background = "#1B4332"; btn.style.color = "#fff"; btn.style.borderColor = "#1B4332";
+      document.getElementById("eventPicker").style.display = attendingValue === "Yes" ? "block" : "none";
+    });
+  });
+  var selectedEvents = ["Nikkah (13 Nov)", "Mehndi (13 Nov)", "Baraat (14 Nov)", "Walima (16 Nov)"];
+  function updateEventsInput(){ document.getElementById("fEvents").value = selectedEvents.join(", ") || "None selected"; }
+  document.querySelectorAll(".evt-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var id = btn.dataset.evt; var idx = selectedEvents.indexOf(id);
+      if (idx > -1){ selectedEvents.splice(idx, 1); btn.textContent = btn.textContent.replace("✓ ", ""); btn.style.background = "transparent"; btn.style.color = "rgba(27,67,50,.5)"; btn.style.borderColor = "rgba(27,67,50,.2)"; }
+      else { selectedEvents.push(id); btn.textContent = "✓ " + btn.textContent; btn.style.background = "rgba(212,175,55,.15)"; btn.style.color = "#1B4332"; btn.style.borderColor = "#D4AF37"; }
+      updateEventsInput();
+    });
+  });
+
+  function launchConfetti(){
+    var colors = ["#D4AF37", "#F3E5AB", "#B8912C", "#FAF7F2", "#1B4332", "#FFF8E0"];
+    var shapes = ["●", "✦", "✧", "◆", "★"];
+    for (var i = 0; i < 90; i++){
+      (function(i){
+        setTimeout(function(){
+          var piece = document.createElement("div");
+          piece.className = "confetti-piece";
+          piece.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+          piece.style.color = colors[Math.floor(Math.random() * colors.length)];
+          piece.style.fontSize = (12 + Math.random() * 20) + "px";
+          piece.style.left = (window.innerWidth / 2) + "px";
+          piece.style.top = (window.innerHeight / 2) + "px";
+          piece.style.textShadow = "0 0 10px " + piece.style.color;
+          document.body.appendChild(piece);
+          var angle = Math.random() * Math.PI * 2;
+          var dist = 120 + Math.random() * 400;
+          var tx = Math.cos(angle) * dist;
+          var ty = Math.sin(angle) * dist - 120;
+          piece.animate([
+            { transform: "translate(0,0) scale(0.4) rotate(0deg)", opacity: 1 },
+            { transform: "translate(" + tx + "px," + ty + "px) scale(1.1) rotate(" + (Math.random()*900 - 450) + "deg)", opacity: 0 }
+          ], { duration: 1800 + Math.random() * 1000, easing: "cubic-bezier(.2,.7,.3,1)", fill: "forwards" });
+          setTimeout(function(){ piece.remove(); }, 3000);
+        }, i * 18);
+      })(i);
+    }
+  }
+
+  var form = document.getElementById("rsvpForm");
+  var submitBtn = document.getElementById("submitBtn");
+  var submitText = document.getElementById("submitText");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("fName").value.trim();
+    var email = document.getElementById("fEmail").value.trim();
+    var ok = true;
+    if (!name){ document.getElementById("errName").style.display = "block"; ok = false; } else { document.getElementById("errName").style.display = "none"; }
+    if (!/^\S+@\S+\.\S+$/.test(email)){ document.getElementById("errEmail").style.display = "block"; ok = false; } else { document.getElementById("errEmail").style.display = "none"; }
+    if (!ok) return;
+    submitText.innerHTML = '<span class="btn-spinner"></span>Sending';
+    submitBtn.disabled = true; submitBtn.style.opacity = "0.8";
+    fetch(form.action, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } })
+    .then(function(response){
+      if (response.ok){
+        form.style.display = "none";
+        var succ = document.getElementById("rsvpSuccess");
+        succ.style.display = "block";
+        document.getElementById("succTitle").textContent = "Thank you, " + name.split(" ")[0] + ".";
+        document.getElementById("succMsg").textContent = attendingValue === "Yes" ? "Your RSVP is in. We can't wait to celebrate with you in Karachi." : "We'll miss you dearly — thank you for letting us know.";
+        setTimeout(function(){ succ.style.transition = "opacity .8s"; succ.style.opacity = "1"; succ.scrollIntoView({ behavior: "smooth", block: "center" }); }, 100);
+        launchConfetti();
+        setTimeout(launchConfetti, 600);
+      } else { return response.json().then(function(data){ throw new Error(data.error || "Something went wrong"); }); }
+    }).catch(function(err){
+      submitText.textContent = "Send RSVP"; submitBtn.disabled = false; submitBtn.style.opacity = "1";
+      alert("Sorry, there was a problem sending your RSVP: " + err.message + "\n\nPlease try again.");
+    });
+  });
+})();
+</script>
+</body>
+</html>
