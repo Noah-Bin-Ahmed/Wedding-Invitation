@@ -68,10 +68,8 @@
   #introScene { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: #1a0d12; overflow: hidden; transition: opacity 2s cubic-bezier(.4,0,.2,1), visibility 2s cubic-bezier(.4,0,.2,1); will-change: opacity; transform: translateZ(0); }
   #introScene.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-  .intro-video { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 1; opacity: 0; transition: opacity 2s cubic-bezier(.4,0,.2,1); will-change: opacity, transform; }
+  .intro-video { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 1; opacity: 0; transition: opacity 2s cubic-bezier(.4,0,.2,1); will-change: opacity; }
   .intro-video.show { opacity: 1; }
-  .intro-video.show.kenburns { animation: videoKenBurns 20s ease-in-out infinite alternate; }
-  @keyframes videoKenBurns { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.15) translate(-2%, -2%); } }
 
   .envelope-image { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 5; opacity: 0; transition: opacity 1.5s cubic-bezier(.4,0,.2,1), transform 2.8s cubic-bezier(.25,.1,.25,1); pointer-events: none; transform-origin: 50% 50%; }
   .envelope-image.show { opacity: 1; }
@@ -211,7 +209,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .intro-video.show.kenburns, .marquee-track, .loader-logo, .tl-flower::before, .gold-glow, .floating-heart { animation: none !important; }
+    .marquee-track, .loader-logo, .tl-flower::before, .gold-glow, .floating-heart { animation: none !important; }
   }
 </style>
 </head>
@@ -615,7 +613,7 @@
   var loader = document.getElementById("loader");
   var body = document.body;
 
-  /* Force mute + play */
+  /* Force mute + play video immediately (hidden) */
   if (introVideo) {
     introVideo.muted = true;
     introVideo.volume = 0;
@@ -624,13 +622,26 @@
     if (p !== undefined) p.catch(function(){});
   }
 
-  setTimeout(function(){ if (introVideo) introVideo.classList.add("show"); }, 400);
-  setTimeout(function(){ envelopeImage.classList.add("show"); }, 1800);
-  setTimeout(function(){ introScene.classList.add("glowing"); }, 2000);
-  setTimeout(function(){ if (introVideo) introVideo.classList.add("kenburns"); }, 5000);
-  setTimeout(function(){ envelopeImage.classList.add("opening"); }, 7500);
+  /* ============ INTRO SEQUENCE ============ */
+  /* 0.4s  → envelope (closed) shows on screen       */
+  setTimeout(function(){ envelopeImage.classList.add("show"); }, 400);
+
+  /* 1.2s  → gold glow pulse around envelope         */
+  setTimeout(function(){ introScene.classList.add("glowing"); }, 1200);
+
+  /* 3.0s  → envelope opens (zoom out + fade)        */
+  setTimeout(function(){ envelopeImage.classList.add("opening"); }, 3000);
+
+  /* 6.0s  → video reveals behind (no kenburns)      */
+  setTimeout(function(){ if (introVideo) introVideo.classList.add("show"); }, 6000);
+
+  /* 11.5s → loader                                  */
   setTimeout(function(){ loader.classList.add("visible"); }, 11500);
+
+  /* 13s   → intro hides                             */
   setTimeout(function(){ introScene.classList.add("hidden"); }, 13000);
+
+  /* 15.5s → main page unlocks                       */
   setTimeout(function(){
     loader.classList.remove("visible");
     body.classList.remove("intro-locked");
