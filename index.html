@@ -217,7 +217,7 @@
 
 <!-- ============ INTRO WITH VIDEO ============ -->
 <div id="introScene">
-  <video class="intro-video" id="introVideo" muted autoplay loop playsinline webkit-playsinline preload="auto">
+  <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="auto">
     <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/dead98caba510972b3672b3fd75d32b394bbf79c/nikkah_couple_walk%20-1.mp4" type="video/mp4">
   </video>
 
@@ -613,40 +613,68 @@
   var loader = document.getElementById("loader");
   var body = document.body;
 
-  /* Force mute + play video immediately (hidden) */
+  /* Mute video but DON'T play yet */
   if (introVideo) {
     introVideo.muted = true;
     introVideo.volume = 0;
     introVideo.setAttribute("muted", "");
-    var p = introVideo.play();
-    if (p !== undefined) p.catch(function(){});
+    /* Preload the video silently */
+    introVideo.load();
   }
 
   /* ============ INTRO SEQUENCE ============ */
-  /* 0.4s  → envelope (closed) shows on screen       */
+  /* 0.4s  → envelope (closed) shows on screen */
   setTimeout(function(){ envelopeImage.classList.add("show"); }, 400);
 
-  /* 1.2s  → gold glow pulse around envelope         */
+  /* 1.2s  → gold glow pulse around envelope */
   setTimeout(function(){ introScene.classList.add("glowing"); }, 1200);
 
-  /* 3.0s  → envelope opens (zoom out + fade)        */
+  /* 3.0s  → envelope opens (zoom out + fade) */
   setTimeout(function(){ envelopeImage.classList.add("opening"); }, 3000);
 
-  /* 6.0s  → video reveals behind (no kenburns)      */
-  setTimeout(function(){ if (introVideo) introVideo.classList.add("show"); }, 6000);
+  /* 6.0s  → video reveals + plays from the very start */
+  setTimeout(function(){
+    if (!introVideo) return;
 
-  /* 11.5s → loader                                  */
+    function revealAndPlay(){
+      try { introVideo.currentTime = 0; } catch(e){}
+      var p = introVideo.play();
+      if (p !== undefined) p.catch(function(){});
+      introVideo.classList.add("show");
+    }
+
+    /* If enough buffered, play now */
+    if (introVideo.readyState >= 3){
+      revealAndPlay();
+    } else {
+      /* Wait until buffered enough, then play */
+      var played = false;
+      function tryPlay(){
+        if (played) return;
+        played = true;
+        revealAndPlay();
+      }
+      introVideo.addEventListener("canplaythrough", tryPlay, { once: true });
+      introVideo.addEventListener("canplay", tryPlay, { once: true });
+      /* Safety fallback after 1.5s */
+      setTimeout(tryPlay, 1500);
+    }
+  }, 6000);
+
+  /* 11.5s → loader */
   setTimeout(function(){ loader.classList.add("visible"); }, 11500);
 
-  /* 13s   → intro hides                             */
+  /* 13s   → intro hides */
   setTimeout(function(){ introScene.classList.add("hidden"); }, 13000);
 
-  /* 15.5s → main page unlocks                       */
+  /* 15.5s → main page unlocks */
   setTimeout(function(){
     loader.classList.remove("visible");
     body.classList.remove("intro-locked");
     window.scrollTo(0, 0);
     startHeroAnimations();
+    /* Pause video after intro to save memory */
+    if (introVideo) { try { introVideo.pause(); } catch(e){} }
   }, 15500);
 
   function startHeroAnimations(){
