@@ -76,13 +76,30 @@
   /* INTRO */
   #introScene { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: #1a0d12; overflow: hidden; transition: opacity 2s cubic-bezier(.4,0,.2,1), visibility 2s cubic-bezier(.4,0,.2,1); will-change: opacity; transform: translateZ(0); }
   #introScene.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-  .intro-video { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 1; opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1); will-change: opacity; }
+
+  /* ★ NEW — Blurred backdrop fills full screen ★ */
+  .intro-backdrop {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    filter: blur(45px) brightness(0.4) saturate(1.3);
+    transform: scale(1.2);
+    opacity: 0;
+    transition: opacity 2.2s cubic-bezier(.4,0,.2,1);
+    pointer-events: none;
+  }
+  .intro-backdrop.show { opacity: 1; }
+
+  .intro-video { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 2; opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1); will-change: opacity; }
   .intro-video.show { opacity: 1; }
   .envelope-image { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 5; opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1), transform 3s cubic-bezier(.25,.1,.25,1); pointer-events: none; transform-origin: 50% 50%; }
   .envelope-image.show { opacity: 1; }
   .envelope-image.opening { transform: scale(2.4); opacity: 0; transition: transform 3s cubic-bezier(.4,0,.2,1), opacity 2s ease .5s; }
 
-  /* ★ DESKTOP FIX — poora video dikhe, zoom na ho ★ */
+  /* ★ DESKTOP — video contain karo, backdrop blur bhare ★ */
   @media (min-width: 768px) {
     .intro-video, .envelope-image {
       top: 0;
@@ -206,7 +223,7 @@
   .tl-time { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.5rem; color: #A86B55; line-height: 1; margin: 0 0 .35rem; font-weight: 500; }
   .tl-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: .12em; color: #4a1a20; text-transform: uppercase; line-height: 1.4; margin: 0; }
 
-  /* ★ DESKTOP FIX — Events 2-column grid ★ */
+  /* DESKTOP EVENTS GRID */
   .events-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
   @media (min-width: 1024px) {
     .events-grid { grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
@@ -280,6 +297,12 @@
 
 <!-- INTRO -->
 <div id="introScene">
+  <!-- Blurred backdrop video — poori screen bharega -->
+  <video class="intro-backdrop" id="introBackdrop" muted playsinline webkit-playsinline preload="auto" aria-hidden="true">
+    <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/dead98caba510972b3672b3fd75d32b394bbf79c/nikkah_couple_walk%20-1.mp4" type="video/mp4">
+  </video>
+
+  <!-- Main video — laptop pe poora dikhega, mobile pe full cover -->
   <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="auto">
     <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/dead98caba510972b3672b3fd75d32b394bbf79c/nikkah_couple_walk%20-1.mp4" type="video/mp4">
   </video>
@@ -670,6 +693,7 @@
   "use strict";
   var introScene = document.getElementById("introScene");
   var introVideo = document.getElementById("introVideo");
+  var introBackdrop = document.getElementById("introBackdrop");
   var envelopeImage = document.getElementById("envelopeImage");
   var loader = document.getElementById("loader");
   var body = document.body;
@@ -679,6 +703,12 @@
     introVideo.volume = 0;
     introVideo.setAttribute("muted", "");
     introVideo.load();
+  }
+  if (introBackdrop) {
+    introBackdrop.muted = true;
+    introBackdrop.volume = 0;
+    introBackdrop.setAttribute("muted", "");
+    introBackdrop.load();
   }
 
   setTimeout(function(){ envelopeImage.classList.add("show"); }, 400);
@@ -692,6 +722,14 @@
       var p = introVideo.play();
       if (p !== undefined) p.catch(function(){});
       introVideo.classList.add("show");
+
+      // Play backdrop alongside
+      if (introBackdrop) {
+        try { introBackdrop.currentTime = 0; } catch(e){}
+        var bp = introBackdrop.play();
+        if (bp !== undefined) bp.catch(function(){});
+        introBackdrop.classList.add("show");
+      }
     }
     if (introVideo.readyState >= 3){
       revealAndPlay();
@@ -736,6 +774,7 @@
     window.scrollTo(0, 0);
     startHeroAnimations();
     if (introVideo) { try { introVideo.pause(); } catch(e){} }
+    if (introBackdrop) { try { introBackdrop.pause(); } catch(e){} }
   }, 12500);
 
   function startHeroAnimations(){
