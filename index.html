@@ -77,13 +77,11 @@
   #introScene { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: #1a0d12; overflow: hidden; transition: opacity 2s cubic-bezier(.4,0,.2,1), visibility 2s cubic-bezier(.4,0,.2,1); will-change: opacity; transform: translateZ(0); }
   #introScene.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-  /* ★ NEW — Blurred backdrop fills full screen ★ */
+  /* Blurred backdrops fill the entire screen */
   .intro-backdrop {
-    position: absolute;
-    top: 0; left: 0;
+    position: absolute; top: 0; left: 0;
     width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center;
+    object-fit: cover; object-position: center;
     z-index: 0;
     filter: blur(45px) brightness(0.4) saturate(1.3);
     transform: scale(1.2);
@@ -93,13 +91,33 @@
   }
   .intro-backdrop.show { opacity: 1; }
 
+  .envelope-backdrop {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/refs/heads/main/IMG_8750.jpeg');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    filter: blur(45px) brightness(0.4) saturate(1.3);
+    transform: scale(1.2);
+    opacity: 0;
+    transition: opacity 2.2s cubic-bezier(.4,0,.2,1), transform 3s cubic-bezier(.4,0,.2,1);
+    pointer-events: none;
+  }
+  .envelope-backdrop.show { opacity: 1; }
+  .envelope-backdrop.opening {
+    transform: scale(2.4);
+    opacity: 0;
+    transition: transform 3s cubic-bezier(.4,0,.2,1), opacity 2s ease .5s;
+  }
+
   .intro-video { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 2; opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1); will-change: opacity; }
   .intro-video.show { opacity: 1; }
   .envelope-image { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 5; opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1), transform 3s cubic-bezier(.25,.1,.25,1); pointer-events: none; transform-origin: 50% 50%; }
   .envelope-image.show { opacity: 1; }
   .envelope-image.opening { transform: scale(2.4); opacity: 0; transition: transform 3s cubic-bezier(.4,0,.2,1), opacity 2s ease .5s; }
 
-  /* ★ DESKTOP — video contain karo, backdrop blur bhare ★ */
+  /* ★ DESKTOP — video & envelope contain, blurred backdrops bhare ★ */
   @media (min-width: 768px) {
     .intro-video, .envelope-image {
       top: 0;
@@ -297,12 +315,15 @@
 
 <!-- INTRO -->
 <div id="introScene">
-  <!-- Blurred backdrop video — poori screen bharega -->
+  <!-- Blurred video backdrop -->
   <video class="intro-backdrop" id="introBackdrop" muted playsinline webkit-playsinline preload="auto" aria-hidden="true">
     <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/dead98caba510972b3672b3fd75d32b394bbf79c/nikkah_couple_walk%20-1.mp4" type="video/mp4">
   </video>
 
-  <!-- Main video — laptop pe poora dikhega, mobile pe full cover -->
+  <!-- Blurred envelope backdrop -->
+  <div class="envelope-backdrop" id="envelopeBackdrop" aria-hidden="true"></div>
+
+  <!-- Main video -->
   <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="auto">
     <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/dead98caba510972b3672b3fd75d32b394bbf79c/nikkah_couple_walk%20-1.mp4" type="video/mp4">
   </video>
@@ -695,6 +716,7 @@
   var introVideo = document.getElementById("introVideo");
   var introBackdrop = document.getElementById("introBackdrop");
   var envelopeImage = document.getElementById("envelopeImage");
+  var envelopeBackdrop = document.getElementById("envelopeBackdrop");
   var loader = document.getElementById("loader");
   var body = document.body;
 
@@ -711,9 +733,16 @@
     introBackdrop.load();
   }
 
-  setTimeout(function(){ envelopeImage.classList.add("show"); }, 400);
+  // Envelope + envelope backdrop show together
+  setTimeout(function(){
+    envelopeImage.classList.add("show");
+    if (envelopeBackdrop) envelopeBackdrop.classList.add("show");
+  }, 400);
   setTimeout(function(){ introScene.classList.add("glowing"); }, 1200);
-  setTimeout(function(){ envelopeImage.classList.add("opening"); }, 2600);
+  setTimeout(function(){
+    envelopeImage.classList.add("opening");
+    if (envelopeBackdrop) envelopeBackdrop.classList.add("opening");
+  }, 2600);
 
   setTimeout(function(){
     if (!introVideo) return;
@@ -723,7 +752,6 @@
       if (p !== undefined) p.catch(function(){});
       introVideo.classList.add("show");
 
-      // Play backdrop alongside
       if (introBackdrop) {
         try { introBackdrop.currentTime = 0; } catch(e){}
         var bp = introBackdrop.play();
