@@ -81,6 +81,17 @@
   .envelope-image { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 5; opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1), transform 3s cubic-bezier(.25,.1,.25,1); pointer-events: none; transform-origin: 50% 50%; }
   .envelope-image.show { opacity: 1; }
   .envelope-image.opening { transform: scale(2.4); opacity: 0; transition: transform 3s cubic-bezier(.4,0,.2,1), opacity 2s ease .5s; }
+
+  /* ★ DESKTOP FIX — poora video dikhe, zoom na ho ★ */
+  @media (min-width: 768px) {
+    .intro-video, .envelope-image {
+      top: 0;
+      height: 100%;
+      object-fit: contain;
+    }
+    .envelope-image.opening { transform: scale(1.8); }
+  }
+
   .gold-glow { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(255,245,220,.55) 0%, rgba(245,216,154,.35) 30%, rgba(224,184,120,.15) 60%, rgba(212,165,116,0) 85%); pointer-events: none; z-index: 8; opacity: 0; filter: blur(18px); mix-blend-mode: screen; }
   #introScene.glowing .gold-glow { animation: goldPulse 3.2s ease-in-out infinite; }
   @keyframes goldPulse { 0%, 100% { opacity: .15; transform: translate(-50%,-50%) scale(0.85); } 50% { opacity: .55; transform: translate(-50%,-50%) scale(1.1); } }
@@ -194,6 +205,12 @@
   .tl-icon img:hover { transform: scale(1.05); filter: sepia(0) saturate(1) brightness(1.05) contrast(1); }
   .tl-time { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.5rem; color: #A86B55; line-height: 1; margin: 0 0 .35rem; font-weight: 500; }
   .tl-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: .12em; color: #4a1a20; text-transform: uppercase; line-height: 1.4; margin: 0; }
+
+  /* ★ DESKTOP FIX — Events 2-column grid ★ */
+  .events-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
+  @media (min-width: 1024px) {
+    .events-grid { grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
+  }
 
   /* BREATHING */
   .breathing { display: inline-block; animation: breathing 4.5s ease-in-out infinite; will-change: letter-spacing; }
@@ -391,7 +408,8 @@
       <div class="gold-divider"></div>
       <p style="margin-top:1.5rem;font-size:14px;color:rgba(123,40,72,.6);">13 – 16 November 2026 · Karachi, Pakistan</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;">
+
+    <div class="events-grid">
 
       <article class="event-card-nikkah card-reveal card-from-left sparkle-border" style="overflow:hidden;border-radius:1.5rem;border:1px solid rgba(201,133,110,.3);background:#fff;">
         <div style="position:relative;height:15rem;overflow:hidden;">
