@@ -62,76 +62,28 @@
     .section-floral > .corner-tr, .section-floral > .corner-bl { width: 90px; height: 90px; }
   }
 
-  /* ============================================
-     VERSES LINE — simple elegant gold line
-     with 📖 emoji top/bottom/traveling
-     ============================================ */
+  /* VERSES LINE */
   .verses-spine-wrap { position: absolute; left: 0; top: 0.5rem; bottom: 0; width: 22px; pointer-events: none; z-index: 1; }
-
-  .verses-line {
-    position: absolute;
-    left: 11px;
-    top: 30px;
-    bottom: 30px;
-    width: 2px;
-    transform: translateX(-50%);
-    background: linear-gradient(180deg,
-      transparent 0%,
-      #C9856E 10%,
-      #7B2848 50%,
-      #C9856E 90%,
-      transparent 100%);
-    border-radius: 2px;
-    box-shadow: 0 0 8px rgba(201,133,110,.4);
-  }
-
-  .verses-book-orn {
-    position: absolute;
-    left: 11px;
-    transform: translateX(-50%);
-    font-size: 30px;
-    line-height: 1;
-    z-index: 3;
-    filter: drop-shadow(0 3px 6px rgba(139,90,43,.35));
-    user-select: none;
-  }
+  .verses-line { position: absolute; left: 11px; top: 30px; bottom: 30px; width: 2px; transform: translateX(-50%); background: linear-gradient(180deg, transparent 0%, #C9856E 10%, #7B2848 50%, #C9856E 90%, transparent 100%); border-radius: 2px; box-shadow: 0 0 8px rgba(201,133,110,.4); }
+  .verses-book-orn { position: absolute; left: 11px; transform: translateX(-50%); font-size: 30px; line-height: 1; z-index: 3; filter: drop-shadow(0 3px 6px rgba(139,90,43,.35)); user-select: none; }
   .verses-book-top { top: -10px; }
   .verses-book-bottom { bottom: -10px; }
+  .verse-book-travel { position: absolute; left: 11px; top: 30px; font-size: 24px; line-height: 1; transform: translate(-50%, -50%); z-index: 5; pointer-events: none; filter: drop-shadow(0 3px 8px rgba(139,90,43,.5)); will-change: top; user-select: none; }
+  .verse-book-travel::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; background: radial-gradient(circle, rgba(201,133,110,.5) 0%, rgba(201,133,110,0) 70%); animation: flowerTrail 3s ease-in-out infinite; pointer-events: none; }
 
-  .verse-book-travel {
-    position: absolute;
-    left: 11px;
-    top: 30px;
-    font-size: 24px;
-    line-height: 1;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-    pointer-events: none;
-    filter: drop-shadow(0 3px 8px rgba(139,90,43,.5));
-    will-change: top;
-    user-select: none;
-  }
-  .verse-book-travel::before {
-    content: '';
-    position: absolute;
-    inset: -8px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,133,110,.5) 0%, rgba(201,133,110,0) 70%);
-    animation: flowerTrail 3s ease-in-out infinite;
-    pointer-events: none;
-  }
-
+  /* INTRO */
   #introScene { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: #1a0d12; overflow: hidden; transition: opacity 2s cubic-bezier(.4,0,.2,1), visibility 2s cubic-bezier(.4,0,.2,1); will-change: opacity; transform: translateZ(0); }
   #introScene.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-  .intro-video { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 1; opacity: 0; transition: opacity 2s cubic-bezier(.4,0,.2,1); will-change: opacity; }
+  .intro-video { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 1; opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1); will-change: opacity; }
   .intro-video.show { opacity: 1; }
-  .envelope-image { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 5; opacity: 0; transition: opacity 1.5s cubic-bezier(.4,0,.2,1), transform 2.8s cubic-bezier(.25,.1,.25,1); pointer-events: none; transform-origin: 50% 50%; }
+  .envelope-image { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 5; opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1), transform 3s cubic-bezier(.25,.1,.25,1); pointer-events: none; transform-origin: 50% 50%; }
   .envelope-image.show { opacity: 1; }
-  .envelope-image.opening { transform: scale(2.6); opacity: 0; transition: transform 2.8s cubic-bezier(.4,0,.2,1), opacity 2s ease .8s; }
+  .envelope-image.opening { transform: scale(2.4); opacity: 0; transition: transform 3s cubic-bezier(.4,0,.2,1), opacity 2s ease .5s; }
   .gold-glow { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(255,245,220,.55) 0%, rgba(245,216,154,.35) 30%, rgba(224,184,120,.15) 60%, rgba(212,165,116,0) 85%); pointer-events: none; z-index: 8; opacity: 0; filter: blur(18px); mix-blend-mode: screen; }
   #introScene.glowing .gold-glow { animation: goldPulse 3.2s ease-in-out infinite; }
   @keyframes goldPulse { 0%, 100% { opacity: .15; transform: translate(-50%,-50%) scale(0.85); } 50% { opacity: .55; transform: translate(-50%,-50%) scale(1.1); } }
 
+  /* LOADER */
   #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10001; background: #FDF6F3; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 2s cubic-bezier(.4,0,.2,1); }
   #loader.visible { opacity: 1; pointer-events: auto; }
   .loader-logo { font-family: 'Cormorant Garamond', serif; font-size: 4rem; letter-spacing: .25em; color: #7B2848; animation: logoPulse 2s ease-in-out infinite; }
@@ -194,57 +146,15 @@
   @keyframes spin { to { transform: rotate(360deg); } }
   .confetti-piece { position: fixed; pointer-events: none; z-index: 99999; will-change: transform, opacity; }
 
-  /* EVENT TIMELINE — ROSE STEM */
+  /* EVENT TIMELINE */
   .event-timeline { position: relative; margin-top: 2rem; padding: 1.5rem 0 1rem; }
-  .event-timeline::before {
-    content: '';
-    position: absolute;
-    left: 50%; top: 0; bottom: 0;
-    width: 3px;
-    transform: translateX(-50%);
-    background: linear-gradient(180deg, transparent 0%, #7A9471 10%, #5C7D53 50%, #7A9471 90%, transparent 100%);
-    border-radius: 3px;
-    box-shadow: inset 0 0 2px rgba(122,148,113,.6), 0 0 5px rgba(92,125,83,.25);
-  }
-
-  .tl-ornament {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 34px;
-    line-height: 1;
-    z-index: 4;
-    pointer-events: none;
-    filter: drop-shadow(0 3px 6px rgba(139,90,43,.35));
-    user-select: none;
-  }
+  .event-timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; transform: translateX(-50%); background: linear-gradient(180deg, transparent 0%, #7A9471 10%, #5C7D53 50%, #7A9471 90%, transparent 100%); border-radius: 3px; box-shadow: inset 0 0 2px rgba(122,148,113,.6), 0 0 5px rgba(92,125,83,.25); }
+  .tl-ornament { position: absolute; left: 50%; transform: translateX(-50%); font-size: 34px; line-height: 1; z-index: 4; pointer-events: none; filter: drop-shadow(0 3px 6px rgba(139,90,43,.35)); user-select: none; }
   .tl-ornament-top { top: -26px; }
   .tl-ornament-bottom { bottom: -26px; transform: translateX(-50%) rotate(180deg); }
-
-  .tl-flower {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    font-size: 30px;
-    line-height: 1;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-    pointer-events: none;
-    filter: drop-shadow(0 3px 8px rgba(139,90,43,.5));
-    will-change: top;
-    user-select: none;
-  }
-  .tl-flower::before {
-    content: '';
-    position: absolute;
-    inset: -8px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,133,110,.5) 0%, rgba(201,133,110,0) 70%);
-    animation: flowerTrail 3s ease-in-out infinite;
-    pointer-events: none;
-  }
+  .tl-flower { position: absolute; left: 50%; top: 0; font-size: 30px; line-height: 1; transform: translate(-50%, -50%); z-index: 5; pointer-events: none; filter: drop-shadow(0 3px 8px rgba(139,90,43,.5)); will-change: top; user-select: none; }
+  .tl-flower::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; background: radial-gradient(circle, rgba(201,133,110,.5) 0%, rgba(201,133,110,0) 70%); animation: flowerTrail 3s ease-in-out infinite; pointer-events: none; }
   @keyframes flowerTrail { 0%, 100% { opacity: .3; transform: scale(1); } 50% { opacity: .7; transform: scale(1.25); } }
-
   .tl-item { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0; margin: 2.5rem 0; position: relative; }
   .tl-item.left .tl-content { grid-column: 1; text-align: right; padding-right: 1.5rem; }
   .tl-item.left .tl-dot-wrap { grid-column: 2; }
@@ -286,6 +196,7 @@
 </head>
 <body class="grain intro-locked">
 
+<!-- ============ INTRO SCENE ============ -->
 <div id="introScene">
   <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="auto">
     <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/dead98caba510972b3672b3fd75d32b394bbf79c/nikkah_couple_walk%20-1.mp4" type="video/mp4">
@@ -686,9 +597,10 @@
     introVideo.load();
   }
 
+  /* SMOOTH INTRO TIMELINE */
   setTimeout(function(){ envelopeImage.classList.add("show"); }, 400);
   setTimeout(function(){ introScene.classList.add("glowing"); }, 1200);
-  setTimeout(function(){ envelopeImage.classList.add("opening"); }, 3000);
+  setTimeout(function(){ envelopeImage.classList.add("opening"); }, 2600);
 
   setTimeout(function(){
     if (!introVideo) return;
@@ -705,19 +617,20 @@
       function tryPlay(){ if (played) return; played = true; revealAndPlay(); }
       introVideo.addEventListener("canplaythrough", tryPlay, { once: true });
       introVideo.addEventListener("canplay", tryPlay, { once: true });
-      setTimeout(tryPlay, 1500);
+      setTimeout(tryPlay, 1200);
     }
-  }, 6000);
+  }, 3400);
 
-  setTimeout(function(){ loader.classList.add("visible"); }, 11500);
-  setTimeout(function(){ introScene.classList.add("hidden"); }, 13000);
+  setTimeout(function(){ loader.classList.add("visible"); }, 8500);
+  setTimeout(function(){ introScene.classList.add("hidden"); }, 10500);
+
   setTimeout(function(){
     loader.classList.remove("visible");
     body.classList.remove("intro-locked");
     window.scrollTo(0, 0);
     startHeroAnimations();
     if (introVideo) { try { introVideo.pause(); } catch(e){} }
-  }, 15500);
+  }, 12500);
 
   function startHeroAnimations(){
     var letterIds = ["heroKicker", "heroTitle", "heroOf", "heroGroom", "heroBride", "heroCity"];
