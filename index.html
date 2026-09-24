@@ -159,7 +159,7 @@
   .venue-time-detail { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: rgba(253,246,243,.72); margin: 0; }
   .venue-city-tag { font-size: 10px; letter-spacing: .35em; text-transform: uppercase; color: rgba(232,196,176,.7); margin: 1.5rem 0 0; }
 
-  /* Gallery tiles */
+  /* Gallery */
   .tile-inner { transition: transform 1.2s cubic-bezier(.2,.8,.2,1), filter .8s ease; }
   .tile:hover .tile-inner { transform: scale(1.08); filter: saturate(1.15) brightness(1.05); }
   .tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(201,133,110,0) 0%, rgba(201,133,110,.4) 50%, rgba(201,133,110,0) 100%); opacity: 0; transition: opacity .6s ease; pointer-events: none; z-index: 2; }
@@ -187,159 +187,111 @@
   .cursor-sparkle { position: fixed; pointer-events: none; z-index: 9998; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle, #FFF8E0 0%, #F3E5AB 40%, #C9856E 80%, transparent 100%); box-shadow: 0 0 14px rgba(201,133,110,.9); animation: sparkleFade 1s ease-out forwards; }
   @keyframes sparkleFade { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0) translateY(-14px); opacity: 0; } }
 
-  /* ═══════════════════════════════════════════════════════
-     ★ VERSES — OPEN BOOK PAGES (OPTION 2) ★
-     ═══════════════════════════════════════════════════════ */
-  .book-wrap {
-    max-width: 720px;
-    margin: 0 auto 2.5rem;
-    perspective: 1500px;
-    perspective-origin: 50% 50%;
-  }
-  .book {
+  /* ═══════════════════════════════════════════════════
+     ★ VERSES — IVORY DEPTH STACK ★
+     ═══════════════════════════════════════════════════ */
+  .ivory-stack-scene {
     position: relative;
-    transform-style: preserve-3d;
-    transform: rotateY(-8deg) rotateX(4deg);
-    transition: transform 1.2s cubic-bezier(.2,.8,.2,1);
+    width: 100%;
+    max-width: 620px;
+    height: 500px;
+    margin: 3rem auto 2rem;
+    padding: 0 1rem;
   }
-  .book:hover { transform: rotateY(0deg) rotateX(0deg); }
+  .ivory-card {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    width: 100%;
+    max-width: 420px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    will-change: transform, opacity, filter;
+    transition:
+      transform 1200ms cubic-bezier(.22,.85,.3,1),
+      opacity 800ms cubic-bezier(.4,0,.2,1),
+      filter 800ms cubic-bezier(.4,0,.2,1);
+    cursor: pointer;
+  }
+  .ivory-card[data-depth="0"] { pointer-events: auto; }
 
-  .book-page-back2 {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #E8C4B0, #C9856E);
+  .ivory-face {
+    width: 100%;
     border-radius: 1.5rem;
-    transform: translateZ(-40px);
-    opacity: .5;
-    pointer-events: none;
-  }
-  .book-page-back {
-    position: absolute;
-    inset: 0;
-    background: #F5E0E4;
-    border-radius: 1.5rem;
-    transform: translateZ(-20px);
-    box-shadow: 0 15px 35px rgba(123,40,72,.2);
-    pointer-events: none;
-  }
-  .book-page {
+    padding: 1.85rem 1.75rem 1.65rem;
     position: relative;
-    background: #fff;
-    border-radius: 1.5rem;
-    border: 1px solid rgba(201,133,110,.3);
-    box-shadow: 0 30px 60px rgba(123,40,72,.18), 0 0 0 1px rgba(201,133,110,.1);
-    transform-style: preserve-3d;
     overflow: hidden;
-    display: grid;
-    grid-template-columns: 180px 1fr;
+    background:
+      radial-gradient(circle at 85% 10%, rgba(232,196,176,.35), transparent 55%),
+      linear-gradient(160deg, #FDF8F0 0%, #F8EEDF 55%, #F2E2CC 100%);
+    color: #3A1A26;
+    box-shadow:
+      0 30px 60px -18px rgba(123,40,72,.22),
+      0 12px 30px -18px rgba(123,40,72,.15);
+    border: 1px solid rgba(201,133,110,.25);
   }
-  .book-page::before {
+  .ivory-face::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; bottom: 0;
-    width: 8px;
-    background: linear-gradient(90deg, rgba(123,40,72,.15), transparent);
-    z-index: 2;
-    pointer-events: none;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #C9856E, #7B2848, #C9856E);
+    border-radius: 1.5rem 1.5rem 0 0;
   }
-
-  .book-left {
-    background: linear-gradient(180deg, #7B2848 0%, #B08080 100%);
-    color: #FDF6F3;
-    padding: 2.5rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    gap: 1.5rem;
-  }
-  .book-left::after {
-    content: '';
-    position: absolute;
-    right: -1px;
-    top: 15%; bottom: 15%;
-    width: 1px;
-    background: linear-gradient(180deg, transparent, #C9856E, transparent);
-  }
-  .book-surah {
-    font-family: 'Jost', sans-serif;
-    font-size: 10px;
-    letter-spacing: .35em;
+  .ivory-tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: .3em;
     text-transform: uppercase;
-    color: #E8C4B0;
     font-weight: 600;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    white-space: nowrap;
-    line-height: 1;
+    padding: .35rem .85rem;
+    border-radius: 9999px;
+    margin-bottom: 1.1rem;
+    color: #A86B55;
+    background: rgba(201,133,110,.15);
+    border: 1px solid rgba(201,133,110,.3);
   }
-  .book-num {
+  .ivory-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 4rem;
-    font-weight: 300;
-    line-height: 1;
-    color: #FDF6F3;
-  }
-  .book-num small {
-    display: block;
-    font-size: 1rem;
-    font-style: italic;
-    opacity: .7;
-    margin-top: .4rem;
-    font-weight: 400;
-  }
-
-  .book-right {
-    padding: 2.5rem 2.5rem 2.5rem 2.75rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .book-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-style: italic;
-    color: #7B2848;
-    line-height: 1.4;
-    margin: 0 0 1rem;
+    font-size: clamp(1.15rem, 2.6vw, 1.5rem);
     font-weight: 500;
+    font-style: italic;
+    line-height: 1.3;
+    margin-bottom: .85rem;
+    color: #7B2848;
+    letter-spacing: .01em;
   }
-  .book-divider {
-    width: 50px;
-    height: 2px;
+  .ivory-divider {
+    width: 40px;
+    height: 1px;
     background: linear-gradient(90deg, #C9856E, transparent);
-    margin: 0 0 1.25rem;
+    margin-bottom: 1rem;
   }
-  .book-body {
+  .ivory-body {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    line-height: 1.85;
+    font-size: 13.5px;
+    line-height: 1.8;
+    font-weight: 400;
     color: rgba(58,26,38,.72);
-    margin: 0;
+  }
+  .ivory-orn {
+    margin-top: 1.15rem;
+    font-size: 10px;
+    letter-spacing: .7em;
+    text-indent: .7em;
+    color: #C9856E;
+    opacity: .6;
   }
 
   @media (max-width: 640px) {
-    .book-page { grid-template-columns: 1fr; }
-    .book-left {
-      padding: 1.5rem 1rem;
-      flex-direction: row;
-      justify-content: center;
-      gap: 1.25rem;
-    }
-    .book-left::after { display: none; }
-    .book-surah {
-      writing-mode: horizontal-tb;
-      transform: none;
-      letter-spacing: .28em;
-    }
-    .book-num { font-size: 2.5rem; }
-    .book-num small { font-size: .85rem; margin-top: .2rem; }
-    .book-right { padding: 1.75rem 1.5rem; }
-    .book-quote { font-size: 1.25rem; }
-    .book-body { font-size: 14px; line-height: 1.75; }
-    .book { transform: rotateY(-3deg) rotateX(2deg); }
+    .ivory-stack-scene { height: 480px; }
+    .ivory-card { top: 58%; max-width: 88%; }
+    .ivory-face { padding: 1.5rem 1.35rem 1.35rem; border-radius: 1.25rem; }
+    .ivory-face::before { border-radius: 1.25rem 1.25rem 0 0; }
+    .ivory-title { font-size: 1.05rem; }
+    .ivory-body { font-size: 12.5px; line-height: 1.7; }
+    .ivory-tag { font-size: 8px; padding: .3rem .75rem; margin-bottom: 1rem; }
+    .ivory-orn { margin-top: 1rem; font-size: 9px; }
   }
 
   @keyframes scrollBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
@@ -520,94 +472,62 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     VERSES SECTION — OPEN BOOK PAGES
-     ═══════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════
+     VERSES — IVORY DEPTH STACK
+     ═══════════════════════════════════════════════════ -->
 <section id="story" class="section-floral" style="position:relative;padding:6rem 1.5rem;background:#FDF6F3;">
   <div class="corner-tr"></div>
   <div class="corner-bl"></div>
   <div style="max-width:56rem;margin:0 auto;">
-    <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+    <div class="reveal" style="text-align:center;margin-bottom:2rem;">
       <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C9856E;margin:0 0 1rem;">Blessings</p>
       <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#7B2848;margin:0;line-height:1.1;">Words of <span style="font-style:italic;" class="text-gold-gradient">Love</span></h2>
       <div class="gold-divider"></div>
       <p style="margin-top:1.5rem;font-size:14px;color:rgba(123,40,72,.6);">From the Holy Quran &amp; Islamic Teachings</p>
     </div>
 
-    <!-- Book 1 -->
-    <div class="book-wrap reveal">
-      <div class="book">
-        <div class="book-page-back2"></div>
-        <div class="book-page-back"></div>
-        <div class="book-page">
-          <div class="book-left">
-            <div class="book-surah">Surah Ar-Rum</div>
-            <div class="book-num">30<small>21</small></div>
-          </div>
-          <div class="book-right">
-            <p class="book-quote">"And among His signs is this..."</p>
-            <div class="book-divider"></div>
-            <p class="book-body">"And among His signs is this, that He created for you mates from among yourselves, that you may dwell in tranquillity with them, and He has put love and mercy between your hearts. Verily in that are signs for those who reflect."</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="ivory-stack-scene" id="ivoryStack">
 
-    <!-- Book 2 -->
-    <div class="book-wrap reveal">
-      <div class="book">
-        <div class="book-page-back2"></div>
-        <div class="book-page-back"></div>
-        <div class="book-page">
-          <div class="book-left">
-            <div class="book-surah">Surah Al-Baqarah</div>
-            <div class="book-num">2<small>187</small></div>
-          </div>
-          <div class="book-right">
-            <p class="book-quote">"They are your garments..."</p>
-            <div class="book-divider"></div>
-            <p class="book-body">"They are your garments and you are their garments." — A beautiful metaphor of how spouses protect, comfort, and cover each other.</p>
-          </div>
+      <div class="ivory-card" data-idx="0" data-depth="0">
+        <div class="ivory-face">
+          <span class="ivory-tag">Surah Ar-Rum · 30:21</span>
+          <h3 class="ivory-title">"And among His signs is this..."</h3>
+          <div class="ivory-divider"></div>
+          <p class="ivory-body">"And among His signs is this, that He created for you mates from among yourselves, that you may dwell in tranquillity with them, and He has put love and mercy between your hearts. Verily in that are signs for those who reflect."</p>
+          <div class="ivory-orn">❦</div>
         </div>
       </div>
-    </div>
 
-    <!-- Book 3 -->
-    <div class="book-wrap reveal">
-      <div class="book">
-        <div class="book-page-back2"></div>
-        <div class="book-page-back"></div>
-        <div class="book-page">
-          <div class="book-left">
-            <div class="book-surah">Surah Al-Furqan</div>
-            <div class="book-num">25<small>74</small></div>
-          </div>
-          <div class="book-right">
-            <p class="book-quote">"Our Lord, grant us..."</p>
-            <div class="book-divider"></div>
-            <p class="book-body">"Our Lord, grant us from among our spouses and offspring comfort to our eyes and make us an example for the righteous."</p>
-          </div>
+      <div class="ivory-card" data-idx="1" data-depth="1">
+        <div class="ivory-face">
+          <span class="ivory-tag">Surah Al-Baqarah · 2:187</span>
+          <h3 class="ivory-title">"They are your garments..."</h3>
+          <div class="ivory-divider"></div>
+          <p class="ivory-body">"They are your garments and you are their garments." — A beautiful metaphor of how spouses protect, comfort, and cover each other. Each becomes the other's shelter and comfort.</p>
+          <div class="ivory-orn">❦</div>
         </div>
       </div>
-    </div>
 
-    <!-- Book 4 -->
-    <div class="book-wrap reveal" style="margin-bottom:0;">
-      <div class="book">
-        <div class="book-page-back2"></div>
-        <div class="book-page-back"></div>
-        <div class="book-page">
-          <div class="book-left">
-            <div class="book-surah">Prophet Muhammad</div>
-            <div class="book-num">ﷺ<small>PBUH</small></div>
-          </div>
-          <div class="book-right">
-            <p class="book-quote">"The best of you..."</p>
-            <div class="book-divider"></div>
-            <p class="book-body">"The best of you are those who are best to their wives." — A reminder to carry love, respect, and kindness into this new chapter.</p>
-          </div>
+      <div class="ivory-card" data-idx="2" data-depth="2">
+        <div class="ivory-face">
+          <span class="ivory-tag">Surah Al-Furqan · 25:74</span>
+          <h3 class="ivory-title">"Our Lord, grant us..."</h3>
+          <div class="ivory-divider"></div>
+          <p class="ivory-body">"Our Lord, grant us from among our spouses and offspring comfort to our eyes and make us an example for the righteous." A dua for the home we build together.</p>
+          <div class="ivory-orn">❦</div>
         </div>
       </div>
+
+      <div class="ivory-card" data-idx="3" data-depth="3">
+        <div class="ivory-face">
+          <span class="ivory-tag">Prophet Muhammad ﷺ</span>
+          <h3 class="ivory-title">"The best of you..."</h3>
+          <div class="ivory-divider"></div>
+          <p class="ivory-body">"The best of you are those who are best to their wives." — A timeless reminder to carry love, respect, and kindness into this new chapter of life.</p>
+          <div class="ivory-orn">❦</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1024,6 +944,100 @@
     var line = document.getElementById("heroLine");
     if (line){ line.style.opacity = "0"; line.style.transform = "scaleX(0)"; line.style.transition = "all 1s ease 1s"; setTimeout(function(){ line.style.opacity = "1"; line.style.transform = "scaleX(1)"; }, 50); }
   }
+
+  // ★ IVORY STACK — auto-play + tap/click to advance ★
+  (function(){
+    var stack = document.getElementById('ivoryStack');
+    if (!stack) return;
+    var cards = stack.querySelectorAll('.ivory-card');
+    var n = cards.length;
+    var idx = 0;
+    var DURATION = 5000;
+    var startTime = Date.now();
+    var rafId = null;
+    var paused = false;
+    var pauseUntil = 0;
+
+    function getStyle(depth){
+      var styles = [
+        { y:    0,  scale: 1.00, opacity: 1.00, blur: 0   },
+        { y:  -42,  scale: 0.96, opacity: 0.85, blur: 2   },
+        { y:  -74,  scale: 0.92, opacity: 0.65, blur: 4   },
+        { y: -100,  scale: 0.88, opacity: 0.40, blur: 6   }
+      ];
+      return styles[Math.min(depth, 3)];
+    }
+
+    function computeDepth(i){
+      return (i - idx + n) % n;
+    }
+
+    function apply(){
+      cards.forEach(function(card, i){
+        var depth = computeDepth(i);
+        var s = getStyle(depth);
+        card.style.transform =
+          'translate(-50%, -50%) ' +
+          'translateY(' + s.y + 'px) ' +
+          'scale(' + s.scale + ')';
+        card.style.opacity = s.opacity;
+        card.style.filter = s.blur > 0 ? 'blur(' + s.blur + 'px)' : 'none';
+        card.style.zIndex = String(100 - depth);
+        card.setAttribute('data-depth', depth);
+        // Only top card gets pointer events
+        card.style.pointerEvents = (depth === 0) ? 'auto' : 'none';
+      });
+    }
+
+    function next(){
+      idx = (idx + 1) % n;
+      apply();
+      startTime = Date.now();
+    }
+
+    function loop(){
+      if (!paused){
+        var elapsed = Date.now() - startTime;
+        if (elapsed >= DURATION){
+          next();
+        }
+      }
+      rafId = requestAnimationFrame(loop);
+    }
+
+    // Tap / click handler
+    cards.forEach(function(card, i){
+      card.addEventListener('click', function(e){
+        if (computeDepth(i) === 0){
+          // Pause auto-play for 1.5s so user's click advances clearly
+          startTime = Date.now();
+          next();
+        }
+      });
+      // Touch
+      card.addEventListener('touchend', function(e){
+        if (computeDepth(i) === 0){
+          // Prevent double firing with click on some devices
+          e.preventDefault();
+          startTime = Date.now();
+          next();
+        }
+      }, { passive: false });
+    });
+
+    // Pause when tab hidden
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden){
+        paused = true;
+      } else {
+        paused = false;
+        startTime = Date.now();
+      }
+    });
+
+    apply();
+    loop();
+  })();
 
   document.querySelectorAll("[data-event-flip]").forEach(function(card){
     var obs = new IntersectionObserver(function(entries){
