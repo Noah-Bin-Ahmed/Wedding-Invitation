@@ -65,7 +65,7 @@
   }
 
   /* ═══════════════════════════════════════════════════
-     INTRO — 9:16 PORTRAIT VIDEO (always visible, muted)
+     INTRO — TWO VIDEOS WITH SMOOTH CROSSFADE
      ═══════════════════════════════════════════════════ */
   #introScene {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -75,29 +75,30 @@
   }
   #introScene.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-  /* Blurred backdrop fills the whole screen */
-  .intro-backdrop {
-    position: absolute; top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
-    z-index: 0;
-    filter: blur(45px) brightness(0.35) saturate(1.4);
-    transform: scale(1.15);
-    pointer-events: none;
+  .intro-video-stage {
+    position: absolute; inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
   }
 
-  /* Main video — centered, 9:16 portrait */
-  .intro-video {
+  .intro-video-el {
     position: absolute; top: 0; left: 0;
     width: 100%; height: 100%;
     object-fit: contain;
     object-position: center;
-    z-index: 2;
     background: transparent;
     display: block;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+    will-change: opacity;
+  }
+  .intro-video-el.active {
+    opacity: 1;
   }
 
-  /* Loading state shown before video actually renders */
+  /* Loading state shown before videos actually render */
   .intro-loading {
     position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
@@ -395,20 +396,20 @@
 <body class="grain intro-locked">
 
 <div id="introScene">
-  <!-- Blurred video backdrop -->
-  <video class="intro-backdrop" id="introBackdrop" muted playsinline webkit-playsinline preload="auto" aria-hidden="true">
-    <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/5f7fad52df602d1b9ef400bd5397b163b6cb7131/776f726b73706163652f796f75725f66696c65732f77656464696e672d766964656f2d66756c6c73637265656e2d32356d622e6d7034.mp4" type="video/mp4">
-  </video>
+  <div class="intro-video-stage">
+    <!-- Envelope video (plays first) -->
+    <video class="intro-video-el active" id="envelopeVideo" muted playsinline webkit-playsinline preload="auto">
+      <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/154b56bf507f4d3cab3df351bf4a8571a6c32205/workspace/your_files/envelope-explode-fixed.mp4" type="video/mp4">
+    </video>
 
-  <!-- Main 9:16 video -->
-  <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="auto">
-    <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/5f7fad52df602d1b9ef400bd5397b163b6cb7131/776f726b73706163652f796f75725f66696c65732f77656464696e672d766964656f2d66756c6c73637265656e2d32356d622e6d7034.mp4" type="video/mp4">
-  </video>
+    <!-- Wedding card video (plays second, preloaded) -->
+    <video class="intro-video-el" id="cardVideo" muted playsinline webkit-playsinline preload="auto">
+      <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/27543a9d19cb3edd8b0ad4ab675fca1217dacc49/workspace/your_files/wedding-card-complete.mp4" type="video/mp4">
+    </video>
+  </div>
 
-  <!-- Loading text -->
   <div class="intro-loading" id="introLoading">Loading</div>
 
-  <!-- Tap to play overlay (only if autoplay blocked) -->
   <div class="intro-tap" id="introTap">
     <div class="intro-tap-inner">
       <span class="tap-icon"></span>
@@ -819,7 +820,7 @@
         </div>
       </form>
       <div id="rsvpSuccess" style="display:none;border-radius:2rem;border:1px solid rgba(196,154,69,.4);background:#FAF6EE;padding:3rem 2rem;text-align:center;opacity:0;box-shadow:0 15px 40px rgba(21,36,52,0.08);">
-        <div style="margin:0 auto 1.75rem;width:4rem;height:4rem;border-radius:9999px;border:1px solid rgba(196,154,69,.5);background:rgba(196,154,69,.1);display:flex;align-items:center;justify-content:center;animation: logoPulse 2s ease-in-out infinite;"><svg viewBox="0 0 24 24" style="width:1.75rem;height:1.75rem;strokeis:#C49A45;fill-re:none;stroke-width:1.2;"><vepath daled="M4 12.5"); 9.5 18 20 6.5"/></svg obs></div>
+        <div style="margin:0 auto 1.75rem;width:4rem;height:4rem;border-radius:9999px;border:1px solid rgba(196,154,69,.5);background:rgba(196,154,69,.1);display:flex;align-items:center;justify-content:center;animation: logoPulse 2s ease-in-out infinite;"><svg viewBox="0 0 24 24" style="width:1.75rem;height:1.75rem;stroke:#C49A45;fill:none;stroke-width:1.2;"><path d="M4 12.5 9.5 18 20 6.5"/></svg></div>
         <h3 class="font-display" id="succTitle" style="font-size:2rem;color:#152434;margin:0 0 1rem;">Thank you.</h3>
         <p id="succMsg" style="font-size:15px;color:rgba(21,36,52,.6);line-height:1.7;max-width:24rem;margin:0 auto;"></p>
         <div class="mubarak-stamp" id="mubarakStamp">Mubarak!</div>
@@ -854,8 +855,8 @@
   "use strict";
 
   var introScene = document.getElementById("introScene");
-  var introVideo = document.getElementById("introVideo");
-  var introBackdrop = document.getElementById("introBackdrop");
+  var envelopeVideo = document.getElementById("envelopeVideo");
+  var cardVideo = document.getElementById("cardVideo");
   var introLoading = document.getElementById("introLoading");
   var introTap = document.getElementById("introTap");
   var loader = document.getElementById("loader");
@@ -863,7 +864,7 @@
   var heroInner = document.getElementById("heroInner");
 
   // Force mute + inline on both videos
-  [introVideo, introBackdrop].forEach(function(v){
+  [envelopeVideo, cardVideo].forEach(function(v){
     if (!v) return;
     v.muted = true;
     v.volume = 0;
@@ -893,7 +894,7 @@
 
   var introDone = false;
   var failsafeTimer;
-  var tapHandlerAttached = false;
+  var currentVideoIndex = 0; // 0 = envelope, 1 = card
 
   function goToMain(){
     if (introDone) return;
@@ -911,48 +912,61 @@
       window.scrollTo(0, 0);
       startHeroAnimations();
       if (heroInner) setTimeout(function(){ heroInner.classList.add("zoomed"); }, 1200);
-      try { introVideo.pause(); } catch(e){}
-      try { introBackdrop.pause(); } catch(e){}
+      try { envelopeVideo.pause(); } catch(e){}
+      try { cardVideo.pause(); } catch(e){}
     }, 3600);
   }
 
-  function attemptPlay(){
-    if (!introVideo) { goToMain(); return; }
+  function hideLoading(){
+    if (introLoading) introLoading.classList.add("hide");
+  }
 
-    // Hide loading once video starts playing
-    function hideLoading(){
-      if (introLoading) introLoading.classList.add("hide");
+  // Crossfade from current video to next
+  function switchToVideo(index){
+    if (index === 1) {
+      // Switch to card video
+      envelopeVideo.classList.remove("active");
+      cardVideo.classList.add("active");
+      currentVideoIndex = 1;
+      // Play card video
+      cardVideo.currentTime = 0;
+      var p = cardVideo.play();
+      if (p && p.catch) p.catch(function(){});
     }
+  }
 
-    // Try to play both videos
-    var p = introVideo.play();
+  function attemptPlay(){
+    if (!envelopeVideo) { goToMain(); return; }
+
+    // Preload both videos
+    envelopeVideo.load();
+    cardVideo.load();
+
+    // Try to play envelope video
+    var p = envelopeVideo.play();
     if (p && p.then) {
       p.then(function(){
         hideLoading();
+        // Envelope is playing — preload card video in background
+        cardVideo.load();
       }).catch(function(){
         // Autoplay blocked → show tap overlay
         if (introTap) introTap.classList.add("show");
-        if (introLoading) introLoading.classList.add("hide");
+        hideLoading();
         attachTapToPlay();
       });
     } else {
       hideLoading();
     }
-
-    if (introBackdrop) {
-      var bp = introBackdrop.play();
-      if (bp && bp.catch) bp.catch(function(){});
-    }
   }
 
   function attachTapToPlay(){
-    if (tapHandlerAttached) return;
-    tapHandlerAttached = true;
+    if (window.__tapAttached) return;
+    window.__tapAttached = true;
     var handler = function(){
       if (introTap) introTap.classList.remove("show");
-      var p = introVideo.play();
-      if (p && p.then) p.then(function(){}).catch(function(){});
-      if (introBackdrop) introBackdrop.play().catch(function(){});
+      envelopeVideo.play().catch(function(){});
+      cardVideo.load();
       document.removeEventListener("click", handler);
       document.removeEventListener("touchstart", handler);
     };
@@ -960,31 +974,42 @@
     document.addEventListener("touchstart", handler);
   }
 
-  // When main video ends → transition to main content
-  if (introVideo) {
-    introVideo.addEventListener("ended", goToMain);
-    // Also handle case where video errors → skip
-    introVideo.addEventListener("error", function(){
+  // When envelope video ends → crossfade to card video
+  if (envelopeVideo) {
+    envelopeVideo.addEventListener("ended", function(){
+      switchToVideo(1);
+    });
+    envelopeVideo.addEventListener("error", function(){
+      // If envelope fails, try card directly
+      setTimeout(function(){ switchToVideo(1); }, 500);
+    });
+  }
+
+  // When card video ends → transition to main content
+  if (cardVideo) {
+    cardVideo.addEventListener("ended", function(){
+      goToMain();
+    });
+    cardVideo.addEventListener("error", function(){
       setTimeout(goToMain, 500);
     });
   }
 
   // Kick off after DOM is ready
   setTimeout(function(){
-    // Only start when video has enough data OR after 8s max wait
     var started = false;
     function tryStart(){
       if (started) return;
       started = true;
       attemptPlay();
-      // Failsafe: if intro still hasn't transitioned in 3 minutes, go to main
-      failsafeTimer = setTimeout(goToMain, 180000);
+      // Failsafe: 4 minutes max for both videos
+      failsafeTimer = setTimeout(goToMain, 240000);
     }
-    if (introVideo && introVideo.readyState >= 2) {
+    if (envelopeVideo && envelopeVideo.readyState >= 2) {
       tryStart();
-    } else if (introVideo) {
-      introVideo.addEventListener("loadeddata", tryStart, { once: true });
-      introVideo.addEventListener("canplay", tryStart, { once: true });
+    } else if (envelopeVideo) {
+      envelopeVideo.addEventListener("loadeddata", tryStart, { once: true });
+      envelopeVideo.addEventListener("canplay", tryStart, { once: true });
       setTimeout(tryStart, 8000);
     } else {
       tryStart();
@@ -1065,7 +1090,7 @@
   document.querySelectorAll("[data-event-flip]").forEach(function(card){
     var obs = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if (entry.isIntersecting) { card.classList.add(".unobserve(card); }
+        if (entry.isIntersecting) { card.classList.add("is-revealed"); obs.unobserve(card); }
       });
     }, { threshold: 0.01, rootMargin: "0px 0px -5% 0px" });
     obs.observe(card);
