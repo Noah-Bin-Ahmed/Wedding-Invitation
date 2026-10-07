@@ -65,53 +65,116 @@
   }
 
   /* ═══════════════════════════════════════════════════
-     INTRO — 9:16 PORTRAIT VIDEO
+     INTRO — 9:16 PORTRAIT VIDEO (always visible, muted)
      ═══════════════════════════════════════════════════ */
-  #introScene { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: #0a0a0a; overflow: hidden; transition: opacity 2s cubic-bezier(.4,0,.2,1), visibility 2s cubic-bezier(.4,0,.2,1); will-change: opacity; transform: translateZ(0); }
+  #introScene {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10000; background: #000; overflow: hidden;
+    transition: opacity 1.6s ease, visibility 1.6s ease;
+    will-change: opacity;
+  }
   #introScene.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-  /* Blurred backdrop fills entire screen */
-  .intro-backdrop { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; filter: blur(50px) brightness(0.3) saturate(1.4); transform: scale(1.3); opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1); pointer-events: none; }
-  .intro-backdrop.show { opacity: 1; }
-
-  /* 9:16 video wrapper centered on screen */
-  .intro-video-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 100vh;
-    height: 100dvh;
-    aspect-ratio: 9 / 16;
-    max-width: 100vw;
-    z-index: 2;
-    opacity: 0;
-    transition: opacity 2.2s cubic-bezier(.4,0,.2,1);
-    overflow: hidden;
-    box-shadow: 0 0 80px rgba(0,0,0,.7);
+  /* Blurred backdrop fills the whole screen */
+  .intro-backdrop {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    z-index: 0;
+    filter: blur(45px) brightness(0.35) saturate(1.4);
+    transform: scale(1.15);
     pointer-events: none;
   }
-  .intro-video-wrapper.show { opacity: 1; }
+
+  /* Main video — centered, 9:16 portrait */
   .intro-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
     object-position: center;
+    z-index: 2;
+    background: transparent;
     display: block;
-    background: #000;
   }
 
-  /* On very wide screens, cap the video height so it doesn't get too big */
-  @media (min-aspect-ratio: 9/16) and (min-width: 900px) {
-    .intro-video-wrapper { height: 96vh; height: 96dvh; }
+  /* Loading state shown before video actually renders */
+  .intro-loading {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    color: rgba(219,196,148,.8);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    transition: opacity .8s ease;
+    pointer-events: none;
+  }
+  .intro-loading.hide { opacity: 0; }
+
+  /* Tap-to-play overlay (only shown if autoplay is blocked) */
+  .intro-tap {
+    position: absolute; inset: 0;
+    z-index: 5;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,.45);
+    cursor: pointer;
+  }
+  .intro-tap.show { display: flex; }
+  .intro-tap-inner {
+    text-align: center;
+    color: #DBC494;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .intro-tap-inner .tap-icon {
+    display: block;
+    width: 64px; height: 64px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    border: 2px solid #C49A45;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: tapPulse 1.8s ease-in-out infinite;
+  }
+  .intro-tap-inner .tap-icon::before {
+    content: '';
+    width: 0; height: 0;
+    border-left: 16px solid #C49A45;
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+    margin-left: 5px;
+  }
+  .intro-tap-inner p {
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+  }
+  @keyframes tapPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(196,154,69,.5); }
+    50% { transform: scale(1.08); box-shadow: 0 0 0 14px rgba(196,154,69,0); }
   }
 
-  .gold-glow { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(219,196,148,.55) 0%, rgba(196,154,69,.35) 30%, rgba(156,116,43,.15) 60%, rgba(156,116,43,0) 85%); pointer-events: none; z-index: 8; opacity: 0; filter: blur(18px); mix-blend-mode: screen; }
+  .gold-glow {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(219,196,148,.5) 0%, rgba(196,154,69,.3) 30%, rgba(156,116,43,.12) 60%, rgba(156,116,43,0) 85%);
+    pointer-events: none; z-index: 8; opacity: 0;
+    filter: blur(18px); mix-blend-mode: screen;
+  }
   #introScene.glowing .gold-glow { animation: goldPulse 3.2s ease-in-out infinite; }
-  @keyframes goldPulse { 0%, 100% { opacity: .15; transform: translate(-50%,-50%) scale(0.85); } 50% { opacity: .55; transform: translate(-50%,-50%) scale(1.1); } }
+  @keyframes goldPulse {
+    0%, 100% { opacity: .15; transform: translate(-50%,-50%) scale(0.85); }
+    50% { opacity: .55; transform: translate(-50%,-50%) scale(1.1); }
+  }
 
   /* LOADER */
-  #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10001; background: #F7F2E8; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 2s cubic-bezier(.4,0,.2,1); }
+  #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10001; background: #F7F2E8; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 1.4s ease; }
   #loader.visible { opacity: 1; pointer-events: auto; }
   .loader-logo { font-family: 'Cormorant Garamond', serif; font-size: 4rem; letter-spacing: .25em; color: #152434; }
   .loader-logo span { color: #C49A45; font-style: italic; }
@@ -332,14 +395,27 @@
 <body class="grain intro-locked">
 
 <div id="introScene">
+  <!-- Blurred video backdrop -->
   <video class="intro-backdrop" id="introBackdrop" muted playsinline webkit-playsinline preload="auto" aria-hidden="true">
-    <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/5f7fad52df602d1b9ef400bd5397b163b6cb7131/workspace/your_files/wedding-video-fullscreen-25mb.mp4" type="video/mp4">
+    <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/5f7fad52df602d1b9ef400bd5397b163b6cb7131/776f726b73706163652f796f75725f66696c65732f77656464696e672d766964656f2d66756c6c73637265656e2d32356d622e6d7034.mp4" type="video/mp4">
   </video>
-  <div class="intro-video-wrapper" id="introVideoWrapper">
-    <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="auto">
-      <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/5f7fad52df602d1b9ef400bd5397b163b6cb7131/workspace/your_files/wedding-video-fullscreen-25mb.mp4" type="video/mp4">
-    </video>
+
+  <!-- Main 9:16 video -->
+  <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="auto">
+    <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/5f7fad52df602d1b9ef400bd5397b163b6cb7131/776f726b73706163652f796f75725f66696c65732f77656464696e672d766964656f2d66756c6c73637265656e2d32356d622e6d7034.mp4" type="video/mp4">
+  </video>
+
+  <!-- Loading text -->
+  <div class="intro-loading" id="introLoading">Loading</div>
+
+  <!-- Tap to play overlay (only if autoplay blocked) -->
+  <div class="intro-tap" id="introTap">
+    <div class="intro-tap-inner">
+      <span class="tap-icon"></span>
+      <p>Tap to Play</p>
+    </div>
   </div>
+
   <div class="gold-glow" style="width:60px;height:60px;left:50%;top:22%;animation-delay:0s;transform:translate(-50%,-50%);"></div>
   <div class="gold-glow" style="width:50px;height:50px;left:50%;top:78%;animation-delay:1.2s;transform:translate(-50%,-50%);"></div>
   <div class="gold-glow" style="width:40px;height:40px;left:22%;top:45%;animation-delay:2.4s;transform:translate(-50%,-50%);"></div>
@@ -492,7 +568,6 @@
               <p class="font-display" style="font-size:1.1rem;color:rgba(31,46,58,.8);margin:0 0 .3rem;">Friday, 13 November 2026</p>
               <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(21,36,52,.6);margin:0 0 1rem;">After Jumma Prayer · Jamia Masjid Al Falahiya</p>
               <p style="font-size:14px;line-height:1.7;color:rgba(31,46,58,.6);margin:0 0 1.25rem;">The sacred Nikkah ceremony, uniting two families in the presence of Allah and our loved ones.</p>
-
               <div class="event-timeline" style="margin-top:3rem;">
                 <div class="tl-ornament tl-ornament-top">🌹</div>
                 <div class="tl-flower">🌸</div>
@@ -502,7 +577,6 @@
                 <div class="tl-item right"><div class="tl-icon"><img src="https://i.ibb.co/QvkJCqhk/IMG-8717.jpg" alt="Dua" /></div><div class="tl-dot-wrap"></div><div class="tl-content"><p class="tl-time">3:30 pm</p><p class="tl-title">Dua &amp; Mubarak</p></div></div>
                 <div class="tl-ornament tl-ornament-bottom">🌹</div>
               </div>
-
               <a href="https://maps.google.com/?q=Jamia+Masjid+Al+Falahiya+Karachi" target="_blank" rel="noopener" class="map-link" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#152434;text-decoration:none;font-weight:500;margin-top:1.5rem;"><span class="pin">📍</span> Open in Maps</a>
             </div>
           </div>
@@ -537,13 +611,11 @@
               <p class="font-display" style="font-size:1.1rem;color:rgba(31,46,58,.8);margin:0 0 .3rem;">Friday, 13 November 2026</p>
               <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(21,36,52,.6);margin:0 0 1rem;">9:00 PM onwards · Al Bilal Ballroom</p>
               <p style="font-size:14px;line-height:1.7;color:rgba(31,46,58,.6);margin:0 0 1.25rem;">An evening of dholki, dance and henna. Come ready to sing, laugh and get your hands decorated.</p>
-
               <div style="border:1px solid rgba(196,154,69,.3);background:rgba(196,154,69,.08);border-radius:.75rem;padding:1rem;margin-bottom:1.25rem;">
                 <p style="font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .4rem;">Dress Code</p>
                 <p class="font-display" style="font-size:1rem;color:rgba(31,46,58,.85);margin:0 0 .3rem;">Yellow &amp; Green Traditional</p>
                 <p style="font-size:12px;color:rgba(31,46,58,.5);margin:0;">Bright yellows, greens and florals.</p>
               </div>
-
               <div class="event-timeline" style="margin-top:3rem;">
                 <div class="tl-ornament tl-ornament-top">🌹</div>
                 <div class="tl-flower">🌸</div>
@@ -553,7 +625,6 @@
                 <div class="tl-item right"><div class="tl-icon"><img src="https://i.ibb.co/23s5qzmv/IMG-8707.jpg" alt="Dinner" /></div><div class="tl-dot-wrap"></div><div class="tl-content"><p class="tl-time">12:00 am</p><p class="tl-title">Dinner</p></div></div>
                 <div class="tl-ornament tl-ornament-bottom">🌹</div>
               </div>
-
               <a href="https://maps.app.goo.gl/KS4t3Zn1KKbgsZxP9?g_st=ic" target="_blank" rel="noopener" class="map-link" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#152434;text-decoration:none;font-weight:500;margin-top:1.5rem;"><span class="pin">📍</span> Open in Maps</a>
             </div>
           </div>
@@ -588,13 +659,11 @@
               <p class="font-display" style="font-size:1.1rem;color:rgba(31,46,58,.8);margin:0 0 .3rem;">Saturday, 14 November 2026</p>
               <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(21,36,52,.6);margin:0 0 1rem;">9:00 PM · Nudrat Banquet</p>
               <p style="font-size:14px;line-height:1.7;color:rgba(31,46,58,.6);margin:0 0 1.25rem;">The groom's grand procession — a night of music, joy, and celebration as the Baraat arrives.</p>
-
               <div style="border:1px solid rgba(196,154,69,.3);background:rgba(196,154,69,.08);border-radius:.75rem;padding:1rem;margin-bottom:1.25rem;">
                 <p style="font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .4rem;">Dress Code</p>
                 <p class="font-display" style="font-size:1rem;color:rgba(31,46,58,.85);margin:0 0 .3rem;">Royal Formal — Sherwani &amp; Lehenga</p>
                 <p style="font-size:12px;color:rgba(31,46,58,.5);margin:0;">Deep jewel tones, gold embroidery, silks.</p>
               </div>
-
               <div class="event-timeline" style="margin-top:3rem;">
                 <div class="tl-ornament tl-ornament-top">🌹</div>
                 <div class="tl-flower">🌸</div>
@@ -605,7 +674,6 @@
                 <div class="tl-item left"><div class="tl-content"><p class="tl-time">12:30 am</p><p class="tl-title">Rukhsati</p></div><div class="tl-dot-wrap"></div><div class="tl-icon"><img src="https://i.ibb.co/Z6VnfGyP/IMG-8725.jpg" alt="Rukhsati" /></div></div>
                 <div class="tl-ornament tl-ornament-bottom">🌹</div>
               </div>
-
               <a href="https://maps.app.goo.gl/ke9NR6pEhi9NnhTY7?g_st=ic" target="_blank" rel="noopener" class="map-link" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#152434;text-decoration:none;font-weight:500;margin-top:1.5rem;"><span class="pin">📍</span> Open in Maps</a>
             </div>
           </div>
@@ -640,13 +708,11 @@
               <p class="font-display" style="font-size:1.1rem;color:rgba(31,46,58,.8);margin:0 0 .3rem;">Monday, 16 November 2026</p>
               <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(21,36,52,.6);margin:0 0 1rem;">9:00 PM · Universal Zewar Banquet</p>
               <p style="font-size:14px;line-height:1.7;color:rgba(31,46,58,.6);margin:0 0 1.25rem;">The grand reception. A formal evening of dinner, blessings and celebration as husband and wife.</p>
-
               <div style="border:1px solid rgba(196,154,69,.3);background:rgba(196,154,69,.08);border-radius:.75rem;padding:1rem;margin-bottom:1.25rem;">
                 <p style="font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .4rem;">Dress Code</p>
                 <p class="font-display" style="font-size:1rem;color:rgba(31,46,58,.85);margin:0 0 .3rem;">Formal Black Tie / Elegant</p>
                 <p style="font-size:12px;color:rgba(31,46,58,.5);margin:0;">Suits, sherwanis, elegant sarees or gowns.</p>
               </div>
-
               <div class="event-timeline" style="margin-top:3rem;">
                 <div class="tl-ornament tl-ornament-top">🌹</div>
                 <div class="tl-flower">🌸</div>
@@ -656,7 +722,6 @@
                 <div class="tl-item right"><div class="tl-icon"><img src="https://i.ibb.co/m5d7sw8m/IMG-8731.jpg" alt="Dinner" /></div><div class="tl-dot-wrap"></div><div class="tl-content"><p class="tl-time">11:00 pm</p><p class="tl-title">Dinner</p></div></div>
                 <div class="tl-ornament tl-ornament-bottom">🌹</div>
               </div>
-
               <a href="https://maps.app.goo.gl/eZ2hiWf45WQ6AGMi8?g_st=ic" target="_blank" rel="noopener" class="map-link" style="display:inline-flex;align-items:center;gap:.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#152434;text-decoration:none;font-weight:500;margin-top:1.5rem;"><span class="pin">📍</span> Open in Maps</a>
             </div>
           </div>
@@ -754,7 +819,7 @@
         </div>
       </form>
       <div id="rsvpSuccess" style="display:none;border-radius:2rem;border:1px solid rgba(196,154,69,.4);background:#FAF6EE;padding:3rem 2rem;text-align:center;opacity:0;box-shadow:0 15px 40px rgba(21,36,52,0.08);">
-        <div style="margin:0 auto 1.75rem;width:4rem;height:4rem;border-radius:9999px;border:1px solid rgba(196,154,69,.5);background:rgba(196,154,69,.1);display:flex;align-items:center;justify-content:center;animation: logoPulse 2s ease-in-out infinite;"><svg viewBox="0 0 24 24" style="width:1.75rem;height:1.75rem;stroke:#C49A45;fill:none;stroke-width:1.2;"><path d="M4 12.5 9.5 18 20 6.5"/></svg></div>
+        <div style="margin:0 auto 1.75rem;width:4rem;height:4rem;border-radius:9999px;border:1px solid rgba(196,154,69,.5);background:rgba(196,154,69,.1);display:flex;align-items:center;justify-content:center;animation: logoPulse 2s ease-in-out infinite;"><svg viewBox="0 0 24 24" style="width:1.75rem;height:1.75rem;strokeis:#C49A45;fill-re:none;stroke-width:1.2;"><vepath daled="M4 12.5"); 9.5 18 20 6.5"/></svg obs></div>
         <h3 class="font-display" id="succTitle" style="font-size:2rem;color:#152434;margin:0 0 1rem;">Thank you.</h3>
         <p id="succMsg" style="font-size:15px;color:rgba(21,36,52,.6);line-height:1.7;max-width:24rem;margin:0 auto;"></p>
         <div class="mubarak-stamp" id="mubarakStamp">Mubarak!</div>
@@ -787,32 +852,27 @@
 <script>
 (function(){
   "use strict";
+
   var introScene = document.getElementById("introScene");
   var introVideo = document.getElementById("introVideo");
-  var introVideoWrapper = document.getElementById("introVideoWrapper");
   var introBackdrop = document.getElementById("introBackdrop");
+  var introLoading = document.getElementById("introLoading");
+  var introTap = document.getElementById("introTap");
   var loader = document.getElementById("loader");
   var body = document.body;
   var heroInner = document.getElementById("heroInner");
 
-  // Force mute + inline playback
-  if (introVideo) {
-    introVideo.muted = true;
-    introVideo.volume = 0;
-    introVideo.setAttribute("muted", "");
-    introVideo.setAttribute("playsinline", "");
-    introVideo.setAttribute("webkit-playsinline", "");
-    introVideo.load();
-  }
-  if (introBackdrop) {
-    introBackdrop.muted = true;
-    introBackdrop.volume = 0;
-    introBackdrop.setAttribute("muted", "");
-    introBackdrop.setAttribute("playsinline", "");
-    introBackdrop.setAttribute("webkit-playsinline", "");
-    introBackdrop.load();
-  }
+  // Force mute + inline on both videos
+  [introVideo, introBackdrop].forEach(function(v){
+    if (!v) return;
+    v.muted = true;
+    v.volume = 0;
+    v.setAttribute("muted", "");
+    v.setAttribute("playsinline", "");
+    v.setAttribute("webkit-playsinline", "");
+  });
 
+  // Loader tagline typing
   var loaderTagline = document.getElementById("loaderTagline");
   var taglineText = "13 · November · 2026";
   var twStarted = false;
@@ -822,102 +882,116 @@
     var i = 0;
     loaderTagline.innerHTML = '<span id="twInline"></span><span class="tw-cursor"></span>';
     var inline = document.getElementById("twInline");
-    function type(){
+    (function type(){
       if (i <= taglineText.length){
         inline.textContent = taglineText.substring(0, i);
         i++;
         setTimeout(type, 90);
       }
-    }
-    type();
+    })();
   }
 
-  var videoEnded = false;
-  var fallbackTimer;
+  var introDone = false;
+  var failsafeTimer;
+  var tapHandlerAttached = false;
 
-  function finishIntro(){
-    if (videoEnded) return;
-    videoEnded = true;
-    clearTimeout(fallbackTimer);
+  function goToMain(){
+    if (introDone) return;
+    introDone = true;
+    clearTimeout(failsafeTimer);
 
-    // Show loader briefly
     loader.classList.add("visible");
     startTypewriter();
 
-    // Fade out intro
-    setTimeout(function(){
-      introScene.classList.add("hidden");
-    }, 1800);
+    setTimeout(function(){ introScene.classList.add("hidden"); }, 1600);
 
-    // Unlock body and start hero
     setTimeout(function(){
       loader.classList.remove("visible");
       body.classList.remove("intro-locked");
       window.scrollTo(0, 0);
       startHeroAnimations();
       if (heroInner) setTimeout(function(){ heroInner.classList.add("zoomed"); }, 1200);
-      if (introVideo) { try { introVideo.pause(); } catch(e){} }
-      if (introBackdrop) { try { introBackdrop.pause(); } catch(e){} }
-    }, 3800);
+      try { introVideo.pause(); } catch(e){}
+      try { introBackdrop.pause(); } catch(e){}
+    }, 3600);
   }
 
-  // Video play setup
-  function playVideo(){
-    if (!introVideo) { finishIntro(); return; }
+  function attemptPlay(){
+    if (!introVideo) { goToMain(); return; }
 
-    function revealAndPlay(){
-      try { introVideo.currentTime = 0; } catch(e){}
-      introVideo.muted = true;
-      introVideo.volume = 0;
-      var p = introVideo.play();
-      if (p !== undefined) {
-        p.then(function(){
-          introVideoWrapper.classList.add("show");
-        }).catch(function(err){
-          // Autoplay blocked — show video anyway and try again on user interaction
-          introVideoWrapper.classList.add("show");
-          var resume = function(){
-            introVideo.muted = true;
-            introVideo.play().catch(function(){});
-            document.removeEventListener("click", resume);
-            document.removeEventListener("touchstart", resume);
-          };
-          document.addEventListener("click", resume);
-          document.addEventListener("touchstart", resume);
-        });
-      } else {
-        introVideoWrapper.classList.add("show");
-      }
-
-      if (introBackdrop) {
-        try { introBackdrop.currentTime = 0; } catch(e){}
-        introBackdrop.muted = true;
-        var bp = introBackdrop.play();
-        if (bp !== undefined) bp.catch(function(){});
-        introBackdrop.classList.add("show");
-      }
+    // Hide loading once video starts playing
+    function hideLoading(){
+      if (introLoading) introLoading.classList.add("hide");
     }
 
-    if (introVideo.readyState >= 3) {
-      revealAndPlay();
+    // Try to play both videos
+    var p = introVideo.play();
+    if (p && p.then) {
+      p.then(function(){
+        hideLoading();
+      }).catch(function(){
+        // Autoplay blocked → show tap overlay
+        if (introTap) introTap.classList.add("show");
+        if (introLoading) introLoading.classList.add("hide");
+        attachTapToPlay();
+      });
     } else {
-      introVideo.addEventListener("canplaythrough", revealAndPlay, { once: true });
-      introVideo.addEventListener("canplay", revealAndPlay, { once: true });
-      setTimeout(revealAndPlay, 4000); // fallback reveal
+      hideLoading();
     }
 
-    // When video finishes → go to next stage
-    introVideo.addEventListener("ended", finishIntro);
+    if (introBackdrop) {
+      var bp = introBackdrop.play();
+      if (bp && bp.catch) bp.catch(function(){});
+    }
   }
 
-  // Kick off
-  setTimeout(function(){
-    setTimeout(function(){ introScene.classList.add("glowing"); }, 1200);
-    playVideo();
-    // Failsafe: if video doesn't end within 3 minutes, move on
-    fallbackTimer = setTimeout(finishIntro, 180000);
-  }, 400);
+  function attachTapToPlay(){
+    if (tapHandlerAttached) return;
+    tapHandlerAttached = true;
+    var handler = function(){
+      if (introTap) introTap.classList.remove("show");
+      var p = introVideo.play();
+      if (p && p.then) p.then(function(){}).catch(function(){});
+      if (introBackdrop) introBackdrop.play().catch(function(){});
+      document.removeEventListener("click", handler);
+      document.removeEventListener("touchstart", handler);
+    };
+    document.addEventListener("click", handler);
+    document.addEventListener("touchstart", handler);
+  }
 
+  // When main video ends → transition to main content
+  if (introVideo) {
+    introVideo.addEventListener("ended", goToMain);
+    // Also handle case where video errors → skip
+    introVideo.addEventListener("error", function(){
+      setTimeout(goToMain, 500);
+    });
+  }
+
+  // Kick off after DOM is ready
+  setTimeout(function(){
+    // Only start when video has enough data OR after 8s max wait
+    var started = false;
+    function tryStart(){
+      if (started) return;
+      started = true;
+      attemptPlay();
+      // Failsafe: if intro still hasn't transitioned in 3 minutes, go to main
+      failsafeTimer = setTimeout(goToMain, 180000);
+    }
+    if (introVideo && introVideo.readyState >= 2) {
+      tryStart();
+    } else if (introVideo) {
+      introVideo.addEventListener("loadeddata", tryStart, { once: true });
+      introVideo.addEventListener("canplay", tryStart, { once: true });
+      setTimeout(tryStart, 8000);
+    } else {
+      tryStart();
+    }
+  }, 300);
+
+  // Hero animations
   function startHeroAnimations(){
     var letterIds = ["heroKicker", "heroTitle", "heroOf", "heroGroom", "heroBride", "heroCity"];
     letterIds.forEach(function(id, idx){
@@ -946,20 +1020,18 @@
     var idx = 0;
     var DURATION = 5000;
     var startTime = Date.now();
-    var rafId = null;
     var paused = false;
 
     function getStyle(depth){
       var styles = [
-        { y:    0,  scale: 1.00, opacity: 1.00, blur: 0   },
-        { y:  -42,  scale: 0.96, opacity: 0.85, blur: 2   },
-        { y:  -74,  scale: 0.92, opacity: 0.65, blur: 4   },
-        { y: -100,  scale: 0.88, opacity: 0.40, blur: 6   }
+        { y: 0, scale: 1.00, opacity: 1.00, blur: 0 },
+        { y: -42, scale: 0.96, opacity: 0.85, blur: 2 },
+        { y: -74, scale: 0.92, opacity: 0.65, blur: 4 },
+        { y: -100, scale: 0.88, opacity: 0.40, blur: 6 }
       ];
       return styles[Math.min(depth, 3)];
     }
     function computeDepth(i){ return (i - idx + n) % n; }
-
     function apply(){
       cards.forEach(function(card, i){
         var depth = computeDepth(i);
@@ -974,22 +1046,17 @@
     }
     function next(){ idx = (idx + 1) % n; apply(); startTime = Date.now(); }
     function loop(){
-      if (!paused){
-        var elapsed = Date.now() - startTime;
-        if (elapsed >= DURATION){ next(); }
-      }
-      rafId = requestAnimationFrame(loop);
+      if (!paused && Date.now() - startTime >= DURATION) next();
+      requestAnimationFrame(loop);
     }
     cards.forEach(function(card, i){
       card.addEventListener('click', function(){
         if (computeDepth(i) === 0){ startTime = Date.now(); next(); }
       });
-      card.addEventListener('touchend', function(e){
-        if (computeDepth(i) === 0){ e.preventDefault(); startTime = Date.now(); next(); }
-      }, { passive: false });
     });
     document.addEventListener('visibilitychange', function(){
-      if (document.hidden){ paused = true; } else { paused = false; startTime = Date.now(); }
+      if (document.hidden) paused = true;
+      else { paused = false; startTime = Date.now(); }
     });
     apply();
     loop();
@@ -998,7 +1065,7 @@
   document.querySelectorAll("[data-event-flip]").forEach(function(card){
     var obs = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if (entry.isIntersecting) { card.classList.add("is-revealed"); obs.unobserve(card); }
+        if (entry.isIntersecting) { card.classList.add(".unobserve(card); }
       });
     }, { threshold: 0.01, rootMargin: "0px 0px -5% 0px" });
     obs.observe(card);
@@ -1028,7 +1095,6 @@
   if (marqueeEl){
     marqueeEl.addEventListener("mouseenter", function(){ marqueeEl.classList.add("is-paused"); });
     marqueeEl.addEventListener("mouseleave", function(){ marqueeEl.classList.remove("is-paused"); });
-    marqueeEl.addEventListener("touchstart", function(){ marqueeEl.classList.toggle("is-paused"); }, { passive: true });
   }
 
   var progress = document.getElementById("progress");
@@ -1046,8 +1112,7 @@
       ticking = false;
       var sy = window.scrollY;
       var h = document.documentElement.scrollHeight - window.innerHeight;
-      var pct = h > 0 ? sy / h : 0;
-      progress.style.transform = "scaleX(" + pct + ")";
+      progress.style.transform = "scaleX(" + (h > 0 ? sy / h : 0) + ")";
       var vh = window.innerHeight;
       for (var i = 0; i < timelineData.length; i++){
         var item = timelineData[i];
@@ -1203,11 +1268,7 @@
         setTimeout(function(){ succ.style.transition = "opacity .8s"; succ.style.opacity = "1"; succ.scrollIntoView({ behavior: "smooth", block: "center" }); }, 100);
         var stamp = document.getElementById("mubarakStamp");
         if (stamp){ setTimeout(function(){ stamp.classList.add("show"); }, 500); }
-        if (attendingValue === "Yes"){
-          launchConfetti();
-          setTimeout(launchConfetti, 600);
-          spawnHearts(28);
-        }
+        if (attendingValue === "Yes"){ launchConfetti(); setTimeout(launchConfetti, 600); spawnHearts(28); }
       } else { return response.json().then(function(data){ throw new Error(data.error || "Something went wrong"); }); }
     }).catch(function(err){
       submitText.textContent = "Send RSVP"; submitBtn.disabled = false; submitBtn.style.opacity = "1";
