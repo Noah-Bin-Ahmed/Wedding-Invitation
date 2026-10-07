@@ -64,16 +64,48 @@
     .section-floral > .corner-tr, .section-floral > .corner-bl { width: 90px; height: 90px; }
   }
 
-  /* INTRO */
-  #introScene { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: #152434; overflow: hidden; transition: opacity 2s cubic-bezier(.4,0,.2,1), visibility 2s cubic-bezier(.4,0,.2,1); will-change: opacity; transform: translateZ(0); }
+  /* ═══════════════════════════════════════════════════
+     INTRO — 9:16 PORTRAIT VIDEO
+     ═══════════════════════════════════════════════════ */
+  #introScene { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: #0a0a0a; overflow: hidden; transition: opacity 2s cubic-bezier(.4,0,.2,1), visibility 2s cubic-bezier(.4,0,.2,1); will-change: opacity; transform: translateZ(0); }
   #introScene.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-  .intro-backdrop { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; filter: blur(45px) brightness(0.4) saturate(1.3); transform: scale(1.2); opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1); pointer-events: none; }
+
+  /* Blurred backdrop fills entire screen */
+  .intro-backdrop { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; filter: blur(50px) brightness(0.3) saturate(1.4); transform: scale(1.3); opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1); pointer-events: none; }
   .intro-backdrop.show { opacity: 1; }
-  .intro-video { position: absolute; top: -4%; left: 0; width: 100%; height: 108%; object-fit: cover; object-position: center; z-index: 2; opacity: 0; transition: opacity 2.2s cubic-bezier(.4,0,.2,1); will-change: opacity; }
-  .intro-video.show { opacity: 1; }
-  @media (min-width: 768px) {
-    .intro-video { top: 0; height: 100%; object-fit: contain; }
+
+  /* 9:16 video wrapper centered on screen */
+  .intro-video-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100vh;
+    height: 100dvh;
+    aspect-ratio: 9 / 16;
+    max-width: 100vw;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 2.2s cubic-bezier(.4,0,.2,1);
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(0,0,0,.7);
+    pointer-events: none;
   }
+  .intro-video-wrapper.show { opacity: 1; }
+  .intro-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    background: #000;
+  }
+
+  /* On very wide screens, cap the video height so it doesn't get too big */
+  @media (min-aspect-ratio: 9/16) and (min-width: 900px) {
+    .intro-video-wrapper { height: 96vh; height: 96dvh; }
+  }
+
   .gold-glow { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(219,196,148,.55) 0%, rgba(196,154,69,.35) 30%, rgba(156,116,43,.15) 60%, rgba(156,116,43,0) 85%); pointer-events: none; z-index: 8; opacity: 0; filter: blur(18px); mix-blend-mode: screen; }
   #introScene.glowing .gold-glow { animation: goldPulse 3.2s ease-in-out infinite; }
   @keyframes goldPulse { 0%, 100% { opacity: .15; transform: translate(-50%,-50%) scale(0.85); } 50% { opacity: .55; transform: translate(-50%,-50%) scale(1.1); } }
@@ -180,101 +212,17 @@
   .cursor-sparkle { position: fixed; pointer-events: none; z-index: 9998; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle, #FFF8E0 0%, #F3E5AB 40%, #C49A45 80%, transparent 100%); box-shadow: 0 0 14px rgba(196,154,69,.9); animation: sparkleFade 1s ease-out forwards; }
   @keyframes sparkleFade { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0) translateY(-14px); opacity: 0; } }
 
-  /* ═══════════════════════════════════════════════════
-     ★ VERSES — IVORY DEPTH STACK ★
-     ═══════════════════════════════════════════════════ */
-  .ivory-stack-scene {
-    position: relative;
-    width: 100%;
-    max-width: 620px;
-    height: 500px;
-    margin: 3rem auto 2rem;
-    padding: 0 1rem;
-  }
-  .ivory-card {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    width: 100%;
-    max-width: 420px;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    will-change: transform, opacity, filter;
-    transition:
-      transform 1200ms cubic-bezier(.22,.85,.3,1),
-      opacity 800ms cubic-bezier(.4,0,.2,1),
-      filter 800ms cubic-bezier(.4,0,.2,1);
-    cursor: pointer;
-  }
+  /* VERSES — IVORY DEPTH STACK */
+  .ivory-stack-scene { position: relative; width: 100%; max-width: 620px; height: 500px; margin: 3rem auto 2rem; padding: 0 1rem; }
+  .ivory-card { position: absolute; top: 55%; left: 50%; width: 100%; max-width: 420px; transform: translate(-50%, -50%); pointer-events: none; will-change: transform, opacity, filter; transition: transform 1200ms cubic-bezier(.22,.85,.3,1), opacity 800ms cubic-bezier(.4,0,.2,1), filter 800ms cubic-bezier(.4,0,.2,1); cursor: pointer; }
   .ivory-card[data-depth="0"] { pointer-events: auto; }
-
-  .ivory-face {
-    width: 100%;
-    border-radius: 1.5rem;
-    padding: 1.85rem 1.75rem 1.65rem;
-    position: relative;
-    overflow: hidden;
-    background:
-      radial-gradient(circle at 85% 10%, rgba(219,196,148,.35), transparent 55%),
-      linear-gradient(160deg, #FAF6EE 0%, #F0E8D8 55%, #E6DAC0 100%);
-    color: #1F2E3A;
-    box-shadow:
-      0 30px 60px -18px rgba(21,36,52,.22),
-      0 12px 30px -18px rgba(21,36,52,.15);
-    border: 1px solid rgba(196,154,69,.25);
-  }
-  .ivory-face::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #C49A45, #152434, #C49A45);
-    border-radius: 1.5rem 1.5rem 0 0;
-  }
-  .ivory-tag {
-    display: inline-block;
-    font-size: 9px;
-    letter-spacing: .3em;
-    text-transform: uppercase;
-    font-weight: 600;
-    padding: .35rem .85rem;
-    border-radius: 9999px;
-    margin-bottom: 1.1rem;
-    color: #9C742B;
-    background: rgba(196,154,69,.15);
-    border: 1px solid rgba(196,154,69,.3);
-  }
-  .ivory-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.15rem, 2.6vw, 1.5rem);
-    font-weight: 500;
-    font-style: italic;
-    line-height: 1.3;
-    margin-bottom: .85rem;
-    color: #152434;
-    letter-spacing: .01em;
-  }
-  .ivory-divider {
-    width: 40px;
-    height: 1px;
-    background: linear-gradient(90deg, #C49A45, transparent);
-    margin-bottom: 1rem;
-  }
-  .ivory-body {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13.5px;
-    line-height: 1.8;
-    font-weight: 400;
-    color: rgba(31,46,58,.72);
-  }
-  .ivory-orn {
-    margin-top: 1.15rem;
-    font-size: 10px;
-    letter-spacing: .7em;
-    text-indent: .7em;
-    color: #C49A45;
-    opacity: .6;
-  }
+  .ivory-face { width: 100%; border-radius: 1.5rem; padding: 1.85rem 1.75rem 1.65rem; position: relative; overflow: hidden; background: radial-gradient(circle at 85% 10%, rgba(219,196,148,.35), transparent 55%), linear-gradient(160deg, #FAF6EE 0%, #F0E8D8 55%, #E6DAC0 100%); color: #1F2E3A; box-shadow: 0 30px 60px -18px rgba(21,36,52,.22), 0 12px 30px -18px rgba(21,36,52,.15); border: 1px solid rgba(196,154,69,.25); }
+  .ivory-face::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #C49A45, #152434, #C49A45); border-radius: 1.5rem 1.5rem 0 0; }
+  .ivory-tag { display: inline-block; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; font-weight: 600; padding: .35rem .85rem; border-radius: 9999px; margin-bottom: 1.1rem; color: #9C742B; background: rgba(196,154,69,.15); border: 1px solid rgba(196,154,69,.3); }
+  .ivory-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.15rem, 2.6vw, 1.5rem); font-weight: 500; font-style: italic; line-height: 1.3; margin-bottom: .85rem; color: #152434; letter-spacing: .01em; }
+  .ivory-divider { width: 40px; height: 1px; background: linear-gradient(90deg, #C49A45, transparent); margin-bottom: 1rem; }
+  .ivory-body { font-family: 'Cormorant Garamond', serif; font-size: 13.5px; line-height: 1.8; font-weight: 400; color: rgba(31,46,58,.72); }
+  .ivory-orn { margin-top: 1.15rem; font-size: 10px; letter-spacing: .7em; text-indent: .7em; color: #C49A45; opacity: .6; }
 
   @media (max-width: 640px) {
     .ivory-stack-scene { height: 480px; }
@@ -385,11 +333,13 @@
 
 <div id="introScene">
   <video class="intro-backdrop" id="introBackdrop" muted playsinline webkit-playsinline preload="auto" aria-hidden="true">
-    <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/5f7fad52df602d1b9ef400bd5397b163b6cb7131/776f726b73706163652f796f75725f66696c65732f77656464696e672d766964656f2d66756c6c73637265656e2d32356d622e6d7034.mp4" type="video/mp4">
+    <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/5f7fad52df602d1b9ef400bd5397b163b6cb7131/workspace/your_files/wedding-video-fullscreen-25mb.mp4" type="video/mp4">
   </video>
-  <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="auto">
-    <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/5f7fad52df602d1b9ef400bd5397b163b6cb7131/776f726b73706163652f796f75725f66696c65732f77656464696e672d766964656f2d66756c6c73637265656e2d32356d622e6d7034.mp4" type="video/mp4">
-  </video>
+  <div class="intro-video-wrapper" id="introVideoWrapper">
+    <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="auto">
+      <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/5f7fad52df602d1b9ef400bd5397b163b6cb7131/workspace/your_files/wedding-video-fullscreen-25mb.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="gold-glow" style="width:60px;height:60px;left:50%;top:22%;animation-delay:0s;transform:translate(-50%,-50%);"></div>
   <div class="gold-glow" style="width:50px;height:50px;left:50%;top:78%;animation-delay:1.2s;transform:translate(-50%,-50%);"></div>
   <div class="gold-glow" style="width:40px;height:40px;left:22%;top:45%;animation-delay:2.4s;transform:translate(-50%,-50%);"></div>
@@ -463,9 +413,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     VERSES — IVORY DEPTH STACK
-     ═══════════════════════════════════════════════════ -->
+<!-- VERSES -->
 <section id="story" class="section-floral" style="position:relative;padding:6rem 1.5rem;background:#F7F2E8;">
   <div class="corner-tr"></div>
   <div class="corner-bl"></div>
@@ -478,7 +426,6 @@
     </div>
 
     <div class="ivory-stack-scene" id="ivoryStack">
-
       <div class="ivory-card" data-idx="0" data-depth="0">
         <div class="ivory-face">
           <span class="ivory-tag">Surah Ar-Rum · 30:21</span>
@@ -488,7 +435,6 @@
           <div class="ivory-orn">❦</div>
         </div>
       </div>
-
       <div class="ivory-card" data-idx="1" data-depth="1">
         <div class="ivory-face">
           <span class="ivory-tag">Surah Al-Baqarah · 2:187</span>
@@ -498,7 +444,6 @@
           <div class="ivory-orn">❦</div>
         </div>
       </div>
-
       <div class="ivory-card" data-idx="2" data-depth="2">
         <div class="ivory-face">
           <span class="ivory-tag">Surah Al-Furqan · 25:74</span>
@@ -508,7 +453,6 @@
           <div class="ivory-orn">❦</div>
         </div>
       </div>
-
       <div class="ivory-card" data-idx="3" data-depth="3">
         <div class="ivory-face">
           <span class="ivory-tag">Prophet Muhammad ﷺ</span>
@@ -518,7 +462,6 @@
           <div class="ivory-orn">❦</div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -535,7 +478,6 @@
     </div>
 
     <div class="events-grid">
-
       <article class="event-flip-container card-reveal card-from-left" data-event-flip>
         <div class="event-flip-inner">
           <div class="event-flip-front">
@@ -847,38 +789,29 @@
   "use strict";
   var introScene = document.getElementById("introScene");
   var introVideo = document.getElementById("introVideo");
+  var introVideoWrapper = document.getElementById("introVideoWrapper");
   var introBackdrop = document.getElementById("introBackdrop");
   var loader = document.getElementById("loader");
   var body = document.body;
   var heroInner = document.getElementById("heroInner");
 
-  if (introVideo) { introVideo.muted = true; introVideo.volume = 0; introVideo.setAttribute("muted", ""); introVideo.load(); }
-  if (introBackdrop) { introBackdrop.muted = true; introBackdrop.volume = 0; introBackdrop.setAttribute("muted", ""); introBackdrop.load(); }
-
-  // Video reveal and play after a short delay
-  setTimeout(function(){
-    if (!introVideo) return;
-    function revealAndPlay(){
-      try { introVideo.currentTime = 0; } catch(e){}
-      var p = introVideo.play();
-      if (p !== undefined) p.catch(function(){});
-      introVideo.classList.add("show");
-      if (introBackdrop) {
-        try { introBackdrop.currentTime = 0; } catch(e){}
-        var bp = introBackdrop.play();
-        if (bp !== undefined) bp.catch(function(){});
-        introBackdrop.classList.add("show");
-      }
-    }
-    if (introVideo.readyState >= 3){ revealAndPlay(); }
-    else {
-      var played = false;
-      function tryPlay(){ if (played) return; played = true; revealAndPlay(); }
-      introVideo.addEventListener("canplaythrough", tryPlay, { once: true });
-      introVideo.addEventListener("canplay", tryPlay, { once: true });
-      setTimeout(tryPlay, 1500);
-    }
-  }, 800); // Start video earlier
+  // Force mute + inline playback
+  if (introVideo) {
+    introVideo.muted = true;
+    introVideo.volume = 0;
+    introVideo.setAttribute("muted", "");
+    introVideo.setAttribute("playsinline", "");
+    introVideo.setAttribute("webkit-playsinline", "");
+    introVideo.load();
+  }
+  if (introBackdrop) {
+    introBackdrop.muted = true;
+    introBackdrop.volume = 0;
+    introBackdrop.setAttribute("muted", "");
+    introBackdrop.setAttribute("playsinline", "");
+    introBackdrop.setAttribute("webkit-playsinline", "");
+    introBackdrop.load();
+  }
 
   var loaderTagline = document.getElementById("loaderTagline");
   var taglineText = "13 · November · 2026";
@@ -899,18 +832,91 @@
     type();
   }
 
-  setTimeout(function(){ loader.classList.add("visible"); startTypewriter(); }, 6000); // Show loader after video has played for a bit
-  setTimeout(function(){ introScene.classList.add("hidden"); }, 9000); // Hide intro
+  var videoEnded = false;
+  var fallbackTimer;
 
+  function finishIntro(){
+    if (videoEnded) return;
+    videoEnded = true;
+    clearTimeout(fallbackTimer);
+
+    // Show loader briefly
+    loader.classList.add("visible");
+    startTypewriter();
+
+    // Fade out intro
+    setTimeout(function(){
+      introScene.classList.add("hidden");
+    }, 1800);
+
+    // Unlock body and start hero
+    setTimeout(function(){
+      loader.classList.remove("visible");
+      body.classList.remove("intro-locked");
+      window.scrollTo(0, 0);
+      startHeroAnimations();
+      if (heroInner) setTimeout(function(){ heroInner.classList.add("zoomed"); }, 1200);
+      if (introVideo) { try { introVideo.pause(); } catch(e){} }
+      if (introBackdrop) { try { introBackdrop.pause(); } catch(e){} }
+    }, 3800);
+  }
+
+  // Video play setup
+  function playVideo(){
+    if (!introVideo) { finishIntro(); return; }
+
+    function revealAndPlay(){
+      try { introVideo.currentTime = 0; } catch(e){}
+      introVideo.muted = true;
+      introVideo.volume = 0;
+      var p = introVideo.play();
+      if (p !== undefined) {
+        p.then(function(){
+          introVideoWrapper.classList.add("show");
+        }).catch(function(err){
+          // Autoplay blocked — show video anyway and try again on user interaction
+          introVideoWrapper.classList.add("show");
+          var resume = function(){
+            introVideo.muted = true;
+            introVideo.play().catch(function(){});
+            document.removeEventListener("click", resume);
+            document.removeEventListener("touchstart", resume);
+          };
+          document.addEventListener("click", resume);
+          document.addEventListener("touchstart", resume);
+        });
+      } else {
+        introVideoWrapper.classList.add("show");
+      }
+
+      if (introBackdrop) {
+        try { introBackdrop.currentTime = 0; } catch(e){}
+        introBackdrop.muted = true;
+        var bp = introBackdrop.play();
+        if (bp !== undefined) bp.catch(function(){});
+        introBackdrop.classList.add("show");
+      }
+    }
+
+    if (introVideo.readyState >= 3) {
+      revealAndPlay();
+    } else {
+      introVideo.addEventListener("canplaythrough", revealAndPlay, { once: true });
+      introVideo.addEventListener("canplay", revealAndPlay, { once: true });
+      setTimeout(revealAndPlay, 4000); // fallback reveal
+    }
+
+    // When video finishes → go to next stage
+    introVideo.addEventListener("ended", finishIntro);
+  }
+
+  // Kick off
   setTimeout(function(){
-    loader.classList.remove("visible");
-    body.classList.remove("intro-locked");
-    window.scrollTo(0, 0);
-    startHeroAnimations();
-    if (heroInner) setTimeout(function(){ heroInner.classList.add("zoomed"); }, 1200);
-    if (introVideo) { try { introVideo.pause(); } catch(e){} }
-    if (introBackdrop) { try { introBackdrop.pause(); } catch(e){} }
-  }, 11000); // Remove loader and unlock body
+    setTimeout(function(){ introScene.classList.add("glowing"); }, 1200);
+    playVideo();
+    // Failsafe: if video doesn't end within 3 minutes, move on
+    fallbackTimer = setTimeout(finishIntro, 180000);
+  }, 400);
 
   function startHeroAnimations(){
     var letterIds = ["heroKicker", "heroTitle", "heroOf", "heroGroom", "heroBride", "heroCity"];
@@ -931,7 +937,7 @@
     if (line){ line.style.opacity = "0"; line.style.transform = "scaleX(0)"; line.style.transition = "all 1s ease 1s"; setTimeout(function(){ line.style.opacity = "1"; line.style.transform = "scaleX(1)"; }, 50); }
   }
 
-  // ★ IVORY STACK — auto-play + tap/click to advance ★
+  // IVORY STACK
   (function(){
     var stack = document.getElementById('ivoryStack');
     if (!stack) return;
@@ -952,19 +958,13 @@
       ];
       return styles[Math.min(depth, 3)];
     }
-
-    function computeDepth(i){
-      return (i - idx + n) % n;
-    }
+    function computeDepth(i){ return (i - idx + n) % n; }
 
     function apply(){
       cards.forEach(function(card, i){
         var depth = computeDepth(i);
         var s = getStyle(depth);
-        card.style.transform =
-          'translate(-50%, -50%) ' +
-          'translateY(' + s.y + 'px) ' +
-          'scale(' + s.scale + ')';
+        card.style.transform = 'translate(-50%, -50%) translateY(' + s.y + 'px) scale(' + s.scale + ')';
         card.style.opacity = s.opacity;
         card.style.filter = s.blur > 0 ? 'blur(' + s.blur + 'px)' : 'none';
         card.style.zIndex = String(100 - depth);
@@ -972,48 +972,25 @@
         card.style.pointerEvents = (depth === 0) ? 'auto' : 'none';
       });
     }
-
-    function next(){
-      idx = (idx + 1) % n;
-      apply();
-      startTime = Date.now();
-    }
-
+    function next(){ idx = (idx + 1) % n; apply(); startTime = Date.now(); }
     function loop(){
       if (!paused){
         var elapsed = Date.now() - startTime;
-        if (elapsed >= DURATION){
-          next();
-        }
+        if (elapsed >= DURATION){ next(); }
       }
       rafId = requestAnimationFrame(loop);
     }
-
     cards.forEach(function(card, i){
-      card.addEventListener('click', function(e){
-        if (computeDepth(i) === 0){
-          startTime = Date.now();
-          next();
-        }
+      card.addEventListener('click', function(){
+        if (computeDepth(i) === 0){ startTime = Date.now(); next(); }
       });
       card.addEventListener('touchend', function(e){
-        if (computeDepth(i) === 0){
-          e.preventDefault();
-          startTime = Date.now();
-          next();
-        }
+        if (computeDepth(i) === 0){ e.preventDefault(); startTime = Date.now(); next(); }
       }, { passive: false });
     });
-
     document.addEventListener('visibilitychange', function(){
-      if (document.hidden){
-        paused = true;
-      } else {
-        paused = false;
-        startTime = Date.now();
-      }
+      if (document.hidden){ paused = true; } else { paused = false; startTime = Date.now(); }
     });
-
     apply();
     loop();
   })();
@@ -1021,10 +998,7 @@
   document.querySelectorAll("[data-event-flip]").forEach(function(card){
     var obs = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if (entry.isIntersecting) {
-          card.classList.add("is-revealed");
-          obs.unobserve(card);
-        }
+        if (entry.isIntersecting) { card.classList.add("is-revealed"); obs.unobserve(card); }
       });
     }, { threshold: 0.01, rootMargin: "0px 0px -5% 0px" });
     obs.observe(card);
@@ -1074,9 +1048,7 @@
       var h = document.documentElement.scrollHeight - window.innerHeight;
       var pct = h > 0 ? sy / h : 0;
       progress.style.transform = "scaleX(" + pct + ")";
-
       var vh = window.innerHeight;
-
       for (var i = 0; i < timelineData.length; i++){
         var item = timelineData[i];
         var rect = item.tl.getBoundingClientRect();
