@@ -64,115 +64,26 @@
     .section-floral > .corner-tr, .section-floral > .corner-bl { width: 90px; height: 90px; }
   }
 
-  /* ═══════════════════════════════════════════════════
-     INTRO — TWO VIDEOS WITH SMOOTH CROSSFADE
-     ═══════════════════════════════════════════════════ */
+  /* INTRO — simple, two videos crossfade */
   #introScene {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 10000; background: #000; overflow: hidden;
-    transition: opacity 1.6s ease, visibility 1.6s ease;
-    will-change: opacity;
+    transition: opacity 1.4s ease, visibility 1.4s ease;
   }
   #introScene.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-  .intro-video-stage {
-    position: absolute; inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #000;
-  }
-
-  .intro-video-el {
+  .intro-video {
     position: absolute; top: 0; left: 0;
     width: 100%; height: 100%;
     object-fit: contain;
     object-position: center;
-    background: transparent;
+    background: #000;
     display: block;
     opacity: 0;
-    transition: opacity 1.4s ease;
-    will-change: opacity;
-  }
-  .intro-video-el.active {
-    opacity: 1;
-  }
-
-  /* Loading state shown before videos actually render */
-  .intro-loading {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-    color: rgba(219,196,148,.8);
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1rem;
-    letter-spacing: .3em;
-    text-transform: uppercase;
-    transition: opacity .8s ease;
+    transition: opacity 1s ease;
     pointer-events: none;
   }
-  .intro-loading.hide { opacity: 0; }
-
-  /* Tap-to-play overlay (only shown if autoplay is blocked) */
-  .intro-tap {
-    position: absolute; inset: 0;
-    z-index: 5;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,.45);
-    cursor: pointer;
-  }
-  .intro-tap.show { display: flex; }
-  .intro-tap-inner {
-    text-align: center;
-    color: #DBC494;
-    font-family: 'Cormorant Garamond', serif;
-  }
-  .intro-tap-inner .tap-icon {
-    display: block;
-    width: 64px; height: 64px;
-    margin: 0 auto 1rem;
-    border-radius: 50%;
-    border: 2px solid #C49A45;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: tapPulse 1.8s ease-in-out infinite;
-  }
-  .intro-tap-inner .tap-icon::before {
-    content: '';
-    width: 0; height: 0;
-    border-left: 16px solid #C49A45;
-    border-top: 11px solid transparent;
-    border-bottom: 11px solid transparent;
-    margin-left: 5px;
-  }
-  .intro-tap-inner p {
-    margin: 0;
-    font-size: 14px;
-    letter-spacing: .3em;
-    text-transform: uppercase;
-    font-family: 'Jost', sans-serif;
-    font-weight: 500;
-  }
-  @keyframes tapPulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(196,154,69,.5); }
-    50% { transform: scale(1.08); box-shadow: 0 0 0 14px rgba(196,154,69,0); }
-  }
-
-  .gold-glow {
-    position: absolute; border-radius: 50%;
-    background: radial-gradient(circle, rgba(219,196,148,.5) 0%, rgba(196,154,69,.3) 30%, rgba(156,116,43,.12) 60%, rgba(156,116,43,0) 85%);
-    pointer-events: none; z-index: 8; opacity: 0;
-    filter: blur(18px); mix-blend-mode: screen;
-  }
-  #introScene.glowing .gold-glow { animation: goldPulse 3.2s ease-in-out infinite; }
-  @keyframes goldPulse {
-    0%, 100% { opacity: .15; transform: translate(-50%,-50%) scale(0.85); }
-    50% { opacity: .55; transform: translate(-50%,-50%) scale(1.1); }
-  }
+  .intro-video.active { opacity: 1; }
 
   /* LOADER */
   #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10001; background: #F7F2E8; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 1.4s ease; }
@@ -249,16 +160,6 @@
   .venue-city-tag { font-size: 10px; letter-spacing: .35em; text-transform: uppercase; color: rgba(219,196,148,.7); margin: 1.5rem 0 0; }
 
   /* Gallery */
-  .tile-inner { transition: transform 1.2s cubic-bezier(.2,.8,.2,1), filter .8s ease; }
-  .tile:hover .tile-inner { transform: scale(1.08); filter: saturate(1.15) brightness(1.05); }
-  .tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(196,154,69,0) 0%, rgba(196,154,69,.4) 50%, rgba(196,154,69,0) 100%); opacity: 0; transition: opacity .6s ease; pointer-events: none; z-index: 2; }
-  .tile:hover::after { opacity: 1; }
-  .gallery-tile { opacity: 0; transition: opacity 1.2s cubic-bezier(.2,.8,.2,1), transform 1.2s cubic-bezier(.2,.8,.2,1); }
-  .gallery-tile.from-left { transform: translateX(-100px) rotate(-6deg); }
-  .gallery-tile.from-right { transform: translateX(100px) rotate(6deg); }
-  .gallery-tile.active { opacity: 1; transform: translateX(0) translateY(0) rotate(0) scale(1); }
-
-  /* GALLERY CAROUSEL */
   .gallery-carousel-scene { position: relative; width: 100%; height: 420px; perspective: 1300px; perspective-origin: 50% 45%; overflow: hidden; margin-top: 1rem; }
   .gallery-carousel { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; animation: carouselSpin 32s infinite linear; }
   .gallery-carousel:hover { animation-play-state: paused; }
@@ -389,38 +290,19 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .marquee-track, .loader-logo, .tl-flower::before, .gold-glow, .floating-heart, .breathing, #heroDate, #submitBtn:hover, .gallery-carousel { animation: none !important; }
+    .marquee-track, .loader-logo, .tl-flower::before, .floating-heart, .breathing, #heroDate, #submitBtn:hover, .gallery-carousel { animation: none !important; }
   }
 </style>
 </head>
 <body class="grain intro-locked">
 
 <div id="introScene">
-  <div class="intro-video-stage">
-    <!-- Envelope video (plays first) -->
-    <video class="intro-video-el active" id="envelopeVideo" muted playsinline webkit-playsinline preload="auto">
-      <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/154b56bf507f4d3cab3df351bf4a8571a6c32205/workspace/your_files/envelope-explode-fixed.mp4" type="video/mp4">
-    </video>
-
-    <!-- Wedding card video (plays second, preloaded) -->
-    <video class="intro-video-el" id="cardVideo" muted playsinline webkit-playsinline preload="auto">
-      <source src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/27543a9d19cb3edd8b0ad4ab675fca1217dacc49/workspace/your_files/wedding-card-complete.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div class="intro-loading" id="introLoading">Loading</div>
-
-  <div class="intro-tap" id="introTap">
-    <div class="intro-tap-inner">
-      <span class="tap-icon"></span>
-      <p>Tap to Play</p>
-    </div>
-  </div>
-
-  <div class="gold-glow" style="width:60px;height:60px;left:50%;top:22%;animation-delay:0s;transform:translate(-50%,-50%);"></div>
-  <div class="gold-glow" style="width:50px;height:50px;left:50%;top:78%;animation-delay:1.2s;transform:translate(-50%,-50%);"></div>
-  <div class="gold-glow" style="width:40px;height:40px;left:22%;top:45%;animation-delay:2.4s;transform:translate(-50%,-50%);"></div>
-  <div class="gold-glow" style="width:40px;height:40px;left:78%;top:45%;animation-delay:3.6s;transform:translate(-50%,-50%);"></div>
+  <video class="intro-video active" id="envelopeVideo" muted playsinline webkit-playsinline preload="auto">
+    <source src="https://cdn.jsdelivr.net/gh/Noah-Bin-Ahmed/Wedding-Invitation@main/776f726b73706163652f796f75725f66696c65732f656e76656c6f70652d6578706c6f64652d66697865642e6d7034.mp4" type="video/mp4">
+  </video>
+  <video class="intro-video" id="cardVideo" muted playsinline webkit-playsinline preload="auto">
+    <source src="https://cdn.jsdelivr.net/gh/Noah-Bin-Ahmed/Wedding-Invitation@main/776f726b73706163652f796f75725f66696c65732f77656464696e672d636172642d636f6d706c6574652e6d7034.mp4" type="video/mp4">
+  </video>
 </div>
 
 <div id="loader">
@@ -857,13 +739,11 @@
   var introScene = document.getElementById("introScene");
   var envelopeVideo = document.getElementById("envelopeVideo");
   var cardVideo = document.getElementById("cardVideo");
-  var introLoading = document.getElementById("introLoading");
-  var introTap = document.getElementById("introTap");
   var loader = document.getElementById("loader");
   var body = document.body;
   var heroInner = document.getElementById("heroInner");
 
-  // Force mute + inline on both videos
+  // Force mute + inline on both
   [envelopeVideo, cardVideo].forEach(function(v){
     if (!v) return;
     v.muted = true;
@@ -873,7 +753,6 @@
     v.setAttribute("webkit-playsinline", "");
   });
 
-  // Loader tagline typing
   var loaderTagline = document.getElementById("loaderTagline");
   var taglineText = "13 · November · 2026";
   var twStarted = false;
@@ -894,7 +773,6 @@
 
   var introDone = false;
   var failsafeTimer;
-  var currentVideoIndex = 0; // 0 = envelope, 1 = card
 
   function goToMain(){
     if (introDone) return;
@@ -917,104 +795,44 @@
     }, 3600);
   }
 
-  function hideLoading(){
-    if (introLoading) introLoading.classList.add("hide");
+  // Start both videos (muted, autoplay)
+  function startVideos(){
+    // Play envelope first
+    var p1 = envelopeVideo.play();
+    if (p1 && p1.catch) p1.catch(function(){});
+    // Preload card
+    try { cardVideo.load(); } catch(e){}
   }
 
-  // Crossfade from current video to next
-  function switchToVideo(index){
-    if (index === 1) {
-      // Switch to card video
-      envelopeVideo.classList.remove("active");
-      cardVideo.classList.add("active");
-      currentVideoIndex = 1;
-      // Play card video
-      cardVideo.currentTime = 0;
-      var p = cardVideo.play();
-      if (p && p.catch) p.catch(function(){});
-    }
-  }
+  // When envelope ends → crossfade to card
+  envelopeVideo.addEventListener("ended", function(){
+    envelopeVideo.classList.remove("active");
+    cardVideo.classList.add("active");
+    var p = cardVideo.play();
+    if (p && p.catch) p.catch(function(){});
+  });
 
-  function attemptPlay(){
-    if (!envelopeVideo) { goToMain(); return; }
+  // When card ends → go to main
+  cardVideo.addEventListener("ended", function(){
+    goToMain();
+  });
 
-    // Preload both videos
-    envelopeVideo.load();
-    cardVideo.load();
+  // If envelope errors, skip to card
+  envelopeVideo.addEventListener("error", function(){
+    envelopeVideo.classList.remove("active");
+    cardVideo.classList.add("active");
+    cardVideo.play().catch(function(){});
+  });
 
-    // Try to play envelope video
-    var p = envelopeVideo.play();
-    if (p && p.then) {
-      p.then(function(){
-        hideLoading();
-        // Envelope is playing — preload card video in background
-        cardVideo.load();
-      }).catch(function(){
-        // Autoplay blocked → show tap overlay
-        if (introTap) introTap.classList.add("show");
-        hideLoading();
-        attachTapToPlay();
-      });
-    } else {
-      hideLoading();
-    }
-  }
+  // If card errors, skip to main
+  cardVideo.addEventListener("error", function(){
+    setTimeout(goToMain, 500);
+  });
 
-  function attachTapToPlay(){
-    if (window.__tapAttached) return;
-    window.__tapAttached = true;
-    var handler = function(){
-      if (introTap) introTap.classList.remove("show");
-      envelopeVideo.play().catch(function(){});
-      cardVideo.load();
-      document.removeEventListener("click", handler);
-      document.removeEventListener("touchstart", handler);
-    };
-    document.addEventListener("click", handler);
-    document.addEventListener("touchstart", handler);
-  }
-
-  // When envelope video ends → crossfade to card video
-  if (envelopeVideo) {
-    envelopeVideo.addEventListener("ended", function(){
-      switchToVideo(1);
-    });
-    envelopeVideo.addEventListener("error", function(){
-      // If envelope fails, try card directly
-      setTimeout(function(){ switchToVideo(1); }, 500);
-    });
-  }
-
-  // When card video ends → transition to main content
-  if (cardVideo) {
-    cardVideo.addEventListener("ended", function(){
-      goToMain();
-    });
-    cardVideo.addEventListener("error", function(){
-      setTimeout(goToMain, 500);
-    });
-  }
-
-  // Kick off after DOM is ready
-  setTimeout(function(){
-    var started = false;
-    function tryStart(){
-      if (started) return;
-      started = true;
-      attemptPlay();
-      // Failsafe: 4 minutes max for both videos
-      failsafeTimer = setTimeout(goToMain, 240000);
-    }
-    if (envelopeVideo && envelopeVideo.readyState >= 2) {
-      tryStart();
-    } else if (envelopeVideo) {
-      envelopeVideo.addEventListener("loadeddata", tryStart, { once: true });
-      envelopeVideo.addEventListener("canplay", tryStart, { once: true });
-      setTimeout(tryStart, 8000);
-    } else {
-      tryStart();
-    }
-  }, 300);
+  // Kick off
+  setTimeout(startVideos, 400);
+  // Failsafe — 5 min max
+  failsafeTimer = setTimeout(goToMain, 300000);
 
   // Hero animations
   function startHeroAnimations(){
