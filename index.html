@@ -64,7 +64,7 @@
     .section-floral > .corner-tr, .section-floral > .corner-bl { width: 90px; height: 90px; }
   }
 
-  /* INTRO — simple, two videos crossfade */
+  /* INTRO — fullscreen 9:16 */
   #introScene {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 10000; background: #000; overflow: hidden;
@@ -74,8 +74,9 @@
 
   .intro-video {
     position: absolute; top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     object-position: center;
     background: #000;
     display: block;
@@ -743,7 +744,6 @@
   var body = document.body;
   var heroInner = document.getElementById("heroInner");
 
-  // Force mute + inline on both
   [envelopeVideo, cardVideo].forEach(function(v){
     if (!v) return;
     v.muted = true;
@@ -795,16 +795,12 @@
     }, 3600);
   }
 
-  // Start both videos (muted, autoplay)
   function startVideos(){
-    // Play envelope first
     var p1 = envelopeVideo.play();
     if (p1 && p1.catch) p1.catch(function(){});
-    // Preload card
     try { cardVideo.load(); } catch(e){}
   }
 
-  // When envelope ends → crossfade to card
   envelopeVideo.addEventListener("ended", function(){
     envelopeVideo.classList.remove("active");
     cardVideo.classList.add("active");
@@ -812,29 +808,23 @@
     if (p && p.catch) p.catch(function(){});
   });
 
-  // When card ends → go to main
   cardVideo.addEventListener("ended", function(){
     goToMain();
   });
 
-  // If envelope errors, skip to card
   envelopeVideo.addEventListener("error", function(){
     envelopeVideo.classList.remove("active");
     cardVideo.classList.add("active");
     cardVideo.play().catch(function(){});
   });
 
-  // If card errors, skip to main
   cardVideo.addEventListener("error", function(){
     setTimeout(goToMain, 500);
   });
 
-  // Kick off
   setTimeout(startVideos, 400);
-  // Failsafe — 5 min max
   failsafeTimer = setTimeout(goToMain, 300000);
 
-  // Hero animations
   function startHeroAnimations(){
     var letterIds = ["heroKicker", "heroTitle", "heroOf", "heroGroom", "heroBride", "heroCity"];
     letterIds.forEach(function(id, idx){
