@@ -64,7 +64,7 @@
     .section-floral > .corner-tr, .section-floral > .corner-bl { width: 90px; height: 90px; }
   }
 
-  /* INTRO — fullscreen 9:16 */
+  /* INTRO — full video visible, no blur, no crop, black background */
   #introScene {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 10000; background: #000; overflow: hidden;
@@ -76,7 +76,7 @@
     position: absolute; top: 0; left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     background: #000;
     display: block;
