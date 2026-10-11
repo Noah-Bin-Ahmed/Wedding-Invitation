@@ -82,10 +82,8 @@
   @keyframes charIn { to { opacity: 1; transform: translateY(0); } }
   .hero-groom-t .char, .hero-bride-t .char { background: linear-gradient(90deg, #152434 0%, #152434 40%, #C49A45 50%, #152434 60%, #152434 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmerMove 4s ease-in-out infinite; }
 
-  /* Scroll-triggered typing chars */
   .type-char { display: inline-block; opacity: 0; transform: translateY(0.1em); transition: opacity .1s ease-out, transform .1s ease-out; }
   .type-char.visible { opacity: 1; transform: translateY(0); }
-  /* Gradient text keeps original gradient — fade whole element in */
   .type-fade { opacity: 0; transition: opacity .7s ease-out, transform .7s ease-out; transform: translateY(0.15em); }
   .type-fade.visible { opacity: 1; transform: translateY(0); }
 
@@ -311,7 +309,6 @@
   </div>
 </div>
 
-<!-- VERSES -->
 <section id="story" class="section-floral" style="position:relative;padding:6rem 1.5rem;background:#F7F2E8;">
   <div class="corner-tr"></div>
   <div class="corner-bl"></div>
@@ -705,7 +702,7 @@
       if (i <= taglineText.length){
         inline.textContent = taglineText.substring(0, i);
         i++;
-        setTimeout(type, 70);
+        setTimeout(type, 55);
       }
     })();
   }
@@ -752,32 +749,38 @@
   setTimeout(startVideos, 400);
   failsafeTimer = setTimeout(goToMain, 300000);
 
-  /* ═══ HERO TYPING SEQUENCE (faster) ═══ */
+  /* ═══ HERO TYPING (fast + smooth, 2 chars per tick) ═══ */
   var heroTimeouts = [];
   function heroTypeInto(el, text, speed){
     el.innerHTML = "";
     el.style.visibility = "visible";
-    var i = 0;
     var cursor = document.createElement("span");
     cursor.className = "typing-cursor-h";
     el.appendChild(cursor);
+
+    var i = 0;
+    var charsPerTick = 2;
+
     function step(){
       if (i < text.length){
-        var ch = text.charAt(i);
-        var span = document.createElement("span");
-        span.className = "char";
-        span.textContent = ch === " " ? "\u00A0" : ch;
-        el.insertBefore(span, cursor);
-        i++;
-        heroTimeouts.push(setTimeout(step, speed + Math.random() * 12));
+        var end = Math.min(i + charsPerTick, text.length);
+        while (i < end){
+          var ch = text.charAt(i);
+          var span = document.createElement("span");
+          span.className = "char";
+          span.textContent = ch === " " ? "\u00A0" : ch;
+          el.insertBefore(span, cursor);
+          i++;
+        }
+        heroTimeouts.push(setTimeout(step, speed));
       } else {
         heroTimeouts.push(setTimeout(function(){
-          cursor.style.transition = "opacity .3s";
+          cursor.style.transition = "opacity .25s";
           cursor.style.opacity = "0";
-        }, 250));
+        }, 200));
       }
     }
-    heroTimeouts.push(setTimeout(step, 60));
+    heroTimeouts.push(setTimeout(step, 40));
   }
 
   function startHeroTyping(){
@@ -785,14 +788,14 @@
     heroTimeouts = [];
 
     var seq = [
-      { id: "heroKicker",  text: "Welcome to the",             speed: 20, delay: 100 },
-      { id: "heroTitle",   text: "Wedding Ceremony",           speed: 30, delay: 150 },
-      { id: "heroOf",      text: "of",                         speed: 35, delay: 120 },
-      { id: "heroHairline", isHairline: true,                  delay: 250 },
-      { id: "heroGroom",   text: "Noah Bin Ahmed",             speed: 32, delay: 120 },
-      { id: "heroAmp",     isAmp: true,                        delay: 100 },
-      { id: "heroBride",   text: "Daughter Of Abdul Sattar",   speed: 26, delay: 120 },
-      { id: "heroCity",    text: "Karachi, Pakistan",          speed: 20, delay: 120 }
+      { id: "heroKicker",  text: "Welcome to the",             speed: 28, delay: 60 },
+      { id: "heroTitle",   text: "Wedding Ceremony",           speed: 30, delay: 100 },
+      { id: "heroOf",      text: "of",                         speed: 30, delay: 80 },
+      { id: "heroHairline", isHairline: true,                  delay: 180 },
+      { id: "heroGroom",   text: "Noah Bin Ahmed",             speed: 30, delay: 80 },
+      { id: "heroAmp",     isAmp: true,                        delay: 80 },
+      { id: "heroBride",   text: "Daughter Of Abdul Sattar",   speed: 28, delay: 80 },
+      { id: "heroCity",    text: "Karachi, Pakistan",          speed: 26, delay: 80 }
     ];
 
     seq.forEach(function(item){
@@ -815,19 +818,22 @@
       heroTimeouts.push(t);
 
       var itemTime;
-      if (item.isHairline) itemTime = 900;
+      if (item.isHairline) itemTime = 850;
       else if (item.isAmp) itemTime = 700;
-      else itemTime = item.text.length * item.speed + 250;
+      else {
+        var totalChars = item.text.length;
+        var ticks = Math.ceil(totalChars / 2);
+        itemTime = ticks * item.speed + 220;
+      }
       totalDelay += itemTime + item.delay;
     });
   }
 
-  /* ═══ SCROLL-TRIGGERED TYPING FOR HEADINGS ═══ */
+  /* ═══ SCROLL-TRIGGERED TYPING ═══ */
   function prepareTypingEl(el){
-    // Gradient text: don't split — fade whole element in (preserves gradient)
     var isGradient = el.classList.contains("text-gold-gradient")
                   || el.classList.contains("shimmer-text")
-                  || el.classList.contains("font-script"); // script font often gradient/gold
+                  || el.classList.contains("font-script");
     el.__isGradient = isGradient;
 
     if (isGradient){
@@ -836,7 +842,6 @@
       return;
     }
 
-    // Split into chars
     var textNodes = [];
     var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
     var node;
@@ -864,7 +869,6 @@
     if (el.__typingStarted) return;
     el.__typingStarted = true;
 
-    // Gradient / script font — fade whole element in
     if (el.__isGradient){
       el.classList.add("visible");
       return;
@@ -873,12 +877,12 @@
     var chars = el.__typingChars;
     if (!chars || !chars.length) return;
     var i = 0;
-    var baseSpeed = speed || 15;
+    var baseSpeed = speed || 14;
     function step(){
       if (i < chars.length){
         chars[i].classList.add("visible");
         i++;
-        setTimeout(step, baseSpeed + Math.random() * 8);
+        setTimeout(step, baseSpeed);
       }
     }
     step();
