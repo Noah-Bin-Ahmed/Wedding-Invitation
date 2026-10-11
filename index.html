@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Noah & Daughter of Abdul Sattar — Nikah Ceremony</title>
+<title>Noah & Daughter of Abdul Sattar — Wedding Ceremony</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -13,7 +13,6 @@
   html { scroll-behavior: smooth; }
   body { background: #F7F2E8; color: #1F2E3A; overflow-x: hidden; margin: 0; font-family: 'Jost', sans-serif; }
   body.intro-locked { overflow: hidden !important; position: fixed !important; width: 100% !important; height: 100% !important; top: 0 !important; left: 0 !important; }
-
   .font-display { font-family: 'Cormorant Garamond', serif; }
   .font-script { font-family: 'Great Vibes', cursive; }
   .text-gold-gradient { background: linear-gradient(135deg, #DBC494 0%, #C49A45 50%, #9C742B 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -26,64 +25,22 @@
   ::-webkit-scrollbar-track { background: #E6DFD3; }
   ::-webkit-scrollbar-thumb { background: #C49A45; border-radius: 9px; }
   .photo-fallback { background: linear-gradient(135deg, #4A6572 0%, #C49A45 50%, #152434 100%); }
-
   .floating-heart { position: fixed; bottom: -60px; pointer-events: none; z-index: 99998; will-change: transform, opacity; animation: floatHeart 4.2s cubic-bezier(.15,.6,.4,1) forwards; filter: drop-shadow(0 3px 6px rgba(196,154,69,.35)); }
   @keyframes floatHeart { 0% { transform: translateY(0) translateX(0) rotate(0deg) scale(.5); opacity: 0; } 10% { opacity: 1; transform: translateY(-10vh) translateX(calc(var(--drift, 0px) * .1)) rotate(36deg) scale(1); } 100% { transform: translateY(-115vh) translateX(var(--drift, 0px)) rotate(360deg) scale(.85); opacity: 0; } }
-
   .section-floral { position: relative; }
-  .section-floral::before,
-  .section-floral::after,
-  .section-floral > .corner-tr,
-  .section-floral > .corner-bl {
-    content: '';
-    position: absolute;
-    width: 240px;
-    height: 240px;
-    background-image: url('https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/refs/heads/main/IMG_8758.jpeg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 1;
-    mix-blend-mode: multiply;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
+  .section-floral::before, .section-floral::after, .section-floral > .corner-tr, .section-floral > .corner-bl { content: ''; position: absolute; width: 240px; height: 240px; background-image: url('https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/refs/heads/main/IMG_8758.jpeg'); background-repeat: no-repeat; background-size: contain; pointer-events: none; z-index: 1; opacity: 1; mix-blend-mode: multiply; transform: translateZ(0); backface-visibility: hidden; }
   .section-floral::before { top: 0; left: 0; }
   .section-floral::after { bottom: 0; right: 0; transform: translateZ(0) rotate(180deg); }
   .section-floral > .corner-tr { top: 0; right: 0; transform: translateZ(0) scaleX(-1); }
   .section-floral > .corner-bl { bottom: 0; left: 0; transform: translateZ(0) scaleY(-1); }
   .section-floral > *:not(.corner-tr):not(.corner-bl) { position: relative; z-index: 2; }
+  @media (max-width: 768px) { .section-floral::before, .section-floral::after, .section-floral > .corner-tr, .section-floral > .corner-bl { width: 130px; height: 130px; } }
+  @media (max-width: 480px) { .section-floral::before, .section-floral::after, .section-floral > .corner-tr, .section-floral > .corner-bl { width: 90px; height: 90px; } }
 
-  @media (max-width: 768px) {
-    .section-floral::before, .section-floral::after,
-    .section-floral > .corner-tr, .section-floral > .corner-bl { width: 130px; height: 130px; }
-  }
-  @media (max-width: 480px) {
-    .section-floral::before, .section-floral::after,
-    .section-floral > .corner-tr, .section-floral > .corner-bl { width: 90px; height: 90px; }
-  }
-
-  /* INTRO — video fills full screen, no black bars */
-  #introScene {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 10000; background: #000; overflow: hidden;
-    transition: opacity 1.4s ease, visibility 1.4s ease;
-  }
+  /* INTRO */
+  #introScene { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: #000; overflow: hidden; transition: opacity 1.4s ease, visibility 1.4s ease; }
   #introScene.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
-  .intro-video {
-    position: absolute; top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    background: #000;
-    display: block;
-    opacity: 0;
-    transition: opacity 1s ease;
-    pointer-events: none;
-  }
+  .intro-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; background: #000; display: block; opacity: 0; transition: opacity 1s ease; pointer-events: none; }
   .intro-video.active { opacity: 1; }
 
   /* LOADER */
@@ -103,8 +60,7 @@
   /* MARQUEE */
   .marquee { position: relative; overflow: hidden; background: linear-gradient(90deg, #152434 0%, #4A6572 50%, #152434 100%); padding: 1.2rem 0; border-top: 1px solid rgba(196,154,69,.3); border-bottom: 1px solid rgba(196,154,69,.3); cursor: pointer; }
   .marquee-track { display: flex; gap: 3rem; white-space: nowrap; animation: marqueeScroll 30s linear infinite; will-change: transform; }
-  .marquee:hover .marquee-track,
-  .marquee.is-paused .marquee-track { animation-play-state: paused !important; }
+  .marquee:hover .marquee-track, .marquee.is-paused .marquee-track { animation-play-state: paused !important; }
   .marquee-item { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #C49A45; letter-spacing: .2em; display: flex; align-items: center; gap: 3rem; }
   .marquee-item .dot { color: #F7F2E8; font-size: 1rem; }
   @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -113,28 +69,34 @@
   .hero-wrap { perspective: 1400px; transform-style: preserve-3d; }
   .hero-inner { transform: translateZ(-500px) scale(1.35); opacity: 0; transition: transform 2s cubic-bezier(.2,.85,.25,1), opacity 1.4s ease; will-change: transform, opacity; }
   .hero-inner.zoomed { transform: translateZ(0) scale(1); opacity: 1; }
-  .hero-letter { display: inline-block; opacity: 0; transform: translateY(60px) rotateX(-90deg) scale(0.5); animation: letterReveal 1s cubic-bezier(.2,.8,.2,1) forwards; }
-  @keyframes letterReveal { to { opacity: 1; transform: translateY(0) rotateX(0) scale(1); } }
-  .shimmer-text { background: linear-gradient(90deg, #152434 0%, #152434 40%, #C49A45 50%, #152434 60%, #152434 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmerMove 4s ease-in-out infinite; }
+  .hero-kicker-t { font-size: 12px; text-transform: uppercase; letter-spacing: .3em; color: #C49A45; margin: 0 0 1.5rem; font-weight: 600; visibility: hidden; }
+  .hero-title-t { font-family: 'Great Vibes', cursive; font-size: clamp(3rem, 12vw, 5rem); color: #152434; margin: 0 0 .5rem; line-height: 1.2; font-weight: 400; visibility: hidden; }
+  .hero-of-t { font-size: 14px; text-transform: uppercase; letter-spacing: .2em; color: #152434; margin: 0 0 1.5rem; font-weight: 500; visibility: hidden; }
+  .hero-groom-t { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 8vw, 3.5rem); margin: 0 0 .25rem; font-weight: 400; line-height: 1.3; background: linear-gradient(90deg, #152434 0%, #152434 40%, #C49A45 50%, #152434 60%, #152434 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmerMove 4s ease-in-out infinite; visibility: hidden; }
   @keyframes shimmerMove { 0%, 100% { background-position: 200% 0; } 50% { background-position: -200% 0; } }
-  .gold-divider { width: 0; height: 2px; background: linear-gradient(90deg, transparent, #C49A45, transparent); margin: 1.25rem auto 0; transition: width 1.6s cubic-bezier(.2,.8,.2,1) .4s; box-shadow: 0 0 12px rgba(196,154,69,.5); }
-  .reveal.active .gold-divider { width: 180px; }
-  .shimmer-btn { position: relative; overflow: hidden; }
-  .shimmer-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); transition: left .6s ease; }
-  .shimmer-btn:hover::before { left: 100%; }
+  .hero-bride-t { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 7vw, 3rem); margin: 0 0 2rem; font-weight: 400; line-height: 1.3; background: linear-gradient(90deg, #152434 0%, #152434 40%, #C49A45 50%, #152434 60%, #152434 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmerMove 4s ease-in-out infinite; visibility: hidden; }
+  .hero-amp-t { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #C49A45; margin: 0 0 .25rem; line-height: 1; visibility: hidden; opacity: 0; transform: scale(0.5) rotate(-20deg); transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .hero-amp-t.active { opacity: 1; transform: scale(1) rotate(0deg); }
+  .hero-hairline-t { width: 100px; height: 1px; background: linear-gradient(90deg, transparent, rgba(196,154,69,0.6), transparent); margin: 0 auto 1.5rem; opacity: 0; transform: scaleX(0); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .hero-hairline-t.active { opacity: 1; transform: scaleX(1); }
+  .hero-city-t { font-size: 11px; text-transform: uppercase; letter-spacing: .3em; color: rgba(21,36,52,.7); margin: 1.5rem 0 0; font-weight: 500; visibility: hidden; }
+  .typing-cursor-h { display: inline-block; width: 2px; height: 1em; background: #152434; margin-left: 3px; vertical-align: text-bottom; animation: blinkH 0.7s step-end infinite; opacity: 1; }
+  @keyframes blinkH { 50% { opacity: 0; } }
+  .typing .char { display: inline-block; opacity: 0; transform: translateY(0.15em); animation: charIn 0.05s ease-out forwards; }
+  @keyframes charIn { to { opacity: 1; transform: translateY(0); } }
+  .hero-groom-t .char, .hero-bride-t .char { background: linear-gradient(90deg, #152434 0%, #152434 40%, #C49A45 50%, #152434 60%, #152434 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmerMove 4s ease-in-out infinite; }
+
+  /* Generic typing chars for scroll-triggered headings */
+  .type-char { display: inline-block; opacity: 0; transform: translateY(0.1em); transition: opacity .05s ease-out, transform .05s ease-out; }
+  .type-char.visible { opacity: 1; transform: translateY(0); }
 
   /* CARD REVEAL */
   .card-reveal { opacity: 0; transform: translateY(60px) scale(0.92); transition: opacity 1.2s cubic-bezier(.2,.8,.2,1), transform 1.2s cubic-bezier(.2,.8,.2,1); }
   .card-reveal.card-from-left { transform: translateX(-80px) translateY(40px) scale(0.94); }
   .card-reveal.card-from-right { transform: translateX(80px) translateY(40px) scale(0.94); }
-  .card-reveal.active {
-    opacity: 1;
-    transform: translateX(0) translateY(0) scale(1);
-    box-shadow: 0 12px 32px rgba(21,36,52,0.07), 0 0 0 1px rgba(196,154,69,.45), 0 0 28px rgba(196,154,69,.10);
-  }
+  .card-reveal.active { opacity: 1; transform: translateX(0) translateY(0) scale(1); box-shadow: 0 12px 32px rgba(21,36,52,0.07), 0 0 0 1px rgba(196,154,69,.45), 0 0 28px rgba(196,154,69,.10); }
   .reveal { opacity: 0; transform: translateY(50px) scale(.97); transition: opacity 1.2s cubic-bezier(.2,.8,.2,1), transform 1.2s cubic-bezier(.2,.8,.2,1); }
   .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
-
   .cd-flip { animation: cdFlip .8s ease-out; }
   @keyframes cdFlip { 0% { transform: rotateX(0deg); opacity: 1; } 50% { transform: rotateX(-90deg) scale(1.1); opacity: .3; } 100% { transform: rotateX(0deg) scale(1); opacity: 1; } }
 
@@ -159,6 +121,7 @@
   .venue-location-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.15rem, 3.5vw, 1.5rem); font-weight: 500; margin: 0 0 .4rem; line-height: 1.25; color: #F7F2E8; }
   .venue-time-detail { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: rgba(247,242,232,.72); margin: 0; }
   .venue-city-tag { font-size: 10px; letter-spacing: .35em; text-transform: uppercase; color: rgba(219,196,148,.7); margin: 1.5rem 0 0; }
+  .smoke-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; pointer-events: none; z-index: 5; border-radius: 1.5rem; }
 
   /* Gallery */
   .gallery-carousel-scene { position: relative; width: 100%; height: 420px; perspective: 1300px; perspective-origin: 50% 45%; overflow: hidden; margin-top: 1rem; }
@@ -174,11 +137,10 @@
   .gallery-carousel-item:nth-child(4) { transform: rotateY(180deg) translateZ(290px); background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=75'); }
   .gallery-carousel-item:nth-child(5) { transform: rotateY(240deg) translateZ(290px); background-image: url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500&q=75'); }
   .gallery-carousel-item:nth-child(6) { transform: rotateY(300deg) translateZ(290px); background-image: url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500&q=75'); }
-
   .cursor-sparkle { position: fixed; pointer-events: none; z-index: 9998; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle, #FFF8E0 0%, #F3E5AB 40%, #C49A45 80%, transparent 100%); box-shadow: 0 0 14px rgba(196,154,69,.9); animation: sparkleFade 1s ease-out forwards; }
   @keyframes sparkleFade { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0) translateY(-14px); opacity: 0; } }
 
-  /* VERSES — IVORY DEPTH STACK */
+  /* VERSES */
   .ivory-stack-scene { position: relative; width: 100%; max-width: 620px; height: 500px; margin: 3rem auto 2rem; padding: 0 1rem; }
   .ivory-card { position: absolute; top: 55%; left: 50%; width: 100%; max-width: 420px; transform: translate(-50%, -50%); pointer-events: none; will-change: transform, opacity, filter; transition: transform 1200ms cubic-bezier(.22,.85,.3,1), opacity 800ms cubic-bezier(.4,0,.2,1), filter 800ms cubic-bezier(.4,0,.2,1); cursor: pointer; }
   .ivory-card[data-depth="0"] { pointer-events: auto; }
@@ -212,13 +174,13 @@
   @keyframes spin { to { transform: rotate(360deg); } }
   .confetti-piece { position: fixed; pointer-events: none; z-index: 99999; will-change: transform, opacity; }
 
-  /* EVENT TIMELINE */
+  /* TIMELINE */
   .event-timeline { position: relative; margin-top: 2rem; padding: 1.5rem 0 1rem; }
   .event-timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; transform: translateX(-50%); background: linear-gradient(180deg, transparent 0%, #7A9471 10%, #5C7D53 50%, #7A9471 90%, transparent 100%); border-radius: 3px; box-shadow: inset 0 0 2px rgba(122,148,113,.6), 0 0 5px rgba(92,125,83,.25); }
   .tl-ornament { position: absolute; left: 50%; transform: translateX(-50%); font-size: 34px; line-height: 1; z-index: 4; pointer-events: none; filter: drop-shadow(0 3px 6px rgba(139,90,43,.35)); user-select: none; }
   .tl-ornament-top { top: -26px; }
   .tl-ornament-bottom { bottom: -26px; transform: translateX(-50%) rotate(180deg); }
-  .tl-flower { position: absolute; left: 50%; top: 0; font-size: 30px; line-height: 1; transform: translate(-50%, -50%); z-index: 5; pointer-events: none; filter: drop-shadow(0 3px 8px rgba(139,90,43,.5)); will-change: transform; user-select: none; }
+  .tl-flower { position: absolute; left: 50%; top: 0; font-size: 30px; line-height: 1; transform: translate(-50%, -50%); z-index: 6; pointer-events: none; filter: drop-shadow(0 3px 8px rgba(139,90,43,.5)); will-change: transform; user-select: none; }
   .tl-flower::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; background: radial-gradient(circle, rgba(196,154,69,.5) 0%, rgba(196,154,69,0) 70%); animation: flowerTrail 3s ease-in-out infinite; pointer-events: none; }
   @keyframes flowerTrail { 0%, 100% { opacity: .3; transform: scale(1); } 50% { opacity: .7; transform: scale(1.25); } }
   .tl-item { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0; margin: 2.5rem 0; position: relative; }
@@ -229,9 +191,7 @@
   .tl-item.right .tl-dot-wrap { grid-column: 2; }
   .tl-item.right .tl-icon { grid-column: 1; padding-right: 1.5rem; text-align: right; }
   .tl-dot-wrap { display: flex; align-items: center; justify-content: center; width: 26px; z-index: 2; }
-  .tl-dot { display: none; }
   .tl-icon { display: flex; align-items: center; justify-content: center; }
-  .tl-icon svg { width: 150px; height: 150px; }
   .tl-icon img { width: 150px; height: 150px; object-fit: contain; border-radius: 0; mix-blend-mode: multiply; -webkit-mask-image: radial-gradient(ellipse at center, #000 42%, rgba(0,0,0,.85) 62%, transparent 90%); mask-image: radial-gradient(ellipse at center, #000 42%, rgba(0,0,0,.85) 62%, transparent 90%); filter: sepia(.1) saturate(.9) brightness(1.02) contrast(.98); transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .5s ease; }
   .tl-icon img:hover { transform: scale(1.05); filter: sepia(0) saturate(1) brightness(1.05) contrast(1); }
   .tl-time { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.5rem; color: #9C742B; line-height: 1; margin: 0 0 .35rem; font-weight: 500; }
@@ -239,25 +199,18 @@
 
   .events-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
   @media (min-width: 1024px) { .events-grid { grid-template-columns: repeat(2, 1fr); gap: 1.75rem; } }
-
   .breathing { display: inline-block; animation: breathing 4.5s ease-in-out infinite; will-change: letter-spacing; }
   @keyframes breathing { 0%, 100% { letter-spacing: .02em; } 50% { letter-spacing: .12em; } }
-
   .mubarak-stamp { display: inline-block; border: 3px double #152434; color: #152434; padding: .5rem 1.4rem; border-radius: .4rem; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; transform: rotate(-15deg) scale(0); opacity: 0; transition: transform .7s cubic-bezier(.2,.9,.3,1.3), opacity .4s ease; box-shadow: 0 0 0 4px rgba(21,36,52,.08); margin: 1.5rem auto .5rem; }
   .mubarak-stamp.show { transform: rotate(-15deg) scale(1); opacity: 1; }
-
   #heroDate { animation: datePulse 2.5s ease-in-out infinite; }
   @keyframes datePulse { 0%, 100% { box-shadow: 0 0 40px rgba(196,154,69,.2), inset 0 0 20px rgba(196,154,69,.1); } 50% { box-shadow: 0 0 60px rgba(196,154,69,.55), 0 0 30px rgba(196,154,69,.3), inset 0 0 20px rgba(196,154,69,.15); } }
-
   #submitBtn:hover { animation: btnGlowPulse 1.5s ease-in-out infinite; }
   @keyframes btnGlowPulse { 0%, 100% { box-shadow: 0 0 20px rgba(196,154,69,.5), 0 0 40px rgba(196,154,69,.2); } 50% { box-shadow: 0 0 30px rgba(196,154,69,.8), 0 0 60px rgba(196,154,69,.4); } }
-
   .signature-draw { position: relative; display: inline-block; cursor: pointer; padding-bottom: 8px; }
   .signature-draw::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background: linear-gradient(90deg, transparent, #C49A45, #DBC494, #C49A45, transparent); transition: width 1.8s cubic-bezier(.2,.8,.2,1); }
   .signature-draw:hover::after { width: 100%; }
-
   #submitBtn:active, .att-btn:active, .evt-btn:active { transform: translateY(3px) scale(.97) !important; transition: transform .12s ease !important; }
-
   @keyframes fieldShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
   .field.error { border-color: #dc2626 !important; animation: fieldShake .45s ease; }
 
@@ -272,8 +225,6 @@
     .gallery-carousel-item:nth-child(6) { transform: rotateY(300deg) translateZ(200px); }
     .gallery-carousel-caption { font-size: .85rem; }
     .event-flip-back { padding: 2rem 1.5rem; }
-
-    .tl-icon svg { width: 110px; height: 110px; }
     .tl-icon img { width: 110px; height: 110px; }
     .tl-time { font-size: 1.25rem; }
     .tl-title { font-size: .85rem; }
@@ -289,9 +240,9 @@
     .mubarak-stamp { font-size: 1.4rem; padding: .4rem 1rem; }
     .loader-logo { font-size: 3rem; }
   }
-
   @media (prefers-reduced-motion: reduce) {
     .marquee-track, .loader-logo, .tl-flower::before, .floating-heart, .breathing, #heroDate, #submitBtn:hover, .gallery-carousel { animation: none !important; }
+    .type-char { opacity: 1 !important; transform: none !important; }
   }
 </style>
 </head>
@@ -347,17 +298,14 @@
   <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(247,242,232,0.6) 0%, rgba(247,242,232,0.8) 60%, rgba(247,242,232,1) 100%);z-index:1;"></div>
   <div class="hero-wrap" style="position:relative;z-index:10;width:100%;">
     <div class="hero-inner" id="heroInner" style="text-align:center;max-width:800px;margin:0 auto;">
-      <p style="font-size:12px;text-transform:uppercase;letter-spacing:.3em;color:#C49A45;margin:0 0 1.5rem;font-weight:600;" id="heroKicker">Welcome to the</p>
-      <h1 class="font-script" style="font-size:clamp(3rem, 12vw, 5rem);color:#152434;margin:0 0 .5rem;line-height:1.2;" id="heroTitle">Nikah Ceremony</h1>
-      <p style="font-size:14px;text-transform:uppercase;letter-spacing:.2em;color:#152434;margin:0 0 1.5rem;font-weight:500;" id="heroOf">of</p>
-      <div class="hairline" style="width:100px;margin:0 auto 1.5rem;" id="heroLine"></div>
-      <h2 class="font-display shimmer-text" style="font-size:clamp(2rem, 8vw, 3.5rem);color:#1F2E3A;margin:0 0 .5rem;font-weight:400;line-height:1.3;" id="heroGroom">Noah Bin Ahmed</h2>
-      <p class="font-script" id="heroAmp" style="font-size:2.5rem;color:#C49A45;margin:0 0 .5rem;">&amp;</p>
-      <h2 class="font-display shimmer-text" style="font-size:clamp(1.8rem, 7vw, 3rem);color:#1F2E3A;margin:0 0 2rem;font-weight:400;line-height:1.3;" id="heroBride">Daughter Of<br/>Abdul Sattar</h2>
-      <div style="background:rgba(21,36,52,0.9);border:1px solid rgba(196,154,69,0.6);border-radius:50px;padding:.9rem 2.5rem;display:inline-block;" id="heroDate">
-        <p style="font-size:14px;text-transform:uppercase;letter-spacing:.25em;color:#F7F2E8;margin:0;font-weight:500;">13 · 11 · 2026</p>
-      </div>
-      <p style="font-size:11px;text-transform:uppercase;letter-spacing:.3em;color:rgba(21,36,52,.7);margin:1.5rem 0 0;font-weight:500;" id="heroCity">Karachi, Pakistan</p>
+      <p class="hero-kicker-t" id="heroKicker"></p>
+      <h1 class="hero-title-t" id="heroTitle"></h1>
+      <p class="hero-of-t" id="heroOf"></p>
+      <div class="hero-hairline-t" id="heroHairline"></div>
+      <h2 class="hero-groom-t" id="heroGroom"></h2>
+      <p class="hero-amp-t" id="heroAmp">&amp;</p>
+      <h2 class="hero-bride-t" id="heroBride"></h2>
+      <p class="hero-city-t" id="heroCity"></p>
     </div>
   </div>
   <div class="scroll-indicator" style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:.5rem;">
@@ -379,12 +327,11 @@
   <div class="corner-bl"></div>
   <div style="max-width:56rem;margin:0 auto;">
     <div class="reveal" style="text-align:center;margin-bottom:2rem;">
-      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 1rem;">Blessings</p>
-      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#152434;margin:0;line-height:1.1;">Words of <span style="font-style:italic;" class="text-gold-gradient">Love</span></h2>
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 1rem;" data-typing="Blessings">Blessings</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#152434;margin:0;line-height:1.1;">Words of <span style="font-style:italic;" class="text-gold-gradient" data-typing="Love">Love</span></h2>
       <div class="gold-divider"></div>
-      <p style="margin-top:1.5rem;font-size:14px;color:rgba(21,36,52,.6);">From the Holy Quran &amp; Islamic Teachings</p>
+      <p style="margin-top:1.5rem;font-size:14px;color:rgba(21,36,52,.6);" data-typing="From the Holy Quran & Islamic Teachings">From the Holy Quran &amp; Islamic Teachings</p>
     </div>
-
     <div class="ivory-stack-scene" id="ivoryStack">
       <div class="ivory-card" data-idx="0" data-depth="0">
         <div class="ivory-face">
@@ -431,23 +378,24 @@
   <div class="corner-bl"></div>
   <div style="max-width:72rem;margin:0 auto;">
     <div class="reveal" style="text-align:center;margin-bottom:4rem;">
-      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 1rem;">The Celebrations</p>
-      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#152434;margin:0;line-height:1.1;">Days of <span class="breathing" style="font-style:italic;">Joy</span></h2>
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 1rem;" data-typing="The Celebrations">The Celebrations</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#152434;margin:0;line-height:1.1;">Days of <span class="breathing" style="font-style:italic;" data-typing="Joy">Joy</span></h2>
       <div class="gold-divider"></div>
-      <p style="margin-top:1.5rem;font-size:14px;color:rgba(21,36,52,.6);">13 – 16 November 2026 · Karachi, Pakistan</p>
+      <p style="margin-top:1.5rem;font-size:14px;color:rgba(21,36,52,.6);" data-typing="13 – 16 November 2026 · Karachi, Pakistan">13 – 16 November 2026 · Karachi, Pakistan</p>
     </div>
 
     <div class="events-grid">
       <article class="event-flip-container card-reveal card-from-left" data-event-flip>
         <div class="event-flip-inner">
           <div class="event-flip-front">
+            <canvas class="smoke-canvas"></canvas>
             <div style="position:relative;height:15rem;overflow:hidden;">
               <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=80&auto=format&fit=crop" alt="Nikah" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
               <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(247,242,232,.9));"></div>
             </div>
             <div style="padding:2rem 2rem 3rem;">
-              <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .75rem;">Day One · Afternoon</p>
-              <h3 class="font-display breathing" style="font-size:1.75rem;color:#152434;margin:0 0 .75rem;">Nikkah Ceremony</h3>
+              <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .75rem;" data-typing="Day One · Afternoon">Day One · Afternoon</p>
+              <h3 class="font-display breathing" style="font-size:1.75rem;color:#152434;margin:0 0 .75rem;" data-typing="Nikkah Ceremony">Nikkah Ceremony</h3>
               <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
               <p class="font-display" style="font-size:1.1rem;color:rgba(31,46,58,.8);margin:0 0 .3rem;">Friday, 13 November 2026</p>
               <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(21,36,52,.6);margin:0 0 1rem;">After Jumma Prayer · Jamia Masjid Al Falahiya</p>
@@ -484,13 +432,14 @@
       <article class="event-flip-container card-reveal card-from-right" data-event-flip>
         <div class="event-flip-inner">
           <div class="event-flip-front">
+            <canvas class="smoke-canvas"></canvas>
             <div style="position:relative;height:15rem;overflow:hidden;">
               <img src="https://i.ibb.co/1tFND64t/IMG-8660.jpg" alt="Mehndi" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
               <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(247,242,232,.9));"></div>
             </div>
             <div style="padding:2rem 2rem 3rem;">
-              <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .75rem;">Day One · Night</p>
-              <h3 class="font-display breathing" style="font-size:1.75rem;color:#152434;margin:0 0 .75rem;">Mehndi</h3>
+              <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .75rem;" data-typing="Day One · Night">Day One · Night</p>
+              <h3 class="font-display breathing" style="font-size:1.75rem;color:#152434;margin:0 0 .75rem;" data-typing="Mehndi">Mehndi</h3>
               <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
               <p class="font-display" style="font-size:1.1rem;color:rgba(31,46,58,.8);margin:0 0 .3rem;">Friday, 13 November 2026</p>
               <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(21,36,52,.6);margin:0 0 1rem;">9:00 PM onwards · Al Bilal Ballroom</p>
@@ -532,13 +481,14 @@
       <article class="event-flip-container card-reveal card-from-left" data-event-flip>
         <div class="event-flip-inner">
           <div class="event-flip-front">
+            <canvas class="smoke-canvas"></canvas>
             <div style="position:relative;height:15rem;overflow:hidden;">
               <img src="https://raw.githubusercontent.com/Noah-Bin-Ahmed/Wedding-Invitation/refs/heads/main/IMG_8764.jpeg" alt="Baraat" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
               <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(247,242,232,.9));"></div>
             </div>
             <div style="padding:2rem 2rem 3rem;">
-              <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .75rem;">Day Two</p>
-              <h3 class="font-display breathing" style="font-size:1.75rem;color:#152434;margin:0 0 .75rem;">Baraat</h3>
+              <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .75rem;" data-typing="Day Two">Day Two</p>
+              <h3 class="font-display breathing" style="font-size:1.75rem;color:#152434;margin:0 0 .75rem;" data-typing="Baraat">Baraat</h3>
               <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
               <p class="font-display" style="font-size:1.1rem;color:rgba(31,46,58,.8);margin:0 0 .3rem;">Saturday, 14 November 2026</p>
               <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(21,36,52,.6);margin:0 0 1rem;">9:00 PM · Nudrat Banquet</p>
@@ -581,13 +531,14 @@
       <article class="event-flip-container card-reveal card-from-right" data-event-flip>
         <div class="event-flip-inner">
           <div class="event-flip-front">
+            <canvas class="smoke-canvas"></canvas>
             <div style="position:relative;height:15rem;overflow:hidden;">
               <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80&auto=format&fit=crop" alt="Walima" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.classList.add('photo-fallback');">
               <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(247,242,232,.9));"></div>
             </div>
             <div style="padding:2rem 2rem 3rem;">
-              <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .75rem;">Day Three</p>
-              <h3 class="font-display breathing" style="font-size:1.75rem;color:#152434;margin:0 0 .75rem;">Walima</h3>
+              <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .75rem;" data-typing="Day Three">Day Three</p>
+              <h3 class="font-display breathing" style="font-size:1.75rem;color:#152434;margin:0 0 .75rem;" data-typing="Walima">Walima</h3>
               <div class="hairline" style="width:3.5rem;margin-bottom:1.25rem;"></div>
               <p class="font-display" style="font-size:1.1rem;color:rgba(31,46,58,.8);margin:0 0 .3rem;">Monday, 16 November 2026</p>
               <p style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(21,36,52,.6);margin:0 0 1rem;">9:00 PM · Universal Zewar Banquet</p>
@@ -629,7 +580,7 @@
 
     <div class="reveal" style="margin-top:5rem;">
       <div style="border-radius:2rem;border:1px solid rgba(196,154,69,.3);background:linear-gradient(135deg, #152434 0%, #4A6572 100%);padding:2.5rem 1.5rem;box-shadow:0 20px 40px rgba(21,36,52,0.2);">
-        <p style="text-align:center;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 2.25rem;">Counting down to the Nikkah</p>
+        <p style="text-align:center;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 2.25rem;" data-typing="Counting down to the Wedding">Counting down to the Wedding</p>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;max-width:36rem;margin:0 auto;">
           <div style="text-align:center;"><div class="font-display" data-cd="d" style="font-size:clamp(2rem,8vw,3.5rem);font-weight:300;color:#F7F2E8;">00</div><div style="margin-top:.5rem;font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(219,196,148,.7);">Days</div></div>
           <div style="text-align:center;"><div class="font-display" data-cd="h" style="font-size:clamp(2rem,8vw,3.5rem);font-weight:300;color:#F7F2E8;">00</div><div style="margin-top:.5rem;font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(219,196,148,.7);">Hours</div></div>
@@ -646,8 +597,8 @@
   <div class="corner-bl"></div>
   <div style="max-width:72rem;margin:0 auto;">
     <div class="reveal" style="text-align:center;margin-bottom:3rem;">
-      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 1rem;">Moments</p>
-      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#152434;margin:0;line-height:1.1;">A few of our <span style="font-style:italic;" class="text-gold-gradient">favourites</span></h2>
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 1rem;" data-typing="Moments">Moments</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#152434;margin:0;line-height:1.1;">A few of our <span style="font-style:italic;" class="text-gold-gradient" data-typing="favourites">favourites</span></h2>
       <div class="gold-divider"></div>
     </div>
 
@@ -673,8 +624,8 @@
   <div class="corner-bl"></div>
   <div style="max-width:48rem;margin:0 auto;">
     <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
-      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 1rem;">RSVP</p>
-      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#152434;margin:0;line-height:1.1;">Will you <span class="breathing" style="font-style:italic;">join us?</span></h2>
+      <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 1rem;" data-typing="RSVP">RSVP</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#152434;margin:0;line-height:1.1;">Will you <span class="breathing" style="font-style:italic;" data-typing="join us?">join us?</span></h2>
       <div class="gold-divider"></div>
       <p style="margin-top:1.5rem;font-size:15px;color:rgba(21,36,52,.6);line-height:1.7;">Kindly respond by <span style="color:#152434;font-weight:500;">30 October 2026</span> so we can save you a seat.</p>
     </div>
@@ -720,8 +671,8 @@
   <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, transparent, #C49A45, transparent);"></div>
   <div style="max-width:48rem;margin:0 auto;text-align:center;">
     <div class="reveal">
-      <p class="font-script signature-draw" style="font-size:clamp(2rem,6vw,3.5rem);color:#C49A45;margin:0;line-height:1.2;">Noah &amp; Daughter of Abdul Sattar</p>
-      <p style="margin-top:1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(247,242,232,.6);">13 – 16 November 2026 · Karachi</p>
+      <p class="font-script signature-draw" style="font-size:clamp(2rem,6vw,3.5rem);color:#C49A45;margin:0;line-height:1.2;" data-typing="Noah & Daughter of Abdul Sattar">Noah &amp; Daughter of Abdul Sattar</p>
+      <p style="margin-top:1.25rem;font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(247,242,232,.6);" data-typing="13 – 16 November 2026 · Karachi">13 – 16 November 2026 · Karachi</p>
       <div class="hairline" style="width:8rem;margin:2.5rem auto;"></div>
       <p style="font-size:13px;color:rgba(247,242,232,.7);line-height:1.7;max-width:24rem;margin:0 auto;">With love, laughter and a little bit of chaos — we can't wait to see you there.</p>
       <p style="margin-top:2.5rem;font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:rgba(196,154,69,.8);">#NoahWedDaughterOfAbdulSattar</p>
@@ -737,6 +688,7 @@
 (function(){
   "use strict";
 
+  /* ═══ INTRO VIDEO ═══ */
   var introScene = document.getElementById("introScene");
   var envelopeVideo = document.getElementById("envelopeVideo");
   var cardVideo = document.getElementById("cardVideo");
@@ -746,11 +698,8 @@
 
   [envelopeVideo, cardVideo].forEach(function(v){
     if (!v) return;
-    v.muted = true;
-    v.volume = 0;
-    v.setAttribute("muted", "");
-    v.setAttribute("playsinline", "");
-    v.setAttribute("webkit-playsinline", "");
+    v.muted = true; v.volume = 0;
+    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
   });
 
   var loaderTagline = document.getElementById("loaderTagline");
@@ -771,24 +720,19 @@
     })();
   }
 
-  var introDone = false;
-  var failsafeTimer;
-
+  var introDone = false, failsafeTimer;
   function goToMain(){
     if (introDone) return;
     introDone = true;
     clearTimeout(failsafeTimer);
-
     loader.classList.add("visible");
     startTypewriter();
-
     setTimeout(function(){ introScene.classList.add("hidden"); }, 1600);
-
     setTimeout(function(){
       loader.classList.remove("visible");
       body.classList.remove("intro-locked");
       window.scrollTo(0, 0);
-      startHeroAnimations();
+      startHeroTyping();
       if (heroInner) setTimeout(function(){ heroInner.classList.add("zoomed"); }, 1200);
       try { envelopeVideo.pause(); } catch(e){}
       try { cardVideo.pause(); } catch(e){}
@@ -807,62 +751,164 @@
     var p = cardVideo.play();
     if (p && p.catch) p.catch(function(){});
   });
-
-  cardVideo.addEventListener("ended", function(){
-    goToMain();
-  });
-
+  cardVideo.addEventListener("ended", goToMain);
   envelopeVideo.addEventListener("error", function(){
     envelopeVideo.classList.remove("active");
     cardVideo.classList.add("active");
     cardVideo.play().catch(function(){});
   });
-
-  cardVideo.addEventListener("error", function(){
-    setTimeout(goToMain, 500);
-  });
+  cardVideo.addEventListener("error", function(){ setTimeout(goToMain, 500); });
 
   setTimeout(startVideos, 400);
   failsafeTimer = setTimeout(goToMain, 300000);
 
-  function startHeroAnimations(){
-    var letterIds = ["heroKicker", "heroTitle", "heroOf", "heroGroom", "heroBride", "heroCity"];
-    letterIds.forEach(function(id, idx){
-      var el = document.getElementById(id);
-      if (!el) return;
-      var text = el.textContent || "";
-      if (el.innerHTML.indexOf("<br") > -1) return;
-      var letters = text.split("");
-      el.innerHTML = letters.map(function(ch, i){
-        if (ch === " ") return '<span class="hero-letter" style="animation-delay:' + (0.4 + idx * 0.15 + i * 0.03) + 's">&nbsp;</span>';
-        return '<span class="hero-letter" style="animation-delay:' + (0.4 + idx * 0.15 + i * 0.03) + 's">' + ch + '</span>';
-      }).join("");
-    });
-    var amp = document.getElementById("heroAmp");
-    if (amp){ amp.style.opacity = "0"; amp.style.transform = "scale(0.5) rotate(-20deg)"; amp.style.transition = "all 1s cubic-bezier(.2,.8,.2,1) 1.1s"; setTimeout(function(){ amp.style.opacity = "1"; amp.style.transform = "scale(1) rotate(0deg)"; }, 50); }
-    var line = document.getElementById("heroLine");
-    if (line){ line.style.opacity = "0"; line.style.transform = "scaleX(0)"; line.style.transition = "all 1s ease 1s"; setTimeout(function(){ line.style.opacity = "1"; line.style.transform = "scaleX(1)"; }, 50); }
+  /* ═══ HERO TYPING SEQUENCE ═══ */
+  var heroTimeouts = [];
+  function heroTypeInto(el, text, speed, isGold){
+    el.innerHTML = "";
+    el.style.visibility = "visible";
+    var i = 0;
+    var cursor = document.createElement("span");
+    cursor.className = "typing-cursor-h";
+    el.appendChild(cursor);
+    function step(){
+      if (i < text.length){
+        var ch = text.charAt(i);
+        var span = document.createElement("span");
+        span.className = "char";
+        span.textContent = ch === " " ? "\u00A0" : ch;
+        el.insertBefore(span, cursor);
+        i++;
+        heroTimeouts.push(setTimeout(step, speed + Math.random() * 25));
+      } else {
+        heroTimeouts.push(setTimeout(function(){
+          cursor.style.transition = "opacity .4s";
+          cursor.style.opacity = "0";
+        }, 350));
+      }
+    }
+    heroTimeouts.push(setTimeout(step, 100));
   }
 
-  // IVORY STACK
+  function startHeroTyping(){
+    heroTimeouts.forEach(function(t){ clearTimeout(t); });
+    heroTimeouts = [];
+
+    var seq = [
+      { id: "heroKicker",  text: "Welcome to the",             speed: 35, delay: 150 },
+      { id: "heroTitle",   text: "Wedding Ceremony",           speed: 50, delay: 250 },
+      { id: "heroOf",      text: "of",                         speed: 60, delay: 200 },
+      { id: "heroHairline", isHairline: true,                  delay: 400 },
+      { id: "heroGroom",   text: "Noah Bin Ahmed",             speed: 55, delay: 200 },
+      { id: "heroAmp",     isAmp: true,                        delay: 150 },
+      { id: "heroBride",   text: "Daughter Of Abdul Sattar",   speed: 45, delay: 200 },
+      { id: "heroCity",    text: "Karachi, Pakistan",          speed: 35, delay: 200 }
+    ];
+
+    seq.forEach(function(item){
+      var el = document.getElementById(item.id);
+      if (!el) return;
+      if (item.isHairline) el.classList.remove("active");
+      else if (item.isAmp) { el.classList.remove("active"); el.style.visibility = "hidden"; }
+      else { el.innerHTML = ""; el.style.visibility = "hidden"; }
+    });
+
+    var totalDelay = 0;
+    seq.forEach(function(item){
+      var t = setTimeout(function(){
+        var el = document.getElementById(item.id);
+        if (!el) return;
+        if (item.isHairline) el.classList.add("active");
+        else if (item.isAmp) { el.style.visibility = "visible"; void el.offsetWidth; el.classList.add("active"); }
+        else heroTypeInto(el, item.text, item.speed);
+      }, totalDelay);
+      heroTimeouts.push(t);
+
+      var itemTime;
+      if (item.isHairline) itemTime = 1000;
+      else if (item.isAmp) itemTime = 900;
+      else itemTime = item.text.length * item.speed + 350;
+      totalDelay += itemTime + item.delay;
+    });
+  }
+
+  /* ═══ SCROLL-TRIGGERED TYPING FOR HEADINGS ═══ */
+  function prepareTypingEl(el){
+    var fullText = el.getAttribute("data-typing") || el.textContent;
+    el.setAttribute("data-full-text", fullText);
+
+    // Walk text nodes and wrap each char in a span (preserving structure)
+    var textNodes = [];
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+    var node;
+    while ((node = walker.nextNode())) textNodes.push(node);
+
+    textNodes.forEach(function(tn){
+      var text = tn.nodeValue || "";
+      if (!text.trim() && text !== " ") return;
+      var frag = document.createDocumentFragment();
+      for (var i = 0; i < text.length; i++){
+        var ch = text.charAt(i);
+        var span = document.createElement("span");
+        span.className = "type-char";
+        span.textContent = ch === " " ? "\u00A0" : ch;
+        frag.appendChild(span);
+      }
+      tn.parentNode.replaceChild(frag, tn);
+    });
+
+    el.__typingChars = el.querySelectorAll(".type-char");
+    el.__typingIdx = 0;
+    el.__typingStarted = false;
+  }
+
+  function runTyping(el, speed){
+    if (el.__typingStarted) return;
+    el.__typingStarted = true;
+    var chars = el.__typingChars;
+    if (!chars || !chars.length) return;
+    var i = 0;
+    var baseSpeed = speed || 28;
+    function step(){
+      if (i < chars.length){
+        chars[i].classList.add("visible");
+        i++;
+        setTimeout(step, baseSpeed + Math.random() * 20);
+      }
+    }
+    step();
+  }
+
+  var typingEls = [];
+  document.querySelectorAll("[data-typing]").forEach(function(el){
+    prepareTypingEl(el);
+    typingEls.push(el);
+  });
+
+  var typingObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        runTyping(entry.target);
+        typingObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25, rootMargin: "0px 0px -30px 0px" });
+  typingEls.forEach(function(el){ typingObserver.observe(el); });
+
+  /* ═══ IVORY STACK ═══ */
   (function(){
     var stack = document.getElementById('ivoryStack');
     if (!stack) return;
     var cards = stack.querySelectorAll('.ivory-card');
-    var n = cards.length;
-    var idx = 0;
-    var DURATION = 5000;
-    var startTime = Date.now();
-    var paused = false;
-
+    var n = cards.length, idx = 0, DURATION = 5000, startTime = Date.now(), paused = false;
     function getStyle(depth){
-      var styles = [
+      var s = [
         { y: 0, scale: 1.00, opacity: 1.00, blur: 0 },
         { y: -42, scale: 0.96, opacity: 0.85, blur: 2 },
         { y: -74, scale: 0.92, opacity: 0.65, blur: 4 },
         { y: -100, scale: 0.88, opacity: 0.40, blur: 6 }
       ];
-      return styles[Math.min(depth, 3)];
+      return s[Math.min(depth, 3)];
     }
     function computeDepth(i){ return (i - idx + n) % n; }
     function apply(){
@@ -891,19 +937,20 @@
       if (document.hidden) paused = true;
       else { paused = false; startTime = Date.now(); }
     });
-    apply();
-    loop();
+    apply(); loop();
   })();
 
+  /* ═══ EVENT FLIP ═══ */
   document.querySelectorAll("[data-event-flip]").forEach(function(card){
     var obs = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if (entry.isIntersecting) { card.classList.add("is-revealed"); obs.unobserve(card); }
+        if (entry.isIntersecting){ card.classList.add("is-revealed"); obs.unobserve(card); }
       });
     }, { threshold: 0.01, rootMargin: "0px 0px -5% 0px" });
     obs.observe(card);
   });
 
+  /* ═══ REVEAL OBSERVERS ═══ */
   var revealObserver = new IntersectionObserver(function(entries){
     entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add("active"); revealObserver.unobserve(en.target); } });
   }, { threshold: 0.1 });
@@ -914,6 +961,7 @@
   }, { threshold: 0.12 });
   document.querySelectorAll(".card-reveal").forEach(function(el){ cardObserver.observe(el); });
 
+  /* ═══ CURSOR SPARKLE ═══ */
   if (window.matchMedia("(hover: hover)").matches){
     var lastSparkle = 0;
     document.addEventListener("mousemove", function(e){
@@ -924,19 +972,20 @@
     });
   }
 
+  /* ═══ MARQUEE ═══ */
   var marqueeEl = document.querySelector(".marquee");
   if (marqueeEl){
     marqueeEl.addEventListener("mouseenter", function(){ marqueeEl.classList.add("is-paused"); });
     marqueeEl.addEventListener("mouseleave", function(){ marqueeEl.classList.remove("is-paused"); });
   }
 
+  /* ═══ SCROLL: PROGRESS + FLOWER ═══ */
   var progress = document.getElementById("progress");
   var timelineData = [];
   document.querySelectorAll(".event-timeline").forEach(function(tl){
     var flower = tl.querySelector(".tl-flower");
     if (flower) timelineData.push({ tl: tl, flower: flower });
   });
-
   var ticking = false;
   function onScroll(){
     if (ticking) return;
@@ -961,6 +1010,7 @@
   window.addEventListener("load", onScroll);
   onScroll();
 
+  /* ═══ NAVBAR ═══ */
   var navbar = document.getElementById("navbar");
   var navTicking = false;
   function updateNav(){
@@ -974,6 +1024,7 @@
   }
   window.addEventListener("scroll", updateNav, { passive: true }); updateNav();
 
+  /* ═══ MOBILE MENU ═══ */
   var menuBtn = document.getElementById("menuBtn");
   var mobileMenu = document.getElementById("mobileMenu");
   var menuOpen = false;
@@ -987,6 +1038,7 @@
     a.addEventListener("click", function(e){ e.preventDefault(); menuBtn.click(); var t = document.querySelector(a.getAttribute("href")); if (t) setTimeout(function(){ t.scrollIntoView({ behavior: "smooth" }); }, 100); });
   });
 
+  /* ═══ COUNTDOWN ═══ */
   var target = new Date("2026-11-13T14:00:00").getTime();
   var prev = { d: "", h: "", m: "", s: "" };
   function pad(n){ return n < 10 ? "0" + n : "" + n; }
@@ -1004,6 +1056,7 @@
   }
   updateCD(); setInterval(updateCD, 1000);
 
+  /* ═══ RSVP FORM ═══ */
   var attendingValue = "Yes";
   document.querySelectorAll(".att-btn").forEach(function(btn){
     btn.addEventListener("click", function(){
@@ -1108,6 +1161,160 @@
       alert("Sorry, there was a problem sending your RSVP: " + err.message + "\n\nPlease try again.");
     });
   });
+
+  /* ═══ SMOKEY FRAME ON EVENT CARDS ═══ */
+  var SMOKE_VERTEX = `
+    attribute vec2 a_position;
+    varying vec2 v_uv;
+    void main() { v_uv = (a_position + 1.0) * 0.5; gl_Position = vec4(a_position, 0.0, 1.0); }
+  `;
+  var SMOKE_FRAGMENT = `
+    precision highp float;
+    varying vec2 v_uv;
+    uniform vec2 u_resolution; uniform float u_time; uniform float u_speed;
+    uniform float u_frameWidth; uniform float u_falloff; uniform float u_noiseScale;
+    uniform float u_noiseStrength; uniform float u_intensity; uniform float u_gamma;
+    uniform vec3 u_frameColor;
+    vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+    float snoise(vec2 v){
+      const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+      vec2 i = floor(v + dot(v, C.yy));
+      vec2 x0 = v - i + dot(i, C.xx);
+      vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+      vec4 x12 = x0.xyxy + C.xxzz; x12.xy -= i1;
+      i = mod(i, 289.0);
+      vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+      vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+      m = m*m; m = m*m;
+      vec3 x = 2.0 * fract(p * C.www) - 1.0;
+      vec3 h = abs(x) - 0.5;
+      vec3 ox = floor(x + 0.5);
+      vec3 a0 = x - ox;
+      m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+      vec3 g;
+      g.x = a0.x * x0.x + h.x * x0.y;
+      g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+      return 130.0 * dot(m, g);
+    }
+    float fbm(vec2 p) {
+      float total = 0.0; float amp = 0.5; float freq = 1.0;
+      for(int i = 0; i < 5; i++) { total += snoise(p * freq) * amp; freq *= 2.02; amp *= 0.5; }
+      return total;
+    }
+    void main() {
+      vec2 uv = v_uv;
+      float aspect = u_resolution.x / u_resolution.y;
+      vec2 noiseUV = uv;
+      if (aspect > 1.0) noiseUV.x *= aspect; else noiseUV.y /= aspect;
+      float t = u_time * u_speed;
+      float noise1 = fbm(noiseUV * u_noiseScale + vec2(t * 0.45, t * 0.28));
+      float noise2 = fbm(noiseUV * (u_noiseScale * 1.5) - vec2(t * 0.32, -t * 0.4));
+      float combinedNoise = (noise1 * 0.65 + noise2 * 0.35 + 1.0) * 0.5;
+      vec2 distToEdge = min(uv, 1.0 - uv);
+      float minAxisDist = min(distToEdge.x, distToEdge.y);
+      float frameDist = clamp(minAxisDist / max(u_frameWidth, 0.0001), 0.0, 1.0);
+      float edgeStrength = 1.0 - frameDist;
+      edgeStrength = pow(edgeStrength, u_falloff);
+      float modulatedFrame = mix(edgeStrength, edgeStrength * combinedNoise, u_noiseStrength);
+      float finalGlow = pow(modulatedFrame * u_intensity, u_gamma);
+      finalGlow = clamp(finalGlow, 0.0, 1.0);
+      float alpha = finalGlow * 0.7;
+      gl_FragColor = vec4(u_frameColor, alpha);
+    }
+  `;
+  var SMOKE_CONFIG = { frameColor: "#00F5FF", speed: 0.75, frameWidth: 0.20, falloff: 6.5, noiseScale: 6.8, noiseStrength: 1.0, intensity: 0.7, gamma: 2.2, dpr: 2 };
+  function hexToRgb(color, fallback){
+    if (!color) return fallback;
+    color = color.trim();
+    if (color.charAt(0) === "#"){
+      var hex = color.substring(1);
+      if (hex.length === 3) hex = hex.split("").map(function(c){return c+c;}).join("");
+      var num = parseInt(hex, 16);
+      if (isNaN(num)) return fallback;
+      return [((num >> 16) & 255)/255, ((num >> 8) & 255)/255, (num & 255)/255];
+    }
+    return fallback;
+  }
+  function compileShader(gl, type, src){
+    var sh = gl.createShader(type);
+    gl.shaderSource(sh, src); gl.compileShader(sh);
+    if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)){ gl.deleteShader(sh); return null; }
+    return sh;
+  }
+  var smokeStartTime = performance.now();
+  var smokeColor = hexToRgb(SMOKE_CONFIG.frameColor, [0, 0.96, 1]);
+
+  document.querySelectorAll(".event-flip-front").forEach(function(frontEl){
+    var canvas = frontEl.querySelector(".smoke-canvas");
+    if (!canvas) return;
+    var gl = canvas.getContext("webgl", { alpha: true, antialias: true, depth: false, premultipliedAlpha: false });
+    if (!gl) return;
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.clearColor(0, 0, 0, 0);
+    var vs = compileShader(gl, gl.VERTEX_SHADER, SMOKE_VERTEX);
+    var fs = compileShader(gl, gl.FRAGMENT_SHADER, SMOKE_FRAGMENT);
+    if (!vs || !fs) return;
+    var program = gl.createProgram();
+    gl.attachShader(program, vs); gl.attachShader(program, fs); gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
+    gl.useProgram(program);
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
+    var posLoc = gl.getAttribLocation(program, "a_position");
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+    var uniforms = {
+      resolution: gl.getUniformLocation(program, "u_resolution"),
+      time: gl.getUniformLocation(program, "u_time"),
+      speed: gl.getUniformLocation(program, "u_speed"),
+      frameWidth: gl.getUniformLocation(program, "u_frameWidth"),
+      falloff: gl.getUniformLocation(program, "u_falloff"),
+      noiseScale: gl.getUniformLocation(program, "u_noiseScale"),
+      noiseStrength: gl.getUniformLocation(program, "u_noiseStrength"),
+      intensity: gl.getUniformLocation(program, "u_intensity"),
+      gamma: gl.getUniformLocation(program, "u_gamma"),
+      frameColor: gl.getUniformLocation(program, "u_frameColor")
+    };
+    function resize(){
+      var dpr = Math.min(window.devicePixelRatio || 1, SMOKE_CONFIG.dpr);
+      var w = Math.round(frontEl.offsetWidth * dpr);
+      var h = Math.round(frontEl.offsetHeight * dpr);
+      if (canvas.width !== w || canvas.height !== h){
+        canvas.width = Math.max(1, w); canvas.height = Math.max(1, h);
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+    }
+    resize();
+    if (window.ResizeObserver) new ResizeObserver(resize).observe(frontEl);
+    window.addEventListener("resize", resize);
+    var visible = true;
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function(entries){ visible = entries[0].isIntersecting; }, { threshold: 0.05 }).observe(frontEl);
+    }
+    function render(){
+      if (visible && gl && canvas){
+        resize();
+        var time = (performance.now() - smokeStartTime) * 0.001;
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.uniform2f(uniforms.resolution, canvas.width, canvas.height);
+        gl.uniform1f(uniforms.time, time);
+        gl.uniform1f(uniforms.speed, SMOKE_CONFIG.speed);
+        gl.uniform1f(uniforms.frameWidth, SMOKE_CONFIG.frameWidth);
+        gl.uniform1f(uniforms.falloff, SMOKE_CONFIG.falloff);
+        gl.uniform1f(uniforms.noiseScale, SMOKE_CONFIG.noiseScale);
+        gl.uniform1f(uniforms.noiseStrength, SMOKE_CONFIG.noiseStrength);
+        gl.uniform1f(uniforms.intensity, SMOKE_CONFIG.intensity);
+        gl.uniform1f(uniforms.gamma, SMOKE_CONFIG.gamma);
+        gl.uniform3f(uniforms.frameColor, smokeColor[0], smokeColor[1], smokeColor[2]);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+      }
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  });
+
 })();
 </script>
 </body>
