@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decoration Preview — N&U Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#F7F2E8; color:#1F2E3A; font-family:'Jost',sans-serif; }
+  .font-display { font-family:'Cormorant Garamond',serif; }
+  .wrap { max-width:1060px; margin:0 auto; padding:0 20px; }
+  header.top { text-align:center; padding:56px 20px 30px; }
+  header.top h1 { font-family:'Cormorant Garamond',serif; font-size:2.4rem; color:#152434; }
+  header.top h1 em { color:#C49A45; font-style:italic; }
+  header.top p { color:rgba(21,36,52,.6); font-style:italic; margin-top:8px; }
+  .hairline { height:1px; background:linear-gradient(90deg,transparent,rgba(196,154,69,.6),transparent); }
+  section.pv { padding:54px 0; border-top:1px solid rgba(196,154,69,.25); }
+  .lbl { display:inline-block; font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:#F7F2E8; background:#152434; padding:7px 20px; border-radius:20px; margin-bottom:14px; }
+  h2.pt { font-family:'Cormorant Garamond',serif; font-size:1.9rem; color:#152434; margin-bottom:6px; }
+  p.pd { color:rgba(21,36,52,.6); font-style:italic; margin-bottom:30px; max-width:640px; }
+
+  /* cards grid */
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px; }
+  .card { border-radius:1.5rem; overflow:hidden; border:1px solid rgba(196,154,69,.3); box-shadow:0 12px 40px rgba(21,36,52,.12); min-height:380px; display:flex; align-items:center; justify-content:center; text-align:center; padding:2.4rem 1.6rem; position:relative; }
+  .card .in { position:relative; z-index:2; max-width:92%; }
+  .venue-deco-top,.venue-deco-bottom { color:#DBC494; letter-spacing:.5em; font-size:.8rem; margin:0 0 1rem; }
+  .venue-deco-bottom { margin:1.2rem 0 0; }
+  .venue-kicker-top { font-size:.65rem; text-transform:uppercase; letter-spacing:.32em; color:rgba(247,242,232,.65); margin:0 0 .6rem; }
+  .venue-event-name { font-family:'Cormorant Garamond',serif; font-size:1.7rem; color:#F7F2E8; margin:0 0 .4rem; }
+  .venue-date-line { font-size:.85rem; color:rgba(247,242,232,.75); margin:0 0 1rem; }
+  .venue-ornament-line { color:#C49A45; margin:0 0 1rem; }
+  .venue-location-label { font-size:.62rem; text-transform:uppercase; letter-spacing:.3em; color:rgba(247,242,232,.55); margin:0 0 .3rem; }
+  .venue-location-name { font-family:'Cormorant Garamond',serif; font-size:1.25rem; color:#F7F2E8; margin:0 0 .3rem; }
+  .venue-time-detail { font-size:.85rem; color:rgba(247,242,232,.75); margin:0; }
+  .venue-city-tag { font-size:.7rem; text-transform:uppercase; letter-spacing:.24em; color:rgba(247,242,232,.5); margin:.8rem 0 0; }
+
+  /* 3: per-event backs */
+  .back-nikkah { background:linear-gradient(135deg,#0f2a2e 0%,#1f5f5b 100%); }
+  .back-mehndi { background:linear-gradient(135deg,#123a1f 0%,#2f7a35 100%); }
+  .back-baraat { background:linear-gradient(135deg,#3a1010 0%,#7a2323 100%); }
+  .back-walima { background:linear-gradient(135deg,#101c3a 0%,#2b3f7a 100%); }
+  .card::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 15% 15%,rgba(219,196,148,.14),transparent 40%),radial-gradient(circle at 85% 85%,rgba(219,196,148,.14),transparent 40%); pointer-events:none; }
+
+  /* 4: dividers */
+  .divbox { background:#fffdf8; border:1px solid rgba(196,154,69,.25); border-radius:1rem; padding:30px 20px; margin-bottom:20px; text-align:center; }
+  .divbox small { display:block; color:rgba(21,36,52,.5); font-style:italic; margin-top:12px; }
+  .drow { display:flex; align-items:center; justify-content:center; gap:16px; }
+  .drule { height:1px; flex:1; max-width:240px; }
+  .dmono { font-family:'Cormorant Garamond',serif; font-size:1.25rem; color:#C49A45; border:1px solid #C49A45; width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:#F7F2E8; }
+
+  /* 5: mehndi pattern front */
+  .mehndi-front { background-color:#F7F2E8; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110' viewBox='0 0 110 110'%3E%3Cg fill='none' stroke='%232f7a44' stroke-width='1' opacity='0.30'%3E%3Ccircle cx='55' cy='55' r='24'/%3E%3Ccircle cx='55' cy='55' r='15'/%3E%3Ccircle cx='55' cy='55' r='5'/%3E%3Cpath d='M55 31 Q64 43 55 55 Q46 43 55 31'/%3E%3Cpath d='M79 55 Q67 64 55 55 Q67 46 79 55'/%3E%3Cpath d='M55 79 Q46 67 55 55 Q64 67 55 79'/%3E%3Cpath d='M31 55 Q43 46 55 55 Q43 64 31 55'/%3E%3C/g%3E%3C/svg%3E"); }
+  .mehndi-front .in h3 { font-family:'Cormorant Garamond',serif; font-size:2rem; color:#152434; margin-bottom:8px; }
+  .mehndi-front .in p { color:rgba(31,46,58,.65); font-style:italic; }
+
+  /* 6: lanterns */
+  .night { border-radius:1.5rem; overflow:hidden; background:linear-gradient(180deg,#0a0a18 0%,#12122a 70%,#1a1a3a 100%); position:relative; min-height:400px; border:1px solid rgba(196,154,69,.4); }
+  .stars span { position:absolute; width:2px; height:2px; background:#fff; border-radius:50%; opacity:.7; animation:tw 3s infinite ease-in-out; }
+  @keyframes tw { 0%,100%{opacity:.2} 50%{opacity:.9} }
+  .lrow { display:flex; justify-content:space-around; padding:0 30px; position:relative; z-index:2; }
+  .lant { display:flex; flex-direction:column; align-items:center; animation:sway 5s ease-in-out infinite; transform-origin:top center; }
+  .lant:nth-child(2){animation-delay:-1.6s}.lant:nth-child(3){animation-delay:-3.2s}
+  @keyframes sway { 0%,100%{transform:rotate(4deg)} 50%{transform:rotate(-4deg)} }
+  .str { width:2px; background:#4a4030; }
+  .lamp { width:70px; height:92px; border-radius:48% 48% 46% 46%; background:radial-gradient(circle at 50% 35%,#ffe9a8,#f5b942 55%,#b45309); box-shadow:0 0 45px 14px rgba(245,185,66,.45),0 0 120px 40px rgba(245,185,66,.15); border:2px solid #7c4a12; position:relative; }
+  .lamp::before{content:'';position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:26px;height:10px;background:#5b3a10;border-radius:4px 4px 0 0;}
+  .lamp::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:20px;height:9px;background:#5b3a10;border-radius:0 0 6px 6px;}
+  .ntext { position:relative; z-index:2; text-align:center; padding:26px 20px 40px; }
+  .ntext h3 { font-family:'Cormorant Garamond',serif; font-size:2rem; color:#fde68a; }
+  .ntext p { color:#a5b4fc; font-style:italic; }
+  footer.end { text-align:center; padding:44px 20px; color:rgba(21,36,52,.55); font-style:italic; }
+  .note { background:rgba(196,154,69,.1); border:1px solid rgba(196,154,69,.35); border-radius:.75rem; padding:14px 18px; font-size:.85rem; color:rgba(21,36,52,.7); margin-bottom:26px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>N <em>&</em> U — Site Decoration Preview</h1>
+    <p>Website ke event cards par 4 ideas ka preview — pasand aaye to site par laga dunga</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="pv">
+    <span class="lbl">Idea 3</span>
+    <h2 class="pt">Event ke hisaab se rang</h2>
+    <p class="pd">Flip cards ke peeche wala hissa (back) har event ke rang me — abhi sab par ek jaisa dark blue hai. Ye preview back side ka hai:</p>
+    <div class="cards">
+      <div class="card back-nikkah"><div class="in">
+        <p class="venue-deco-top">✦ ✦ ✦</p><p class="venue-kicker-top">You're Invited</p>
+        <h4 class="venue-event-name">Nikkah Ceremony</h4><p class="venue-date-line">Friday · 13 November 2026</p>
+        <div class="venue-ornament-line">✦</div><p class="venue-location-label">Venue</p>
+        <h5 class="venue-location-name">Jamia Masjid Al Falahiya</h5><p class="venue-time-detail">After Jumma Prayer</p>
+        <p class="venue-city-tag">Karachi · Pakistan</p><p class="venue-deco-bottom">✦ ✦ ✦</p>
+      </div></div>
+      <div class="card back-mehndi"><div class="in">
+        <p class="venue-deco-top">✦ ✦ ✦</p><p class="venue-kicker-top">You're Invited</p>
+        <h4 class="venue-event-name">Mehndi Night</h4><p class="venue-date-line">Friday · 13 November 2026</p>
+        <div class="venue-ornament-line">✦</div><p class="venue-location-label">Venue</p>
+        <h5 class="venue-location-name">Al Bilal Ballroom</h5><p class="venue-time-detail">9:00 PM onwards</p>
+        <p class="venue-city-tag">Karachi · Pakistan</p><p class="venue-deco-bottom">✦ ✦ ✦</p>
+      </div></div>
+      <div class="card back-baraat"><div class="in">
+        <p class="venue-deco-top">✦ ✦ ✦</p><p class="venue-kicker-top">You're Invited</p>
+        <h4 class="venue-event-name">Baraat</h4><p class="venue-date-line">Saturday · 14 November 2026</p>
+        <div class="venue-ornament-line">✦</div><p class="venue-location-label">Venue</p>
+        <h5 class="venue-location-name">Nudrat Banquet</h5><p class="venue-time-detail">9:00 PM onwards</p>
+        <p class="venue-city-tag">Karachi · Pakistan</p><p class="venue-deco-bottom">✦ ✦ ✦</p>
+      </div></div>
+      <div class="card back-walima"><div class="in">
+        <p class="venue-deco-top">✦ ✦ ✦</p><p class="venue-kicker-top">You're Invited</p>
+        <h4 class="venue-event-name">Walima</h4><p class="venue-date-line">Monday · 16 November 2026</p>
+        <div class="venue-ornament-line">✦</div><p class="venue-location-label">Venue</p>
+        <h5 class="venue-location-name">Universal Zewar Banquet</h5><p class="venue-time-detail">9:00 PM onwards</p>
+        <p class="venue-city-tag">Karachi · Pakistan</p><p class="venue-deco-bottom">✦ ✦ ✦</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="pv">
+    <span class="lbl">Idea 4</span>
+    <h2 class="pt">Ornamental N&U dividers</h2>
+    <p class="pd">Site ke sections ke beech ye gold dividers — beech me N&U monogram:</p>
+    <div class="divbox">
+      <div class="drow">
+        <div class="drule" style="background:linear-gradient(90deg,transparent,#C49A45)"></div>
+        <div class="dmono">N&U</div>
+        <div class="drule" style="background:linear-gradient(90deg,#C49A45,transparent)"></div>
+      </div><small>Style A — classic gold line + monogram seal</small>
+    </div>
+    <div class="divbox">
+      <div class="drow">
+        <div class="drule" style="background:repeating-linear-gradient(90deg,#C49A45 0 8px,transparent 8px 15px);height:2px"></div>
+        <div style="color:#C49A45;font-size:1.3rem;letter-spacing:.2em">❧ N &amp; U ❧</div>
+        <div class="drule" style="background:repeating-linear-gradient(90deg,#C49A45 0 8px,transparent 8px 15px);height:2px"></div>
+      </div><small>Style B — dotted flourish</small>
+    </div>
+  </section>
+
+  <section class="pv">
+    <span class="lbl">Idea 5</span>
+    <h2 class="pt">Mehndi card par henna pattern</h2>
+    <p class="pd">Mehndi wale card ke front par halka henna/paisley jaal — text bilkul saaf rahega:</p>
+    <div class="note">Ye card ka front side hai (photo wali side) — pattern cream background par subtle hai.</div>
+    <div class="cards" style="grid-template-columns:minmax(280px,420px);justify-content:center">
+      <div class="card mehndi-front"><div class="in">
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 .75rem">Day One · Night</p>
+        <h3>Mehndi</h3>
+        <div class="hairline" style="width:3.5rem;margin:0 auto 1.25rem"></div>
+        <p>Friday, 13 November 2026<br>9:00 PM onwards · Al Bilal Ballroom</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="pv">
+    <span class="lbl">Idea 6</span>
+    <h2 class="pt">Latakti lanterns</h2>
+    <p class="pd">Raat wale events (Mehndi/Baraat) ke section ke upar jhoolti roshan lanterns:</p>
+    <div class="night">
+      <div class="stars" id="stars"></div>
+      <div class="lrow">
+        <div class="lant"><div class="str" style="height:70px"></div><div class="lamp"></div></div>
+        <div class="lant"><div class="str" style="height:115px"></div><div class="lamp"></div></div>
+        <div class="lant"><div class="str" style="height:60px"></div><div class="lamp"></div></div>
+      </div>
+      <div class="ntext"><h3>Mehndi Night</h3><p>Friday, 13 November · 9:00 PM · Al Bilal Ballroom</p></div>
+    </div>
+  </section>
+
+</div>
+<footer class="end">Preview khatam — batao kaunsi ideas site par lagani hain (3, 4, 5, 6 me se).</footer>
+<script>
+  var box=document.getElementById('stars');
+  for(var i=0;i<60;i++){var s=document.createElement('span');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*55+'%';s.style.animationDelay=(Math.random()*3)+'s';box.appendChild(s);}
+</script>
+</body>
+</html>
