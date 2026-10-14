@@ -266,11 +266,8 @@
 <body class="grain intro-locked">
 
 <div id="introScene">
-  <video class="intro-video active" id="envelopeVideo" muted playsinline webkit-playsinline preload="auto">
-    <source src="https://cdn.jsdelivr.net/gh/Noah-Bin-Ahmed/Wedding-Invitation@main/776f726b73706163652f796f75725f66696c65732f656e76656c6f70652d6578706c6f64652d66697865642e6d7034.mp4" type="video/mp4">
-  </video>
-  <video class="intro-video" id="cardVideo" muted playsinline webkit-playsinline preload="auto">
-    <source src="https://cdn.jsdelivr.net/gh/Noah-Bin-Ahmed/Wedding-Invitation@main/776f726b73706163652f796f75725f66696c65732f77656464696e672d636172642d636f6d706c6574652e6d7034.mp4" type="video/mp4">
+  <video class="intro-video active" id="doorsVideo" muted playsinline webkit-playsinline preload="auto">
+    <source src="https://cdn.jsdelivr.net/gh/Noah-Bin-Ahmed/Wedding-Invitation@main/golden-doors-intro.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -721,17 +718,15 @@
 
   /* ═══ INTRO VIDEO ═══ */
   var introScene = document.getElementById("introScene");
-  var envelopeVideo = document.getElementById("envelopeVideo");
-  var cardVideo = document.getElementById("cardVideo");
+  var doorsVideo = document.getElementById("doorsVideo");
   var loader = document.getElementById("loader");
   var body = document.body;
   var heroInner = document.getElementById("heroInner");
 
-  [envelopeVideo, cardVideo].forEach(function(v){
-    if (!v) return;
-    v.muted = true; v.volume = 0;
-    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
-  });
+  if (doorsVideo){
+    doorsVideo.muted = true; doorsVideo.volume = 0;
+    doorsVideo.setAttribute("muted", ""); doorsVideo.setAttribute("playsinline", ""); doorsVideo.setAttribute("webkit-playsinline", "");
+  }
 
   var loaderTagline = document.getElementById("loaderTagline");
   var taglineText = "13 · November · 2026";
@@ -758,37 +753,27 @@
     clearTimeout(failsafeTimer);
     loader.classList.add("visible");
     startTypewriter();
-    setTimeout(function(){ introScene.classList.add("hidden"); }, 1400);
+    setTimeout(function(){ introScene.classList.add("hidden"); }, 800);
     setTimeout(function(){
       loader.classList.remove("visible");
       body.classList.remove("intro-locked");
       window.scrollTo(0, 0);
       startHeroTyping();
       if (heroInner) setTimeout(function(){ heroInner.classList.add("zoomed"); }, 1000);
-      try { envelopeVideo.pause(); } catch(e){}
-      try { cardVideo.pause(); } catch(e){}
-    }, 3200);
+      try { doorsVideo.pause(); } catch(e){}
+    }, 1800);
   }
 
   function startVideos(){
-    var p1 = envelopeVideo.play();
+    if (!doorsVideo) { goToMain(); return; }
+    var p1 = doorsVideo.play();
     if (p1 && p1.catch) p1.catch(function(){});
-    try { cardVideo.load(); } catch(e){}
   }
 
-  envelopeVideo.addEventListener("ended", function(){
-    envelopeVideo.classList.remove("active");
-    cardVideo.classList.add("active");
-    var p = cardVideo.play();
-    if (p && p.catch) p.catch(function(){});
-  });
-  cardVideo.addEventListener("ended", goToMain);
-  envelopeVideo.addEventListener("error", function(){
-    envelopeVideo.classList.remove("active");
-    cardVideo.classList.add("active");
-    cardVideo.play().catch(function(){});
-  });
-  cardVideo.addEventListener("error", function(){ setTimeout(goToMain, 500); });
+  if (doorsVideo){
+    doorsVideo.addEventListener("ended", goToMain);
+    doorsVideo.addEventListener("error", function(){ setTimeout(goToMain, 500); });
+  }
 
   setTimeout(startVideos, 400);
   failsafeTimer = setTimeout(goToMain, 300000);
