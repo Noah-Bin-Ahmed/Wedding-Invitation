@@ -266,11 +266,8 @@
 <body class="grain intro-locked">
 
 <div id="introScene">
-  <video class="intro-video active" id="gateVideo" muted playsinline webkit-playsinline preload="auto">
-    <source src="https://cdn.jsdelivr.net/gh/Noah-Bin-Ahmed/Wedding-Invitation@main/gate-intro.mp4" type="video/mp4">
-  </video>
-  <video class="intro-video" id="coupleVideo" muted playsinline webkit-playsinline preload="auto">
-    <source src="https://cdn.jsdelivr.net/gh/Noah-Bin-Ahmed/Wedding-Invitation@main/couple-walk-intro.mp4" type="video/mp4">
+  <video class="intro-video active" id="introVideo" muted playsinline webkit-playsinline preload="auto">
+    <source src="https://cdn.jsdelivr.net/gh/Noah-Bin-Ahmed/Wedding-Invitation@main/intro-combined.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -721,17 +718,15 @@
 
   /* ═══ INTRO VIDEO ═══ */
   var introScene = document.getElementById("introScene");
-  var gateVideo = document.getElementById("gateVideo");
-  var coupleVideo = document.getElementById("coupleVideo");
+  var introVideo = document.getElementById("introVideo");
   var loader = document.getElementById("loader");
   var body = document.body;
   var heroInner = document.getElementById("heroInner");
 
-  [gateVideo, coupleVideo].forEach(function(v){
-    if (!v) return;
-    v.muted = true; v.volume = 0;
-    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
-  });
+  if (introVideo){
+    introVideo.muted = true; introVideo.volume = 0;
+    introVideo.setAttribute("muted", ""); introVideo.setAttribute("playsinline", ""); introVideo.setAttribute("webkit-playsinline", "");
+  }
 
   var loaderTagline = document.getElementById("loaderTagline");
   var taglineText = "13 · November · 2026";
@@ -765,39 +760,19 @@
       window.scrollTo(0, 0);
       startHeroTyping();
       if (heroInner) setTimeout(function(){ heroInner.classList.add("zoomed"); }, 1000);
-      try { gateVideo.pause(); } catch(e){}
-      try { coupleVideo.pause(); } catch(e){}
+      try { introVideo.pause(); } catch(e){}
     }, 1800);
   }
 
   function startVideos(){
-    if (!gateVideo) { goToMain(); return; }
-    var p1 = gateVideo.play();
+    if (!introVideo) { goToMain(); return; }
+    var p1 = introVideo.play();
     if (p1 && p1.catch) p1.catch(function(){});
-    try { coupleVideo.load(); } catch(e){}
   }
 
-  if (gateVideo){
-    gateVideo.addEventListener("ended", function(){
-      gateVideo.classList.remove("active");
-      if (coupleVideo){
-        coupleVideo.classList.add("active");
-        var p = coupleVideo.play();
-        if (p && p.catch) p.catch(function(){});
-      } else { goToMain(); }
-    });
-    gateVideo.addEventListener("error", function(){
-      gateVideo.classList.remove("active");
-      if (coupleVideo){
-        coupleVideo.classList.add("active");
-        var p2 = coupleVideo.play();
-        if (p2 && p2.catch) p2.catch(function(){});
-      } else { setTimeout(goToMain, 500); }
-    });
-  }
-  if (coupleVideo){
-    coupleVideo.addEventListener("ended", goToMain);
-    coupleVideo.addEventListener("error", function(){ setTimeout(goToMain, 500); });
+  if (introVideo){
+    introVideo.addEventListener("ended", goToMain);
+    introVideo.addEventListener("error", function(){ setTimeout(goToMain, 500); });
   }
 
   setTimeout(startVideos, 400);
