@@ -326,6 +326,7 @@ document.querySelectorAll(".vfx-card").forEach(function(card, ci){
     var f=frac();
     return C.base>=1 ? 1 : Math.min(1, Math.max(0,(f-C.base)/(1-C.base)));
   }
+  C.getProgress = progress;
   function check(){
     if (C.done) return;
     C.prog=progress();
@@ -383,7 +384,7 @@ function loop(now){
   var t=now/1000;
   concepts.forEach(function(C){
     if (!C.done && C.disp.style.display!=="none"){
-      C.prog=progress();
+      C.prog=C.getProgress();
       var x=C.dctx, w=C.W, h=C.H;
       x.clearRect(0,0,w,h);
       if (C.kind==="gulab"){ drawBloom(x, w/2, h/2, Math.min(w,h)*0.46, C.prog, t); }
