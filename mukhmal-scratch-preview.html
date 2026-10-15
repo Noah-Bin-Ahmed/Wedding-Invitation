@@ -21,12 +21,12 @@
   .ms-title { font-family:'Cormorant Garamond',serif; font-weight:600; letter-spacing:.08em; font-size:clamp(1.9rem,5.5vw,2.9rem); color:#e8c86a; margin:.55rem 0 1.4rem; transition:opacity .45s ease; text-transform:uppercase; }
   .ms-stage { position:relative; border:1px solid rgba(196,154,69,.55); box-shadow:0 20px 60px rgba(0,0,0,.55); }
   .ms-frame { display:block; width:100%; height:auto; }
-  .ms-center { position:absolute; left:15%; right:15%; top:26%; bottom:10%; display:flex; align-items:center; justify-content:center; pointer-events:none; }
-  .ms-date { position:relative; text-align:center; padding:16px 26px; pointer-events:auto; }
+  .ms-center { position:absolute; left:19%; right:19%; top:29%; bottom:13%; }
+  .ms-date { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:.4rem; }
   .ms-kicker { font-size:clamp(9px,1.8vw,12px); letter-spacing:.4em; text-indent:.4em; text-transform:uppercase; color:#8a6420; margin:0 0 .5rem; }
   .ms-dbig { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:clamp(1.5rem,4.8vw,2.6rem); color:#43300a; margin:0; line-height:1.15; white-space:nowrap; }
   .ms-dsub { font-size:clamp(9px,1.9vw,12px); letter-spacing:.32em; text-indent:.32em; text-transform:uppercase; color:#8a6420; margin:.65rem 0 0; white-space:nowrap; }
-  canvas.ms-cover { position:absolute; inset:0; width:100%; height:100%; display:block; border-radius:12px; cursor:crosshair; touch-action:none; -webkit-tap-highlight-color:transparent; border:1px solid rgba(122,86,26,.65); box-shadow:0 8px 22px rgba(0,0,0,.28), 0 0 20px rgba(217,180,95,.4), inset 0 0 18px rgba(120,85,25,.18); }
+  canvas.ms-cover { position:absolute; inset:0; width:100%; height:100%; display:block; border-radius:6px; cursor:crosshair; touch-action:none; -webkit-tap-highlight-color:transparent; box-shadow:inset 0 0 26px rgba(120,85,25,.22); }
   .ms-hint { margin-top:1.1rem; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:rgba(243,233,207,.7); }
   .ms-after { display:none; margin-top:1.2rem; }
   .ms-card.revealed .ms-hint { display:none; }
@@ -58,8 +58,8 @@
           <p class="ms-kicker">Mehendi</p>
           <p class="ms-dbig">13 November 2026</p>
           <p class="ms-dsub">Friday • 6:00 PM</p>
-          <canvas class="ms-cover"></canvas>
         </div>
+        <canvas class="ms-cover"></canvas>
       </div>
     </div>
     <p class="ms-hint">Use your finger or cursor to uncover the moment.</p>
@@ -78,8 +78,8 @@
           <p class="ms-kicker">Baraat</p>
           <p class="ms-dbig">14 November 2026</p>
           <p class="ms-dsub">Saturday • 6:00 PM</p>
-          <canvas class="ms-cover"></canvas>
         </div>
+        <canvas class="ms-cover"></canvas>
       </div>
     </div>
     <p class="ms-hint">Use your finger or cursor to uncover the moment.</p>
@@ -98,8 +98,8 @@
           <p class="ms-kicker">Walima</p>
           <p class="ms-dbig">16 November 2026</p>
           <p class="ms-dsub">Monday • 6:00 PM</p>
-          <canvas class="ms-cover"></canvas>
         </div>
+        <canvas class="ms-cover"></canvas>
       </div>
     </div>
     <p class="ms-hint">Use your finger or cursor to uncover the moment.</p>
@@ -137,7 +137,7 @@
     cv.height = Math.max(1, Math.round(r.height * dpr));
     var x = cv.getContext("2d");
     x.scale(dpr, dpr);
-    var W = r.width, H = r.height, R = 12;
+    var W = r.width, H = r.height, R = 8;
     x.save();
     rr(x, 0, 0, W, H, R);
     x.clip();
@@ -147,9 +147,11 @@
     x.strokeStyle = "rgba(90,60,15,0.10)"; x.lineWidth = 1;
     for (var i = -H; i < W; i += 12){ x.beginPath(); x.moveTo(i, 0); x.lineTo(i + H, H); x.stroke(); }
     var sheen = x.createLinearGradient(0, 0, W, 0);
-    sheen.addColorStop(0, "rgba(255,255,255,0)"); sheen.addColorStop(0.5, "rgba(255,255,255,0.5)"); sheen.addColorStop(1, "rgba(255,255,255,0)");
+    sheen.addColorStop(0, "rgba(255,255,255,0)"); sheen.addColorStop(0.5, "rgba(255,255,255,0.45)"); sheen.addColorStop(1, "rgba(255,255,255,0)");
     x.fillStyle = sheen; x.fillRect(0, 0, W, H);
-    x.restore(); rr(x, 1.5, 1.5, W - 3, H - 3, R - 1); x.strokeStyle = "rgba(95,66,14,0.55)"; x.lineWidth = 2; x.stroke();
+    x.restore();
+    rr(x, 1.5, 1.5, W - 3, H - 3, R - 1);
+    x.strokeStyle = "rgba(95,66,14,0.55)"; x.lineWidth = 2; x.stroke();
   }
   function makeScratchable(card, cv){
     var x = cv.getContext("2d");
@@ -160,7 +162,7 @@
       return { x: p.clientX - r.left, y: p.clientY - r.top };
     }
     function scratch(px, py){
-      var rad = Math.max(14, cv.clientWidth * 0.09);
+      var rad = Math.max(14, cv.clientWidth * 0.06);
       x.save();
       x.globalCompositeOperation = "destination-out";
       x.beginPath(); x.arc(px, py, rad, 0, 7); x.fill();
@@ -168,7 +170,7 @@
         x.lineWidth = rad * 2; x.lineCap = "round"; x.lineJoin = "round";
         x.beginPath(); x.moveTo(last.x, last.y); x.lineTo(px, py); x.stroke();
       }
-      x.restore(); rr(x, 1.5, 1.5, W - 3, H - 3, R - 1); x.strokeStyle = "rgba(95,66,14,0.55)"; x.lineWidth = 2; x.stroke();
+      x.restore();
       last = { x: px, y: py };
     }
     function clearedRatio(){
