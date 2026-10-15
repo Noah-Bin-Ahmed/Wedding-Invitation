@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mukhmal Scratch — Date Reveal Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Jost',sans-serif; color:#f3e9cf; min-height:100vh; background:linear-gradient(rgba(8,14,26,.84), rgba(8,14,26,.92)), url('mukhmal-bg.jpg') center top / cover no-repeat fixed, #0a1424; }
+  .wrap { max-width:700px; margin:0 auto; padding:0 20px 90px; }
+  header.top { text-align:center; padding:50px 20px 6px; }
+  header.top h1 { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(1.8rem,5vw,2.6rem); color:#e8c86a; letter-spacing:.05em; }
+  header.top h1 em { color:#f4e3b2; }
+  .gold-divider { width:130px; height:1px; margin:20px auto; background:linear-gradient(90deg,transparent,#C49A45,transparent); }
+  header.top p { font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(243,233,207,.55); }
+  .ms-card { text-align:center; margin:3.2rem 0 0; }
+  .ms-kick { font-size:11px; letter-spacing:.42em; text-indent:.42em; text-transform:uppercase; color:#C49A45; }
+  .ms-title { font-family:'Cormorant Garamond',serif; font-weight:600; letter-spacing:.08em; font-size:clamp(1.9rem,5.5vw,2.9rem); color:#e8c86a; margin:.55rem 0 1.4rem; transition:opacity .45s ease; text-transform:uppercase; }
+  .ms-stage { position:relative; border:1px solid rgba(196,154,69,.55); box-shadow:0 20px 60px rgba(0,0,0,.55); }
+  .ms-frame { display:block; width:100%; height:auto; }
+  .ms-center { position:absolute; left:19%; right:19%; top:29%; bottom:13%; }
+  .ms-date { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:.4rem; }
+  .ms-kicker { font-size:clamp(9px,1.8vw,12px); letter-spacing:.4em; text-indent:.4em; text-transform:uppercase; color:#8a6420; margin:0 0 .5rem; }
+  .ms-dbig { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:clamp(1.5rem,4.8vw,2.6rem); color:#43300a; margin:0; line-height:1.15; }
+  .ms-dsub { font-size:clamp(9px,1.9vw,12px); letter-spacing:.32em; text-indent:.32em; text-transform:uppercase; color:#8a6420; margin:.65rem 0 0; }
+  canvas.ms-cover { position:absolute; inset:0; width:100%; height:100%; display:block; cursor:crosshair; touch-action:none; box-shadow:inset 0 0 24px rgba(0,0,0,.18); }
+  .ms-hint { margin-top:1.1rem; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:rgba(243,233,207,.7); }
+  .ms-after { display:none; margin-top:1.2rem; }
+  .ms-card.revealed .ms-hint { display:none; }
+  .ms-card.revealed .ms-after { display:block; animation:fadeUp .9s ease both; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+  .ms-std { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.05rem; color:rgba(232,200,106,.85); }
+  .ms-cal { margin:1.4rem auto 0; max-width:300px; }
+  .cal-title { font-size:11px; letter-spacing:.4em; text-indent:.4em; text-transform:uppercase; color:#C49A45; margin:0 0 .7rem; }
+  .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .cal-grid span { font-size:12px; padding:7px 0; color:rgba(243,233,207,.75); border-radius:50%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; }
+  .cal-grid .cal-dow { color:#C49A45; font-size:10px; letter-spacing:.1em; }
+  .cal-grid .cal-hl { background:radial-gradient(circle at 35% 30%, #f4e3b2, #d9b45f 60%, #a8751f); color:#3a2a10; font-weight:600; box-shadow:0 0 14px rgba(217,180,95,.6); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Mukhmal <em>Scratch</em> — Preview</h1>
+    <div class="gold-divider"></div>
+    <p>Navy / Gold — hamari theme me</p>
+  </header>
+  <section class="ms-card" data-day="13" data-event="Mehendi" data-dow="Friday">
+    <p class="ms-kick">A Date To Hold Close</p>
+    <h2 class="ms-title">Scratch to Reveal</h2>
+    <div class="ms-stage">
+      <img class="ms-frame" src="mukhmal-frame.jpg" alt="Ornate date frame">
+      <div class="ms-center">
+        <div class="ms-date">
+          <p class="ms-kicker">Mehendi</p>
+          <p class="ms-dbig">13 November 2026</p>
+          <p class="ms-dsub">Friday • 6:00 PM</p>
+        </div>
+        <canvas class="ms-cover"></canvas>
+      </div>
+    </div>
+    <p class="ms-hint">Use your finger or cursor to uncover the moment.</p>
+    <div class="ms-after">
+      <p class="ms-std">Save the date — we would be honoured to have you with us.</p>
+      <div class="ms-cal"></div>
+    </div>
+  </section>
+  <section class="ms-card" data-day="14" data-event="Baraat" data-dow="Saturday">
+    <p class="ms-kick">A Date To Hold Close</p>
+    <h2 class="ms-title">Scratch to Reveal</h2>
+    <div class="ms-stage">
+      <img class="ms-frame" src="mukhmal-frame.jpg" alt="Ornate date frame">
+      <div class="ms-center">
+        <div class="ms-date">
+          <p class="ms-kicker">Baraat</p>
+          <p class="ms-dbig">14 November 2026</p>
+          <p class="ms-dsub">Saturday • 6:00 PM</p>
+        </div>
+        <canvas class="ms-cover"></canvas>
+      </div>
+    </div>
+    <p class="ms-hint">Use your finger or cursor to uncover the moment.</p>
+    <div class="ms-after">
+      <p class="ms-std">Save the date — we would be honoured to have you with us.</p>
+      <div class="ms-cal"></div>
+    </div>
+  </section>
+  <section class="ms-card" data-day="16" data-event="Walima" data-dow="Monday">
+    <p class="ms-kick">A Date To Hold Close</p>
+    <h2 class="ms-title">Scratch to Reveal</h2>
+    <div class="ms-stage">
+      <img class="ms-frame" src="mukhmal-frame.jpg" alt="Ornate date frame">
+      <div class="ms-center">
+        <div class="ms-date">
+          <p class="ms-kicker">Walima</p>
+          <p class="ms-dbig">16 November 2026</p>
+          <p class="ms-dsub">Monday • 6:00 PM</p>
+        </div>
+        <canvas class="ms-cover"></canvas>
+      </div>
+    </div>
+    <p class="ms-hint">Use your finger or cursor to uncover the moment.</p>
+    <div class="ms-after">
+      <p class="ms-std">Save the date — we would be honoured to have you with us.</p>
+      <div class="ms-cal"></div>
+    </div>
+  </section>
+</div>
+<script>
+(function(){
+  "use strict";
+  function buildCalendar(card){
+    var day = parseInt(card.dataset.day, 10);
+    var html = '<p class="cal-title">November 2026</p><div class="cal-grid">';
+    ["S","M","T","W","T","F","S"].forEach(function(d){ html += '<span class="cal-dow">' + d + "</span>"; });
+    for (var d = 1; d <= 30; d++){
+      html += '<span class="' + (d === day ? "cal-hl" : "") + '">' + d + "</span>";
+    }
+    card.querySelector(".ms-cal").innerHTML = html + "</div>";
+  }
+  function drawCover(cv){
+    var r = cv.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.max(1, Math.round(r.width * dpr));
+    cv.height = Math.max(1, Math.round(r.height * dpr));
+    var x = cv.getContext("2d");
+    x.scale(dpr, dpr);
+    var W = r.width, H = r.height;
+    var g = x.createLinearGradient(0, 0, W, H);
+    g.addColorStop(0, "#f4f4f6"); g.addColorStop(0.5, "#d7d7dc"); g.addColorStop(1, "#ededf0");
+    x.fillStyle = g; x.fillRect(0, 0, W, H);
+    x.strokeStyle = "rgba(0,0,0,0.05)"; x.lineWidth = 1;
+    for (var i = -H; i < W; i += 12){ x.beginPath(); x.moveTo(i, 0); x.lineTo(i + H, H); x.stroke(); }
+    var sheen = x.createLinearGradient(0, 0, W, 0);
+    sheen.addColorStop(0, "rgba(255,255,255,0)"); sheen.addColorStop(0.5, "rgba(255,255,255,0.5)"); sheen.addColorStop(1, "rgba(255,255,255,0)");
+    x.fillStyle = sheen; x.fillRect(0, 0, W, H);
+  }
+  function makeScratchable(card, cv){
+    var x = cv.getContext("2d");
+    var drawing = false, last = null, moves = 0, done = false;
+    function pos(e){
+      var r = cv.getBoundingClientRect();
+      var p = (e.touches && e.touches[0]) ? e.touches[0] : e;
+      return { x: p.clientX - r.left, y: p.clientY - r.top };
+    }
+    function scratch(px, py){
+      var rad = Math.max(16, cv.clientWidth * 0.07);
+      x.save();
+      x.globalCompositeOperation = "destination-out";
+      x.beginPath(); x.arc(px, py, rad, 0, 7); x.fill();
+      if (last){
+        x.lineWidth = rad * 2; x.lineCap = "round"; x.lineJoin = "round";
+        x.beginPath(); x.moveTo(last.x, last.y); x.lineTo(px, py); x.stroke();
+      }
+      x.restore();
+      last = { x: px, y: py };
+    }
+    function clearedRatio(){
+      try {
+        var d = x.getImageData(0, 0, cv.width, cv.height).data;
+        var clear = 0, total = 0;
+        for (var i = 3; i < d.length; i += 48){ total++; if (d[i] === 0) clear++; }
+        return total ? clear / total : 0;
+      } catch (err){ return 0; }
+    }
+    function finish(){
+      if (done) return; done = true;
+      cv.style.transition = "opacity .7s ease"; cv.style.opacity = "0";
+      setTimeout(function(){ cv.remove(); }, 750);
+      var title = card.querySelector(".ms-title");
+      title.style.opacity = "0";
+      setTimeout(function(){ title.textContent = "Our Forever Begins"; title.style.opacity = "1"; }, 460);
+      card.classList.add("revealed");
+    }
+    cv.addEventListener("pointerdown", function(e){
+      if (done) return;
+      drawing = true; last = null;
+      var p = pos(e); scratch(p.x, p.y);
+      try { cv.setPointerCapture(e.pointerId); } catch (err){}
+      e.preventDefault();
+    });
+    cv.addEventListener("pointermove", function(e){
+      if (!drawing || done) return;
+      var p = pos(e); scratch(p.x, p.y);
+      if (++moves % 14 === 0 && clearedRatio() > 0.45) finish();
+    });
+    ["pointerup","pointercancel","pointerleave"].forEach(function(ev){
+      cv.addEventListener(ev, function(){ drawing = false; if (!done && clearedRatio() > 0.45) finish(); });
+    });
+    window.addEventListener("resize", function(){ if (!done) drawCover(cv); });
+  }
+  function init(){
+    document.querySelectorAll(".ms-card").forEach(function(card){
+      buildCalendar(card);
+      var cv = card.querySelector(".ms-cover");
+      drawCover(cv);
+      makeScratchable(card, cv);
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+</body>
+</html>
