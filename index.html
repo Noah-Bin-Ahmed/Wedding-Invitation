@@ -302,7 +302,7 @@
   <a href="#gallery" class="mobile-link" style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:#152434;text-decoration:none;">Gallery</a>
   <a href="#rsvp" class="mobile-link" style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:#152434;text-decoration:none;">RSVP</a>
   <div class="hairline" style="width:6rem;margin-top:1rem;"></div>
-  <p style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(21,36,52,.45);margin:0;">13 · 11 · 2026</p>
+  <p style="font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:rgba(21,36,52,.45);margin:0;">Save the Date</p>
 </div>
 
 <main>
@@ -330,8 +330,8 @@
 
 <div class="marquee" id="marquee">
   <div class="marquee-track">
-    <div class="marquee-item">Noah Bin Ahmed <span class="dot">✦</span> Daughter Of Abdul Sattar (Late) <span class="dot">✦</span> 13 · 11 · 2026 <span class="dot">✦</span> Karachi <span class="dot">✦</span></div>
-    <div class="marquee-item">Noah Bin Ahmed <span class="dot">✦</span> Daughter Of Abdul Sattar (Late) <span class="dot">✦</span> 13 · 11 · 2026 <span class="dot">✦</span> Karachi <span class="dot">✦</span></div>
+    <div class="marquee-item">Noah Bin Ahmed <span class="dot">✦</span> Daughter Of Abdul Sattar (Late) <span class="dot">✦</span> Save the Date <span class="dot">✦</span> Karachi <span class="dot">✦</span></div>
+    <div class="marquee-item">Noah Bin Ahmed <span class="dot">✦</span> Daughter Of Abdul Sattar (Late) <span class="dot">✦</span> Save the Date <span class="dot">✦</span> Karachi <span class="dot">✦</span></div>
   </div>
 </div>
 
@@ -386,7 +386,29 @@
   </div>
 </section>
 
-<section id="details" class="section-floral" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg, #F7F2E8 0%, #EAE0D0 100%);">
+<section id="scratchdate" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg,#152434 0%,#1F2E3A 100%);overflow:hidden;">
+  <div style="max-width:34rem;margin:0 auto;text-align:center;position:relative;z-index:2;">
+    <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 1rem;">Save the Date</p>
+    <h2 class="font-display" style="font-size:clamp(2rem,6vw,3rem);font-weight:300;color:#F7F2E8;margin:0;line-height:1.1;">Scratch to <span style="font-style:italic;color:#DBC494;">Reveal</span></h2>
+    <div class="gold-divider" style="margin:1.5rem auto;"></div>
+    <div id="scratchWrap" style="position:relative;border-radius:1rem;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.45);margin-top:2rem;">
+      <div style="background:linear-gradient(135deg,#F7F2E8 0%,#EFE4CF 100%);padding:2.75rem 1.5rem;">
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#C49A45;margin:0 0 .4rem;">Mehendi</p>
+        <p class="font-display" style="font-size:1.35rem;color:#152434;margin:0 0 1.5rem;">Friday · 13 November 2026</p>
+        <div class="hairline" style="width:4rem;margin:0 auto 1.5rem;"></div>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#C49A45;margin:0 0 .4rem;">Baraat</p>
+        <p class="font-display" style="font-size:1.35rem;color:#152434;margin:0 0 1.5rem;">Saturday · 14 November 2026</p>
+        <div class="hairline" style="width:4rem;margin:0 auto 1.5rem;"></div>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#C49A45;margin:0 0 .4rem;">Walima</p>
+        <p class="font-display" style="font-size:1.35rem;color:#152434;margin:0;">Monday · 16 November 2026</p>
+      </div>
+      <canvas id="scratchCanvas" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;"></canvas>
+    </div>
+    <p style="margin-top:1.5rem;font-size:11px;text-transform:uppercase;letter-spacing:.25em;color:rgba(219,196,148,.75);">Ungli se scratch karo</p>
+  </div>
+</section>
+
+ <section id="details" class="section-floral" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg, #F7F2E8 0%, #EAE0D0 100%);">
   <div class="corner-tr"></div>
   <div class="corner-bl"></div>
   <div style="max-width:72rem;margin:0 auto;">
@@ -729,7 +751,7 @@
   }
 
   var loaderTagline = document.getElementById("loaderTagline");
-  var taglineText = "13 · November · 2026";
+  var taglineText = "Save the Date";
   var twStarted = false;
   function startTypewriter(){
     if (twStarted) return;
@@ -1092,7 +1114,7 @@
     setNum("m", pad(Math.floor((diff / 60000) % 60)));
     setNum("s", pad(Math.floor((diff / 1000) % 60)));
   }
-  updateCD(); setInterval(updateCD, 1000);
+updateCD(); setInterval(updateCD, 1000);   /* SCRATCH TO REVEAL */   (function(){     var wrap = document.getElementById("scratchWrap");     var canvas = document.getElementById("scratchCanvas");     if (!wrap || !canvas) return;     var ctx = canvas.getContext("2d");     var done = false, scratching = false, moves = 0;     function drawFoil(){       ctx.globalCompositeOperation = "source-over";       var g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);       g.addColorStop(0, "#DBC494"); g.addColorStop(0.5, "#C49A45"); g.addColorStop(1, "#9C742B");       ctx.fillStyle = g;       ctx.fillRect(0, 0, canvas.width, canvas.height);       ctx.fillStyle = "rgba(255,255,255,.09)";       for (var i = -canvas.height; i < canvas.width + canvas.height; i += 30){         ctx.beginPath();         ctx.moveTo(i, 0); ctx.lineTo(i + 15, 0);         ctx.lineTo(i + 15 - canvas.height, canvas.height); ctx.lineTo(i - canvas.height, canvas.height);         ctx.closePath(); ctx.fill();       }       ctx.fillStyle = "rgba(21,36,52,.8)";       ctx.font = "600 13px Jost, sans-serif";       ctx.textAlign = "center"; ctx.textBaseline = "middle";       ctx.fillText("S C R A T C H   H E R E", canvas.width / 2, canvas.height / 2);     }     function sizeCanvas(){       if (done) return;       var r = wrap.getBoundingClientRect();       canvas.width = Math.max(1, Math.round(r.width));       canvas.height = Math.max(1, Math.round(r.height));       drawFoil();     }     function pos(e){       var r = canvas.getBoundingClientRect();       return { x: e.clientX - r.left, y: e.clientY - r.top };     }     function erase(x, y){       ctx.globalCompositeOperation = "destination-out";       ctx.beginPath(); ctx.arc(x, y, 28, 0, Math.PI * 2); ctx.fill();     }     function scratchedPct(){       try {         var d = ctx.getImageData(0, 0, canvas.width, canvas.height).data;         var clear = 0, total = 0;         for (var i = 3; i < d.length; i += 48){ total++; if (d[i] === 0) clear++; }         return total ? clear / total : 0;       } catch(e){ return 0; }     }     function check(){       if (done) return;       if (scratchedPct() > 0.45){         done = true;         canvas.style.transition = "opacity .8s ease";         canvas.style.opacity = "0";         setTimeout(function(){ canvas.style.display = "none"; }, 850);       }     }     canvas.addEventListener("pointerdown", function(e){       if (done) return;       scratching = true; moves = 0;       try { canvas.setPointerCapture(e.pointerId); } catch(err){}       var p = pos(e); erase(p.x, p.y);       e.preventDefault();     });     canvas.addEventListener("pointermove", function(e){       if (!scratching || done) return;       var p = pos(e); erase(p.x, p.y);       if (++moves % 12 === 0) check();     });     function endScratch(){ if (scratching){ scratching = false; check(); } }     canvas.addEventListener("pointerup", endScratch);     canvas.addEventListener("pointercancel", endScratch);     sizeCanvas();     window.addEventListener("resize", sizeCanvas);     window.addEventListener("load", sizeCanvas);   })();
 
   /* ═══ RSVP FORM ═══ */
   var attendingValue = "Yes";
