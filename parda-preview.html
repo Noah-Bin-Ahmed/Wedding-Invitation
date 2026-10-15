@@ -6,11 +6,10 @@
 <title>Velvet Parda — Date Reveal Preview</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:#F7F2E8; color:#1F2E3A; font-family:'Jost',sans-serif; }
-  .font-display { font-family:'Cormorant Garamond',serif; }
   .wrap { max-width:1060px; margin:0 auto; padding:0 20px 80px; }
   header.top { text-align:center; padding:52px 20px 12px; }
   header.top h1 { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(1.9rem,5vw,2.8rem); color:#152434; }
@@ -21,12 +20,18 @@
   @media(max-width:820px){ .parda-grid{ grid-template-columns:1fr; max-width:22rem; margin-left:auto; margin-right:auto; } }
   .parda-card { text-align:center; }
   .parda-event { font-size:11px; text-transform:uppercase; letter-spacing:.32em; color:#C49A45; margin:0 0 1rem; }
-  .parda-stage { position:relative; overflow:hidden; border-radius:.7rem; min-height:300px; display:flex; align-items:center; justify-content:center; border:1px solid #C49A45; outline:1px solid rgba(196,154,69,.5); outline-offset:5px; box-shadow:0 16px 40px rgba(21,36,52,.25); cursor:pointer; -webkit-tap-highlight-color:transparent; }
-  .parda-date { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:1rem; background:radial-gradient(circle at 50% 38%, #FFF8E2 0%, #F5E2B0 38%, #DDB95F 72%, #A87F34 100%); }
-  .parda-date .d-day { font-size:10px; text-transform:uppercase; letter-spacing:.28em; color:rgba(60,40,12,.7); margin:0 0 .4rem; }
-  .parda-date .d-full { font-family:'Cormorant Garamond',serif; font-size:1.65rem; color:#3A2A10; margin:0; line-height:1.25; }
-  .parda-date .d-flourish { font-size:11px; letter-spacing:.45em; color:#8A6A2A; margin:.7rem 0 0; }
-  .parda-rays { position:absolute; inset:-20%; pointer-events:none; opacity:0; transition:opacity 1.6s ease .5s; background:linear-gradient(105deg, transparent 42%, rgba(255,250,230,.35) 50%, transparent 58%), linear-gradient(75deg, transparent 44%, rgba(255,250,230,.22) 50%, transparent 56%); }
+  .parda-stage { position:relative; overflow:hidden; border-radius:.7rem; min-height:320px; display:flex; align-items:center; justify-content:center; border:1px solid #C49A45; outline:1px solid rgba(196,154,69,.5); outline-offset:5px; box-shadow:0 16px 40px rgba(21,36,52,.25); cursor:pointer; -webkit-tap-highlight-color:transparent; transition:box-shadow 1.2s ease .5s, border-color 1.2s ease .5s; }
+  .parda-stage.open { box-shadow:0 16px 40px rgba(21,36,52,.25), 0 0 80px rgba(244,205,120,.65); border-color:#e8c86a; }
+  .parda-date { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:1.2rem; background:radial-gradient(circle at 50% 26%, #fffdf0 0%, #fdf0c2 28%, #f4d78a 52%, #d9ab4e 76%, #96702a 100%); }
+  .parda-frame { position:absolute; inset:16px; border:1px solid rgba(122,86,26,.85); pointer-events:none; }
+  .parda-frame::before { content:""; position:absolute; inset:5px; border:1px solid rgba(122,86,26,.5); }
+  .fc { position:absolute; font-size:15px; color:#8a6420; line-height:1; }
+  .fc.tl { top:-10px; left:-6px; } .fc.tr { top:-10px; right:-6px; } .fc.bl { bottom:-10px; left:-6px; } .fc.br { bottom:-10px; right:-6px; }
+  .d-event { font-size:10px; letter-spacing:.42em; text-indent:.42em; text-transform:uppercase; color:#7c5c1c; margin:0 0 .35rem; }
+  .d-num { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:4rem; line-height:1; color:#42300a; margin:0; text-shadow:0 0 26px rgba(255,246,214,.85); }
+  .d-month { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:1.55rem; color:#5a4212; margin:.2rem 0 0; }
+  .d-year { font-size:.85rem; letter-spacing:.5em; text-indent:.5em; color:#7c5c1c; margin:.5rem 0 0; }
+  .parda-rays { position:absolute; inset:-20%; pointer-events:none; opacity:0; transition:opacity 1.6s ease .5s; background:linear-gradient(105deg, transparent 42%, rgba(255,250,230,.4) 50%, transparent 58%), linear-gradient(75deg, transparent 44%, rgba(255,250,230,.25) 50%, transparent 56%); }
   .parda-stage.open .parda-rays { opacity:1; }
   .parda-shine { position:absolute; inset:0; overflow:hidden; pointer-events:none; opacity:0; }
   .parda-stage.open .parda-shine { opacity:1; }
@@ -34,23 +39,25 @@
   .parda-stage.open .parda-shine::after { animation:shineSweep 2.4s ease .9s forwards; }
   @keyframes shineSweep { to { left:130%; } }
   .parda-curtain { position:absolute; top:0; bottom:0; width:51%; z-index:3; background:repeating-linear-gradient(90deg, rgba(0,0,0,.42) 0 9px, rgba(255,255,255,.05) 9px 18px, rgba(0,0,0,.30) 18px 30px), linear-gradient(180deg, #1D3249 0%, #12233A 45%, #0A1424 100%); box-shadow:inset 0 -30px 60px rgba(0,0,0,.5); transition:transform 1.5s cubic-bezier(.7,0,.3,1); }
-  .parda-curtain.left { left:0; border-right:1px solid rgba(196,154,69,.6);  background:url('parda-curtain-left.jpg') center/cover no-repeat;}
-  .parda-curtain.right { right:0; border-left:1px solid rgba(196,154,69,.6);  background:url('parda-curtain-right.jpg') center/cover no-repeat;}
+  .parda-curtain.left { left:0; border-right:1px solid rgba(196,154,69,.6); background:url('parda-curtain-left.jpg') center/cover no-repeat; }
+  .parda-curtain.right { right:0; border-left:1px solid rgba(196,154,69,.6); background:url('parda-curtain-right.jpg') center/cover no-repeat; }
   .parda-curtain .trim { position:absolute; top:0; bottom:0; width:15px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='48' viewBox='0 0 16 48'%3E%3Cpath d='M8 5 L12 11 L8 17 L4 11 Z' fill='none' stroke='%23C49A45' stroke-width='1.6'/%3E%3Ccircle cx='8' cy='29' r='3.2' fill='none' stroke='%23C49A45' stroke-width='1.6'/%3E%3Ccircle cx='8' cy='29' r='1.1' fill='%23C49A45'/%3E%3Cpath d='M8 38 L11 44 L8 49 L5 44 Z' fill='%23C49A45'/%3E%3C/svg%3E"); background-repeat:repeat-y; background-position:center top; }
-  .parda-curtain.left .trim { right:4px; }
-  .parda-curtain.right .trim { left:4px; }
+  .parda-curtain.left .trim { right:4px; } .parda-curtain.right .trim { left:4px; }
   .parda-curtain::before { content:""; position:absolute; top:0; left:0; right:0; height:44px; background:linear-gradient(180deg, rgba(0,0,0,.55), transparent); }
   .parda-stage.open .parda-curtain.left { transform:translateX(-104%); }
   .parda-stage.open .parda-curtain.right { transform:translateX(104%); }
-  .parda-seal { position:absolute; z-index:4; top:50%; left:50%; width:104px; height:104px; margin:-52px 0 0 -52px; border-radius:50%; border:none; cursor:pointer; background:radial-gradient(circle at 35% 30%, #F4E3B2 0%, #D9B45F 45%, #A87F34 80%, #7A5A22 100%); box-shadow:0 8px 24px rgba(0,0,0,.5), inset 0 2px 6px rgba(255,255,255,.5), inset 0 -4px 10px rgba(90,62,20,.5); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; transition:transform .5s ease, opacity .5s ease; animation:sealPulse 2.2s ease-in-out infinite; }
-  @keyframes sealPulse { 0%,100%{ box-shadow:0 8px 24px rgba(0,0,0,.5), 0 0 0 0 rgba(196,154,69,.55);} 50%{ box-shadow:0 8px 24px rgba(0,0,0,.5), 0 0 0 12px rgba(196,154,69,0);} }
-  .parda-seal .mono { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:1.3rem; color:#3A2A10; }
-  .parda-seal .tap { font-size:8px; letter-spacing:.24em; text-transform:uppercase; color:rgba(58,42,16,.8); }
-  .parda-stage.open .parda-seal { transform:scale(.2); opacity:0; pointer-events:none; animation:none; }
-  .parda-date .d-full, .parda-date .d-day, .parda-date .d-flourish { opacity:0; }
-  .parda-stage.open .parda-date .d-day { animation:dateIn .8s ease .9s forwards; }
-  .parda-stage.open .parda-date .d-full { animation:dateIn .9s cubic-bezier(.2,1.4,.4,1) 1.05s forwards; }
-  .parda-stage.open .parda-date .d-flourish { animation:dateIn .8s ease 1.3s forwards; }
+  .parda-seal { position:absolute; z-index:4; top:50%; left:50%; width:116px; height:116px; margin:-74px 0 0 -58px; border:none; cursor:pointer; padding:0; border-radius:48% 52% 50% 50% / 52% 48% 52% 48%; background:radial-gradient(circle at 38% 30%, #f9e2a0 0%, #e0b34c 38%, #a8751f 70%, #77500f 100%); box-shadow:0 12px 28px rgba(0,0,0,.55), inset 0 3px 9px rgba(255,246,214,.65), inset 0 -8px 16px rgba(74,48,8,.6); display:flex; align-items:center; justify-content:center; transition:transform .5s ease, opacity .5s ease; animation:sealPulse 2.4s ease-in-out infinite; }
+  .parda-seal::before { content:""; position:absolute; inset:11px; border-radius:46% 54% 51% 49% / 54% 46% 53% 47%; border:2px solid rgba(96,64,16,.6); box-shadow:inset 0 2px 5px rgba(255,246,214,.55), 0 1px 3px rgba(255,246,214,.35); }
+  .parda-seal .mono { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.9rem; letter-spacing:.04em; color:#5f420e; text-shadow:0 2px 2px rgba(255,244,208,.65), 0 -1px 2px rgba(58,38,6,.55); }
+  @keyframes sealPulse { 0%,100% { box-shadow:0 12px 28px rgba(0,0,0,.55), inset 0 3px 9px rgba(255,246,214,.65), inset 0 -8px 16px rgba(74,48,8,.6), 0 0 0 0 rgba(224,179,76,.55); } 50% { box-shadow:0 12px 28px rgba(0,0,0,.55), inset 0 3px 9px rgba(255,246,214,.65), inset 0 -8px 16px rgba(74,48,8,.6), 0 0 0 14px rgba(224,179,76,0); } }
+  .seal-cap { position:absolute; z-index:4; top:calc(50% + 52px); left:0; right:0; font-size:9px; letter-spacing:.34em; text-indent:.34em; text-transform:uppercase; color:#f3dd9a; text-shadow:0 2px 6px rgba(0,0,0,.75); transition:opacity .4s ease; pointer-events:none; }
+  .parda-stage.open .parda-seal { transform:scale(.15); opacity:0; pointer-events:none; animation:none; }
+  .parda-stage.open .seal-cap { opacity:0; }
+  .parda-date .d-event, .parda-date .d-num, .parda-date .d-month, .parda-date .d-year { opacity:0; }
+  .parda-stage.open .d-event { animation:dateIn .8s ease .9s forwards; }
+  .parda-stage.open .d-num { animation:dateIn .9s cubic-bezier(.2,1.4,.4,1) 1.05s forwards; }
+  .parda-stage.open .d-month { animation:dateIn .8s ease 1.25s forwards; }
+  .parda-stage.open .d-year { animation:dateIn .8s ease 1.4s forwards; }
   @keyframes dateIn { from{ opacity:0; transform:scale(.75); filter:brightness(2);} to{ opacity:1; transform:scale(1); filter:brightness(1);} }
   .hint { margin-top:1.1rem; font-size:10px; text-transform:uppercase; letter-spacing:.22em; color:rgba(21,36,52,.45); }
 </style>
@@ -67,15 +74,18 @@
       <p class="parda-event">✦ Mehendi ✦</p>
       <div class="parda-stage" role="button" tabindex="0" aria-label="Reveal Mehendi date">
         <div class="parda-date">
-          <p class="d-day">Friday</p>
-          <p class="d-full">13 November<br>2026</p>
-          <p class="d-flourish">❦ ❦ ❦</p>
+          <div class="parda-frame"><span class="fc tl">❦</span><span class="fc tr">❦</span><span class="fc bl">❦</span><span class="fc br">❦</span></div>
+          <p class="d-event">Mehendi</p>
+          <p class="d-num">13</p>
+          <p class="d-month">November</p>
+          <p class="d-year">2026</p>
         </div>
         <div class="parda-rays"></div>
         <div class="parda-shine"></div>
         <div class="parda-curtain left"><span class="trim"></span></div>
         <div class="parda-curtain right"><span class="trim"></span></div>
-        <button class="parda-seal" aria-label="Tap to reveal"><span class="mono">N·U</span><span class="tap">Tap to reveal</span></button>
+        <button class="parda-seal" aria-label="Tap to reveal"><span class="mono">N·U</span></button>
+        <p class="seal-cap">Tap to reveal</p>
       </div>
       <p class="hint">Tap the seal</p>
     </div>
@@ -83,15 +93,18 @@
       <p class="parda-event">✦ Baraat ✦</p>
       <div class="parda-stage" role="button" tabindex="0" aria-label="Reveal Baraat date">
         <div class="parda-date">
-          <p class="d-day">Saturday</p>
-          <p class="d-full">14 November<br>2026</p>
-          <p class="d-flourish">❦ ❦ ❦</p>
+          <div class="parda-frame"><span class="fc tl">❦</span><span class="fc tr">❦</span><span class="fc bl">❦</span><span class="fc br">❦</span></div>
+          <p class="d-event">Baraat</p>
+          <p class="d-num">14</p>
+          <p class="d-month">November</p>
+          <p class="d-year">2026</p>
         </div>
         <div class="parda-rays"></div>
         <div class="parda-shine"></div>
         <div class="parda-curtain left"><span class="trim"></span></div>
         <div class="parda-curtain right"><span class="trim"></span></div>
-        <button class="parda-seal" aria-label="Tap to reveal"><span class="mono">N·U</span><span class="tap">Tap to reveal</span></button>
+        <button class="parda-seal" aria-label="Tap to reveal"><span class="mono">N·U</span></button>
+        <p class="seal-cap">Tap to reveal</p>
       </div>
       <p class="hint">Tap the seal</p>
     </div>
@@ -99,15 +112,18 @@
       <p class="parda-event">✦ Walima ✦</p>
       <div class="parda-stage" role="button" tabindex="0" aria-label="Reveal Walima date">
         <div class="parda-date">
-          <p class="d-day">Monday</p>
-          <p class="d-full">16 November<br>2026</p>
-          <p class="d-flourish">❦ ❦ ❦</p>
+          <div class="parda-frame"><span class="fc tl">❦</span><span class="fc tr">❦</span><span class="fc bl">❦</span><span class="fc br">❦</span></div>
+          <p class="d-event">Walima</p>
+          <p class="d-num">16</p>
+          <p class="d-month">November</p>
+          <p class="d-year">2026</p>
         </div>
         <div class="parda-rays"></div>
         <div class="parda-shine"></div>
         <div class="parda-curtain left"><span class="trim"></span></div>
         <div class="parda-curtain right"><span class="trim"></span></div>
-        <button class="parda-seal" aria-label="Tap to reveal"><span class="mono">N·U</span><span class="tap">Tap to reveal</span></button>
+        <button class="parda-seal" aria-label="Tap to reveal"><span class="mono">N·U</span></button>
+        <p class="seal-cap">Tap to reveal</p>
       </div>
       <p class="hint">Tap the seal</p>
     </div>
