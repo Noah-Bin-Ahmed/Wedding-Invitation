@@ -21,12 +21,12 @@
   .ms-title { font-family:'Cormorant Garamond',serif; font-weight:600; letter-spacing:.08em; font-size:clamp(1.9rem,5.5vw,2.9rem); color:#e8c86a; margin:.55rem 0 1.4rem; transition:opacity .45s ease; text-transform:uppercase; }
   .ms-stage { position:relative; border:1px solid rgba(196,154,69,.55); box-shadow:0 20px 60px rgba(0,0,0,.55); }
   .ms-frame { display:block; width:100%; height:auto; }
-  .ms-center { position:absolute; left:19%; right:19%; top:29%; bottom:13%; }
+  .ms-center { position:absolute; left:19%; right:19%; top:29%; bottom:13%; pointer-events:none; }
   .ms-date { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:.4rem; }
   .ms-kicker { font-size:clamp(9px,1.8vw,12px); letter-spacing:.4em; text-indent:.4em; text-transform:uppercase; color:#8a6420; margin:0 0 .5rem; }
   .ms-dbig { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:clamp(1.5rem,4.8vw,2.6rem); color:#43300a; margin:0; line-height:1.15; white-space:nowrap; }
   .ms-dsub { font-size:clamp(9px,1.9vw,12px); letter-spacing:.32em; text-indent:.32em; text-transform:uppercase; color:#8a6420; margin:.65rem 0 0; white-space:nowrap; }
-  canvas.ms-cover { position:absolute; inset:0; width:100%; height:100%; display:block; border-radius:10px; cursor:crosshair; touch-action:none; -webkit-tap-highlight-color:transparent; box-shadow:inset 0 0 26px rgba(0,0,0,.35); }
+  canvas.ms-cover { position:absolute; inset:0; width:100%; height:100%; display:block; cursor:crosshair; touch-action:none; -webkit-tap-highlight-color:transparent; }
   .ms-hint { margin-top:1.1rem; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:rgba(243,233,207,.7); }
   .ms-after { display:none; margin-top:1.2rem; }
   .ms-card.revealed .ms-hint { display:none; }
@@ -59,8 +59,8 @@
           <p class="ms-dbig">13 November 2026</p>
           <p class="ms-dsub">Friday • 6:00 PM</p>
         </div>
-        <canvas class="ms-cover"></canvas>
       </div>
+      <canvas class="ms-cover"></canvas>
     </div>
     <p class="ms-hint">Use your finger or cursor to uncover the moment.</p>
     <div class="ms-after">
@@ -79,8 +79,8 @@
           <p class="ms-dbig">14 November 2026</p>
           <p class="ms-dsub">Saturday • 6:00 PM</p>
         </div>
-        <canvas class="ms-cover"></canvas>
       </div>
+      <canvas class="ms-cover"></canvas>
     </div>
     <p class="ms-hint">Use your finger or cursor to uncover the moment.</p>
     <div class="ms-after">
@@ -99,8 +99,8 @@
           <p class="ms-dbig">16 November 2026</p>
           <p class="ms-dsub">Monday • 6:00 PM</p>
         </div>
-        <canvas class="ms-cover"></canvas>
       </div>
+      <canvas class="ms-cover"></canvas>
     </div>
     <p class="ms-hint">Use your finger or cursor to uncover the moment.</p>
     <div class="ms-after">
@@ -112,6 +112,9 @@
 <script>
 (function(){
   "use strict";
+  var maskImg = new Image();
+  var maskOK = false, maskFailed = false;
+  var pageLoaded = false;
   function buildCalendar(card){
     var day = parseInt(card.dataset.day, 10);
     var html = '<p class="cal-title">November 2026</p><div class="cal-grid">';
@@ -121,15 +124,6 @@
     }
     card.querySelector(".ms-cal").innerHTML = html + "</div>";
   }
-  function rr(x, X, Y, W, H, R){
-    x.beginPath();
-    x.moveTo(X + R, Y);
-    x.arcTo(X + W, Y, X + W, Y + H, R);
-    x.arcTo(X + W, Y + H, X, Y + H, R);
-    x.arcTo(X, Y + H, X, Y, R);
-    x.arcTo(X, Y, X + W, Y, R);
-    x.closePath();
-  }
   function drawCover(cv){
     var r = cv.getBoundingClientRect();
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -137,21 +131,29 @@
     cv.height = Math.max(1, Math.round(r.height * dpr));
     var x = cv.getContext("2d");
     x.scale(dpr, dpr);
-    var W = r.width, H = r.height, R = 8;
-    x.save();
-    rr(x, 0, 0, W, H, R);
-    x.clip();
-    var g = x.createLinearGradient(0, 0, W, H);
-    g.addColorStop(0, "#1e3450"); g.addColorStop(0.5, "#12233a"); g.addColorStop(1, "#0a1626");
+    var W = r.width, H = r.height;
+    var g = x.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, "#1e3450"); g.addColorStop(1, "#0a1626");
     x.fillStyle = g; x.fillRect(0, 0, W, H);
     x.strokeStyle = "rgba(255,255,255,0.045)"; x.lineWidth = 1;
-    for (var i = -H; i < W; i += 12){ x.beginPath(); x.moveTo(i, 0); x.lineTo(i + H, H); x.stroke(); }
-    var sheen = x.createLinearGradient(0, 0, W, 0);
-    sheen.addColorStop(0, "rgba(255,255,255,0)"); sheen.addColorStop(0.5, "rgba(255,255,255,0.14)"); sheen.addColorStop(1, "rgba(255,255,255,0)");
+    for (var i = -H; i < W; i += 14){ x.beginPath(); x.moveTo(i, 0); x.lineTo(i + H, H); x.stroke(); }
+    var sheen = x.createLinearGradient(0, 0, W, H * 0.6);
+    sheen.addColorStop(0, "rgba(255,255,255,0.10)"); sheen.addColorStop(0.6, "rgba(255,255,255,0)");
     x.fillStyle = sheen; x.fillRect(0, 0, W, H);
-    x.restore();
-    rr(x, 1.5, 1.5, W - 3, H - 3, R - 1);
-    x.strokeStyle = "rgba(196,154,69,0.28)"; x.lineWidth = 1.5; x.stroke();
+    if (maskOK){
+      x.globalCompositeOperation = "destination-in";
+      x.drawImage(maskImg, 0, 0, W, H);
+      x.globalCompositeOperation = "source-over";
+    }
+    if (maskOK){
+      var mc = document.createElement("canvas");
+      mc.width = cv.width; mc.height = cv.height;
+      var mx = mc.getContext("2d");
+      mx.drawImage(maskImg, 0, 0, mc.width, mc.height);
+      cv._mask = mx.getImageData(0, 0, mc.width, mc.height).data;
+    } else {
+      cv._mask = null;
+    }
   }
   function makeScratchable(card, cv){
     var x = cv.getContext("2d");
@@ -162,7 +164,7 @@
       return { x: p.clientX - r.left, y: p.clientY - r.top };
     }
     function scratch(px, py){
-      var rad = Math.max(14, cv.clientWidth * 0.06);
+      var rad = Math.max(14, cv.clientWidth * 0.05);
       x.save();
       x.globalCompositeOperation = "destination-out";
       x.beginPath(); x.arc(px, py, rad, 0, 7); x.fill();
@@ -176,8 +178,15 @@
     function clearedRatio(){
       try {
         var d = x.getImageData(0, 0, cv.width, cv.height).data;
+        var mp = cv._mask;
         var clear = 0, total = 0;
-        for (var i = 3; i < d.length; i += 48){ total++; if (d[i] === 0) clear++; }
+        for (var i = 3; i < d.length; i += 192){
+          if (mp){
+            if (mp[i] > 127){ total++; if (d[i] < 127) clear++; }
+          } else {
+            total++; if (d[i] === 0) clear++;
+          }
+        }
         return total ? clear / total : 0;
       } catch (err){ return 0; }
     }
@@ -214,8 +223,15 @@
       makeScratchable(card, cv);
     });
   }
-  if (document.readyState === "complete") init();
-  else window.addEventListener("load", init);
+  function tryInit(){
+    if (pageLoaded && (maskOK || maskFailed)) init();
+  }
+  maskImg.onload = function(){ maskOK = true; tryInit(); };
+  maskImg.onerror = function(){ maskFailed = true; tryInit(); };
+  maskImg.src = "mukhmal-mask.png";
+  if (document.readyState === "complete"){ pageLoaded = true; }
+  else { window.addEventListener("load", function(){ pageLoaded = true; tryInit(); }); }
+  tryInit();
 })();
 </script>
 </body>
