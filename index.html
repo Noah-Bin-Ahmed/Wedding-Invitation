@@ -386,29 +386,59 @@
   </div>
 </section>
 
-<section id="scratchdate" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg,#152434 0%,#1F2E3A 100%);overflow:hidden;">
-  <div style="max-width:34rem;margin:0 auto;text-align:center;position:relative;z-index:2;">
+
+
+ <sectio class="section-floral" style="position:relative;padding:4rem 1.5rem;background:#F7F2E8;overflow:hidden;">
+  <style>
+    .scratch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.25rem;}
+    @media(max-width:768px){.scratch-grid{grid-template-columns:1fr;max-width:21rem;margin-left:auto;margin-right:auto;}}
+  </style>
+  <div class="corner-tr"></div>
+  <div class="corner-bl"></div>
+  <div style="max-width:62rem;margin:0 auto;text-align:center;position:relative;z-index:2;">
     <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 1rem;">Save the Date</p>
-    <h2 class="font-display" style="font-size:clamp(2rem,6vw,3rem);font-weight:300;color:#F7F2E8;margin:0;line-height:1.1;">Scratch to <span style="font-style:italic;color:#DBC494;">Reveal</span></h2>
-    <div class="gold-divider" style="margin:1.5rem auto;"></div>
-    <div id="scratchWrap" style="position:relative;border-radius:1rem;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.45);margin-top:2rem;">
-      <div style="background:linear-gradient(135deg,#F7F2E8 0%,#EFE4CF 100%);padding:2.75rem 1.5rem;">
-        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#C49A45;margin:0 0 .4rem;">Mehendi</p>
-        <p class="font-display" style="font-size:1.35rem;color:#152434;margin:0 0 1.5rem;">Friday · 13 November 2026</p>
-        <div class="hairline" style="width:4rem;margin:0 auto 1.5rem;"></div>
-        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#C49A45;margin:0 0 .4rem;">Baraat</p>
-        <p class="font-display" style="font-size:1.35rem;color:#152434;margin:0 0 1.5rem;">Saturday · 14 November 2026</p>
-        <div class="hairline" style="width:4rem;margin:0 auto 1.5rem;"></div>
-        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#C49A45;margin:0 0 .4rem;">Walima</p>
-        <p class="font-display" style="font-size:1.35rem;color:#152434;margin:0;">Monday · 16 November 2026</p>
+    <h2 class="font-display" style="font-size:clamp(1.8rem,5vw,2.6rem);font-weight:300;color:#152434;margin:0;line-height:1.1;">Scratch to <span style="font-style:italic;color:#C49A45;">Reveal</span></h2>
+    <div class="gold-divider" style="margin:1.25rem auto;"></div>
+    <div class="scratch-grid">
+      <div style="background:linear-gradient(160deg,#152434 0%,#24394F 100%);border:1px solid rgba(196,154,69,.55);border-radius:1rem;padding:1.5rem 1rem 1.25rem;box-shadow:0 14px 34px rgba(21,36,52,.18);">
+        <p style="color:#C49A45;margin:0 0 .5rem;font-size:.9rem;">✦</p>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#DBC494;margin:0 0 1rem;">Mehendi</p>
+        <div class="scratch-box" style="position:relative;border-radius:.6rem;overflow:hidden;min-height:92px;display:flex;align-items:center;justify-content:center;background:rgba(247,242,232,.06);">
+          <div style="text-align:center;padding:1rem .5rem;">
+            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(219,196,148,.8);margin:0 0 .3rem;">Friday</p>
+            <p class="font-display" style="font-size:1.3rem;color:#F7F2E8;margin:0;">13 November 2026</p>
+          </div>
+          <canvas class="scratch-canvas" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;"></canvas>
+        </div>
       </div>
-      <canvas id="scratchCanvas" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;"></canvas>
+      <div style="background:linear-gradient(160deg,#152434 0%,#24394F 100%);border:1px solid rgba(196,154,69,.55);border-radius:1rem;padding:1.5rem 1rem 1.25rem;box-shadow:0 14px 34px rgba(21,36,52,.18);">
+        <p style="color:#C49A45;margin:0 0 .5rem;font-size:.9rem;">✦</p>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#DBC494;margin:0 0 1rem;">Baraat</p>
+        <div class="scratch-box" style="position:relative;border-radius:.6rem;overflow:hidden;min-height:92px;display:flex;align-items:center;justify-content:center;background:rgba(247,242,232,.06);">
+          <div style="text-align:center;padding:1rem .5rem;">
+            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(219,196,148,.8);margin:0 0 .3rem;">Saturday</p>
+            <p class="font-display" style="font-size:1.3rem;color:#F7F2E8;margin:0;">14 November 2026</p>
+          </div>
+          <canvas class="scratch-canvas" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;"></canvas>
+        </div>
+      </div>
+      <div style="background:linear-gradient(160deg,#152434 0%,#24394F 100%);border:1px solid rgba(196,154,69,.55);border-radius:1rem;padding:1.5rem 1rem 1.25rem;box-shadow:0 14px 34px rgba(21,36,52,.18);">
+        <p style="color:#C49A45;margin:0 0 .5rem;font-size:.9rem;">✦</p>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#DBC494;margin:0 0 1rem;">Walima</p>
+        <div class="scratch-box" style="position:relative;border-radius:.6rem;overflow:hidden;min-height:92px;display:flex;align-items:center;justify-content:center;background:rgba(247,242,232,.06);">
+          <div style="text-align:center;padding:1rem .5rem;">
+            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(219,196,148,.8);margin:0 0 .3rem;">Monday</p>
+            <p class="font-display" style="font-size:1.3rem;color:#F7F2E8;margin:0;">16 November 2026</p>
+          </div>
+          <canvas class="scratch-canvas" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;"></canvas>
+        </div>
+      </div>
     </div>
-    <p style="margin-top:1.5rem;font-size:11px;text-transform:uppercase;letter-spacing:.25em;color:rgba(219,196,148,.75);">Ungli se scratch karo</p>
+    <p style="margin-top:1.75rem;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(21,36,52,.5);">Har card ko alag se scratch karo</p>
   </div>
 </section>
-
- <section id="details" class="section-floral" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg, #F7F2E8 0%, #EAE0D0 100%);">
+  
+  <section id="details" class="section-floral" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg, #F7F2E8 0%, #EAE0D0 100%);">
   <div class="corner-tr"></div>
   <div class="corner-bl"></div>
   <div style="max-width:72rem;margin:0 auto;">
@@ -1114,7 +1144,7 @@
     setNum("m", pad(Math.floor((diff / 60000) % 60)));
     setNum("s", pad(Math.floor((diff / 1000) % 60)));
   }
-updateCD(); setInterval(updateCD, 1000);   /* SCRATCH TO REVEAL */   (function(){     var wrap = document.getElementById("scratchWrap");     var canvas = document.getElementById("scratchCanvas");     if (!wrap || !canvas) return;     var ctx = canvas.getContext("2d");     var done = false, scratching = false, moves = 0;     function drawFoil(){       ctx.globalCompositeOperation = "source-over";       var g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);       g.addColorStop(0, "#DBC494"); g.addColorStop(0.5, "#C49A45"); g.addColorStop(1, "#9C742B");       ctx.fillStyle = g;       ctx.fillRect(0, 0, canvas.width, canvas.height);       ctx.fillStyle = "rgba(255,255,255,.09)";       for (var i = -canvas.height; i < canvas.width + canvas.height; i += 30){         ctx.beginPath();         ctx.moveTo(i, 0); ctx.lineTo(i + 15, 0);         ctx.lineTo(i + 15 - canvas.height, canvas.height); ctx.lineTo(i - canvas.height, canvas.height);         ctx.closePath(); ctx.fill();       }       ctx.fillStyle = "rgba(21,36,52,.8)";       ctx.font = "600 13px Jost, sans-serif";       ctx.textAlign = "center"; ctx.textBaseline = "middle";       ctx.fillText("S C R A T C H   H E R E", canvas.width / 2, canvas.height / 2);     }     function sizeCanvas(){       if (done) return;       var r = wrap.getBoundingClientRect();       canvas.width = Math.max(1, Math.round(r.width));       canvas.height = Math.max(1, Math.round(r.height));       drawFoil();     }     function pos(e){       var r = canvas.getBoundingClientRect();       return { x: e.clientX - r.left, y: e.clientY - r.top };     }     function erase(x, y){       ctx.globalCompositeOperation = "destination-out";       ctx.beginPath(); ctx.arc(x, y, 28, 0, Math.PI * 2); ctx.fill();     }     function scratchedPct(){       try {         var d = ctx.getImageData(0, 0, canvas.width, canvas.height).data;         var clear = 0, total = 0;         for (var i = 3; i < d.length; i += 48){ total++; if (d[i] === 0) clear++; }         return total ? clear / total : 0;       } catch(e){ return 0; }     }     function check(){       if (done) return;       if (scratchedPct() > 0.45){         done = true;         canvas.style.transition = "opacity .8s ease";         canvas.style.opacity = "0";         setTimeout(function(){ canvas.style.display = "none"; }, 850);       }     }     canvas.addEventListener("pointerdown", function(e){       if (done) return;       scratching = true; moves = 0;       try { canvas.setPointerCapture(e.pointerId); } catch(err){}       var p = pos(e); erase(p.x, p.y);       e.preventDefault();     });     canvas.addEventListener("pointermove", function(e){       if (!scratching || done) return;       var p = pos(e); erase(p.x, p.y);       if (++moves % 12 === 0) check();     });     function endScratch(){ if (scratching){ scratching = false; check(); } }     canvas.addEventListener("pointerup", endScratch);     canvas.addEventListener("pointercancel", endScratch);     sizeCanvas();     window.addEventListener("resize", sizeCanvas);     window.addEventListener("load", sizeCanvas);   })();
+updateCD(); setInterval(updateCD, 1000);   /* SCRATCH TO REVEAL — 3 cards */ document.querySelectorAll(".scratch-box").forEach(function(box){ var canvas = box.querySelector(".scratch-canvas"); if (!canvas) return; var ctx = canvas.getContext("2d"); var done = false, touched = false, scratching = false, moves = 0; function drawFoil(){ ctx.globalCompositeOperation = "source-over"; var w = canvas.width, h = canvas.height; var g = ctx.createLinearGradient(0, 0, w, h); g.addColorStop(0, "#E3CDA0"); g.addColorStop(0.5, "#C49A45"); g.addColorStop(1, "#A37E33"); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); ctx.fillStyle = "rgba(255,255,255,.10)"; for (var i = -h; i < w + h; i += 34){ ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i + 16, 0); ctx.lineTo(i + 16 - h, h); ctx.lineTo(i - h, h); ctx.closePath(); ctx.fill(); } ctx.fillStyle = "rgba(120,85,30,.18)"; for (var y = 11; y < h; y += 22){ for (var x = 11; x < w; x += 22){ ctx.beginPath(); ctx.arc(x, y, 1.6, 0, Math.PI * 2); ctx.fill(); } } ctx.fillStyle = "rgba(21,36,52,.78)"; ctx.font = "600 11px Jost, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("✦  SCRATCH  ✦", w / 2, h / 2); } function size(redraw){ if (done) return; if (touched && !redraw) return; var r = box.getBoundingClientRect(); canvas.width = Math.max(1, Math.round(r.width)); canvas.height = Math.max(1, Math.round(r.height)); drawFoil(); } function pos(e){ var r = canvas.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; } function erase(x, y){ ctx.globalCompositeOperation = "destination-out"; ctx.beginPath(); ctx.arc(x, y, 24, 0, Math.PI * 2); ctx.fill(); } function pct(){ try { var d = ctx.getImageData(0, 0, canvas.width, canvas.height).data, c = 0, t = 0; for (var i = 3; i < d.length; i += 64){ t++; if (d[i] === 0) c++; } return t ? c / t : 0; } catch(e){ return 0; } } function check(){ if (done) return; if (pct() > 0.4){ done = true; canvas.style.transition = "opacity .7s ease"; canvas.style.opacity = "0"; setTimeout(function(){ canvas.style.display = "none"; }, 750); } } canvas.addEventListener("pointerdown", function(e){ if (done) return; scratching = true; touched = true; moves = 0; try { canvas.setPointerCapture(e.pointerId); } catch(_e){} var p = pos(e); erase(p.x, p.y); e.preventDefault(); }); canvas.addEventListener("pointermove", function(e){ if (!scratching || done) return; var p = pos(e); erase(p.x, p.y); if (++moves % 10 === 0) check(); }); canvas.addEventListener("pointerup", function(){ if (scratching){ scratching = false; check(); } }); canvas.addEventListener("pointercancel", function(){ scratching = false; }); size(false); window.addEventListener("resize", function(){ size(false); }); window.addEventListener("load", function(){ size(false); }); });
 
   /* ═══ RSVP FORM ═══ */
   var attendingValue = "Yes";
