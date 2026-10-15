@@ -24,6 +24,11 @@
   .concept .desc { margin:10px auto 26px; max-width:34rem; font-size:.92rem; line-height:1.7; color:rgba(31,46,58,.65); }
   .demo { display:flex; justify-content:center; }
   canvas { touch-action:none; }
+  .corner { position:absolute; width:26px; height:26px; border:0 solid #C49A45; z-index:3; pointer-events:none; }
+  .c-tl { top:10px; left:10px; border-top-width:2px; border-left-width:2px; }
+  .c-tr { top:10px; right:10px; border-top-width:2px; border-right-width:2px; }
+  .c-bl { bottom:10px; left:10px; border-bottom-width:2px; border-left-width:2px; }
+  .c-br { bottom:10px; right:10px; border-bottom-width:2px; border-right-width:2px; }
 </style>
 </head>
 <body>
@@ -36,66 +41,61 @@
 
   <section class="concept" style="text-align:center;">
     <div class="concept-num">1</div>
-    <h2>Shahi <span>Mohar</span></h2>
-    <p class="desc">Royal wax-seal style — darmiyan me sunheri mohar hai, usay scratch karo to neeche date niklegi. Gol shape, sab se alag look.</p>
+    <h2>Shahi <span>Sikka</span></h2>
+    <p class="desc">Asal sunheray sikkay jaisa — bareek guilloche naqsh (note/sikkay wali engraving), kinaron par dhaariyan, beech me N·U mohar. Scratch karo to date niklegi.</p>
     <div class="demo">
-      <div style="background:#FFFDF8;border:1px solid rgba(196,154,69,.55);border-radius:1.1rem;padding:1.75rem 1.5rem 1.5rem;max-width:19rem;width:100%;box-shadow:0 14px 34px rgba(21,36,52,.10);">
-        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#C49A45;margin:0 0 1rem;">Mehendi</p>
-        <div class="scratch-box" data-kind="seal" style="position:relative;width:190px;height:190px;margin:0 auto;">
+      <div style="position:relative;max-width:20rem;width:100%;background:linear-gradient(165deg,#152434,#24394F);border:1px solid #C49A45;outline:1px solid rgba(196,154,69,.5);outline-offset:5px;border-radius:.6rem;padding:2.2rem 1.5rem 1.6rem;box-shadow:0 16px 40px rgba(21,36,52,.28);">
+        <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.32em;color:#DBC494;margin:0 0 1.1rem;">✦ Mehendi ✦</p>
+        <div class="scratch-box" data-kind="coin" style="position:relative;width:200px;height:200px;margin:0 auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45));">
           <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
-            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(21,36,52,.55);margin:0 0 .3rem;">Friday</p>
-            <p class="font-display" style="font-size:1.35rem;color:#152434;margin:0;">13 Nov 2026</p>
+            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#DBC494;margin:0 0 .3rem;">Friday</p>
+            <p class="font-display" style="font-size:1.4rem;color:#EFDDAE;margin:0;text-shadow:0 0 16px rgba(196,154,69,.7);">13 Nov 2026</p>
           </div>
-          <canvas style="position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;"></canvas>
+          <canvas style="position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;border-radius:50%;"></canvas>
         </div>
-        <p style="margin-top:1.1rem;font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:rgba(21,36,52,.45);">Mohar scratch karo</p>
+        <p style="margin-top:1.2rem;font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:rgba(219,196,148,.55);">Sikka scratch karo</p>
       </div>
     </div>
   </section>
 
   <section class="concept" style="text-align:center;">
     <div class="concept-num">2</div>
-    <h2>Golden <span>Ticket</span></h2>
-    <p class="desc">Cinema-ticket style — navy ticket, side me perforated stub, darmiyan me sunheri patti scratch karo to date samne.</p>
+    <h2>Damask <span>Jaal</span></h2>
+    <p class="desc">Shaahi kapron wala damask jaal — sunheri foil par ghana naqsh, kinaron par gehri vignette. Bilkul asal metallic foil jaisa texture.</p>
     <div class="demo">
-      <div style="max-width:21rem;width:100%;display:flex;background:linear-gradient(160deg,#152434 0%,#24394F 100%);border:1px solid rgba(196,154,69,.55);border-radius:.9rem;overflow:hidden;box-shadow:0 14px 34px rgba(21,36,52,.20);position:relative;">
-        <div style="flex:1;padding:1.5rem 1.25rem;text-align:center;">
-          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#DBC494;margin:0 0 .4rem;">✦ Mehendi ✦</p>
-          <p style="font-size:9px;text-transform:uppercase;letter-spacing:.28em;color:rgba(219,196,148,.6);margin:0 0 1rem;">You're Invited</p>
-          <div class="scratch-box" data-kind="ticket" style="position:relative;border-radius:.55rem;overflow:hidden;min-height:86px;display:flex;align-items:center;justify-content:center;">
-            <div style="text-align:center;padding:.9rem .5rem;">
-              <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(219,196,148,.8);margin:0 0 .25rem;">Friday</p>
-              <p class="font-display" style="font-size:1.25rem;color:#F7F2E8;margin:0;">13 Nov 2026</p>
-            </div>
-            <canvas style="position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;"></canvas>
+      <div style="position:relative;max-width:20rem;width:100%;background:#FFFDF8;border:1px solid #C49A45;outline:1px solid rgba(196,154,69,.5);outline-offset:5px;border-radius:.6rem;padding:2.2rem 1.5rem 1.6rem;box-shadow:0 16px 40px rgba(21,36,52,.12);">
+        <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.32em;color:#C49A45;margin:0 0 1.1rem;">Mehendi</p>
+        <div class="scratch-box" data-kind="damask" style="position:relative;border-radius:.35rem;overflow:hidden;min-height:150px;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(120,85,30,.4),0 6px 18px rgba(21,36,52,.18);">
+          <div style="text-align:center;padding:1rem .5rem;">
+            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(21,36,52,.55);margin:0 0 .3rem;">Friday</p>
+            <p class="font-display" style="font-size:1.5rem;color:#152434;margin:0;">13 November 2026</p>
+            <p style="font-size:9px;letter-spacing:.35em;color:#C49A45;margin:.6rem 0 0;">✦ ✦ ✦</p>
           </div>
+          <canvas style="position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;"></canvas>
         </div>
-        <div style="width:58px;border-left:2px dashed rgba(196,154,69,.6);display:flex;align-items:center;justify-content:center;position:relative;">
-          <span style="position:absolute;top:-11px;left:-11px;width:22px;height:22px;border-radius:50%;background:#F7F2E8;"></span>
-          <span style="position:absolute;bottom:-11px;left:-11px;width:22px;height:22px;border-radius:50%;background:#F7F2E8;"></span>
-          <p style="writing-mode:vertical-rl;font-size:11px;letter-spacing:.35em;color:#C49A45;text-transform:uppercase;">N &amp; U</p>
-        </div>
+        <p style="margin-top:1.2rem;font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:rgba(21,36,52,.45);">Foil scratch karo</p>
       </div>
     </div>
   </section>
 
   <section class="concept" style="text-align:center;">
     <div class="concept-num">3</div>
-    <h2><span>Jharokha</span> Arch</h2>
-    <p class="desc">Mughal jharokha style mehraab — sunheri frame ke andar mehrab-shaped scratch window, andar date chhupi hai. Sab se shaahi look.</p>
+    <h2>Sunheri <span>Mandala</span></h2>
+    <p class="desc">Hathon se bana mandala — pankhriyon ke ghane halqay, darmiyan me N·U. Mehendi ki raat ke liye bilkul munasib shaahi naqsh.</p>
     <div class="demo">
-      <div style="max-width:16rem;width:100%;">
-        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#C49A45;margin:0 0 1rem;">Mehendi</p>
-        <div style="border:1px solid #C49A45;border-radius:120px 120px 14px 14px;padding:10px;background:linear-gradient(160deg,#152434,#24394F);box-shadow:0 14px 34px rgba(21,36,52,.20);">
-          <div class="scratch-box" data-kind="arch" style="position:relative;border-radius:110px 110px 8px 8px;overflow:hidden;min-height:280px;display:flex;align-items:center;justify-content:center;background:rgba(247,242,232,.05);">
-            <div style="text-align:center;padding:4.5rem 1rem 1rem;">
-              <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(219,196,148,.8);margin:0 0 .3rem;">Friday</p>
-              <p class="font-display" style="font-size:1.35rem;color:#F7F2E8;margin:0;">13 Nov<br>2026</p>
-            </div>
-            <canvas style="position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;"></canvas>
+      <div style="position:relative;max-width:20rem;width:100%;background:radial-gradient(circle at 50% 30%,#1D2F44,#0B1420 75%);border:1px solid #C49A45;outline:1px solid rgba(196,154,69,.5);outline-offset:5px;border-radius:.6rem;padding:2.2rem 1.5rem 1.6rem;box-shadow:0 16px 40px rgba(11,20,32,.4);">
+        <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.32em;color:#DBC494;margin:0 0 1.1rem;">✦ Mehendi ✦</p>
+        <div class="scratch-box" data-kind="mandala" style="position:relative;width:210px;height:210px;margin:0 auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,.5));">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#DBC494;margin:0 0 .3rem;">Friday</p>
+            <p class="font-display" style="font-size:1.35rem;color:#EFDDAE;margin:0;text-shadow:0 0 16px rgba(196,154,69,.7);">13 Nov 2026</p>
           </div>
+          <canvas style="position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;border-radius:50%;"></canvas>
         </div>
-        <p style="margin-top:1.1rem;font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:rgba(21,36,52,.45);">Mehraab scratch karo</p>
+        <p style="margin-top:1.2rem;font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:rgba(219,196,148,.55);">Mandala scratch karo</p>
       </div>
     </div>
   </section>
@@ -106,129 +106,199 @@
 <script>
 (function(){
   "use strict";
-  function paintSeal(ctx, w, h){
-    var cx = w/2, cy = h/2, r = Math.min(w,h)/2 - 3;
-    var g = ctx.createRadialGradient(cx-r*0.3, cy-r*0.3, r*0.1, cx, cy, r);
-    g.addColorStop(0, "#EFDDAE"); g.addColorStop(0.55, "#C49A45"); g.addColorStop(1, "#8A6A2A");
-    ctx.fillStyle = g;
-    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.fill();
-    ctx.strokeStyle = "rgba(90,62,20,.55)"; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.arc(cx, cy, r-9, 0, Math.PI*2); ctx.stroke();
-    ctx.fillStyle = "rgba(90,62,20,.5)";
-    for (var a = 0; a < 24; a++){
-      var ang = a/24*Math.PI*2;
-      ctx.beginPath(); ctx.arc(cx + Math.cos(ang)*(r-4.5), cy + Math.sin(ang)*(r-4.5), 1.6, 0, Math.PI*2); ctx.fill();
+  var TAU = Math.PI*2;
+  function goldBase(ctx, cx, cy, r, deep){
+    var g = ctx.createRadialGradient(cx-r*0.35, cy-r*0.35, r*0.08, cx, cy, r);
+    if (deep){
+      g.addColorStop(0,"#EFDDAE"); g.addColorStop(0.45,"#D9B45F");
+      g.addColorStop(0.8,"#A87F34"); g.addColorStop(1,"#7A5A22");
+    } else {
+      g.addColorStop(0,"#F4E3B2"); g.addColorStop(0.5,"#D9B45F");
+      g.addColorStop(0.85,"#B08A3A"); g.addColorStop(1,"#8A6A2A");
     }
-    ctx.fillStyle = "rgba(60,40,12,.82)";
-    ctx.font = "600 30px 'Cormorant Garamond', serif";
-    ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.fillText("N·U", cx, cy+1);
-    ctx.font = "600 9px Jost, sans-serif";
-    ctx.fillText("S C R A T C H", cx, cy+30);
+    return g;
   }
-  function paintTicket(ctx, w, h){
-    var g = ctx.createLinearGradient(0, 0, w, h);
-    g.addColorStop(0, "#E3CDA0"); g.addColorStop(0.5, "#C49A45"); g.addColorStop(1, "#A37E33");
-    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = "rgba(255,255,255,.12)";
-    for (var i = -h; i < w+h; i += 30){
-      ctx.beginPath();
-      ctx.moveTo(i,0); ctx.lineTo(i+14,0); ctx.lineTo(i+14-h,h); ctx.lineTo(i-h,h);
-      ctx.closePath(); ctx.fill();
-    }
-    ctx.fillStyle = "rgba(21,36,52,.78)";
-    ctx.font = "600 11px Jost, sans-serif";
-    ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.fillText("✦  SCRATCH  ✦", w/2, h/2);
-  }
-  function paintArch(ctx, w, h){
-    var r = w/2;
-    ctx.beginPath();
-    ctx.moveTo(0, h);
-    ctx.lineTo(0, r);
-    ctx.arc(r, r, r, Math.PI, 0);
-    ctx.lineTo(w, h);
-    ctx.closePath();
-    var g = ctx.createLinearGradient(0, 0, 0, h);
-    g.addColorStop(0, "#E3CDA0"); g.addColorStop(0.5, "#C49A45"); g.addColorStop(1, "#96742E");
-    ctx.fillStyle = g; ctx.fill();
-    ctx.save(); ctx.clip();
-    ctx.fillStyle = "rgba(255,255,255,.10)";
-    for (var i = -h; i < w+h; i += 30){
-      ctx.beginPath();
-      ctx.moveTo(i,0); ctx.lineTo(i+14,0); ctx.lineTo(i+14-h,h); ctx.lineTo(i-h,h);
-      ctx.closePath(); ctx.fill();
-    }
-    ctx.fillStyle = "rgba(120,85,30,.20)";
-    for (var y = 14; y < h; y += 24){
-      for (var x = 14; x < w; x += 24){
-        ctx.beginPath(); ctx.arc(x, y, 1.7, 0, Math.PI*2); ctx.fill();
+  function paintCoin(ctx, w, h){
+    var cx=w/2, cy=h/2, r=Math.min(w,h)/2-2, k, a;
+    ctx.fillStyle = goldBase(ctx,cx,cy,r,false);
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,TAU); ctx.fill();
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,TAU); ctx.clip();
+    for (var f=0; f<2; f++){
+      var n = 40 + f*16, off = r*(0.36 + f*0.16), rr = r*(0.68 - f*0.12);
+      for (k=0;k<n;k++){
+        a = k/n*TAU + f*0.35;
+        ctx.strokeStyle = f ? "rgba(255,244,214,.30)" : "rgba(110,75,25,.32)";
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.arc(cx+Math.cos(a)*off, cy+Math.sin(a)*off, rr, 0, TAU);
+        ctx.stroke();
       }
     }
+    ctx.strokeStyle = "rgba(110,75,25,.16)"; ctx.lineWidth = 0.5;
+    for (var i=0;i<160;i++){
+      a=i/160*TAU;
+      ctx.beginPath();
+      ctx.moveTo(cx+Math.cos(a)*r*0.20, cy+Math.sin(a)*r*0.20);
+      ctx.lineTo(cx+Math.cos(a)*r*0.97, cy+Math.sin(a)*r*0.97);
+      ctx.stroke();
+    }
     ctx.restore();
-    ctx.fillStyle = "rgba(21,36,52,.78)";
-    ctx.font = "600 11px Jost, sans-serif";
-    ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.fillText("✦ SCRATCH ✦", w/2, h*0.62);
+    ctx.strokeStyle = "rgba(70,48,15,.65)"; ctx.lineWidth = 2.2;
+    for (var m=0;m<90;m++){
+      a=m/90*TAU;
+      ctx.beginPath();
+      ctx.moveTo(cx+Math.cos(a)*(r-1), cy+Math.sin(a)*(r-1));
+      ctx.lineTo(cx+Math.cos(a)*(r-8), cy+Math.sin(a)*(r-8));
+      ctx.stroke();
+    }
+    ctx.fillStyle = "rgba(70,48,15,.55)";
+    for (var b=0;b<44;b++){
+      a=b/44*TAU;
+      ctx.beginPath(); ctx.arc(cx+Math.cos(a)*(r-17), cy+Math.sin(a)*(r-17), 1.8, 0, TAU); ctx.fill();
+    }
+    ctx.strokeStyle = "rgba(70,48,15,.5)"; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(cx,cy,r-24,0,TAU); ctx.stroke();
+    ctx.fillStyle = "rgba(58,38,12,.92)";
+    ctx.textAlign="center"; ctx.textBaseline="middle";
+    ctx.font = "600 34px 'Cormorant Garamond', serif";
+    ctx.fillText("N·U", cx, cy-8);
+    ctx.font = "600 8px Jost, sans-serif";
+    ctx.fillStyle = "rgba(58,38,12,.75)";
+    ctx.fillText("S C R A T C H", cx, cy+26);
   }
-  var painters = { seal: paintSeal, ticket: paintTicket, arch: paintArch };
+  function paintDamask(ctx, w, h){
+    var g = ctx.createLinearGradient(0,0,w,h);
+    g.addColorStop(0,"#E7D096"); g.addColorStop(0.35,"#CFA855");
+    g.addColorStop(0.65,"#C49A45"); g.addColorStop(1,"#9A7630");
+    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+    var s = 30, row = 0;
+    for (var y = s/2; y < h + s; y += s, row++){
+      for (var x = (row%2 ? 0 : s/2); x < w + s; x += s){
+        var px = x, py = y;
+        ctx.strokeStyle = "rgba(110,75,25,.42)"; ctx.lineWidth = 1.1;
+        ctx.beginPath();
+        ctx.moveTo(px, py-9); ctx.lineTo(px+7, py); ctx.lineTo(px, py+9); ctx.lineTo(px-7, py);
+        ctx.closePath(); ctx.stroke();
+        ctx.fillStyle = "rgba(110,75,25,.5)";
+        ctx.beginPath(); ctx.arc(px, py, 2.2, 0, TAU); ctx.fill();
+        ctx.fillStyle = "rgba(255,244,214,.5)";
+        for (var p=0;p<4;p++){
+          var pa = p/4*TAU + Math.PI/4;
+          ctx.beginPath(); ctx.arc(px+Math.cos(pa)*11, py+Math.sin(pa)*11, 1.4, 0, TAU); ctx.fill();
+        }
+        ctx.strokeStyle = "rgba(255,244,214,.35)"; ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        ctx.moveTo(px-s/2, py); ctx.quadraticCurveTo(px, py-s/2, px+s/2, py);
+        ctx.stroke();
+      }
+    }
+    ctx.fillStyle = "rgba(255,255,255,.10)";
+    for (var d=-h; d<w+h; d+=46){
+      ctx.beginPath();
+      ctx.moveTo(d,0); ctx.lineTo(d+20,0); ctx.lineTo(d+20-h,h); ctx.lineTo(d-h,h);
+      ctx.closePath(); ctx.fill();
+    }
+    var v = ctx.createRadialGradient(w/2,h/2,Math.min(w,h)*0.3, w/2,h/2, Math.max(w,h)*0.75);
+    v.addColorStop(0,"rgba(0,0,0,0)"); v.addColorStop(1,"rgba(60,40,12,.38)");
+    ctx.fillStyle = v; ctx.fillRect(0,0,w,h);
+    ctx.fillStyle = "rgba(40,28,10,.8)";
+    ctx.font = "600 11px Jost, sans-serif";
+    ctx.textAlign="center"; ctx.textBaseline="middle";
+    ctx.fillText("✦  SCRATCH  ✦", w/2, h/2);
+  }
+  function paintMandala(ctx, w, h){
+    var cx=w/2, cy=h/2, r=Math.min(w,h)/2-2, k, a;
+    ctx.fillStyle = goldBase(ctx,cx,cy,r,true);
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,TAU); ctx.fill();
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,TAU); ctx.clip();
+    function petalRing(count, rad, len, wid, stroke, fillA){
+      for (k=0;k<count;k++){
+        a=k/count*TAU;
+        var px=cx+Math.cos(a)*rad, py=cy+Math.sin(a)*rad;
+        ctx.save(); ctx.translate(px,py); ctx.rotate(a+Math.PI/2);
+        if (fillA){ ctx.fillStyle=fillA; ctx.beginPath(); ctx.ellipse(0,0,wid,len,0,0,TAU); ctx.fill(); }
+        ctx.strokeStyle=stroke; ctx.lineWidth=1.1;
+        ctx.beginPath(); ctx.ellipse(0,0,wid,len,0,0,TAU); ctx.stroke();
+        ctx.restore();
+      }
+    }
+    petalRing(28, r*0.80, r*0.16, r*0.055, "rgba(90,60,20,.55)");
+    petalRing(28, r*0.80, r*0.09, r*0.03, "rgba(255,244,214,.5)");
+    ctx.fillStyle="rgba(90,60,20,.6)";
+    for (k=0;k<28;k++){
+      a=(k+0.5)/28*TAU;
+      ctx.beginPath(); ctx.arc(cx+Math.cos(a)*r*0.66, cy+Math.sin(a)*r*0.66, 2, 0, TAU); ctx.fill();
+    }
+    petalRing(20, r*0.52, r*0.13, r*0.05, "rgba(90,60,20,.6)", "rgba(255,244,214,.18)");
+    petalRing(12, r*0.32, r*0.10, r*0.045, "rgba(90,60,20,.65)");
+    ctx.strokeStyle="rgba(90,60,20,.5)"; ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.arc(cx,cy,r*0.97,0,TAU); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx,cy,r*0.60,0,TAU); ctx.stroke();
+    ctx.restore();
+    ctx.fillStyle="rgba(52,34,10,.92)";
+    ctx.textAlign="center"; ctx.textBaseline="middle";
+    ctx.font="600 30px 'Cormorant Garamond', serif";
+    ctx.fillText("N·U", cx, cy-6);
+    ctx.font="600 8px Jost, sans-serif";
+    ctx.fillStyle="rgba(52,34,10,.7)";
+    ctx.fillText("S C R A T C H", cx, cy+22);
+  }
+  var painters = { coin: paintCoin, damask: paintDamask, mandala: paintMandala };
   document.querySelectorAll(".scratch-box").forEach(function(box){
-    var kind = box.getAttribute("data-kind");
-    var paint = painters[kind] || paintTicket;
+    var paint = painters[box.getAttribute("data-kind")] || paintCoin;
     var canvas = box.querySelector("canvas");
     var ctx = canvas.getContext("2d");
-    var done = false, touched = false, scratching = false, moves = 0, base = 0;
+    var done=false, touched=false, scratching=false, moves=0, base=0;
     function size(redraw){
       if (done) return;
       if (touched && !redraw) return;
-      var r = box.getBoundingClientRect();
-      canvas.width = Math.max(1, Math.round(r.width));
-      canvas.height = Math.max(1, Math.round(r.height));
+      var rc = box.getBoundingClientRect();
+      canvas.width = Math.max(1, Math.round(rc.width));
+      canvas.height = Math.max(1, Math.round(rc.height));
       ctx.globalCompositeOperation = "source-over";
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0,0,canvas.width,canvas.height);
       paint(ctx, canvas.width, canvas.height);
       base = frac();
     }
     function frac(){
-      try {
-        var d = ctx.getImageData(0, 0, canvas.width, canvas.height).data, c = 0, t = 0;
-        for (var i = 3; i < d.length; i += 64){ t++; if (d[i] === 0) c++; }
-        return t ? c/t : 0;
-      } catch(e){ return 0; }
+      try{
+        var d=ctx.getImageData(0,0,canvas.width,canvas.height).data, c=0, t=0;
+        for (var i=3;i<d.length;i+=64){ t++; if(d[i]===0) c++; }
+        return t?c/t:0;
+      }catch(e){ return 0; }
     }
     function check(){
       if (done) return;
-      var f = frac();
-      var rel = base >= 1 ? 1 : (f - base)/(1 - base);
+      var f=frac(), rel = base>=1 ? 1 : (f-base)/(1-base);
       if (rel > 0.42){
-        done = true;
-        canvas.style.transition = "opacity .7s ease";
-        canvas.style.opacity = "0";
-        setTimeout(function(){ canvas.style.display = "none"; }, 750);
+        done=true;
+        canvas.style.transition="opacity .7s ease"; canvas.style.opacity="0";
+        setTimeout(function(){ canvas.style.display="none"; },750);
       }
     }
     function pos(e){
-      var r = canvas.getBoundingClientRect();
-      return { x: e.clientX - r.left, y: e.clientY - r.top };
+      var rc=canvas.getBoundingClientRect();
+      return { x:e.clientX-rc.left, y:e.clientY-rc.top };
     }
-    function erase(x, y){
-      ctx.globalCompositeOperation = "destination-out";
-      ctx.beginPath(); ctx.arc(x, y, 24, 0, Math.PI*2); ctx.fill();
+    function erase(x,y){
+      ctx.globalCompositeOperation="destination-out";
+      ctx.beginPath(); ctx.arc(x,y,24,0,TAU); ctx.fill();
     }
     canvas.addEventListener("pointerdown", function(e){
       if (done) return;
-      scratching = true; touched = true; moves = 0;
-      try { canvas.setPointerCapture(e.pointerId); } catch(_e){}
-      var p = pos(e); erase(p.x, p.y);
-      e.preventDefault();
+      scratching=true; touched=true; moves=0;
+      try{ canvas.setPointerCapture(e.pointerId); }catch(_e){}
+      var p=pos(e); erase(p.x,p.y); e.preventDefault();
     });
     canvas.addEventListener("pointermove", function(e){
-      if (!scratching || done) return;
-      var p = pos(e); erase(p.x, p.y);
-      if (++moves % 10 === 0) check();
+      if (!scratching||done) return;
+      var p=pos(e); erase(p.x,p.y);
+      if (++moves%10===0) check();
     });
-    canvas.addEventListener("pointerup", function(){ if (scratching){ scratching = false; check(); } });
-    canvas.addEventListener("pointercancel", function(){ scratching = false; });
+    canvas.addEventListener("pointerup", function(){ if(scratching){ scratching=false; check(); } });
+    canvas.addEventListener("pointercancel", function(){ scratching=false; });
     size(false);
     window.addEventListener("resize", function(){ size(false); });
     window.addEventListener("load", function(){ size(false); });
