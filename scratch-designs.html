@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Scratch Card Designs — N&U Wedding</title>
+<title>Scratch Card VFX Designs — N&U Wedding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:#F7F2E8; color:#1F2E3A; font-family:'Jost',sans-serif; }
@@ -17,85 +17,109 @@
   header.top h1 em { color:#C49A45; }
   header.top p { margin-top:10px; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(21,36,52,.55); }
   .gold-divider { width:120px; height:1px; margin:22px auto; background:linear-gradient(90deg,transparent,#C49A45,transparent); }
-  .concept { margin:56px 0 0; padding:36px 20px 44px; border:1px solid rgba(196,154,69,.35); border-radius:1.25rem; background:#FFFDF8; box-shadow:0 12px 40px rgba(21,36,52,.07); }
+  .concept { margin:56px 0 0; padding:36px 20px 44px; border:1px solid rgba(196,154,69,.35); border-radius:1.25rem; background:#FFFDF8; box-shadow:0 12px 40px rgba(21,36,52,.07); text-align:center; }
   .concept-num { display:inline-flex; align-items:center; justify-content:center; width:2.4rem; height:2.4rem; border-radius:50%; border:1px solid #C49A45; color:#C49A45; font-family:'Cormorant Garamond',serif; font-size:1.2rem; margin-bottom:14px; }
   .concept h2 { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:1.7rem; color:#152434; }
   .concept h2 span { color:#C49A45; font-style:italic; }
   .concept .desc { margin:10px auto 26px; max-width:34rem; font-size:.92rem; line-height:1.7; color:rgba(31,46,58,.65); }
   .demo { display:flex; justify-content:center; }
-  canvas { touch-action:none; }
-  .corner { position:absolute; width:26px; height:26px; border:0 solid #C49A45; z-index:3; pointer-events:none; }
+  canvas { touch-action:none; display:block; }
+  .vfx-card { position:relative; max-width:21rem; width:100%; border:1px solid #C49A45; outline:1px solid rgba(196,154,69,.5); outline-offset:5px; border-radius:.6rem; padding:2rem 1.25rem 1.4rem; overflow:hidden; }
+  .vfx-card .bg-fx { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+  .vfx-card .burst-fx { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:5; }
+  .vfx-inner { position:relative; z-index:2; }
+  .corner { position:absolute; width:26px; height:26px; border:0 solid #C49A45; z-index:6; pointer-events:none; }
   .c-tl { top:10px; left:10px; border-top-width:2px; border-left-width:2px; }
   .c-tr { top:10px; right:10px; border-top-width:2px; border-right-width:2px; }
   .c-bl { bottom:10px; left:10px; border-bottom-width:2px; border-left-width:2px; }
   .c-br { bottom:10px; right:10px; border-bottom-width:2px; border-right-width:2px; }
+  .scratch-box { position:relative; border-radius:.55rem; overflow:hidden; min-height:150px; display:flex; align-items:center; justify-content:center; }
+  .scratch-box .date { text-align:center; padding:1rem .5rem; position:relative; z-index:1; }
+  .scratch-box canvas.scratch { position:absolute; inset:0; width:100%; height:100%; cursor:crosshair; z-index:2; transition:opacity .6s ease; }
+  .scratch-box.done canvas.scratch { opacity:0; pointer-events:none; }
+  .date .d-day { font-size:10px; text-transform:uppercase; letter-spacing:.25em; margin:0 0 .3rem; }
+  .date .d-full { font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin:0; }
+  .scratch-box.revealed .date { animation: dateIn .9s cubic-bezier(.2,1.4,.4,1) forwards; }
+  @keyframes dateIn { 0% { transform:scale(.7); filter:brightness(2.2); } 60% { transform:scale(1.08); } 100% { transform:scale(1); } }
+  .hint { margin-top:1.1rem; font-size:10px; text-transform:uppercase; letter-spacing:.22em; position:relative; z-index:2; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <h1>Scratch Card <em>Designs</em></h1>
+    <h1>Scratch Card <em>VFX</em> Designs</h1>
     <div class="gold-divider"></div>
-    <p>Har design ko ungli se scratch karke try karo — phir 1, 2 ya 3 bata do</p>
+    <p>Animated + VFX — har ek ko scratch karke dekho, phir 1, 2 ya 3 bata do</p>
   </header>
 
-  <section class="concept" style="text-align:center;">
+  <section class="concept">
     <div class="concept-num">1</div>
-    <h2>Shahi <span>Sikka</span></h2>
-    <p class="desc">Asal sunheray sikkay jaisa — bareek guilloche naqsh (note/sikkay wali engraving), kinaron par dhaariyan, beech me N·U mohar. Scratch karo to date niklegi.</p>
+    <h2>Liquid <span>Gold</span></h2>
+    <p class="desc">Pighle sonay jaisi foil — roshni ki lehar musalsal behti hai, scratch karne par sunheray sparkles urtay hain, reveal par golden dhamaka.</p>
     <div class="demo">
-      <div style="position:relative;max-width:20rem;width:100%;background:linear-gradient(165deg,#152434,#24394F);border:1px solid #C49A45;outline:1px solid rgba(196,154,69,.5);outline-offset:5px;border-radius:.6rem;padding:2.2rem 1.5rem 1.6rem;box-shadow:0 16px 40px rgba(21,36,52,.28);">
+      <div class="vfx-card" data-kind="gold" style="background:linear-gradient(165deg,#152434,#24394F);box-shadow:0 16px 40px rgba(21,36,52,.28);">
+        <canvas class="bg-fx"></canvas>
         <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
-        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.32em;color:#DBC494;margin:0 0 1.1rem;">✦ Mehendi ✦</p>
-        <div class="scratch-box" data-kind="coin" style="position:relative;width:200px;height:200px;margin:0 auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45));">
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
-            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#DBC494;margin:0 0 .3rem;">Friday</p>
-            <p class="font-display" style="font-size:1.4rem;color:#EFDDAE;margin:0;text-shadow:0 0 16px rgba(196,154,69,.7);">13 Nov 2026</p>
+        <div class="vfx-inner">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.32em;color:#DBC494;margin:0 0 1.1rem;">✦ Mehendi ✦</p>
+          <div class="scratch-box" style="box-shadow:0 6px 18px rgba(0,0,0,.35), inset 0 0 0 1px rgba(120,85,30,.5);">
+            <div class="date">
+              <p class="d-day" style="color:#DBC494;">Friday</p>
+              <p class="d-full" style="color:#EFDDAE;text-shadow:0 0 16px rgba(196,154,69,.7);">13 November 2026</p>
+            </div>
+            <canvas class="scratch"></canvas>
           </div>
-          <canvas style="position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;border-radius:50%;"></canvas>
+          <p class="hint" style="color:rgba(219,196,148,.55);">Scratch karo — sparkles dekho</p>
         </div>
-        <p style="margin-top:1.2rem;font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:rgba(219,196,148,.55);">Sikka scratch karo</p>
+        <canvas class="burst-fx"></canvas>
       </div>
     </div>
   </section>
 
-  <section class="concept" style="text-align:center;">
+  <section class="concept">
     <div class="concept-num">2</div>
-    <h2>Damask <span>Jaal</span></h2>
-    <p class="desc">Shaahi kapron wala damask jaal — sunheri foil par ghana naqsh, kinaron par gehri vignette. Bilkul asal metallic foil jaisa texture.</p>
+    <h2>Firefly <span>Night</span></h2>
+    <p class="desc">Jagmagati raat — foil par sitaare timtimaty hain, scratch comet ki dum ki tarah chamakta hai, reveal par aatish-bazi aur roshan date.</p>
     <div class="demo">
-      <div style="position:relative;max-width:20rem;width:100%;background:#FFFDF8;border:1px solid #C49A45;outline:1px solid rgba(196,154,69,.5);outline-offset:5px;border-radius:.6rem;padding:2.2rem 1.5rem 1.6rem;box-shadow:0 16px 40px rgba(21,36,52,.12);">
+      <div class="vfx-card" data-kind="night" style="background:radial-gradient(circle at 50% 20%,#16283D,#070D17 78%);box-shadow:0 16px 40px rgba(7,13,23,.5);">
+        <canvas class="bg-fx"></canvas>
         <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
-        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.32em;color:#C49A45;margin:0 0 1.1rem;">Mehendi</p>
-        <div class="scratch-box" data-kind="damask" style="position:relative;border-radius:.35rem;overflow:hidden;min-height:150px;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(120,85,30,.4),0 6px 18px rgba(21,36,52,.18);">
-          <div style="text-align:center;padding:1rem .5rem;">
-            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(21,36,52,.55);margin:0 0 .3rem;">Friday</p>
-            <p class="font-display" style="font-size:1.5rem;color:#152434;margin:0;">13 November 2026</p>
-            <p style="font-size:9px;letter-spacing:.35em;color:#C49A45;margin:.6rem 0 0;">✦ ✦ ✦</p>
+        <div class="vfx-inner">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.32em;color:#DBC494;margin:0 0 1.1rem;">✦ Mehendi ✦</p>
+          <div class="scratch-box" style="box-shadow:0 6px 18px rgba(0,0,0,.5), inset 0 0 0 1px rgba(196,154,69,.35);">
+            <div class="date">
+              <p class="d-day" style="color:#DBC494;">Friday</p>
+              <p class="d-full" style="color:#FFF3D6;text-shadow:0 0 18px rgba(255,220,150,.9),0 0 46px rgba(196,154,69,.5);">13 November 2026</p>
+            </div>
+            <canvas class="scratch"></canvas>
           </div>
-          <canvas style="position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;"></canvas>
+          <p class="hint" style="color:rgba(219,196,148,.55);">Sitaare hatao — date jagmagayegi</p>
         </div>
-        <p style="margin-top:1.2rem;font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:rgba(21,36,52,.45);">Foil scratch karo</p>
+        <canvas class="burst-fx"></canvas>
       </div>
     </div>
   </section>
 
-  <section class="concept" style="text-align:center;">
+  <section class="concept">
     <div class="concept-num">3</div>
-    <h2>Sunheri <span>Mandala</span></h2>
-    <p class="desc">Hathon se bana mandala — pankhriyon ke ghane halqay, darmiyan me N·U. Mehendi ki raat ke liye bilkul munasib shaahi naqsh.</p>
+    <h2>Royal <span>Ignite</span></h2>
+    <p class="desc">Dahaktay angaaron wali foil — dararon me aag sulagti hai, scratch karne par chingariyan urti hain, reveal par sholon ka dhamaka.</p>
     <div class="demo">
-      <div style="position:relative;max-width:20rem;width:100%;background:radial-gradient(circle at 50% 30%,#1D2F44,#0B1420 75%);border:1px solid #C49A45;outline:1px solid rgba(196,154,69,.5);outline-offset:5px;border-radius:.6rem;padding:2.2rem 1.5rem 1.6rem;box-shadow:0 16px 40px rgba(11,20,32,.4);">
+      <div class="vfx-card" data-kind="ember" style="background:linear-gradient(165deg,#1A1210,#0D0A09);box-shadow:0 16px 40px rgba(13,10,9,.5);">
+        <canvas class="bg-fx"></canvas>
         <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
-        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.32em;color:#DBC494;margin:0 0 1.1rem;">✦ Mehendi ✦</p>
-        <div class="scratch-box" data-kind="mandala" style="position:relative;width:210px;height:210px;margin:0 auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,.5));">
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
-            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#DBC494;margin:0 0 .3rem;">Friday</p>
-            <p class="font-display" style="font-size:1.35rem;color:#EFDDAE;margin:0;text-shadow:0 0 16px rgba(196,154,69,.7);">13 Nov 2026</p>
+        <div class="vfx-inner">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:.32em;color:#E8B96A;margin:0 0 1.1rem;">✦ Mehendi ✦</p>
+          <div class="scratch-box" style="box-shadow:0 6px 18px rgba(0,0,0,.55), inset 0 0 0 1px rgba(200,120,50,.4);">
+            <div class="date">
+              <p class="d-day" style="color:#E8B96A;">Friday</p>
+              <p class="d-full" style="color:#FFE9C4;text-shadow:0 0 18px rgba(255,150,60,.9),0 0 46px rgba(255,110,30,.45);">13 November 2026</p>
+            </div>
+            <canvas class="scratch"></canvas>
           </div>
-          <canvas style="position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;border-radius:50%;"></canvas>
+          <p class="hint" style="color:rgba(232,185,106,.55);">Angaare hatao — chingariyan urengi</p>
         </div>
-        <p style="margin-top:1.2rem;font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:rgba(219,196,148,.55);">Mandala scratch karo</p>
+        <canvas class="burst-fx"></canvas>
       </div>
     </div>
   </section>
@@ -105,204 +129,276 @@
 
 <script>
 (function(){
-  "use strict";
-  var TAU = Math.PI*2;
-  function goldBase(ctx, cx, cy, r, deep){
-    var g = ctx.createRadialGradient(cx-r*0.35, cy-r*0.35, r*0.08, cx, cy, r);
-    if (deep){
-      g.addColorStop(0,"#EFDDAE"); g.addColorStop(0.45,"#D9B45F");
-      g.addColorStop(0.8,"#A87F34"); g.addColorStop(1,"#7A5A22");
-    } else {
-      g.addColorStop(0,"#F4E3B2"); g.addColorStop(0.5,"#D9B45F");
-      g.addColorStop(0.85,"#B08A3A"); g.addColorStop(1,"#8A6A2A");
-    }
-    return g;
+"use strict";
+var TAU = Math.PI*2;
+function rnd(seed){ var x = Math.sin(seed*127.1+311.7)*43758.5453; return x - Math.floor(x); }
+function Parts(){ this.a = []; }
+Parts.prototype.add = function(p){ if (this.a.length < 420) this.a.push(p); };
+Parts.prototype.step = function(dt){
+  for (var i=this.a.length-1; i>=0; i--){
+    var p = this.a[i];
+    p.life -= dt;
+    if (p.life <= 0){ this.a.splice(i,1); continue; }
+    p.x += p.vx*dt; p.y += p.vy*dt;
+    p.vy += (p.g||0)*dt; p.vx *= (1-(p.drag||0)*dt); p.vy *= (1-(p.drag||0)*dt);
+    if (p.sway) p.x += Math.sin(p.life*6 + p.seed)*p.sway*dt;
   }
-  function paintCoin(ctx, w, h){
-    var cx=w/2, cy=h/2, r=Math.min(w,h)/2-2, k, a;
-    ctx.fillStyle = goldBase(ctx,cx,cy,r,false);
-    ctx.beginPath(); ctx.arc(cx,cy,r,0,TAU); ctx.fill();
-    ctx.save();
-    ctx.beginPath(); ctx.arc(cx,cy,r,0,TAU); ctx.clip();
-    for (var f=0; f<2; f++){
-      var n = 40 + f*16, off = r*(0.36 + f*0.16), rr = r*(0.68 - f*0.12);
-      for (k=0;k<n;k++){
-        a = k/n*TAU + f*0.35;
-        ctx.strokeStyle = f ? "rgba(255,244,214,.30)" : "rgba(110,75,25,.32)";
-        ctx.lineWidth = 0.6;
-        ctx.beginPath();
-        ctx.arc(cx+Math.cos(a)*off, cy+Math.sin(a)*off, rr, 0, TAU);
-        ctx.stroke();
-      }
-    }
-    ctx.strokeStyle = "rgba(110,75,25,.16)"; ctx.lineWidth = 0.5;
-    for (var i=0;i<160;i++){
-      a=i/160*TAU;
-      ctx.beginPath();
-      ctx.moveTo(cx+Math.cos(a)*r*0.20, cy+Math.sin(a)*r*0.20);
-      ctx.lineTo(cx+Math.cos(a)*r*0.97, cy+Math.sin(a)*r*0.97);
-      ctx.stroke();
-    }
-    ctx.restore();
-    ctx.strokeStyle = "rgba(70,48,15,.65)"; ctx.lineWidth = 2.2;
-    for (var m=0;m<90;m++){
-      a=m/90*TAU;
-      ctx.beginPath();
-      ctx.moveTo(cx+Math.cos(a)*(r-1), cy+Math.sin(a)*(r-1));
-      ctx.lineTo(cx+Math.cos(a)*(r-8), cy+Math.sin(a)*(r-8));
-      ctx.stroke();
-    }
-    ctx.fillStyle = "rgba(70,48,15,.55)";
-    for (var b=0;b<44;b++){
-      a=b/44*TAU;
-      ctx.beginPath(); ctx.arc(cx+Math.cos(a)*(r-17), cy+Math.sin(a)*(r-17), 1.8, 0, TAU); ctx.fill();
-    }
-    ctx.strokeStyle = "rgba(70,48,15,.5)"; ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.arc(cx,cy,r-24,0,TAU); ctx.stroke();
-    ctx.fillStyle = "rgba(58,38,12,.92)";
-    ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.font = "600 34px 'Cormorant Garamond', serif";
-    ctx.fillText("N·U", cx, cy-8);
-    ctx.font = "600 8px Jost, sans-serif";
-    ctx.fillStyle = "rgba(58,38,12,.75)";
-    ctx.fillText("S C R A T C H", cx, cy+26);
+};
+Parts.prototype.draw = function(ctx){
+  ctx.save();
+  ctx.globalCompositeOperation = "lighter";
+  for (var i=0;i<this.a.length;i++){
+    var p=this.a[i], t=p.life/p.max;
+    ctx.globalAlpha = Math.max(0,t)*(p.alpha||1);
+    ctx.fillStyle = p.color;
+    ctx.beginPath(); ctx.arc(p.x,p.y, Math.max(0.4,p.size*t), 0, TAU); ctx.fill();
   }
-  function paintDamask(ctx, w, h){
-    var g = ctx.createLinearGradient(0,0,w,h);
-    g.addColorStop(0,"#E7D096"); g.addColorStop(0.35,"#CFA855");
-    g.addColorStop(0.65,"#C49A45"); g.addColorStop(1,"#9A7630");
-    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
-    var s = 30, row = 0;
-    for (var y = s/2; y < h + s; y += s, row++){
-      for (var x = (row%2 ? 0 : s/2); x < w + s; x += s){
-        var px = x, py = y;
-        ctx.strokeStyle = "rgba(110,75,25,.42)"; ctx.lineWidth = 1.1;
-        ctx.beginPath();
-        ctx.moveTo(px, py-9); ctx.lineTo(px+7, py); ctx.lineTo(px, py+9); ctx.lineTo(px-7, py);
-        ctx.closePath(); ctx.stroke();
-        ctx.fillStyle = "rgba(110,75,25,.5)";
-        ctx.beginPath(); ctx.arc(px, py, 2.2, 0, TAU); ctx.fill();
-        ctx.fillStyle = "rgba(255,244,214,.5)";
-        for (var p=0;p<4;p++){
-          var pa = p/4*TAU + Math.PI/4;
-          ctx.beginPath(); ctx.arc(px+Math.cos(pa)*11, py+Math.sin(pa)*11, 1.4, 0, TAU); ctx.fill();
-        }
-        ctx.strokeStyle = "rgba(255,244,214,.35)"; ctx.lineWidth = 0.8;
-        ctx.beginPath();
-        ctx.moveTo(px-s/2, py); ctx.quadraticCurveTo(px, py-s/2, px+s/2, py);
-        ctx.stroke();
-      }
-    }
-    ctx.fillStyle = "rgba(255,255,255,.10)";
-    for (var d=-h; d<w+h; d+=46){
-      ctx.beginPath();
-      ctx.moveTo(d,0); ctx.lineTo(d+20,0); ctx.lineTo(d+20-h,h); ctx.lineTo(d-h,h);
-      ctx.closePath(); ctx.fill();
-    }
-    var v = ctx.createRadialGradient(w/2,h/2,Math.min(w,h)*0.3, w/2,h/2, Math.max(w,h)*0.75);
-    v.addColorStop(0,"rgba(0,0,0,0)"); v.addColorStop(1,"rgba(60,40,12,.38)");
-    ctx.fillStyle = v; ctx.fillRect(0,0,w,h);
-    ctx.fillStyle = "rgba(40,28,10,.8)";
-    ctx.font = "600 11px Jost, sans-serif";
-    ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.fillText("✦  SCRATCH  ✦", w/2, h/2);
+  ctx.restore();
+  ctx.globalAlpha = 1;
+};
+function baseGold(c,w,h){
+  var x=c.getContext("2d");
+  var g=x.createLinearGradient(0,0,w,h);
+  g.addColorStop(0,"#EFDDAE"); g.addColorStop(0.4,"#D9B45F");
+  g.addColorStop(0.7,"#C49A45"); g.addColorStop(1,"#96742E");
+  x.fillStyle=g; x.fillRect(0,0,w,h);
+  x.fillStyle="rgba(110,75,25,.30)";
+  for (var i=0;i<130;i++){ x.beginPath(); x.arc(rnd(i+3)*w, rnd(i+99)*h, 1+rnd(i+7)*2.2, 0, TAU); x.fill(); }
+  x.strokeStyle="rgba(255,246,220,.28)"; x.lineWidth=1;
+  for (var d=-h; d<w+h; d+=34){ x.beginPath(); x.moveTo(d,0); x.lineTo(d+12,0); x.lineTo(d+12-h,h); x.lineTo(d-h,h); x.stroke(); }
+  var v=x.createRadialGradient(w/2,h/2,Math.min(w,h)*0.25,w/2,h/2,Math.max(w,h)*0.72);
+  v.addColorStop(0,"rgba(0,0,0,0)"); v.addColorStop(1,"rgba(60,40,12,.34)");
+  x.fillStyle=v; x.fillRect(0,0,w,h);
+  x.fillStyle="rgba(52,34,10,.78)";
+  x.font="600 11px Jost, sans-serif"; x.textAlign="center"; x.textBaseline="middle";
+  x.fillText("✦  SCRATCH  ✦", w/2, h/2);
+}
+function baseNight(c,w,h){
+  var x=c.getContext("2d");
+  var g=x.createLinearGradient(0,0,0,h);
+  g.addColorStop(0,"#0A1322"); g.addColorStop(1,"#16283D");
+  x.fillStyle=g; x.fillRect(0,0,w,h);
+  for (var i=0;i<60;i++){
+    x.fillStyle="rgba(220,230,250,"+(0.25+rnd(i+5)*0.5)+")";
+    x.beginPath(); x.arc(rnd(i+1)*w, rnd(i+101)*h, 0.5+rnd(i+201)*1.3, 0, TAU); x.fill();
   }
-  function paintMandala(ctx, w, h){
-    var cx=w/2, cy=h/2, r=Math.min(w,h)/2-2, k, a;
-    ctx.fillStyle = goldBase(ctx,cx,cy,r,true);
-    ctx.beginPath(); ctx.arc(cx,cy,r,0,TAU); ctx.fill();
-    ctx.save();
-    ctx.beginPath(); ctx.arc(cx,cy,r,0,TAU); ctx.clip();
-    function petalRing(count, rad, len, wid, stroke, fillA){
-      for (k=0;k<count;k++){
-        a=k/count*TAU;
-        var px=cx+Math.cos(a)*rad, py=cy+Math.sin(a)*rad;
-        ctx.save(); ctx.translate(px,py); ctx.rotate(a+Math.PI/2);
-        if (fillA){ ctx.fillStyle=fillA; ctx.beginPath(); ctx.ellipse(0,0,wid,len,0,0,TAU); ctx.fill(); }
-        ctx.strokeStyle=stroke; ctx.lineWidth=1.1;
-        ctx.beginPath(); ctx.ellipse(0,0,wid,len,0,0,TAU); ctx.stroke();
-        ctx.restore();
-      }
-    }
-    petalRing(28, r*0.80, r*0.16, r*0.055, "rgba(90,60,20,.55)");
-    petalRing(28, r*0.80, r*0.09, r*0.03, "rgba(255,244,214,.5)");
-    ctx.fillStyle="rgba(90,60,20,.6)";
-    for (k=0;k<28;k++){
-      a=(k+0.5)/28*TAU;
-      ctx.beginPath(); ctx.arc(cx+Math.cos(a)*r*0.66, cy+Math.sin(a)*r*0.66, 2, 0, TAU); ctx.fill();
-    }
-    petalRing(20, r*0.52, r*0.13, r*0.05, "rgba(90,60,20,.6)", "rgba(255,244,214,.18)");
-    petalRing(12, r*0.32, r*0.10, r*0.045, "rgba(90,60,20,.65)");
-    ctx.strokeStyle="rgba(90,60,20,.5)"; ctx.lineWidth=1.2;
-    ctx.beginPath(); ctx.arc(cx,cy,r*0.97,0,TAU); ctx.stroke();
-    ctx.beginPath(); ctx.arc(cx,cy,r*0.60,0,TAU); ctx.stroke();
-    ctx.restore();
-    ctx.fillStyle="rgba(52,34,10,.92)";
-    ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.font="600 30px 'Cormorant Garamond', serif";
-    ctx.fillText("N·U", cx, cy-6);
-    ctx.font="600 8px Jost, sans-serif";
-    ctx.fillStyle="rgba(52,34,10,.7)";
-    ctx.fillText("S C R A T C H", cx, cy+22);
+  var mx=w*0.8, my=h*0.3, mr=Math.min(w,h)*0.16;
+  x.fillStyle="#E8ECF5"; x.beginPath(); x.arc(mx,my,mr,0,TAU); x.fill();
+  x.fillStyle="#0E1828"; x.beginPath(); x.arc(mx+mr*0.45,my-mr*0.25,mr*0.9,0,TAU); x.fill();
+  x.fillStyle="rgba(200,215,240,.5)";
+  x.font="600 10px Jost, sans-serif"; x.textAlign="center"; x.textBaseline="middle";
+  x.fillText("✦  SCRATCH  ✦", w/2, h*0.8);
+}
+function baseEmber(c,w,h){
+  var x=c.getContext("2d");
+  var g=x.createLinearGradient(0,0,0,h);
+  g.addColorStop(0,"#241A14"); g.addColorStop(1,"#120D0B");
+  x.fillStyle=g; x.fillRect(0,0,w,h);
+  x.fillStyle="rgba(0,0,0,.35)";
+  for (var i=0;i<160;i++){ x.beginPath(); x.arc(rnd(i+3)*w, rnd(i+99)*h, 1+rnd(i+7)*2.6, 0, TAU); x.fill(); }
+  x.strokeStyle="rgba(0,0,0,.55)"; x.lineWidth=2.5;
+  for (var cr=0; cr<7; cr++){
+    x.beginPath();
+    var px=rnd(cr+501)*w, py=0;
+    x.moveTo(px,py);
+    for (var sgm=0; sgm<5; sgm++){ px+=(rnd(cr*10+sgm+1)-0.5)*70; py+=h/5; x.lineTo(px,py); }
+    x.stroke();
   }
-  var painters = { coin: paintCoin, damask: paintDamask, mandala: paintMandala };
-  document.querySelectorAll(".scratch-box").forEach(function(box){
-    var paint = painters[box.getAttribute("data-kind")] || paintCoin;
-    var canvas = box.querySelector("canvas");
-    var ctx = canvas.getContext("2d");
-    var done=false, touched=false, scratching=false, moves=0, base=0;
-    function size(redraw){
-      if (done) return;
-      if (touched && !redraw) return;
-      var rc = box.getBoundingClientRect();
-      canvas.width = Math.max(1, Math.round(rc.width));
-      canvas.height = Math.max(1, Math.round(rc.height));
-      ctx.globalCompositeOperation = "source-over";
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      paint(ctx, canvas.width, canvas.height);
-      base = frac();
+  x.fillStyle="rgba(255,170,90,.4)";
+  x.font="600 10px Jost, sans-serif"; x.textAlign="center"; x.textBaseline="middle";
+  x.fillText("✦  SCRATCH  ✦", w/2, h*0.85);
+}
+function emberCracks(w,h){
+  var out=[];
+  for (var cr=0; cr<7; cr++){
+    var pts=[], px=rnd(cr+501)*w, py=0;
+    pts.push([px,py]);
+    for (var s=0;s<5;s++){ px+=(rnd(cr*10+s+1)-0.5)*70; py+=h/5; pts.push([px,py]); }
+    out.push({pts:pts, ph:rnd(cr+77)*TAU});
+  }
+  return out;
+}
+var concepts=[];
+document.querySelectorAll(".vfx-card").forEach(function(card, ci){
+  var kind = card.getAttribute("data-kind");
+  var box = card.querySelector(".scratch-box");
+  var disp = card.querySelector("canvas.scratch");
+  var bg = card.querySelector("canvas.bg-fx");
+  var bst = card.querySelector("canvas.burst-fx");
+  var dctx = disp.getContext("2d");
+  var bctx = bg.getContext("2d");
+  var fctx = bst.getContext("2d");
+  var off = document.createElement("canvas");
+  var octx = off.getContext("2d");
+  var C = {
+    kind:kind, card:card, box:box, disp:disp, dctx:dctx, off:off, octx:octx,
+    bctx:bctx, fctx:fctx, done:false, touched:false, scratching:false,
+    moves:0, base:0, W:0, H:0, BW:0, BH:0,
+    trail:new Parts(), ambient:new Parts(), stars:[], cracks:[], shoot:null, shootT:2+rnd(ci)*4
+  };
+  function size(){
+    var r = box.getBoundingClientRect();
+    C.W=Math.max(1,Math.round(r.width)); C.H=Math.max(1,Math.round(r.height));
+    disp.width=C.W; disp.height=C.H; off.width=C.W; off.height=C.H;
+    var br = card.getBoundingClientRect();
+    C.BW=Math.max(1,Math.round(br.width)); C.BH=Math.max(1,Math.round(br.height));
+    bg.width=C.BW; bg.height=C.BH; bst.width=C.BW; bst.height=C.BH;
+    octx.globalCompositeOperation="source-over";
+    octx.clearRect(0,0,C.W,C.H);
+    if (kind==="gold") baseGold(off,C.W,C.H);
+    else if (kind==="night") baseNight(off,C.W,C.H);
+    else baseEmber(off,C.W,C.H);
+    C.base = frac();
+    C.stars=[]; C.cracks=[];
+    if (kind==="night"){
+      for (var i=0;i<42;i++) C.stars.push({x:rnd(i+1+ci*50)*C.W, y:rnd(i+101+ci*50)*C.H, r:0.6+rnd(i+201)*1.6, sp:1+rnd(i+301)*3, ph:rnd(i+401)*TAU});
     }
-    function frac(){
-      try{
-        var d=ctx.getImageData(0,0,canvas.width,canvas.height).data, c=0, t=0;
-        for (var i=3;i<d.length;i+=64){ t++; if(d[i]===0) c++; }
-        return t?c/t:0;
-      }catch(e){ return 0; }
+    if (kind==="ember"){ C.cracks = emberCracks(C.W,C.H); }
+    if (!C.touched) seedAmbient();
+  }
+  function seedAmbient(){
+    C.ambient = new Parts();
+    for (var i=0;i<26;i++){
+      if (kind==="gold") C.ambient.add({x:rnd(i+11)*C.BW, y:rnd(i+111)*C.BH, vx:(rnd(i+211)-0.5)*8, vy:-6-rnd(i+311)*14, life:4+rnd(i+411)*4, max:8, size:1+rnd(i+511)*2.2, color:"#E8C876", alpha:0.5, sway:6, seed:rnd(i+611)*9});
+      else if (kind==="night") C.ambient.add({x:rnd(i+11)*C.BW, y:rnd(i+111)*C.BH, vx:0, vy:0, life:3+rnd(i+211)*4, max:7, size:0.6+rnd(i+311)*1.4, color:"#CFE0FF", alpha:0.55, seed:rnd(i+411)*9});
+      else C.ambient.add({x:rnd(i+11)*C.BW, y:C.BH*0.4+rnd(i+111)*C.BH*0.6, vx:(rnd(i+211)-0.5)*10, vy:-14-rnd(i+311)*26, life:2.5+rnd(i+411)*3, max:5.5, size:1+rnd(i+511)*2.4, color: rnd(i+611)>0.5?"#FF9A3C":"#FFC46B", alpha:0.75, sway:14, seed:rnd(i+711)*9});
     }
-    function check(){
-      if (done) return;
-      var f=frac(), rel = base>=1 ? 1 : (f-base)/(1-base);
-      if (rel > 0.42){
-        done=true;
-        canvas.style.transition="opacity .7s ease"; canvas.style.opacity="0";
-        setTimeout(function(){ canvas.style.display="none"; },750);
-      }
+  }
+  function frac(){
+    try{
+      var d=octx.getImageData(0,0,C.W,C.H).data, c=0, t=0;
+      for (var i=3;i<d.length;i+=96){ t++; if(d[i]===0) c++; }
+      return t?c/t:0;
+    }catch(e){ return 0; }
+  }
+  function check(){
+    if (C.done) return;
+    var f=frac(), rel = C.base>=1 ? 1 : (f-C.base)/(1-C.base);
+    if (rel > 0.40) reveal();
+  }
+  function cardPos(e, canvas){
+    var r=canvas.getBoundingClientRect(), cr=card.getBoundingClientRect();
+    return { x:e.clientX-r.left, y:e.clientY-r.top, bx:e.clientX-cr.left, by:e.clientY-cr.top };
+  }
+  function erase(x,y){
+    octx.globalCompositeOperation="destination-out";
+    octx.beginPath(); octx.arc(x,y,26,0,TAU); octx.fill();
+  }
+  function trailBurst(bx,by){
+    for (var i=0;i<4;i++){
+      var col = kind==="ember" ? (rnd(bx+i)>0.5?"#FF9A3C":"#FFD98A") : (kind==="night" ? "#FFF3D6" : "#FFE9A8");
+      C.trail.add({x:bx, y:by, vx:(rnd(bx*3+i)-0.5)*90, vy:(rnd(by*3+i)-0.5)*90 - 30, life:0.5+rnd(i+bx)*0.4, max:0.9, size:1.5+rnd(i+7)*2.5, color:col, alpha:0.95, g:160, drag:1.2});
     }
-    function pos(e){
-      var rc=canvas.getBoundingClientRect();
-      return { x:e.clientX-rc.left, y:e.clientY-rc.top };
+  }
+  function reveal(){
+    C.done=true;
+    box.classList.add("done","revealed");
+    var cx=C.BW/2, cy=C.BH/2;
+    for (var i=0;i<90;i++){
+      var a=rnd(i+1)*TAU, sp=60+rnd(i+101)*260;
+      var col = kind==="ember" ? (rnd(i+201)>0.4?"#FF9A3C":"#FFE9A8") : (kind==="night" ? "#FFF3D6" : "#FFE9A8");
+      C.trail.add({x:cx+(rnd(i+301)-0.5)*40, y:cy+(rnd(i+401)-0.5)*30, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp-60, life:0.9+rnd(i+501)*0.9, max:1.8, size:2+rnd(i+601)*3.4, color:col, alpha:1, g:220, drag:1.6});
     }
-    function erase(x,y){
-      ctx.globalCompositeOperation="destination-out";
-      ctx.beginPath(); ctx.arc(x,y,24,0,TAU); ctx.fill();
-    }
-    canvas.addEventListener("pointerdown", function(e){
-      if (done) return;
-      scratching=true; touched=true; moves=0;
-      try{ canvas.setPointerCapture(e.pointerId); }catch(_e){}
-      var p=pos(e); erase(p.x,p.y); e.preventDefault();
-    });
-    canvas.addEventListener("pointermove", function(e){
-      if (!scratching||done) return;
-      var p=pos(e); erase(p.x,p.y);
-      if (++moves%10===0) check();
-    });
-    canvas.addEventListener("pointerup", function(){ if(scratching){ scratching=false; check(); } });
-    canvas.addEventListener("pointercancel", function(){ scratching=false; });
-    size(false);
-    window.addEventListener("resize", function(){ size(false); });
-    window.addEventListener("load", function(){ size(false); });
+    setTimeout(function(){ disp.style.display="none"; }, 700);
+  }
+  disp.addEventListener("pointerdown", function(e){
+    if (C.done) return;
+    C.scratching=true; C.touched=true; C.moves=0;
+    try{ disp.setPointerCapture(e.pointerId); }catch(_e){}
+    var p=cardPos(e,disp); erase(p.x,p.y); trailBurst(p.bx,p.by);
+    e.preventDefault();
   });
+  disp.addEventListener("pointermove", function(e){
+    if (!C.scratching || C.done) return;
+    var p=cardPos(e,disp); erase(p.x,p.y); trailBurst(p.bx,p.by);
+    if (++C.moves%12===0) check();
+  });
+  disp.addEventListener("pointerup", function(){ if(C.scratching){ C.scratching=false; check(); } });
+  disp.addEventListener("pointercancel", function(){ C.scratching=false; });
+  C.size=size;
+  concepts.push(C);
+  size();
+});
+window.addEventListener("resize", function(){ concepts.forEach(function(C){ if(!C.touched) C.size(); }); });
+window.addEventListener("load", function(){ concepts.forEach(function(C){ if(!C.touched) C.size(); }); });
+var last=performance.now();
+function loop(now){
+  var dt=Math.min(0.05,(now-last)/1000); last=now;
+  var t=now/1000;
+  concepts.forEach(function(C){
+    if (!C.done && C.disp.style.display!=="none"){
+      var x=C.dctx, w=C.W, h=C.H;
+      x.clearRect(0,0,w,h);
+      x.drawImage(C.off,0,0);
+      x.globalCompositeOperation="source-atop";
+      if (C.kind==="gold"){
+        var sx=((t*90)%(w+240))-120;
+        x.save(); x.translate(w/2,h/2); x.rotate(-0.5); x.translate(-w/2,-h/2);
+        var g=x.createLinearGradient(sx-70,0,sx+70,0);
+        g.addColorStop(0,"rgba(255,246,220,0)"); g.addColorStop(0.5,"rgba(255,246,220,.5)"); g.addColorStop(1,"rgba(255,246,220,0)");
+        x.fillStyle=g; x.fillRect(sx-70,-h,140,h*3);
+        x.restore();
+      } else if (C.kind==="night"){
+        for (var i=0;i<C.stars.length;i++){
+          var s=C.stars[i], a=0.25+0.75*Math.abs(Math.sin(t*s.sp+s.ph));
+          x.fillStyle="rgba(255,250,230,"+a.toFixed(3)+")";
+          x.beginPath(); x.arc(s.x,s.y,s.r,0,TAU); x.fill();
+        }
+      } else {
+        for (var cr=0;cr<C.cracks.length;cr++){
+          var ck=C.cracks[cr], ga=0.22+0.38*Math.abs(Math.sin(t*2.6+ck.ph));
+          x.strokeStyle="rgba(255,"+Math.round(110+60*ga)+",40,"+ga.toFixed(3)+")";
+          x.lineWidth=3; x.beginPath();
+          x.moveTo(ck.pts[0][0],ck.pts[0][1]);
+          for (var s2=1;s2<ck.pts.length;s2++) x.lineTo(ck.pts[s2][0],ck.pts[s2][1]);
+          x.stroke();
+          x.strokeStyle="rgba(255,220,150,"+(ga*0.9).toFixed(3)+")";
+          x.lineWidth=1; x.stroke();
+        }
+      }
+      x.globalCompositeOperation="source-over";
+    }
+    var b=C.bctx;
+    b.clearRect(0,0,C.BW,C.BH);
+    if (C.kind==="night"){
+      for (var k=0;k<50;k++){
+        var ax=rnd(k+901)*C.BW, ay=rnd(k+951)*C.BH;
+        var aa=0.15+0.5*Math.abs(Math.sin(t*(0.6+rnd(k+961)*1.6)+rnd(k+971)*TAU));
+        b.fillStyle="rgba(200,220,255,"+aa.toFixed(3)+")";
+        b.beginPath(); b.arc(ax,ay,0.5+rnd(k+981)*1.2,0,TAU); b.fill();
+      }
+      C.shootT-=dt;
+      if (C.shootT<=0 && !C.shoot){
+        C.shoot={x:rnd(t)*C.BW*0.7+C.BW*0.15, y:rnd(t*1.3)*C.BH*0.3, vx:260, vy:120, life:0.9};
+        C.shootT=5+rnd(t*2.7)*5;
+      }
+      if (C.shoot){
+        var sh=C.shoot; sh.life-=dt; sh.x+=sh.vx*dt; sh.y+=sh.vy*dt;
+        var sg=b.createLinearGradient(sh.x,sh.y,sh.x-sh.vx*0.25,sh.y-sh.vy*0.25);
+        sg.addColorStop(0,"rgba(255,255,255,"+(0.9*Math.max(0,sh.life)).toFixed(3)+")");
+        sg.addColorStop(1,"rgba(255,255,255,0)");
+        b.strokeStyle=sg; b.lineWidth=2;
+        b.beginPath(); b.moveTo(sh.x,sh.y); b.lineTo(sh.x-sh.vx*0.25,sh.y-sh.vy*0.25); b.stroke();
+        if (sh.life<=0) C.shoot=null;
+      }
+    }
+    C.ambient.step(dt);
+    if (C.ambient.a.length<20 && rnd(t*13+C.BW)>0.4){
+      var nb = C.kind==="gold"
+        ? {x:rnd(t*7)*C.BW, y:C.BH+6, vx:(rnd(t*9)-0.5)*8, vy:-6-rnd(t*11)*14, life:5, max:5, size:1+rnd(t*13)*2.2, color:"#E8C876", alpha:0.5, sway:6, seed:rnd(t*17)*9}
+        : C.kind==="night"
+        ? {x:rnd(t*7)*C.BW, y:rnd(t*9)*C.BH, vx:0, vy:0, life:4, max:4, size:0.6+rnd(t*11)*1.4, color:"#CFE0FF", alpha:0.5, seed:rnd(t*13)*9}
+        : {x:rnd(t*7)*C.BW, y:C.BH*0.5+rnd(t*9)*C.BH*0.5, vx:(rnd(t*11)-0.5)*10, vy:-14-rnd(t*13)*26, life:3.5, max:3.5, size:1+rnd(t*15)*2.4, color:rnd(t*17)>0.5?"#FF9A3C":"#FFC46B", alpha:0.75, sway:14, seed:rnd(t*19)*9};
+      C.ambient.add(nb);
+    }
+    C.ambient.draw(b);
+    var f=C.fctx;
+    f.clearRect(0,0,C.BW,C.BH);
+    C.trail.step(dt); C.trail.draw(f);
+  });
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
 })();
 </script>
 </body>
