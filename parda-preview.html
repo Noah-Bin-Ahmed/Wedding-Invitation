@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Velvet Parda — Date Reveal Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#F7F2E8; color:#1F2E3A; font-family:'Jost',sans-serif; }
+  .font-display { font-family:'Cormorant Garamond',serif; }
+  .wrap { max-width:1060px; margin:0 auto; padding:0 20px 80px; }
+  header.top { text-align:center; padding:52px 20px 12px; }
+  header.top h1 { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(1.9rem,5vw,2.8rem); color:#152434; }
+  header.top h1 em { color:#C49A45; }
+  header.top p { margin-top:10px; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(21,36,52,.55); }
+  .gold-divider { width:120px; height:1px; margin:22px auto; background:linear-gradient(90deg,transparent,#C49A45,transparent); }
+  .parda-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+  @media(max-width:820px){ .parda-grid{ grid-template-columns:1fr; max-width:22rem; margin-left:auto; margin-right:auto; } }
+  .parda-card { text-align:center; }
+  .parda-event { font-size:11px; text-transform:uppercase; letter-spacing:.32em; color:#C49A45; margin:0 0 1rem; }
+  .parda-stage { position:relative; overflow:hidden; border-radius:.7rem; min-height:300px; display:flex; align-items:center; justify-content:center; border:1px solid #C49A45; outline:1px solid rgba(196,154,69,.5); outline-offset:5px; box-shadow:0 16px 40px rgba(21,36,52,.25); cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .parda-date { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:1rem; background:radial-gradient(circle at 50% 38%, #FFF8E2 0%, #F5E2B0 38%, #DDB95F 72%, #A87F34 100%); }
+  .parda-date .d-day { font-size:10px; text-transform:uppercase; letter-spacing:.28em; color:rgba(60,40,12,.7); margin:0 0 .4rem; }
+  .parda-date .d-full { font-family:'Cormorant Garamond',serif; font-size:1.65rem; color:#3A2A10; margin:0; line-height:1.25; }
+  .parda-date .d-flourish { font-size:11px; letter-spacing:.45em; color:#8A6A2A; margin:.7rem 0 0; }
+  .parda-rays { position:absolute; inset:-20%; pointer-events:none; opacity:0; transition:opacity 1.6s ease .5s; background:linear-gradient(105deg, transparent 42%, rgba(255,250,230,.35) 50%, transparent 58%), linear-gradient(75deg, transparent 44%, rgba(255,250,230,.22) 50%, transparent 56%); }
+  .parda-stage.open .parda-rays { opacity:1; }
+  .parda-shine { position:absolute; inset:0; overflow:hidden; pointer-events:none; opacity:0; }
+  .parda-stage.open .parda-shine { opacity:1; }
+  .parda-shine::after { content:""; position:absolute; top:-20%; bottom:-20%; width:70px; background:linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform:skewX(-18deg); left:-90px; }
+  .parda-stage.open .parda-shine::after { animation:shineSweep 2.4s ease .9s forwards; }
+  @keyframes shineSweep { to { left:130%; } }
+  .parda-curtain { position:absolute; top:0; bottom:0; width:51%; z-index:3; background:repeating-linear-gradient(90deg, rgba(0,0,0,.42) 0 9px, rgba(255,255,255,.05) 9px 18px, rgba(0,0,0,.30) 18px 30px), linear-gradient(180deg, #1D3249 0%, #12233A 45%, #0A1424 100%); box-shadow:inset 0 -30px 60px rgba(0,0,0,.5); transition:transform 1.5s cubic-bezier(.7,0,.3,1); }
+  .parda-curtain.left { left:0; border-right:1px solid rgba(196,154,69,.6); }
+  .parda-curtain.right { right:0; border-left:1px solid rgba(196,154,69,.6); }
+  .parda-curtain .trim { position:absolute; top:0; bottom:0; width:15px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='48' viewBox='0 0 16 48'%3E%3Cpath d='M8 5 L12 11 L8 17 L4 11 Z' fill='none' stroke='%23C49A45' stroke-width='1.6'/%3E%3Ccircle cx='8' cy='29' r='3.2' fill='none' stroke='%23C49A45' stroke-width='1.6'/%3E%3Ccircle cx='8' cy='29' r='1.1' fill='%23C49A45'/%3E%3Cpath d='M8 38 L11 44 L8 49 L5 44 Z' fill='%23C49A45'/%3E%3C/svg%3E"); background-repeat:repeat-y; background-position:center top; }
+  .parda-curtain.left .trim { right:4px; }
+  .parda-curtain.right .trim { left:4px; }
+  .parda-curtain::before { content:""; position:absolute; top:0; left:0; right:0; height:44px; background:linear-gradient(180deg, rgba(0,0,0,.55), transparent); }
+  .parda-stage.open .parda-curtain.left { transform:translateX(-104%); }
+  .parda-stage.open .parda-curtain.right { transform:translateX(104%); }
+  .parda-seal { position:absolute; z-index:4; top:50%; left:50%; width:104px; height:104px; margin:-52px 0 0 -52px; border-radius:50%; border:none; cursor:pointer; background:radial-gradient(circle at 35% 30%, #F4E3B2 0%, #D9B45F 45%, #A87F34 80%, #7A5A22 100%); box-shadow:0 8px 24px rgba(0,0,0,.5), inset 0 2px 6px rgba(255,255,255,.5), inset 0 -4px 10px rgba(90,62,20,.5); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; transition:transform .5s ease, opacity .5s ease; animation:sealPulse 2.2s ease-in-out infinite; }
+  @keyframes sealPulse { 0%,100%{ box-shadow:0 8px 24px rgba(0,0,0,.5), 0 0 0 0 rgba(196,154,69,.55);} 50%{ box-shadow:0 8px 24px rgba(0,0,0,.5), 0 0 0 12px rgba(196,154,69,0);} }
+  .parda-seal .mono { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:1.3rem; color:#3A2A10; }
+  .parda-seal .tap { font-size:8px; letter-spacing:.24em; text-transform:uppercase; color:rgba(58,42,16,.8); }
+  .parda-stage.open .parda-seal { transform:scale(.2); opacity:0; pointer-events:none; animation:none; }
+  .parda-date .d-full, .parda-date .d-day, .parda-date .d-flourish { opacity:0; }
+  .parda-stage.open .parda-date .d-day { animation:dateIn .8s ease .9s forwards; }
+  .parda-stage.open .parda-date .d-full { animation:dateIn .9s cubic-bezier(.2,1.4,.4,1) 1.05s forwards; }
+  .parda-stage.open .parda-date .d-flourish { animation:dateIn .8s ease 1.3s forwards; }
+  @keyframes dateIn { from{ opacity:0; transform:scale(.75); filter:brightness(2);} to{ opacity:1; transform:scale(1); filter:brightness(1);} }
+  .hint { margin-top:1.1rem; font-size:10px; text-transform:uppercase; letter-spacing:.22em; color:rgba(21,36,52,.45); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Velvet <em>Parda</em> — Preview</h1>
+    <div class="gold-divider"></div>
+    <p>Seal par tap karo — parda khulega aur date roshan hogi</p>
+  </header>
+  <div class="parda-grid">
+    <div class="parda-card">
+      <p class="parda-event">✦ Mehendi ✦</p>
+      <div class="parda-stage" role="button" tabindex="0" aria-label="Reveal Mehendi date">
+        <div class="parda-date">
+          <p class="d-day">Friday</p>
+          <p class="d-full">13 November<br>2026</p>
+          <p class="d-flourish">❦ ❦ ❦</p>
+        </div>
+        <div class="parda-rays"></div>
+        <div class="parda-shine"></div>
+        <div class="parda-curtain left"><span class="trim"></span></div>
+        <div class="parda-curtain right"><span class="trim"></span></div>
+        <button class="parda-seal" aria-label="Tap to reveal"><span class="mono">N·U</span><span class="tap">Tap to reveal</span></button>
+      </div>
+      <p class="hint">Tap the seal</p>
+    </div>
+    <div class="parda-card">
+      <p class="parda-event">✦ Baraat ✦</p>
+      <div class="parda-stage" role="button" tabindex="0" aria-label="Reveal Baraat date">
+        <div class="parda-date">
+          <p class="d-day">Saturday</p>
+          <p class="d-full">14 November<br>2026</p>
+          <p class="d-flourish">❦ ❦ ❦</p>
+        </div>
+        <div class="parda-rays"></div>
+        <div class="parda-shine"></div>
+        <div class="parda-curtain left"><span class="trim"></span></div>
+        <div class="parda-curtain right"><span class="trim"></span></div>
+        <button class="parda-seal" aria-label="Tap to reveal"><span class="mono">N·U</span><span class="tap">Tap to reveal</span></button>
+      </div>
+      <p class="hint">Tap the seal</p>
+    </div>
+    <div class="parda-card">
+      <p class="parda-event">✦ Walima ✦</p>
+      <div class="parda-stage" role="button" tabindex="0" aria-label="Reveal Walima date">
+        <div class="parda-date">
+          <p class="d-day">Monday</p>
+          <p class="d-full">16 November<br>2026</p>
+          <p class="d-flourish">❦ ❦ ❦</p>
+        </div>
+        <div class="parda-rays"></div>
+        <div class="parda-shine"></div>
+        <div class="parda-curtain left"><span class="trim"></span></div>
+        <div class="parda-curtain right"><span class="trim"></span></div>
+        <button class="parda-seal" aria-label="Tap to reveal"><span class="mono">N·U</span><span class="tap">Tap to reveal</span></button>
+      </div>
+      <p class="hint">Tap the seal</p>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:56px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(21,36,52,.5);">Pasand aye to bata do — site par laga dunga</p>
+</div>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll(".parda-stage").forEach(function(stage){
+    function open(){
+      if (stage.classList.contains("open")) return;
+      stage.classList.add("open");
+    }
+    stage.addEventListener("click", open);
+    stage.addEventListener("keydown", function(e){
+      if (e.key==="Enter" || e.key===" "){ e.preventDefault(); open(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
