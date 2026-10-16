@@ -390,8 +390,28 @@
 
  <section id="scratchdate" class="section-floral" style="position:relative;padding:4rem 1.5rem;background:#F7F2E8;overflow:hidden;">
   <style>
-    .scratch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.25rem;}
-    @media(max-width:768px){.scratch-grid{grid-template-columns:1fr;max-width:21rem;margin-left:auto;margin-right:auto;}}
+    .msc-wrap{max-width:620px;margin:2.25rem auto 0;position:relative;z-index:2;}
+    .msc-stage{position:relative;border:1px solid rgba(196,154,69,.65);box-shadow:0 20px 60px rgba(21,36,52,.28);}
+    .msc-frame{display:block;width:100%;height:auto;}
+    .msc-center{position:absolute;left:19%;right:19%;top:21%;bottom:14%;pointer-events:none;}
+    .msc-date{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.4rem;}
+    .msc-kicker{font-family:'Jost',sans-serif;font-size:7px;letter-spacing:.35em;text-indent:.35em;text-transform:uppercase;color:#8a6420;margin:0 0 .25rem;}
+    .msc-dbig{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(11px,3.4vw,20px);color:#43300a;margin:0;line-height:1.15;white-space:nowrap;}
+    .msc-ev{line-height:1.2;}
+    .msc-sep{width:36%;height:1px;margin:.35rem auto;background:linear-gradient(90deg,transparent,#C49A45,transparent);}
+    canvas.msc-cover{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:crosshair;touch-action:none;-webkit-tap-highlight-color:transparent;}
+    .msc-hint{margin-top:1.1rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:rgba(21,36,52,.6);text-align:center;}
+    .msc-after{display:none;margin-top:1.2rem;text-align:center;}
+    .msc-std{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:#8a6420;}
+    .msc-cal{margin:1.2rem auto 0;max-width:300px;}
+    .msc-cal .cal-title{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.4em;text-indent:.4em;text-transform:uppercase;color:#8a6420;margin:0 0 .7rem;}
+    .msc-cal .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+    .msc-cal .cal-grid span{font-family:'Jost',sans-serif;font-size:12px;padding:7px 0;color:#152434;border-radius:50%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;}
+    .msc-cal .cal-grid .cal-dow{color:#C49A45;font-size:10px;letter-spacing:.1em;}
+    .msc-cal .cal-grid .cal-hl{background:radial-gradient(circle at 35% 30%,#f4e3b2,#d9b45f 60%,#a8751f);color:#3a2a10;font-weight:600;box-shadow:0 0 14px rgba(217,180,95,.6);}
+    #scratchdate.revealed .msc-hint{display:none;}
+    #scratchdate.revealed .msc-after{display:block;animation:mscFadeUp .9s ease both;}
+    @keyframes mscFadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
   </style>
   <div class="corner-tr"></div>
   <div class="corner-bl"></div>
@@ -399,46 +419,38 @@
     <p style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:#C49A45;margin:0 0 1rem;">Save the Date</p>
     <h2 class="font-display" style="font-size:clamp(1.8rem,5vw,2.6rem);font-weight:300;color:#152434;margin:0;line-height:1.1;">Scratch to <span style="font-style:italic;color:#C49A45;">Reveal</span></h2>
     <div class="gold-divider" style="margin:1.25rem auto;"></div>
-    <div class="scratch-grid">
-      <div style="background:linear-gradient(160deg,#152434 0%,#24394F 100%);border:1px solid rgba(196,154,69,.55);border-radius:1rem;padding:1.5rem 1rem 1.25rem;box-shadow:0 14px 34px rgba(21,36,52,.18);">
-        <p style="color:#C49A45;margin:0 0 .5rem;font-size:.9rem;">✦</p>
-        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#DBC494;margin:0 0 1rem;">Mehendi</p>
-        <div class="scratch-box" style="position:relative;border-radius:.6rem;overflow:hidden;min-height:92px;display:flex;align-items:center;justify-content:center;background:rgba(247,242,232,.06);">
-          <div style="text-align:center;padding:1rem .5rem;">
-            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(219,196,148,.8);margin:0 0 .3rem;">Friday</p>
-            <p class="font-display" style="font-size:1.3rem;color:#F7F2E8;margin:0;">13 November 2026</p>
+    <div class="msc-wrap">
+      <div class="msc-stage">
+        <img class="msc-frame" src="mukhmal-frame.jpg" alt="Ornate date frame">
+        <div class="msc-center">
+          <div class="msc-date">
+            <div class="msc-ev">
+              <p class="msc-kicker">Mehendi</p>
+              <p class="msc-dbig">13 November 2026</p>
+            </div>
+            <div class="msc-sep"></div>
+            <div class="msc-ev">
+              <p class="msc-kicker">Baraat</p>
+              <p class="msc-dbig">14 November 2026</p>
+            </div>
+            <div class="msc-sep"></div>
+            <div class="msc-ev">
+              <p class="msc-kicker">Walima</p>
+              <p class="msc-dbig">16 November 2026</p>
+            </div>
           </div>
-          <canvas class="scratch-canvas" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;"></canvas>
         </div>
+        <canvas class="msc-cover"></canvas>
       </div>
-      <div style="background:linear-gradient(160deg,#152434 0%,#24394F 100%);border:1px solid rgba(196,154,69,.55);border-radius:1rem;padding:1.5rem 1rem 1.25rem;box-shadow:0 14px 34px rgba(21,36,52,.18);">
-        <p style="color:#C49A45;margin:0 0 .5rem;font-size:.9rem;">✦</p>
-        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#DBC494;margin:0 0 1rem;">Baraat</p>
-        <div class="scratch-box" style="position:relative;border-radius:.6rem;overflow:hidden;min-height:92px;display:flex;align-items:center;justify-content:center;background:rgba(247,242,232,.06);">
-          <div style="text-align:center;padding:1rem .5rem;">
-            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(219,196,148,.8);margin:0 0 .3rem;">Saturday</p>
-            <p class="font-display" style="font-size:1.3rem;color:#F7F2E8;margin:0;">14 November 2026</p>
-          </div>
-          <canvas class="scratch-canvas" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;"></canvas>
-        </div>
-      </div>
-      <div style="background:linear-gradient(160deg,#152434 0%,#24394F 100%);border:1px solid rgba(196,154,69,.55);border-radius:1rem;padding:1.5rem 1rem 1.25rem;box-shadow:0 14px 34px rgba(21,36,52,.18);">
-        <p style="color:#C49A45;margin:0 0 .5rem;font-size:.9rem;">✦</p>
-        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#DBC494;margin:0 0 1rem;">Walima</p>
-        <div class="scratch-box" style="position:relative;border-radius:.6rem;overflow:hidden;min-height:92px;display:flex;align-items:center;justify-content:center;background:rgba(247,242,232,.06);">
-          <div style="text-align:center;padding:1rem .5rem;">
-            <p style="font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(219,196,148,.8);margin:0 0 .3rem;">Monday</p>
-            <p class="font-display" style="font-size:1.3rem;color:#F7F2E8;margin:0;">16 November 2026</p>
-          </div>
-          <canvas class="scratch-canvas" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;"></canvas>
-        </div>
+      <p class="msc-hint">Use your finger or cursor to uncover the moment.</p>
+      <div class="msc-after">
+        <p class="msc-std">Save the dates — we would be honoured to have you with us.</p>
+        <div class="msc-cal" id="mscCal"></div>
       </div>
     </div>
-    <p style="margin-top:1.75rem;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:rgba(21,36,52,.5);">Har card ko alag se scratch karo</p>
   </div>
 </section>
-  
-  <section id="details" class="section-floral" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg, #F7F2E8 0%, #EAE0D0 100%);">
+<section id="details" class="section-floral" style="position:relative;padding:6rem 1.5rem;background:linear-gradient(180deg, #F7F2E8 0%, #EAE0D0 100%);">
   <div class="corner-tr"></div>
   <div class="corner-bl"></div>
   <div style="max-width:72rem;margin:0 auto;">
@@ -1144,9 +1156,140 @@
     setNum("m", pad(Math.floor((diff / 60000) % 60)));
     setNum("s", pad(Math.floor((diff / 1000) % 60)));
   }
-updateCD(); setInterval(updateCD, 1000);   /* SCRATCH TO REVEAL — 3 cards */ document.querySelectorAll(".scratch-box").forEach(function(box){ var canvas = box.querySelector(".scratch-canvas"); if (!canvas) return; var ctx = canvas.getContext("2d"); var done = false, touched = false, scratching = false, moves = 0; function drawFoil(){ ctx.globalCompositeOperation = "source-over"; var w = canvas.width, h = canvas.height; var g = ctx.createLinearGradient(0, 0, w, h); g.addColorStop(0, "#E3CDA0"); g.addColorStop(0.5, "#C49A45"); g.addColorStop(1, "#A37E33"); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); ctx.fillStyle = "rgba(255,255,255,.10)"; for (var i = -h; i < w + h; i += 34){ ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i + 16, 0); ctx.lineTo(i + 16 - h, h); ctx.lineTo(i - h, h); ctx.closePath(); ctx.fill(); } ctx.fillStyle = "rgba(120,85,30,.18)"; for (var y = 11; y < h; y += 22){ for (var x = 11; x < w; x += 22){ ctx.beginPath(); ctx.arc(x, y, 1.6, 0, Math.PI * 2); ctx.fill(); } } ctx.fillStyle = "rgba(21,36,52,.78)"; ctx.font = "600 11px Jost, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("✦  SCRATCH  ✦", w / 2, h / 2); } function size(redraw){ if (done) return; if (touched && !redraw) return; var r = box.getBoundingClientRect(); canvas.width = Math.max(1, Math.round(r.width)); canvas.height = Math.max(1, Math.round(r.height)); drawFoil(); } function pos(e){ var r = canvas.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; } function erase(x, y){ ctx.globalCompositeOperation = "destination-out"; ctx.beginPath(); ctx.arc(x, y, 24, 0, Math.PI * 2); ctx.fill(); } function pct(){ try { var d = ctx.getImageData(0, 0, canvas.width, canvas.height).data, c = 0, t = 0; for (var i = 3; i < d.length; i += 64){ t++; if (d[i] === 0) c++; } return t ? c / t : 0; } catch(e){ return 0; } } function check(){ if (done) return; if (pct() > 0.4){ done = true; canvas.style.transition = "opacity .7s ease"; canvas.style.opacity = "0"; setTimeout(function(){ canvas.style.display = "none"; }, 750); } } canvas.addEventListener("pointerdown", function(e){ if (done) return; scratching = true; touched = true; moves = 0; try { canvas.setPointerCapture(e.pointerId); } catch(_e){} var p = pos(e); erase(p.x, p.y); e.preventDefault(); }); canvas.addEventListener("pointermove", function(e){ if (!scratching || done) return; var p = pos(e); erase(p.x, p.y); if (++moves % 10 === 0) check(); }); canvas.addEventListener("pointerup", function(){ if (scratching){ scratching = false; check(); } }); canvas.addEventListener("pointercancel", function(){ scratching = false; }); size(false); window.addEventListener("resize", function(){ size(false); }); window.addEventListener("load", function(){ size(false); }); });
-
-  /* ═══ RSVP FORM ═══ */
+updateCD(); setInterval(updateCD, 1000);   /* MUKHMAL SCRATCH — date reveal (mask-clipped navy cover) */
+(function(){
+  "use strict";
+  var section = document.getElementById("scratchdate");
+  if (!section) return;
+  var cv = section.querySelector(".msc-cover");
+  var frameImg = section.querySelector(".msc-frame");
+  if (!cv || !frameImg) return;
+  var maskImg = new Image();
+  var maskOK = false, maskFailed = false, initDone = false;
+  function buildCalendar(){
+    var days = [13, 14, 16];
+    var html = '<p class="cal-title">November 2026</p><div class="cal-grid">';
+    ["S","M","T","W","T","F","S"].forEach(function(d){ html += '<span class="cal-dow">' + d + "</span>"; });
+    for (var d = 1; d <= 30; d++){
+      html += '<span class="' + (days.indexOf(d) !== -1 ? "cal-hl" : "") + '">' + d + "</span>";
+    }
+    var cal = section.querySelector("#mscCal");
+    if (cal) cal.innerHTML = html + "</div>";
+  }
+  function drawCover(){
+    var r = cv.getBoundingClientRect();
+    if (r.width < 2 || r.height < 2) return false;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.max(1, Math.round(r.width * dpr));
+    cv.height = Math.max(1, Math.round(r.height * dpr));
+    var x = cv.getContext("2d");
+    x.scale(dpr, dpr);
+    var W = r.width, H = r.height;
+    var g = x.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, "#1e3450"); g.addColorStop(1, "#0a1626");
+    x.fillStyle = g; x.fillRect(0, 0, W, H);
+    x.strokeStyle = "rgba(255,255,255,0.045)"; x.lineWidth = 1;
+    for (var i = -H; i < W; i += 14){ x.beginPath(); x.moveTo(i, 0); x.lineTo(i + H, H); x.stroke(); }
+    var sheen = x.createLinearGradient(0, 0, W, H * 0.6);
+    sheen.addColorStop(0, "rgba(255,255,255,0.10)"); sheen.addColorStop(0.6, "rgba(255,255,255,0)");
+    x.fillStyle = sheen; x.fillRect(0, 0, W, H);
+    if (maskOK){
+      x.globalCompositeOperation = "destination-in";
+      x.drawImage(maskImg, 0, 0, W, H);
+      x.globalCompositeOperation = "source-over";
+      var mc = document.createElement("canvas");
+      mc.width = cv.width; mc.height = cv.height;
+      var mx = mc.getContext("2d");
+      mx.drawImage(maskImg, 0, 0, mc.width, mc.height);
+      cv._mask = mx.getImageData(0, 0, mc.width, mc.height).data;
+    } else {
+      cv._mask = null;
+    }
+    return true;
+  }
+  function makeScratchable(){
+    var x = cv.getContext("2d");
+    var drawing = false, last = null, moves = 0, done = false;
+    function pos(e){
+      var r = cv.getBoundingClientRect();
+      var p = (e.touches && e.touches[0]) ? e.touches[0] : e;
+      return { x: p.clientX - r.left, y: p.clientY - r.top };
+    }
+    function scratch(px, py){
+      var rad = Math.max(14, cv.clientWidth * 0.05);
+      x.save();
+      x.globalCompositeOperation = "destination-out";
+      x.beginPath(); x.arc(px, py, rad, 0, 7); x.fill();
+      if (last){
+        x.lineWidth = rad * 2; x.lineCap = "round"; x.lineJoin = "round";
+        x.beginPath(); x.moveTo(last.x, last.y); x.lineTo(px, py); x.stroke();
+      }
+      x.restore();
+      last = { x: px, y: py };
+    }
+    function clearedRatio(){
+      try {
+        var d = x.getImageData(0, 0, cv.width, cv.height).data;
+        var mp = cv._mask;
+        var clear = 0, total = 0;
+        for (var i = 3; i < d.length; i += 192){
+          if (mp){
+            if (mp[i] > 127){ total++; if (d[i] < 127) clear++; }
+          } else {
+            total++; if (d[i] === 0) clear++;
+          }
+        }
+        return total ? clear / total : 0;
+      } catch (err){ return 0; }
+    }
+    function finish(){
+      if (done) return; done = true;
+      cv.style.transition = "opacity .7s ease"; cv.style.opacity = "0";
+      setTimeout(function(){ cv.remove(); }, 750);
+      section.classList.add("revealed");
+    }
+    cv.addEventListener("pointerdown", function(e){
+      if (done) return;
+      drawing = true; last = null;
+      var p = pos(e); scratch(p.x, p.y);
+      try { cv.setPointerCapture(e.pointerId); } catch (err){}
+      e.preventDefault();
+    });
+    cv.addEventListener("pointermove", function(e){
+      if (!drawing || done) return;
+      var p = pos(e); scratch(p.x, p.y);
+      if (++moves % 14 === 0 && clearedRatio() > 0.45) finish();
+    });
+    ["pointerup","pointercancel","pointerleave"].forEach(function(ev){
+      cv.addEventListener(ev, function(){ drawing = false; if (!done && clearedRatio() > 0.45) finish(); });
+    });
+  }
+  function init(){
+    buildCalendar();
+    if (!drawCover()){
+      setTimeout(init, 400);
+      return;
+    }
+    makeScratchable();
+  }
+  function tryInit(){
+    if (initDone) return;
+    if ((maskOK || maskFailed) && frameImg.complete && frameImg.naturalWidth > 0){
+      initDone = true;
+      init();
+    }
+  }
+  maskImg.onload = function(){ maskOK = true; tryInit(); };
+  maskImg.onerror = function(){ maskFailed = true; tryInit(); };
+  maskImg.src = "mukhmal-mask.png";
+  if (frameImg.complete) tryInit();
+  else {
+    frameImg.addEventListener("load", tryInit);
+    frameImg.addEventListener("error", function(){ maskFailed = true; tryInit(); });
+  }
+  tryInit();
+})();
+/* ═══ RSVP FORM ═══ */
   var attendingValue = "Yes";
   document.querySelectorAll(".att-btn").forEach(function(btn){
     btn.addEventListener("click", function(){
