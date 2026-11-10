@@ -721,7 +721,7 @@
   function startVideos(){
     if (!introVideo) { goToMain(); return; }
     var p1 = introVideo.play();
-    if (p1 && p1.catch) p1.catch(function(){});
+    if (p1 && p1.catch) p1.catch(function(){ setTimeout(goToMain, 800); });
   }
 
   if (introVideo){
@@ -730,7 +730,7 @@
   }
 
   setTimeout(startVideos, 400);
-  failsafeTimer = setTimeout(goToMain, 300000);
+  failsafeTimer = setTimeout(goToMain, 8000);
 
   /* ═══ HERO TYPING (fast + smooth, 2 chars per tick) ═══ */
   var heroTimeouts = [];
