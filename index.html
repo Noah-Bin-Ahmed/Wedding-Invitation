@@ -265,7 +265,10 @@
 </head>
 <body class="grain">
 
-<div id="introScene" style="display:none">
+<div id="introScene" class="hidden">
+  <video class="intro-video active" id="introVideo" muted playsinline webkit-playsinline preload="auto">
+    <source src="https://noah-bin-ahmed.github.io/Wedding-Invitation/intro-combined.mp4" type="video/mp4">
+  </video>
 </div>
 
 <div id="loader">
@@ -775,11 +778,12 @@
 (function(){
   "use strict";
 
-  /* ═══ INTRO VIDEO ═══ */
+  /* ═══ INTRO VIDEO (non-blocking) ═══ */
+  /* The invitation is visible from the first paint. The couple video only
+     appears if it is ready to play quickly; on a slow connection it is
+     skipped entirely — never a black screen, never stuck. */
   var introScene = document.getElementById("introScene");
   var introVideo = document.getElementById("introVideo");
-  var loader = document.getElementById("loader");
-  var body = document.body;
   var heroInner = document.getElementById("heroInner");
 
   if (introVideo){
@@ -787,55 +791,53 @@
     introVideo.setAttribute("muted", ""); introVideo.setAttribute("playsinline", ""); introVideo.setAttribute("webkit-playsinline", "");
   }
 
-  var loaderTagline = document.getElementById("loaderTagline");
-  var taglineText = "Save the Date";
-  var twStarted = false;
-  function startTypewriter(){
-    if (twStarted) return;
-    twStarted = true;
-    var i = 0;
-    loaderTagline.innerHTML = '<span id="twInline"></span><span class="tw-cursor"></span>';
-    var inline = document.getElementById("twInline");
-    (function type(){
-      if (i <= taglineText.length){
-        inline.textContent = taglineText.substring(0, i);
-        i++;
-        setTimeout(type, 55);
-      }
-    })();
-  }
+  /* Hero typing starts right away, once the rest of this script has run. */
+  setTimeout(function(){
+    window.scrollTo(0, 0);
+    startHeroTyping();
+    if (heroInner) setTimeout(function(){ heroInner.classList.add("zoomed"); }, 1000);
+  }, 50);
 
-  var introDone = false, failsafeTimer;
+  var introDone = false, introShown = false, introCancelled = false;
   function goToMain(){
     if (introDone) return;
     introDone = true;
-    clearTimeout(failsafeTimer);
-    loader.classList.add("visible");
-    startTypewriter();
-    setTimeout(function(){ introScene.classList.add("hidden"); }, 800);
-    setTimeout(function(){
-      loader.classList.remove("visible");
-      body.classList.remove("intro-locked");
-      window.scrollTo(0, 0);
-      startHeroTyping();
-      if (heroInner) setTimeout(function(){ heroInner.classList.add("zoomed"); }, 1000);
-      try { introVideo.pause(); } catch(e){}
-    }, 1800);
+    if (introShown){
+      introScene.classList.add("hidden");
+      setTimeout(function(){
+        try { introVideo.pause(); } catch(e){}
+      }, 1400);
+    }
   }
 
-  function startVideos(){
-    if (!introVideo) { goToMain(); return; }
-    var p1 = introVideo.play();
-    if (p1 && p1.catch) p1.catch(function(){ setTimeout(goToMain, 800); });
+  /* If the guest scrolls before the video is ready, never interrupt them. */
+  window.addEventListener("scroll", function(){ introCancelled = true; }, { passive: true });
+
+  function tryShowIntro(){
+    if (introDone || introShown || introCancelled) return;
+    if (window.scrollY > 0) { introCancelled = true; return; }
+    if (!introVideo) return;
+    var p = introVideo.play();
+    if (p && p.then){
+      p.then(function(){
+        if (introCancelled || introDone) { try { introVideo.pause(); } catch(e){} return; }
+        introShown = true;
+        introScene.classList.remove("hidden");
+      }).catch(function(){ /* autoplay blocked — the invitation stays open */ });
+    }
   }
 
   if (introVideo){
+    introVideo.addEventListener("canplay", tryShowIntro);
     introVideo.addEventListener("ended", goToMain);
-    introVideo.addEventListener("error", function(){ setTimeout(goToMain, 500); });
+    introVideo.addEventListener("error", goToMain);
+    /* Not ready within 3 seconds? Forget it — and stop the download. */
+    setTimeout(function(){
+      if (introShown) return;
+      introCancelled = true;
+      try { introVideo.pause(); introVideo.src = ""; introVideo.load(); } catch(e){}
+    }, 3000);
   }
-
-  setTimeout(startVideos, 400);
-  failsafeTimer = setTimeout(goToMain, 8000);
 
   /* ═══ HERO TYPING (fast + smooth, 2 chars per tick) ═══ */
   var heroTimeouts = [];
